@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0021)file:///G:/index.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>懒人躺平攻略 - 全能编辑版</title>
     <style>
@@ -786,13 +786,13 @@
         }
     </style>
 </head>
-<body>
+<body class="">
     <div class="container">
         <!-- 开发者模式按钮 -->
         <button class="dev-mode-btn" id="devModeBtn">开发者模式</button>
         
         <!-- 增强的开发者工具面板 -->
-        <div class="dev-tools" id="devTools">
+        <div class="dev-tools" id="devTools" style="display: none;">
             <div class="dev-tabs">
                 <div class="dev-tab active" data-tab="layout">布局管理</div>
                 <div class="dev-tab" data-tab="style">样式编辑</div>
@@ -805,9 +805,28 @@
                 <h3>布局管理器</h3>
                 <div class="dev-control-group">
                     <h4>板块管理</h4>
-                    <div class="section-list" id="sectionList">
-                        <!-- 板块列表将通过JavaScript动态生成 -->
-                    </div>
+                    <div class="section-list" id="sectionList"><div class="section-item" draggable="true" data-section-id="strategy-section">
+                    <input type="checkbox" class="section-toggle" checked="">
+                    <span>🧠 战略类角色</span>
+                </div><div class="section-item" draggable="true" data-section-id="ranged-section">
+                    <input type="checkbox" class="section-toggle" checked="">
+                    <span>🏹 远击类角色</span>
+                </div><div class="section-item" draggable="true" data-section-id="magic-section">
+                    <input type="checkbox" class="section-toggle" checked="">
+                    <span>🔮 构术类角色</span>
+                </div><div class="section-item" draggable="true" data-section-id="light-section">
+                    <input type="checkbox" class="section-toggle" checked="">
+                    <span>⚡ 轻锐类角色</span>
+                </div><div class="section-item" draggable="true" data-section-id="guard-section">
+                    <input type="checkbox" class="section-toggle" checked="">
+                    <span>🛡️ 宿卫类角色</span>
+                </div><div class="section-item" draggable="true" data-section-id="tips-section">
+                    <input type="checkbox" class="section-toggle" checked="">
+                    <span>💡 新手注意事项</span>
+                </div><div class="section-item" draggable="true" data-section-id="navigation-section">
+                    <input type="checkbox" class="section-toggle" checked="">
+                    <span>🧭 导航规则</span>
+                </div></div>
                     <button class="add-section-btn" id="addSectionBtn">+ 添加新板块</button>
                 </div>
             </div>
@@ -844,10 +863,10 @@
                     <div class="dev-control">
                         <label>字体家族:</label>
                         <select id="fontFamily">
-                            <option value="'Segoe UI', 'Microsoft YaHei', sans-serif">默认</option>
+                            <option value="&#39;Segoe UI&#39;, &#39;Microsoft YaHei&#39;, sans-serif">默认</option>
                             <option value="Arial, sans-serif">Arial</option>
-                            <option value="'Times New Roman', serif">Times New Roman</option>
-                            <option value="'Courier New', monospace">Courier New</option>
+                            <option value="&#39;Times New Roman&#39;, serif">Times New Roman</option>
+                            <option value="&#39;Courier New&#39;, monospace">Courier New</option>
                         </select>
                     </div>
                 </div>
@@ -885,21 +904,21 @@
                     <div class="function-toggle">
                         <label>自动链接识别:</label>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="autoLinkToggle" checked>
+                            <input type="checkbox" id="autoLinkToggle" checked="">
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
                     <div class="function-toggle">
                         <label>词条颜色标记:</label>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="colorMarkToggle" checked>
+                            <input type="checkbox" id="colorMarkToggle" checked="">
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
                     <div class="function-toggle">
                         <label>批量操作面板:</label>
                         <label class="toggle-switch">
-                            <input type="checkbox" id="batchPanelToggle" checked>
+                            <input type="checkbox" id="batchPanelToggle" checked="">
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
@@ -992,9 +1011,892 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="strategy-tbody">
-                    <!-- 内容将通过JavaScript动态生成 -->
-                </tbody>
+                <tbody id="strategy-tbody"><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="0">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">1.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">向日葵</span>
+                            <input type="text" class="edit-input name-edit" value="向日葵">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="0">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云鸣沙炮</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">多谋1207</span>
+                            <input type="text" class="edit-input training-edit" value="多谋1207">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">0致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="0致">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">未开</span>
+                            <input type="text" class="edit-input glory-edit" value="未开">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="构" style="color: rgb(255, 107, 107);">构</span><span class="attr-item" data-text="全" style="color: rgb(255, 107, 107);">全</span><span class="attr-item" data-text="攻%" style="color: rgb(255, 107, 107);">攻%</span><span class="attr-item" data-text="攻" style="color: rgb(255, 107, 107);">攻</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="构/全/攻%/攻">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="1">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">2.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">银雀山汉简</span>
+                            <input type="text" class="edit-input name-edit" value="银雀山汉简">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="1">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云鸣沙炮</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">undefined</span>
+                            <input type="text" class="edit-input glory-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span><span class="attr-item" data-text="1" style="color: rgb(255, 107, 107);">1</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例/1">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="2">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">3.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">海水江崖炉</span>
+                            <input type="text" class="edit-input name-edit" value="海水江崖炉">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="2">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云鸣沙炮</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">undefined</span>
+                            <input type="text" class="edit-input glory-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="3">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">4.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">鸟音山水钟</span>
+                            <input type="text" class="edit-input name-edit" value="鸟音山水钟">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="3">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云鸣沙炮</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="4">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">5.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">十二花卉杯</span>
+                            <input type="text" class="edit-input name-edit" value="十二花卉杯">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="4">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云鸣沙炮</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="5">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">6.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">商周十供</span>
+                            <input type="text" class="edit-input name-edit" value="商周十供">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="5">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云鸣沙炮</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="6">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">7.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">利簋</span>
+                            <input type="text" class="edit-input name-edit" value="利簋">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="6">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云鸣沙炮</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="7">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">8.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">敦煌飞天</span>
+                            <input type="text" class="edit-input name-edit" value="敦煌飞天">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="7">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云鸣沙炮</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="8">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">9.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">五星出东方</span>
+                            <input type="text" class="edit-input name-edit" value="五星出东方">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="8">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云鸣沙炮</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="9">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">10.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">莲塘乳鸭图</span>
+                            <input type="text" class="edit-input name-edit" value="莲塘乳鸭图">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="9">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云鸣沙炮</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="10">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">11.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">白龙梅瓶</span>
+                            <input type="text" class="edit-input name-edit" value="白龙梅瓶">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="10">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="11">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">12.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">晋侯鸟尊</span>
+                            <input type="text" class="edit-input name-edit" value="晋侯鸟尊">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="11">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="12">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">13.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">皇后之玺</span>
+                            <input type="text" class="edit-input name-edit" value="皇后之玺">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="12">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="13">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">14.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">诗文执壶</span>
+                            <input type="text" class="edit-input name-edit" value="诗文执壶">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="13">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="strategy" data-index="14">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">15.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">丙午神钩</span>
+                            <input type="text" class="edit-input name-edit" value="丙午神钩">
+                        </div>
+                        <button class="delete-row" data-type="strategy" data-index="14">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">大杯</span>
+                            <input type="text" class="edit-input strength-edit" value="大杯">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr></tbody>
             </table>
         </section>
         
@@ -1020,9 +1922,66 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="ranged-tbody">
-                    <!-- 内容将通过JavaScript动态生成 -->
-                </tbody>
+                <tbody id="ranged-tbody"><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="ranged" data-index="0">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">1.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">远击角色A</span>
+                            <input type="text" class="edit-input name-edit" value="远击角色A">
+                        </div>
+                        <button class="delete-row" data-type="ranged" data-index="0">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">铜犴弩</span>
+                            <input type="text" class="edit-input weapon-edit" value="铜犴弩">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">undefined</span>
+                            <input type="text" class="edit-input strength-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">破碎5500</span>
+                            <input type="text" class="edit-input training-edit" value="破碎5500">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">0致/3致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="0致/3致">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">undefined</span>
+                            <input type="text" class="edit-input glory-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"></div>
+                            <input type="text" class="edit-input attributes-edit" value="">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes">远击</span>
+                            <input type="text" class="edit-input notes-edit" value="远击">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr></tbody>
             </table>
         </section>
         
@@ -1048,9 +2007,66 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="magic-tbody">
-                    <!-- 内容将通过JavaScript动态生成 -->
-                </tbody>
+                <tbody id="magic-tbody"><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="magic" data-index="0">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">1.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">构术角色A</span>
+                            <input type="text" class="edit-input name-edit" value="构术角色A">
+                        </div>
+                        <button class="delete-row" data-type="magic" data-index="0">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">undefined</span>
+                            <input type="text" class="edit-input strength-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">储4600/威4303</span>
+                            <input type="text" class="edit-input training-edit" value="储4600/威4303">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">3致/6致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="3致/6致">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">undefined</span>
+                            <input type="text" class="edit-input glory-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"></div>
+                            <input type="text" class="edit-input attributes-edit" value="">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr></tbody>
             </table>
         </section>
         
@@ -1076,9 +2092,66 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="light-tbody">
-                    <!-- 内容将通过JavaScript动态生成 -->
-                </tbody>
+                <tbody id="light-tbody"><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="light" data-index="0">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">1.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">轻锐角色A</span>
+                            <input type="text" class="edit-input name-edit" value="轻锐角色A">
+                        </div>
+                        <button class="delete-row" data-type="light" data-index="0">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">undefined</span>
+                            <input type="text" class="edit-input strength-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">穿甲3700</span>
+                            <input type="text" class="edit-input training-edit" value="穿甲3700">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">3致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="3致">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">undefined</span>
+                            <input type="text" class="edit-input glory-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"></div>
+                            <input type="text" class="edit-input attributes-edit" value="">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr></tbody>
             </table>
         </section>
         
@@ -1104,9 +2177,184 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="guard-tbody">
-                    <!-- 内容将通过JavaScript动态生成 -->
-                </tbody>
+                <tbody id="guard-tbody"><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="guard" data-index="0">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">1.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">宿卫角色A</span>
+                            <input type="text" class="edit-input name-edit" value="宿卫角色A">
+                        </div>
+                        <button class="delete-row" data-type="guard" data-index="0">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">undefined</span>
+                            <input type="text" class="edit-input strength-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">固防0307</span>
+                            <input type="text" class="edit-input training-edit" value="固防0307">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">0致/3致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="0致/3致">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">undefined</span>
+                            <input type="text" class="edit-input glory-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"></div>
+                            <input type="text" class="edit-input attributes-edit" value="">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="guard" data-index="1">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">2.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">新宿卫角色</span>
+                            <input type="text" class="edit-input name-edit" value="新宿卫角色">
+                        </div>
+                        <button class="delete-row" data-type="guard" data-index="1">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">undefined</span>
+                            <input type="text" class="edit-input strength-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">undefined</span>
+                            <input type="text" class="edit-input glory-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="11111111111111111111" style="color: rgb(255, 107, 107);">11111111111111111111</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="11111111111111111111">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="guard" data-index="2">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">3.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">新宿卫角色</span>
+                            <input type="text" class="edit-input name-edit" value="新宿卫角色">
+                        </div>
+                        <button class="delete-row" data-type="guard" data-index="2">×</button>
+                    </td>
+                    <td>
+                        <div class="editable weapon-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable strength-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="strength-text strength">undefined</span>
+                            <input type="text" class="edit-input strength-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable training-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="training-text training">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable knowledge-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="knowledge-text knowledge">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable glory-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">undefined</span>
+                            <input type="text" class="edit-input glory-edit" value="undefined">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: rgb(255, 107, 107);">示例</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="示例">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"></span>
+                            <input type="text" class="edit-input notes-edit" value="">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr></tbody>
             </table>
         </section>
         
@@ -1126,9 +2374,76 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="tips-tbody">
-                    <!-- 内容将通过JavaScript动态生成 -->
-                </tbody>
+                <tbody id="tips-tbody"><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="tips" data-index="0">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">1.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text"> https://www.bilibili.com/</span>
+                            <input type="text" class="edit-input name-edit" value=" https://www.bilibili.com/">
+                        </div>
+                        <button class="delete-row" data-type="tips" data-index="0">×</button>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes"><a href="https://www.bilibili.com/" class="auto-link" target="_blank" rel="noopener noreferrer">https://www.bilibili.com/</a></span>
+                            <input type="text" class="edit-input notes-edit" value="https://www.bilibili.com/">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="tips" data-index="1">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">2.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">新注意事项</span>
+                            <input type="text" class="edit-input name-edit" value="新注意事项">
+                        </div>
+                        <button class="delete-row" data-type="tips" data-index="1">×</button>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes">请输入内容</span>
+                            <input type="text" class="edit-input notes-edit" value="请输入内容">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr>
+                    <td>
+                        <input type="checkbox" class="row-selector" data-type="tips" data-index="2">
+                    </td>
+                    <td>
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="row-number">3.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="name-text">新注意事项</span>
+                            <input type="text" class="edit-input name-edit" value="新注意事项">
+                        </div>
+                        <button class="delete-row" data-type="tips" data-index="2">×</button>
+                    </td>
+                    <td>
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes">请输入内容</span>
+                            <input type="text" class="edit-input notes-edit" value="请输入内容">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr></tbody>
             </table>
         </section>
         
@@ -1148,9 +2463,7 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="navigation-tbody">
-                    <!-- 内容将通过JavaScript动态生成 -->
-                </tbody>
+                <tbody id="navigation-tbody"></tbody>
             </table>
         </section>
         
@@ -1164,11 +2477,11 @@
                 <span class="abbreviation editable-dev" data-type="text">攻%</span>=<span class="editable-dev" data-type="text">百分比攻击力</span>, 
                 <span class="abbreviation editable-dev" data-type="text">攻</span>=<span class="editable-dev" data-type="text">攻击力</span>
             </p>
-            <p class="editable-dev" data-type="text">词条优先级: 红色 > 蓝色 > 绿色（绿色词条可任选）</p>
+            <p class="editable-dev" data-type="text">词条优先级: 红色 &gt; 蓝色 &gt; 绿色（绿色词条可任选）</p>
             <p class="editable-dev" data-type="text" style="margin-top: 10px;">提示: 右键点击词条更改颜色</p>
         </footer>
         
-        <div class="notification" id="notification">更改已保存！</div>
+        <div class="notification" id="notification" style="display: none;">开发者模式已关闭 - 进入只读模式</div>
     </div>
 
     <script>
@@ -2070,5 +3383,5 @@
             }
         });
     </script>
-</body>
-</html>
+
+</body></html>
