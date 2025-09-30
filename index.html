@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>懒人躺平攻略 - 全能编辑版</title>
+    <title>懒人躺平攻略</title>
     <style>
-        /* 这里是我们完整的CSS样式 */
+        /* 原有CSS样式保持不变 */
         * {
             margin: 0;
             padding: 0;
@@ -22,43 +22,1969 @@
             transition: all 0.3s;
         }
         
-        /* ... 完整的CSS代码 ... */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(16, 36, 54, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #4a9de3;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #4a9de3;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: #a0c8f0;
+            margin-bottom: 15px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            background: rgba(74, 157, 227, 0.5);
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(74, 157, 227, 0.7);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn.strategy { background: rgba(74, 157, 227, 0.5); }
+        .nav-btn.ranged { background: rgba(255, 158, 100, 0.5); }
+        .nav-btn.magic { background: rgba(186, 104, 200, 0.5); }
+        .nav-btn.light { background: rgba(76, 217, 100, 0.5); }
+        .nav-btn.guard { background: rgba(255, 107, 107, 0.5); }
+        
+        .nav-btn.strategy:hover { background: rgba(74, 157, 227, 0.7); }
+        .nav-btn.ranged:hover { background: rgba(255, 158, 100, 0.7); }
+        .nav-btn.magic:hover { background: rgba(186, 104, 200, 0.7); }
+        .nav-btn.light:hover { background: rgba(76, 217, 100, 0.7); }
+        .nav-btn.guard:hover { background: rgba(255, 107, 107, 0.7); }
+        
+        .dev-mode-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 193, 7, 0.8);
+            border: none;
+            border-radius: 5px;
+            color: #333;
+            padding: 8px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .dev-mode-btn:hover {
+            background: rgba(255, 193, 7, 1);
+            transform: scale(1.05);
+        }
+        
+        .dev-mode-btn.active {
+            background: rgba(76, 175, 80, 0.8);
+            color: white;
+        }
+        
+        .dev-tools {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background: rgba(30, 40, 50, 0.95);
+            border-radius: 5px;
+            padding: 15px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 280px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .dev-tools h3 {
+            margin-bottom: 10px;
+            color: #4a9de3;
+            text-align: center;
+        }
+        
+        .dev-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .dev-control-group {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .dev-control-group h4 {
+            margin-bottom: 8px;
+            color: #a0c8f0;
+            font-size: 0.9rem;
+        }
+        
+        .dev-control {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .dev-control label {
+            font-size: 0.9rem;
+            flex: 1;
+        }
+        
+        .dev-control input, .dev-control select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            color: white;
+            padding: 5px;
+            width: 120px;
+        }
+        
+        .dev-control input[type="color"] {
+            height: 30px;
+            padding: 2px;
+        }
+        
+        .dev-control input[type="range"] {
+            width: 100px;
+        }
+        
+        .dev-reset {
+            background: rgba(244, 67, 54, 0.7);
+            border: none;
+            border-radius: 3px;
+            color: white;
+            padding: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .dev-reset:hover {
+            background: rgba(244, 67, 54, 0.9);
+        }
+        
+        .editable-dev {
+            outline: 1px dashed transparent;
+            transition: outline 0.2s;
+            min-height: 20px;
+        }
+        
+        .dev-mode .editable-dev:hover {
+            outline: 1px dashed #4a9de3;
+            background: rgba(74, 157, 227, 0.1);
+        }
+        
+        .dev-mode .editable-dev.dragging {
+            opacity: 0.7;
+        }
+        
+        .drag-handle {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: rgba(74, 157, 227, 0.7);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: move;
+        }
+        
+        .dev-mode .drag-handle {
+            display: flex;
+        }
+        
+        .class-section {
+            margin-bottom: 30px;
+            background: rgba(16, 36, 54, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            scroll-margin-top: 100px;
+            position: relative;
+        }
+        
+        .class-header {
+            padding: 15px 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: rgba(30, 60, 90, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 4px solid;
+        }
+        
+        .strategy { border-left-color: #4a9de3; }
+        .ranged { border-left-color: #ff9e64; }
+        .magic { border-left-color: #ba68c8; }
+        .light { border-left-color: #4cd964; }
+        .guard { border-left-color: #ff6b6b; }
+        
+        .add-character {
+            background: rgba(107, 207, 127, 0.3);
+            border: none;
+            border-radius: 3px;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: none; /* 默认隐藏添加按钮 */
+        }
+        
+        .dev-mode .add-character {
+            display: inline-block; /* 开发者模式下显示 */
+        }
+        
+        .add-character:hover {
+            background: rgba(107, 207, 127, 0.5);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: rgba(40, 70, 100, 0.9);
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(74, 157, 227, 0.5);
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        tr:nth-child(even) {
+            background: rgba(30, 50, 70, 0.4);
+        }
+        
+        tr:hover {
+            background: rgba(50, 90, 130, 0.3);
+        }
+        
+        .delete-row {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 107, 107, 0.3);
+            border: none;
+            border-radius: 3px;
+            color: #fff;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: none; /* 默认隐藏删除按钮 */
+        }
+        
+        .dev-mode .delete-row {
+            display: flex; /* 开发者模式下显示 */
+        }
+        
+        tr:hover .delete-row {
+            opacity: 1;
+        }
+        
+        .delete-row:hover {
+            background: rgba(255, 107, 107, 0.5);
+        }
+        
+        .editable {
+            cursor: pointer;
+            padding: 3px 5px;
+            border-radius: 3px;
+            position: relative;
+        }
+        
+        /* 普通模式下禁用编辑悬停效果 */
+        .editable:hover {
+            background: transparent;
+        }
+        
+        .dev-mode .editable:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .edit-input {
+            display: none;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            color: #fff;
+            padding: 5px 8px;
+            font-size: inherit;
+            font-family: inherit;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+        
+        .edit-input:focus {
+            outline: none;
+            border-color: #4a9de3;
+            box-shadow: 0 0 0 2px rgba(74, 157, 227, 0.3);
+        }
+        
+        .weapon {
+            color: #ff9e64;
+        }
+        
+        /* 新增：强度样式 */
+        .strength {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .training {
+            color: #6bcf7f;
+        }
+        
+        .knowledge {
+            color: #ba68c8;
+        }
+        
+        .glory {
+            color: #ffd700;
+        }
+        
+        .attributes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            min-height: 30px;
+        }
+        
+        .attr-item {
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s;
+            color: #fff;
+        }
+        
+        .attr-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .color-picker {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(30, 40, 50, 0.95);
+            border-radius: 5px;
+            padding: 10px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            width: 120px;
+        }
+        
+        .color-options {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 3px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .color-option:hover {
+            border-color: #fff;
+        }
+        
+        .color-option.active {
+            border-color: #fff;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        
+        .notes {
+            font-style: italic;
+            color: #a0c8f0;
+            font-size: 0.9rem;
+        }
+        
+        .abbreviation {
+            background: rgba(74, 157, 227, 0.2);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            margin: 0 2px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #a0c8f0;
+            font-size: 0.9rem;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(107, 207, 127, 0.9);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 1000;
+        }
+        
+        /* 新增：批量操作面板样式 */
+        .batch-panel {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 40, 50, 0.95);
+            border-radius: 10px;
+            padding: 15px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            display: none;
+            min-width: 300px;
+            border: 1px solid #4a9de3;
+        }
+        
+        .dev-mode .batch-panel {
+            display: block;
+        }
+        
+        .batch-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #4a9de3;
+            font-weight: bold;
+        }
+        
+        .batch-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .batch-btn {
+            background: rgba(74, 157, 227, 0.7);
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .batch-btn:hover {
+            background: rgba(74, 157, 227, 0.9);
+            transform: translateY(-2px);
+        }
+        
+        .batch-btn.delete {
+            background: rgba(255, 107, 107, 0.7);
+        }
+        
+        .batch-btn.delete:hover {
+            background: rgba(255, 107, 107, 0.9);
+        }
+        
+        .batch-selection-info {
+            font-size: 0.8rem;
+            color: #a0c8f0;
+            margin-top: 5px;
+        }
+        
+        /* 新增：选择框样式 */
+        .row-selector {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 16px;
+            height: 16px;
+            display: none;
+        }
+        
+        .dev-mode .row-selector {
+            display: block;
+        }
+        
+        /* 新增：强度选择器样式 */
+        .strength-selector {
+            display: none;
+            position: absolute;
+            background: rgba(30, 40, 50, 0.95);
+            border-radius: 5px;
+            padding: 10px;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border: 1px solid #4a9de3;
+        }
+        
+        .strength-option {
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin: 2px 0;
+            color: #ffd700;
+        }
+        
+        .strength-option:hover {
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+            }
+            
+            .attributes {
+                flex-direction: column;
+                gap: 3px;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+            
+            .dev-tools {
+                width: 90%;
+                right: 5%;
+            }
+            
+            .batch-panel {
+                width: 90%;
+                left: 5%;
+                transform: none;
+            }
+            
+            .batch-controls {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 完整的HTML结构 -->
+        <!-- 开发者模式按钮 -->
         <button class="dev-mode-btn" id="devModeBtn">开发者模式</button>
         
+        <!-- 开发者工具面板 -->
         <div class="dev-tools" id="devTools">
-            <!-- 开发者工具面板 -->
+            <h3>开发者工具</h3>
+            
+            <div class="dev-control-group">
+                <h4>页面样式</h4>
+                <div class="dev-control">
+                    <label>背景颜色:</label>
+                    <input type="color" id="bgColor" value="#1a2a3a">
+                </div>
+                <div class="dev-control">
+                    <label>字体大小:</label>
+                    <input type="range" id="fontSize" min="12" max="24" value="16">
+                </div>
+                <div class="dev-control">
+                    <label>字体:</label>
+                    <select id="fontFamily">
+                        <option value="'Segoe UI', 'Microsoft YaHei', sans-serif">默认</option>
+                        <option value="Arial, sans-serif">Arial</option>
+                        <option value="'Times New Roman', serif">Times New Roman</option>
+                        <option value="'Courier New', monospace">Courier New</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="dev-control-group">
+                <h4>文本颜色</h4>
+                <div class="dev-control">
+                    <label>标题颜色:</label>
+                    <input type="color" id="titleColor" value="#4a9de3">
+                </div>
+                <div class="dev-control">
+                    <label>正文字色:</label>
+                    <input type="color" id="textColor" value="#e0e0e0">
+                </div>
+                <div class="dev-control">
+                    <label>链接颜色:</label>
+                    <input type="color" id="linkColor" value="#a0c8f0">
+                </div>
+            </div>
+            
+            <div class="dev-control-group">
+                <h4>编辑功能</h4>
+                <div style="font-size: 0.8rem; color: #a0c8f0; margin-bottom: 10px;">
+                    单击文本进行编辑，拖拽区域调整位置
+                </div>
+            </div>
+            
+            <button class="dev-reset" id="devReset">重置所有更改</button>
         </div>
         
         <header>
-            <!-- 页面头部 -->
+            <h1 class="editable-dev" data-type="text">懒人躺平版攻略</h1>
+            <div class="subtitle editable-dev" data-type="text">无责任声明：个人向理解,不做任何保证</div>
+            
+            <!-- 导航按钮 -->
+            <div class="nav-buttons">
+                <button class="nav-btn strategy editable-dev" data-target="strategy-section" data-type="button">
+                    <span>🧠</span> <span class="editable-dev" data-type="text">战略类角色</span>
+                </button>
+                <button class="nav-btn ranged editable-dev" data-target="ranged-section" data-type="button">
+                    <span>🏹</span> <span class="editable-dev" data-type="text">远击类角色</span>
+                </button>
+                <button class="nav-btn magic editable-dev" data-target="magic-section" data-type="button">
+                    <span>🔮</span> <span class="editable-dev" data-type="text">构术类角色</span>
+                </button>
+                <button class="nav-btn light editable-dev" data-target="light-section" data-type="button">
+                    <span>⚡</span> <span class="editable-dev" data-type="text">轻锐类角色</span>
+                </button>
+                <button class="nav-btn guard editable-dev" data-target="guard-section" data-type="button">
+                    <span>🛡️</span> <span class="editable-dev" data-type="text">宿卫类角色</span>
+                </button>
+            </div>
         </header>
         
-        <!-- 各个内容板块 -->
-        <section class="class-section strategy" id="strategy-section">
-            <!-- 战略类角色表格 -->
+        <!-- 新增：批量操作面板 -->
+        <div class="batch-panel" id="batchPanel">
+            <div class="batch-header">
+                <span>批量操作</span>
+                <button class="batch-btn" id="selectAllBtn">全选</button>
+            </div>
+            <div class="batch-controls">
+                <button class="batch-btn" id="batchWeaponBtn">批量修改武器</button>
+                <button class="batch-btn" id="batchStrengthBtn">批量修改强度</button>
+                <button class="batch-btn" id="batchTrainingBtn">批量修改深造</button>
+                <button class="batch-btn delete" id="batchDeleteBtn">批量删除</button>
+            </div>
+            <div class="batch-selection-info" id="selectionInfo">已选择 0 个角色</div>
+        </div>
+        
+        <!-- 战略类角色 - 添加强度列 -->
+        <section class="class-section strategy editable-dev" id="strategy-section" data-type="section">
+            <div class="drag-handle">≡</div>
+            <div class="class-header strategy">
+                <span class="editable-dev" data-type="text">🧠 战略类角色</span>
+                <button class="add-character editable-dev" data-type="strategy">+ 添加角色</button>
+            </div>
+            <table id="strategy-table">
+                <thead>
+                    <tr>
+                        <th width="30px"></th>
+                        <th class="editable-dev" data-type="text">角色名称</th>
+                        <th class="editable-dev" data-type="text">武器</th>
+                        <th class="editable-dev" data-type="text">强度</th>
+                        <th class="editable-dev" data-type="text">深造</th>
+                        <th class="editable-dev" data-type="text">致知</th>
+                        <th class="editable-dev" data-type="text">焕彰</th>
+                        <th class="editable-dev" data-type="text">词条推荐</th>
+                        <th class="editable-dev" data-type="text">备注</th>
+                        <th width="30px"></th>
+                    </tr>
+                </thead>
+                <tbody id="strategy-tbody">
+                    <!-- 内容将通过JavaScript动态生成 -->
+                </tbody>
+            </table>
         </section>
         
-        <!-- 其他板块... -->
+        <!-- 远击类角色 -->
+        <section class="class-section ranged editable-dev" id="ranged-section" data-type="section">
+            <div class="drag-handle">≡</div>
+            <div class="class-header ranged">
+                <span class="editable-dev" data-type="text">🏹 远击类角色</span>
+                <button class="add-character editable-dev" data-type="ranged">+ 添加角色</button>
+            </div>
+            <table id="ranged-table">
+                <thead>
+                    <tr>
+                        <th width="30px"></th>
+                        <th class="editable-dev" data-type="text">角色名称</th>
+                        <th class="editable-dev" data-type="text">武器</th>
+                        <th class="editable-dev" data-type="text">强度</th>
+                        <th class="editable-dev" data-type="text">深造</th>
+                        <th class="editable-dev" data-type="text">致知</th>
+                        <th class="editable-dev" data-type="text">焕彰</th>
+                        <th class="editable-dev" data-type="text">词条推荐</th>
+                        <th class="editable-dev" data-type="text">备注</th>
+                        <th width="30px"></th>
+                    </tr>
+                </thead>
+                <tbody id="ranged-tbody">
+                    <!-- 内容将通过JavaScript动态生成 -->
+                </tbody>
+            </table>
+        </section>
         
-        <footer>
-            <!-- 页脚信息 -->
+        <!-- 构术类角色 -->
+        <section class="class-section magic editable-dev" id="magic-section" data-type="section">
+            <div class="drag-handle">≡</div>
+            <div class="class-header magic">
+                <span class="editable-dev" data-type="text">🔮 构术类角色</span>
+                <button class="add-character editable-dev" data-type="magic">+ 添加角色</button>
+            </div>
+            <table id="magic-table">
+                <thead>
+                    <tr>
+                        <th width="30px"></th>
+                        <th class="editable-dev" data-type="text">角色名称</th>
+                        <th class="editable-dev" data-type="text">武器</th>
+                        <th class="editable-dev" data-type="text">强度</th>
+                        <th class="editable-dev" data-type="text">深造</th>
+                        <th class="editable-dev" data-type="text">致知</th>
+                        <th class="editable-dev" data-type="text">焕彰</th>
+                        <th class="editable-dev" data-type="text">词条推荐</th>
+                        <th class="editable-dev" data-type="text">备注</th>
+                        <th width="30px"></th>
+                    </tr>
+                </thead>
+                <tbody id="magic-tbody">
+                    <!-- 内容将通过JavaScript动态生成 -->
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- 轻锐类角色 -->
+        <section class="class-section light editable-dev" id="light-section" data-type="section">
+            <div class="drag-handle">≡</div>
+            <div class="class-header light">
+                <span class="editable-dev" data-type="text">⚡ 轻锐类角色</span>
+                <button class="add-character editable-dev" data-type="light">+ 添加角色</button>
+            </div>
+            <table id="light-table">
+                <thead>
+                    <tr>
+                        <th width="30px"></th>
+                        <th class="editable-dev" data-type="text">角色名称</th>
+                        <th class="editable-dev" data-type="text">武器</th>
+                        <th class="editable-dev" data-type="text">强度</th>
+                        <th class="editable-dev" data-type="text">深造</th>
+                        <th class="editable-dev" data-type="text">致知</th>
+                        <th class="editable-dev" data-type="text">焕彰</th>
+                        <th class="editable-dev" data-type="text">词条推荐</th>
+                        <th class="editable-dev" data-type="text">备注</th>
+                        <th width="30px"></th>
+                    </tr>
+                </thead>
+                <tbody id="light-tbody">
+                    <!-- 内容将通过JavaScript动态生成 -->
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- 宿卫类角色 -->
+        <section class="class-section guard editable-dev" id="guard-section" data-type="section">
+            <div class="drag-handle">≡</div>
+            <div class="class-header guard">
+                <span class="editable-dev" data-type="text">🛡️ 宿卫类角色</span>
+                <button class="add-character editable-dev" data-type="guard">+ 添加角色</button>
+            </div>
+            <table id="guard-table">
+                <thead>
+                    <tr>
+                        <th width="30px"></th>
+                        <th class="editable-dev" data-type="text">角色名称</th>
+                        <th class="editable-dev" data-type="text">武器</th>
+                        <th class="editable-dev" data-type="text">强度</th>
+                        <th class="editable-dev" data-type="text">深造</th>
+                        <th class="editable-dev" data-type="text">致知</th>
+                        <th class="editable-dev" data-type="text">焕彰</th>
+                        <th class="editable-dev" data-type="text">词条推荐</th>
+                        <th class="editable-dev" data-type="text">备注</th>
+                        <th width="30px"></th>
+                    </tr>
+                </thead>
+                <tbody id="guard-tbody">
+                    <!-- 内容将通过JavaScript动态生成 -->
+                </tbody>
+            </table>
+        </section>
+        
+        <footer class="editable-dev" data-type="section">
+            <p class="editable-dev" data-type="text">缩写说明: 
+                <span class="abbreviation editable-dev" data-type="text">暴</span>=<span class="editable-dev" data-type="text">暴击</span>, 
+                <span class="abbreviation editable-dev" data-type="text">爆</span>=<span class="editable-dev" data-type="text">爆伤</span>, 
+                <span class="abbreviation editable-dev" data-type="text">构</span>=<span class="editable-dev" data-type="text">构素伤害提升</span>, 
+                <span class="abbreviation editable-dev" data-type="text">物</span>=<span class="editable-dev" data-type="text">物理伤害提升</span>, 
+                <span class="abbreviation editable-dev" data-type="text">全</span>=<span class="editable-dev" data-type="text">伤害提升</span>, 
+                <span class="abbreviation editable-dev" data-type="text">攻%</span>=<span class="editable-dev" data-type="text">百分比攻击力</span>, 
+                <span class="abbreviation editable-dev" data-type="text">攻</span>=<span class="editable-dev" data-type="text">攻击力</span>
+            </p>
+            <p class="editable-dev" data-type="text">词条优先级: 红色 > 蓝色 > 绿色（绿色词条可任选）</p>
+            <p class="editable-dev" data-type="text" style="margin-top: 10px;">提示: 右键点击词条更改颜色</p>
         </footer>
         
         <div class="notification" id="notification">更改已保存！</div>
     </div>
 
     <script>
-        // 完整的JavaScript代码
-        const systemMonitor = {
-            // ... 所有JavaScript功能代码
+        // 简化颜色选项 - 只保留三种颜色
+        const colorOptions = [
+            { name: '红色', value: '#ff6b6b' },
+            { name: '蓝色', value: '#4a9de3' },
+            { name: '绿色', value: '#6bcf7f' }
+        ];
+
+        // 强度选项
+        const strengthOptions = ['S+', 'S', 'A+', 'A', 'B+', 'B', 'C'];
+
+        // 初始数据 - 添加强度字段
+        const initialData = {
+            strategy: [
+                {
+                    name: "银雀山汉简",
+                    weapon: "流云",
+                    strength: "S+",
+                    training: "戒卫7201",
+                    knowledge: "0致",
+                    glory: "未设置",
+                    attributes: [
+                        { text: "暴", color: "#ff6b6b" },
+                        { text: "爆", color: "#ff6b6b" },
+                        { text: "构", color: "#ff6b6b" },
+                        { text: "全", color: "#ff6b6b" },
+                        { text: "攻%", color: "#4a9de3" },
+                        { text: "警", color: "#4a9de3" }
+                    ],
+                    notes: "无暴搭配银雀7201"
+                },
+                {
+                    name: "海水江崖炉",
+                    weapon: "流云",
+                    strength: "A+",
+                    training: "戒卫2107",
+                    knowledge: "0致",
+                    glory: "未设置",
+                    attributes: [
+                        { text: "暴", color: "#ff6b6b" },
+                        { text: "爆", color: "#ff6b6b" },
+                        { text: "构", color: "#ff6b6b" },
+                        { text: "全", color: "#ff6b6b" },
+                        { text: "警戒", color: "#4a9de3" }
+                    ],
+                    notes: "搭配银雀深造7201"
+                }
+            ],
+            ranged: [
+                {
+                    name: "远击角色A",
+                    weapon: "铜犴弩",
+                    strength: "S",
+                    training: "破碎5500",
+                    knowledge: "0致/3致",
+                    glory: "未设置",
+                    attributes: [
+                        { text: "物伤", color: "#ff6b6b" },
+                        { text: "全伤", color: "#ff6b6b" },
+                        { text: "爆", color: "#ff6b6b" }
+                    ],
+                    notes: "远击"
+                }
+            ],
+            magic: [
+                {
+                    name: "构术角色A",
+                    weapon: "流云",
+                    strength: "A",
+                    training: "储4600/威4303",
+                    knowledge: "3致/6致",
+                    glory: "未设置",
+                    attributes: [
+                        { text: "暴", color: "#ff6b6b" },
+                        { text: "爆", color: "#ff6b6b" },
+                        { text: "构", color: "#ff6b6b" },
+                        { text: "全", color: "#ff6b6b" }
+                    ],
+                    notes: ""
+                }
+            ],
+            light: [
+                {
+                    name: "轻锐角色A",
+                    weapon: "流云",
+                    strength: "B+",
+                    training: "穿甲3700",
+                    knowledge: "3致",
+                    glory: "未设置",
+                    attributes: [
+                        { text: "物", color: "#ff6b6b" },
+                        { text: "全", color: "#ff6b6b" },
+                        { text: "攻击%", color: "#4a9de3" },
+                        { text: "攻击", color: "#4a9de3" }
+                    ],
+                    notes: ""
+                }
+            ],
+            guard: [
+                {
+                    name: "宿卫角色A",
+                    weapon: "流云",
+                    strength: "A+",
+                    training: "固防0307",
+                    knowledge: "0致/3致",
+                    glory: "未设置",
+                    attributes: [
+                        { text: "汲取", color: "#ff6b6b" },
+                        { text: "生命", color: "#ff6b6b" },
+                        { text: "生命", color: "#ff6b6b" },
+                        { text: "双防", color: "#4a9de3" }
+                    ],
+                    notes: ""
+                }
+            ]
         };
-        
-        // ... 其余完整的JS代码
+
+        // 从本地存储加载数据或使用初始数据
+        function loadData() {
+            const savedData = localStorage.getItem('characterData');
+            return savedData ? JSON.parse(savedData) : initialData;
+        }
+
+        // 保存数据到本地存储
+        function saveData(data) {
+            localStorage.setItem('characterData', JSON.stringify(data));
+        }
+
+        // 格式化属性显示
+        function formatAttributes(attributes) {
+            if (!attributes || !Array.isArray(attributes)) return '';
+            
+            return attributes.map(attr => {
+                return `<span class="attr-item" data-text="${attr.text}" style="color: ${attr.color};">${attr.text}</span>`;
+            }).join('');
+        }
+
+        // 渲染表格
+        function renderTables() {
+            const data = loadData();
+            
+            // 为每个类别渲染表格
+            for (const [type, characters] of Object.entries(data)) {
+                const tbody = document.getElementById(`${type}-tbody`);
+                tbody.innerHTML = '';
+                
+                characters.forEach((character, index) => {
+                    const row = createTableRow(character, type, index);
+                    tbody.appendChild(row);
+                });
+            }
+            
+            // 绑定颜色选择器事件
+            bindColorPickerEvents();
+            
+            // 根据开发者模式状态更新编辑功能
+            updateEditability();
+            
+            // 更新选择信息
+            updateSelectionInfo();
+        }
+
+        // 创建表格行
+        function createTableRow(character, type, index) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>
+                    <input type="checkbox" class="row-selector" data-type="${type}" data-index="${index}">
+                </td>
+                <td>
+                    <div class="editable name-editable editable-dev" data-type="text">
+                        <span class="name-text">${character.name}</span>
+                        <input type="text" class="edit-input name-edit" value="${character.name}">
+                    </div>
+                    <button class="delete-row" data-type="${type}" data-index="${index}">×</button>
+                </td>
+                <td>
+                    <div class="editable weapon-editable editable-dev" data-type="text">
+                        <span class="weapon-text weapon">${character.weapon}</span>
+                        <input type="text" class="edit-input weapon-edit" value="${character.weapon}">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable strength-editable editable-dev" data-type="text">
+                        <span class="strength-text strength">${character.strength}</span>
+                        <input type="text" class="edit-input strength-edit" value="${character.strength}">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable training-editable editable-dev" data-type="text">
+                        <span class="training-text training">${character.training}</span>
+                        <input type="text" class="edit-input training-edit" value="${character.training}">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable knowledge-editable editable-dev" data-type="text">
+                        <span class="knowledge-text knowledge">${character.knowledge}</span>
+                        <input type="text" class="edit-input knowledge-edit" value="${character.knowledge}">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable glory-editable editable-dev" data-type="text">
+                        <span class="glory-text glory">${character.glory}</span>
+                        <input type="text" class="edit-input glory-edit" value="${character.glory}">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable attributes-editable editable-dev" data-type="text">
+                        <div class="attributes-text attributes">${formatAttributes(character.attributes)}</div>
+                        <input type="text" class="edit-input attributes-edit" value="${getAttributesText(character.attributes)}">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable notes-editable editable-dev" data-type="text">
+                        <span class="notes-text notes">${character.notes}</span>
+                        <input type="text" class="edit-input notes-edit" value="${character.notes}">
+                    </div>
+                </td>
+                <td></td>
+            `;
+            
+            // 添加事件监听器
+            addEventListenersToRow(row, type, index);
+            
+            return row;
+        }
+
+        // 获取属性文本
+        function getAttributesText(attributes) {
+            if (!attributes || !Array.isArray(attributes)) return '';
+            return attributes.map(attr => attr.text).join('/');
+        }
+
+        // 为行添加事件监听器
+        function addEventListenersToRow(row, type, index) {
+            // 选择框事件
+            const selector = row.querySelector('.row-selector');
+            selector.addEventListener('change', function() {
+                updateSelectionInfo();
+            });
+            
+            // 名称编辑
+            const nameEditable = row.querySelector('.name-editable');
+            const nameText = row.querySelector('.name-text');
+            const nameEdit = row.querySelector('.name-edit');
+            
+            nameEditable.addEventListener('click', (e) => {
+                if (!document.body.classList.contains('dev-mode')) {
+                    e.stopPropagation();
+                    return;
+                }
+                
+                nameText.style.display = 'none';
+                nameEdit.style.display = 'block';
+                nameEdit.focus();
+                nameEdit.select();
+            });
+            
+            nameEdit.addEventListener('blur', () => saveEdit(nameEdit, type, index, 'name'));
+            nameEdit.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') saveEdit(nameEdit, type, index, 'name');
+                if (e.key === 'Escape') cancelEdit(nameEdit);
+            });
+            
+            // 武器编辑
+            const weaponEditable = row.querySelector('.weapon-editable');
+            const weaponText = row.querySelector('.weapon-text');
+            const weaponEdit = row.querySelector('.weapon-edit');
+            
+            weaponEditable.addEventListener('click', (e) => {
+                if (!document.body.classList.contains('dev-mode')) {
+                    e.stopPropagation();
+                    return;
+                }
+                
+                weaponText.style.display = 'none';
+                weaponEdit.style.display = 'block';
+                weaponEdit.focus();
+                weaponEdit.select();
+            });
+            
+            weaponEdit.addEventListener('blur', () => saveEdit(weaponEdit, type, index, 'weapon'));
+            weaponEdit.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') saveEdit(weaponEdit, type, index, 'weapon');
+                if (e.key === 'Escape') cancelEdit(weaponEdit);
+            });
+            
+            // 强度编辑
+            const strengthEditable = row.querySelector('.strength-editable');
+            const strengthText = row.querySelector('.strength-text');
+            const strengthEdit = row.querySelector('.strength-edit');
+            
+            strengthEditable.addEventListener('click', (e) => {
+                if (!document.body.classList.contains('dev-mode')) {
+                    e.stopPropagation();
+                    return;
+                }
+                
+                // 显示强度选择器而不是文本输入
+                showStrengthSelector(strengthText, type, index);
+            });
+            
+            strengthEdit.addEventListener('blur', () => saveEdit(strengthEdit, type, index, 'strength'));
+            strengthEdit.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') saveEdit(strengthEdit, type, index, 'strength');
+                if (e.key === 'Escape') cancelEdit(strengthEdit);
+            });
+            
+            // 深造编辑
+            const trainingEditable = row.querySelector('.training-editable');
+            const trainingText = row.querySelector('.training-text');
+            const trainingEdit = row.querySelector('.training-edit');
+            
+            trainingEditable.addEventListener('click', (e) => {
+                if (!document.body.classList.contains('dev-mode')) {
+                    e.stopPropagation();
+                    return;
+                }
+                
+                trainingText.style.display = 'none';
+                trainingEdit.style.display = 'block';
+                trainingEdit.focus();
+                trainingEdit.select();
+            });
+            
+            trainingEdit.addEventListener('blur', () => saveEdit(trainingEdit, type, index, 'training'));
+            trainingEdit.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') saveEdit(trainingEdit, type, index, 'training');
+                if (e.key === 'Escape') cancelEdit(trainingEdit);
+            });
+            
+            // 致知编辑
+            const knowledgeEditable = row.querySelector('.knowledge-editable');
+            const knowledgeText = row.querySelector('.knowledge-text');
+            const knowledgeEdit = row.querySelector('.knowledge-edit');
+            
+            knowledgeEditable.addEventListener('click', (e) => {
+                if (!document.body.classList.contains('dev-mode')) {
+                    e.stopPropagation();
+                    return;
+                }
+                
+                knowledgeText.style.display = 'none';
+                knowledgeEdit.style.display = 'block';
+                knowledgeEdit.focus();
+                knowledgeEdit.select();
+            });
+            
+            knowledgeEdit.addEventListener('blur', () => saveEdit(knowledgeEdit, type, index, 'knowledge'));
+            knowledgeEdit.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') saveEdit(knowledgeEdit, type, index, 'knowledge');
+                if (e.key === 'Escape') cancelEdit(knowledgeEdit);
+            });
+            
+            // 焕彰编辑
+            const gloryEditable = row.querySelector('.glory-editable');
+            const gloryText = row.querySelector('.glory-text');
+            const gloryEdit = row.querySelector('.glory-edit');
+            
+            gloryEditable.addEventListener('click', (e) => {
+                if (!document.body.classList.contains('dev-mode')) {
+                    e.stopPropagation();
+                    return;
+                }
+                
+                gloryText.style.display = 'none';
+                gloryEdit.style.display = 'block';
+                gloryEdit.focus();
+                gloryEdit.select();
+            });
+            
+            gloryEdit.addEventListener('blur', () => saveEdit(gloryEdit, type, index, 'glory'));
+            gloryEdit.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') saveEdit(gloryEdit, type, index, 'glory');
+                if (e.key === 'Escape') cancelEdit(gloryEdit);
+            });
+            
+            // 属性编辑
+            const attributesEditable = row.querySelector('.attributes-editable');
+            const attributesText = row.querySelector('.attributes-text');
+            const attributesEdit = row.querySelector('.attributes-edit');
+            
+            attributesEditable.addEventListener('click', (e) => {
+                if (e.target.classList.contains('attr-item')) {
+                    return;
+                }
+                
+                if (!document.body.classList.contains('dev-mode')) {
+                    e.stopPropagation();
+                    return;
+                }
+                
+                attributesText.style.display = 'none';
+                attributesEdit.style.display = 'block';
+                attributesEdit.focus();
+                attributesEdit.select();
+            });
+            
+            attributesEdit.addEventListener('blur', () => saveAttributesEdit(attributesEdit, type, index));
+            attributesEdit.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') saveAttributesEdit(attributesEdit, type, index);
+                if (e.key === 'Escape') cancelEdit(attributesEdit);
+            });
+            
+            // 备注编辑
+            const notesEditable = row.querySelector('.notes-editable');
+            const notesText = row.querySelector('.notes-text');
+            const notesEdit = row.querySelector('.notes-edit');
+            
+            notesEditable.addEventListener('click', (e) => {
+                if (!document.body.classList.contains('dev-mode')) {
+                    e.stopPropagation();
+                    return;
+                }
+                
+                notesText.style.display = 'none';
+                notesEdit.style.display = 'block';
+                notesEdit.focus();
+                notesEdit.select();
+            });
+            
+            notesEdit.addEventListener('blur', () => saveEdit(notesEdit, type, index, 'notes'));
+            notesEdit.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') saveEdit(notesEdit, type, index, 'notes');
+                if (e.key === 'Escape') cancelEdit(notesEdit);
+            });
+            
+            // 删除行
+            const deleteBtn = row.querySelector('.delete-row');
+            deleteBtn.addEventListener('click', function() {
+                const type = this.dataset.type;
+                const index = parseInt(this.dataset.index);
+                
+                const data = loadData();
+                data[type].splice(index, 1);
+                saveData(data);
+                renderTables();
+                showNotification('角色已删除');
+            });
+        }
+
+        // 显示强度选择器
+        function showStrengthSelector(strengthElement, type, index) {
+            // 移除现有的选择器
+            document.querySelectorAll('.strength-selector').forEach(selector => {
+                selector.remove();
+            });
+            
+            // 创建强度选择器
+            const selector = document.createElement('div');
+            selector.className = 'strength-selector';
+            selector.innerHTML = strengthOptions.map(option => `
+                <div class="strength-option" data-value="${option}">${option}</div>
+            `).join('');
+            
+            // 定位选择器
+            const rect = strengthElement.getBoundingClientRect();
+            selector.style.position = 'fixed';
+            selector.style.top = `${rect.bottom + window.scrollY}px`;
+            selector.style.left = `${rect.left + window.scrollX}px`;
+            
+            // 添加到页面
+            document.body.appendChild(selector);
+            
+            // 选项点击事件
+            selector.querySelectorAll('.strength-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const newStrength = this.dataset.value;
+                    strengthElement.textContent = newStrength;
+                    
+                    // 更新数据
+                    const data = loadData();
+                    data[type][index].strength = newStrength;
+                    saveData(data);
+                    
+                    selector.remove();
+                    showNotification('强度已更新');
+                });
+            });
+            
+            // 点击页面其他地方关闭选择器
+            const closeSelector = (e) => {
+                if (!selector.contains(e.target)) {
+                    selector.remove();
+                    document.removeEventListener('click', closeSelector);
+                }
+            };
+            
+            setTimeout(() => {
+                document.addEventListener('click', closeSelector);
+            }, 100);
+        }
+
+        // 更新选择信息
+        function updateSelectionInfo() {
+            const selectedCount = document.querySelectorAll('.row-selector:checked').length;
+            document.getElementById('selectionInfo').textContent = `已选择 ${selectedCount} 个角色`;
+        }
+
+        // 批量操作功能
+        function setupBatchOperations() {
+            // 全选按钮
+            document.getElementById('selectAllBtn').addEventListener('click', function() {
+                const selectors = document.querySelectorAll('.row-selector');
+                const allSelected = selectors.length > 0 && Array.from(selectors).every(s => s.checked);
+                
+                selectors.forEach(selector => {
+                    selector.checked = !allSelected;
+                });
+                updateSelectionInfo();
+            });
+            
+            // 批量修改武器
+            document.getElementById('batchWeaponBtn').addEventListener('click', function() {
+                const selected = getSelectedRows();
+                if (selected.length === 0) {
+                    showNotification('请先选择要修改的角色');
+                    return;
+                }
+                
+                const newWeapon = prompt('请输入新的武器名称：', '流云');
+                if (newWeapon) {
+                    batchUpdateField(selected, 'weapon', newWeapon);
+                    showNotification(`已更新 ${selected.length} 个角色的武器`);
+                }
+            });
+            
+            // 批量修改强度
+            document.getElementById('batchStrengthBtn').addEventListener('click', function() {
+                const selected = getSelectedRows();
+                if (selected.length === 0) {
+                    showNotification('请先选择要修改的角色');
+                    return;
+                }
+                
+                const newStrength = prompt('请输入新的强度等级（S+/S/A+/A/B+/B/C）：', 'A');
+                if (newStrength && strengthOptions.includes(newStrength)) {
+                    batchUpdateField(selected, 'strength', newStrength);
+                    showNotification(`已更新 ${selected.length} 个角色的强度`);
+                } else if (newStrength) {
+                    showNotification('请输入有效的强度等级');
+                }
+            });
+            
+            // 批量修改深造
+            document.getElementById('batchTrainingBtn').addEventListener('click', function() {
+                const selected = getSelectedRows();
+                if (selected.length === 0) {
+                    showNotification('请先选择要修改的角色');
+                    return;
+                }
+                
+                const newTraining = prompt('请输入新的深造配置：', '戒卫7201');
+                if (newTraining) {
+                    batchUpdateField(selected, 'training', newTraining);
+                    showNotification(`已更新 ${selected.length} 个角色的深造`);
+                }
+            });
+            
+            // 批量删除
+            document.getElementById('batchDeleteBtn').addEventListener('click', function() {
+                const selected = getSelectedRows();
+                if (selected.length === 0) {
+                    showNotification('请先选择要删除的角色');
+                    return;
+                }
+                
+                if (confirm(`确定要删除选中的 ${selected.length} 个角色吗？`)) {
+                    batchDeleteRows(selected);
+                    showNotification(`已删除 ${selected.length} 个角色`);
+                }
+            });
+        }
+
+        // 获取选中的行
+        function getSelectedRows() {
+            const selected = [];
+            document.querySelectorAll('.row-selector:checked').forEach(selector => {
+                selected.push({
+                    type: selector.dataset.type,
+                    index: parseInt(selector.dataset.index)
+                });
+            });
+            return selected;
+        }
+
+        // 批量更新字段
+        function batchUpdateField(selected, field, value) {
+            const data = loadData();
+            
+            selected.forEach(({ type, index }) => {
+                if (data[type] && data[type][index]) {
+                    data[type][index][field] = value;
+                }
+            });
+            
+            saveData(data);
+            renderTables();
+        }
+
+        // 批量删除行
+        function batchDeleteRows(selected) {
+            const data = loadData();
+            
+            // 按类型分组并倒序删除（避免索引问题）
+            const grouped = {};
+            selected.forEach(({ type, index }) => {
+                if (!grouped[type]) grouped[type] = [];
+                grouped[type].push(index);
+            });
+            
+            Object.keys(grouped).forEach(type => {
+                grouped[type].sort((a, b) => b - a).forEach(index => {
+                    data[type].splice(index, 1);
+                });
+            });
+            
+            saveData(data);
+            renderTables();
+        }
+
+        // 更新编辑功能状态
+        function updateEditability() {
+            const isDevMode = document.body.classList.contains('dev-mode');
+            const editables = document.querySelectorAll('.editable');
+            
+            editables.forEach(editable => {
+                if (isDevMode) {
+                    editable.style.cursor = 'pointer';
+                } else {
+                    editable.style.cursor = 'default';
+                }
+            });
+        }
+
+        // 绑定颜色选择器事件
+        function bindColorPickerEvents() {
+            document.querySelectorAll('.attr-item').forEach(attrItem => {
+                attrItem.replaceWith(attrItem.cloneNode(true));
+            });
+            
+            document.querySelectorAll('.attr-item').forEach(attrItem => {
+                attrItem.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                    showColorPicker(this);
+                });
+            });
+        }
+
+        // 显示颜色选择器
+        function showColorPicker(attrElement) {
+            document.querySelectorAll('.color-picker').forEach(picker => {
+                picker.remove();
+            });
+            
+            const attrText = attrElement.dataset.text;
+            const colorPicker = document.createElement('div');
+            colorPicker.className = 'color-picker';
+            colorPicker.innerHTML = `
+                <div class="color-options">
+                    ${colorOptions.map(color => `
+                        <div class="color-option" 
+                             style="background-color: ${color.value}" 
+                             data-color="${color.value}"></div>
+                    `).join('')}
+                </div>
+            `;
+            
+            const rect = attrElement.getBoundingClientRect();
+            colorPicker.style.position = 'fixed';
+            colorPicker.style.top = `${rect.bottom + window.scrollY}px`;
+            colorPicker.style.left = `${rect.left + window.scrollX}px`;
+            
+            document.body.appendChild(colorPicker);
+            
+            colorPicker.querySelectorAll('.color-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const newColor = this.dataset.color;
+                    updateAttributeColor(attrText, newColor, attrElement);
+                    colorPicker.remove();
+                });
+            });
+            
+            const closePicker = (e) => {
+                if (!colorPicker.contains(e.target)) {
+                    colorPicker.remove();
+                    document.removeEventListener('click', closePicker);
+                }
+            };
+            
+            setTimeout(() => {
+                document.addEventListener('click', closePicker);
+            }, 100);
+        }
+
+        // 更新属性颜色
+        function updateAttributeColor(attrText, newColor, attrElement) {
+            const row = attrElement.closest('tr');
+            const type = row.querySelector('.delete-row').dataset.type;
+            const index = parseInt(row.querySelector('.delete-row').dataset.index);
+            
+            const data = loadData();
+            const character = data[type][index];
+            
+            const attrIndex = character.attributes.findIndex(attr => attr.text === attrText);
+            if (attrIndex !== -1) {
+                character.attributes[attrIndex].color = newColor;
+                saveData(data);
+                renderTables();
+                showNotification('颜色已更新');
+            }
+        }
+
+        // 保存属性编辑
+        function saveAttributesEdit(input, type, index) {
+            const textElement = input.previousElementSibling;
+            const newValue = input.value;
+            
+            input.style.display = 'none';
+            textElement.style.display = 'block';
+            
+            const newAttributes = newValue.split('/').map(text => {
+                text = text.trim();
+                const data = loadData();
+                const character = data[type][index];
+                const existingAttr = character.attributes.find(attr => attr.text === text);
+                
+                return {
+                    text: text,
+                    color: existingAttr ? existingAttr.color : '#ff6b6b'
+                };
+            });
+            
+            const data = loadData();
+            data[type][index].attributes = newAttributes;
+            
+            saveData(data);
+            renderTables();
+        }
+
+        // 保存编辑
+        function saveEdit(input, type, index, field) {
+            const textElement = input.previousElementSibling;
+            const newValue = input.value;
+            
+            textElement.textContent = newValue;
+            input.style.display = 'none';
+            textElement.style.display = 'inline';
+            
+            const data = loadData();
+            data[type][index][field] = newValue;
+            
+            saveData(data);
+        }
+
+        // 取消编辑
+        function cancelEdit(input) {
+            const textElement = input.previousElementSibling;
+            input.style.display = 'none';
+            textElement.style.display = 'inline';
+        }
+
+        // 显示通知
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+
+        // 导航功能
+        function setupNavigation() {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.dataset.target;
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        targetSection.style.boxShadow = '0 0 0 3px rgba(74, 157, 227, 0.5)';
+                        setTimeout(() => {
+                            targetSection.style.boxShadow = '';
+                        }, 1000);
+                    }
+                });
+            });
+        }
+
+        // 开发者模式功能
+        function setupDevMode() {
+            const devModeBtn = document.getElementById('devModeBtn');
+            const devTools = document.getElementById('devTools');
+            let devModeActive = false;
+            
+            devModeBtn.addEventListener('click', function() {
+                devModeActive = !devModeActive;
+                
+                if (devModeActive) {
+                    document.body.classList.add('dev-mode');
+                    devTools.style.display = 'block';
+                    this.classList.add('active');
+                    this.textContent = '开发者模式 (开)';
+                    showNotification('开发者模式已开启 - 现在可以编辑内容');
+                } else {
+                    document.body.classList.remove('dev-mode');
+                    devTools.style.display = 'none';
+                    this.classList.remove('active');
+                    this.textContent = '开发者模式';
+                    showNotification('开发者模式已关闭 - 进入只读模式');
+                }
+                
+                updateEditability();
+            });
+            
+            // 双击编辑文本
+            document.addEventListener('dblclick', function(e) {
+                if (!devModeActive) return;
+                
+                const target = e.target;
+                if (target.classList.contains('editable-dev') && target.getAttribute('data-type') === 'text') {
+                    makeElementEditable(target);
+                }
+            });
+            
+            function makeElementEditable(element) {
+                const originalText = element.textContent;
+                const originalColor = element.style.color || window.getComputedStyle(element).color;
+                
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = originalText;
+                input.style.width = '100%';
+                input.style.background = 'rgba(255,255,255,0.9)';
+                input.style.color = '#000';
+                input.style.border = '1px solid #4a9de3';
+                input.style.padding = '2px 5px';
+                input.style.borderRadius = '3px';
+                
+                element.innerHTML = '';
+                element.appendChild(input);
+                input.focus();
+                input.select();
+                
+                input.addEventListener('blur', function() {
+                    element.textContent = this.value;
+                    element.style.color = originalColor;
+                    
+                    if (element.closest('td')) {
+                        saveTableData();
+                    }
+                });
+                
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        element.textContent = this.value;
+                        element.style.color = originalColor;
+                        
+                        if (element.closest('td')) {
+                            saveTableData();
+                        }
+                    } else if (e.key === 'Escape') {
+                        element.textContent = originalText;
+                        element.style.color = originalColor;
+                    }
+                });
+            }
+            
+            function saveTableData() {
+                const data = {};
+                const sections = ['strategy', 'ranged', 'magic', 'light', 'guard'];
+                
+                sections.forEach(section => {
+                    data[section] = [];
+                    const rows = document.querySelectorAll(`#${section}-tbody tr`);
+                    
+                    rows.forEach(row => {
+                        const character = {
+                            name: row.querySelector('.name-text').textContent,
+                            weapon: row.querySelector('.weapon-text').textContent,
+                            strength: row.querySelector('.strength-text').textContent,
+                            training: row.querySelector('.training-text').textContent,
+                            knowledge: row.querySelector('.knowledge-text').textContent,
+                            glory: row.querySelector('.glory-text').textContent,
+                            notes: row.querySelector('.notes-text').textContent,
+                            attributes: []
+                        };
+                        
+                        const attrItems = row.querySelectorAll('.attr-item');
+                        attrItems.forEach(attr => {
+                            character.attributes.push({
+                                text: attr.textContent,
+                                color: attr.style.color || '#ff6b6b'
+                            });
+                        });
+                        
+                        data[section].push(character);
+                    });
+                });
+                
+                saveData(data);
+                showNotification('表格数据已保存');
+            }
+            
+            // 拖拽功能
+            let draggedElement = null;
+            let offsetX, offsetY;
+            
+            document.querySelectorAll('.drag-handle').forEach(handle => {
+                handle.addEventListener('mousedown', function(e) {
+                    if (!devModeActive) return;
+                    
+                    draggedElement = this.parentElement;
+                    const rect = draggedElement.getBoundingClientRect();
+                    offsetX = e.clientX - rect.left;
+                    offsetY = e.clientY - rect.top;
+                    
+                    draggedElement.classList.add('dragging');
+                    draggedElement.style.zIndex = '1000';
+                    
+                    document.addEventListener('mousemove', onMouseMove);
+                    document.addEventListener('mouseup', onMouseUp);
+                    
+                    e.preventDefault();
+                });
+            });
+            
+            function onMouseMove(e) {
+                if (!draggedElement) return;
+                
+                draggedElement.style.position = 'absolute';
+                draggedElement.style.left = (e.clientX - offsetX) + 'px';
+                draggedElement.style.top = (e.clientY - offsetY) + 'px';
+            }
+            
+            function onMouseUp() {
+                if (draggedElement) {
+                    draggedElement.classList.remove('dragging');
+                    draggedElement.style.zIndex = '';
+                    draggedElement = null;
+                }
+                
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            }
+            
+            // 开发者工具控制
+            const bgColorInput = document.getElementById('bgColor');
+            const fontSizeInput = document.getElementById('fontSize');
+            const fontFamilySelect = document.getElementById('fontFamily');
+            const titleColorInput = document.getElementById('titleColor');
+            const textColorInput = document.getElementById('textColor');
+            const linkColorInput = document.getElementById('linkColor');
+            const devResetBtn = document.getElementById('devReset');
+            
+            loadDevSettings();
+            
+            bgColorInput.addEventListener('change', function() {
+                document.body.style.background = this.value;
+                saveDevSettings();
+            });
+            
+            fontSizeInput.addEventListener('input', function() {
+                document.body.style.fontSize = this.value + 'px';
+                saveDevSettings();
+            });
+            
+            fontFamilySelect.addEventListener('change', function() {
+                document.body.style.fontFamily = this.value;
+                saveDevSettings();
+            });
+            
+            titleColorInput.addEventListener('change', function() {
+                document.querySelector('h1').style.color = this.value;
+                saveDevSettings();
+            });
+            
+            textColorInput.addEventListener('change', function() {
+                document.body.style.color = this.value;
+                saveDevSettings();
+            });
+            
+            linkColorInput.addEventListener('change', function() {
+                document.querySelector('.subtitle').style.color = this.value;
+                saveDevSettings();
+            });
+            
+            devResetBtn.addEventListener('click', function() {
+                document.body.style.background = '';
+                document.body.style.fontSize = '';
+                document.body.style.fontFamily = '';
+                document.body.style.color = '';
+                document.querySelector('h1').style.color = '';
+                document.querySelector('.subtitle').style.color = '';
+                
+                bgColorInput.value = '#1a2a3a';
+                fontSizeInput.value = '16';
+                fontFamilySelect.value = "'Segoe UI', 'Microsoft YaHei', sans-serif";
+                titleColorInput.value = '#4a9de3';
+                textColorInput.value = '#e0e0e0';
+                linkColorInput.value = '#a0c8f0';
+                
+                localStorage.removeItem('devSettings');
+                showNotification('样式已重置');
+            });
+            
+            function saveDevSettings() {
+                const settings = {
+                    bgColor: bgColorInput.value,
+                    fontSize: fontSizeInput.value,
+                    fontFamily: fontFamilySelect.value,
+                    titleColor: titleColorInput.value,
+                    textColor: textColorInput.value,
+                    linkColor: linkColorInput.value
+                };
+                localStorage.setItem('devSettings', JSON.stringify(settings));
+            }
+            
+            function loadDevSettings() {
+                const savedSettings = localStorage.getItem('devSettings');
+                if (savedSettings) {
+                    const settings = JSON.parse(savedSettings);
+                    
+                    bgColorInput.value = settings.bgColor;
+                    fontSizeInput.value = settings.fontSize;
+                    fontFamilySelect.value = settings.fontFamily;
+                    titleColorInput.value = settings.titleColor;
+                    textColorInput.value = settings.textColor;
+                    linkColorInput.value = settings.linkColor;
+                    
+                    document.body.style.background = settings.bgColor;
+                    document.body.style.fontSize = settings.fontSize + 'px';
+                    document.body.style.fontFamily = settings.fontFamily;
+                    document.body.style.color = settings.textColor;
+                    document.querySelector('h1').style.color = settings.titleColor;
+                    document.querySelector('.subtitle').style.color = settings.linkColor;
+                }
+            }
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            renderTables();
+            setupNavigation();
+            setupDevMode();
+            setupBatchOperations();
+            
+            document.querySelectorAll('.add-character').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (!document.body.classList.contains('dev-mode')) {
+                        showNotification('请在开发者模式下添加角色');
+                        return;
+                    }
+                    
+                    const type = this.dataset.type;
+                    const data = loadData();
+                    
+                    data[type].push({
+                        name: `新${getTypeName(type)}角色`,
+                        weapon: "未设置",
+                        strength: "B",
+                        training: "未设置",
+                        knowledge: "未设置",
+                        glory: "未设置",
+                        attributes: [
+                            { text: "示例", color: "#ff6b6b" }
+                        ],
+                        notes: ""
+                    });
+                    
+                    saveData(data);
+                    renderTables();
+                    showNotification('新角色已添加');
+                });
+            });
+            
+            function getTypeName(type) {
+                const names = {
+                    strategy: '战略',
+                    ranged: '远击',
+                    magic: '构术',
+                    light: '轻锐',
+                    guard: '宿卫'
+                };
+                return names[type] || '未知';
+            }
+        });
     </script>
 </body>
 </html>
