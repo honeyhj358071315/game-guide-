@@ -940,13 +940,13 @@
         }
     </style>
 </head>
-<body class="dev-mode">
+<body class="">
     <div class="container">
         <!-- 开发者模式按钮 -->
-        <button class="dev-mode-btn active" id="devModeBtn">开发者模式 (开)</button>
+        <button class="dev-mode-btn" id="devModeBtn">开发者模式</button>
         
         <!-- 简化版开发者工具面板 -->
-        <div class="dev-tools" id="devTools" style="display: block;">
+        <div class="dev-tools" id="devTools" style="display: none;">
             <div class="dev-tabs">
                 <div class="dev-tab active" data-tab="layout">布局管理</div>
                 <div class="dev-tab" data-tab="content">内容操作</div>
@@ -974,10 +974,10 @@
                     <span>🛡️ 宿卫类角色</span>
                 </div><div class="section-item" draggable="true" data-section-id="tips-section">
                     <input type="checkbox" class="section-toggle" checked="">
-                    <span>💡 新手注意事项</span>
+                    <span>💡 新手导航</span>
                 </div><div class="section-item" draggable="true" data-section-id="navigation-section">
                     <input type="checkbox" class="section-toggle" checked="">
-                    <span>🧭 导航规则</span>
+                    <span>🧭 导航</span>
                 </div></div>
                     <button class="add-section-btn" id="addSectionBtn">+ 添加新板块</button>
                 </div>
@@ -1006,7 +1006,7 @@
                     <button class="batch-btn delete" id="clearDataBtn">清空所有数据</button>
                 </div>
             </div>
-        <button class="dev-tools-toggle" title="展开/收起开发者面板">⯅</button></div>
+        <button class="dev-tools-toggle" title="展开/收起开发者面板">⯅</button><button class="dev-tools-toggle" title="展开/收起开发者面板">⯅</button></div>
         
         <header>
             <h1 class="editable-dev" data-type="text">懒人躺平版攻略</h1>
@@ -1018,22 +1018,22 @@
                     <span>🧠</span> <span class="editable-dev" data-type="text">远击类角色</span>
                 </button>
                 <button class="nav-btn ranged editable-dev" data-target="ranged-section" data-type="button">
-                    <span>🏹</span> <span class="editable-dev" data-type="text">轻锐类角色</span>
+                    <span>🏹</span> <span class="editable-dev" data-type="text"> 轻锐类角色</span>
                 </button>
                 <button class="nav-btn magic editable-dev" data-target="magic-section" data-type="button">
-                    <span>🔮</span> <span class="editable-dev" data-type="text">新手注意事项</span>
+                    <span>🔮</span> <span class="editable-dev" data-type="text">新手导航</span>
                 </button>
                 <button class="nav-btn light editable-dev" data-target="light-section" data-type="button">
-                    <span>⚡</span> <span class="editable-dev" data-type="text"> 轻锐类角色</span>
+                    <span>⚡</span> <span class="editable-dev" data-type="text">新板块</span>
                 </button>
                 <button class="nav-btn guard editable-dev" data-target="guard-section" data-type="button">
-                    <span>🛡️</span> <span class="editable-dev" data-type="text">宿卫类角色</span>
+                    <span>🛡️</span> <span class="editable-dev" data-type="text"></span>
                 </button>
                 <button class="nav-btn tips editable-dev" data-target="tips-section" data-type="button">
-                    <span>💡</span> <span class="editable-dev" data-type="text">新手导航</span>
+                    <span>💡</span> <span class="editable-dev" data-type="text"></span>
                 </button>
                 <button class="nav-btn navigation editable-dev" data-target="navigation-section" data-type="button">
-                    <span>🧭</span> <span class="editable-dev" data-type="text">导航</span>
+                    <span>🧭</span> <span class="editable-dev" data-type="text"></span>
                 </button>
             </div>
         </header>
@@ -1082,964 +1082,961 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="strategy-tbody"><tr draggable="true" data-type="strategy" data-index="0">
+                <tbody id="strategy-tbody"><tr draggable="false" data-type="strategy" data-index="0">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="0">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: red" data-type="strategy" data-index="0">1.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">浑天仪</span>
                             <input type="text" class="edit-input name-edit" value="浑天仪">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="0">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
-                            <span class="weapon-text weapon">流云鸣沙炮
-雪融万花炮</span>
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="weapon-text weapon">流云鸣沙炮<br>雪融万花炮</span>
                             <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮|雪融万花炮">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">选练</span>
                             <input type="text" class="edit-input strength-edit" value="选练">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">多谋6004</span>
                             <input type="text" class="edit-input training-edit" value="多谋6004">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">赠送</span>
                             <input type="text" class="edit-input knowledge-edit" value="赠送">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
-                            <span class="glory-text glory" style="display: inline;">召唤辅助</span>
-                            <input type="text" class="edit-input glory-edit" value="召唤" style="display: none;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="glory-text glory">召唤辅助</span>
+                            <input type="text" class="edit-input glory-edit" value="召唤辅助">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="暴/爆/构/治/攻%" style="color: #ff6b6b;">暴/爆/构/治/攻%</span></div>
                             <input type="text" class="edit-input attributes-edit" value="暴/爆/构/治/攻%">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
-                            <span class="notes-text notes">主要用于搭配
-帛画+天球的体系
-1</span>
-                            <input type="text" class="edit-input notes-edit" value="主要用于搭配|帛画+天球的体系|1">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <span class="notes-text notes">主要用于搭配<br>帛画+天球的体系</span>
+                            <input type="text" class="edit-input notes-edit" value="主要用于搭配|帛画+天球的体系">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="1">
+                </tr><tr draggable="false" data-type="strategy" data-index="1">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="1">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: red" data-type="strategy" data-index="1">2.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">向日葵</span>
                             <input type="text" class="edit-input name-edit" value="向日葵">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="1">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">流云鸣沙炮</span>
                             <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">必练</span>
                             <input type="text" class="edit-input strength-edit" value="必练">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">多谋1207</span>
                             <input type="text" class="edit-input training-edit" value="多谋1207">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">0致/3致</span>
                             <input type="text" class="edit-input knowledge-edit" value="0致/3致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">dot核心</span>
                             <input type="text" class="edit-input glory-edit" value="dot核心">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="构/全/攻%/攻" style="color: #ff6b6b;">构/全/攻%/攻</span></div>
                             <input type="text" class="edit-input attributes-edit" value="构/全/攻%/攻">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">搭配dot/战略都可以/或散搭</span>
                             <input type="text" class="edit-input notes-edit" value="搭配dot/战略都可以/或散搭">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="2">
+                </tr><tr draggable="false" data-type="strategy" data-index="2">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="2">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: red" data-type="strategy" data-index="2">3.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">银雀山汉简</span>
                             <input type="text" class="edit-input name-edit" value="银雀山汉简">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="2">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">流云鸣沙炮</span>
                             <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">必练</span>
                             <input type="text" class="edit-input strength-edit" value="必练">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">戒卫7201</span>
                             <input type="text" class="edit-input training-edit" value="戒卫7201">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">0致/3致</span>
                             <input type="text" class="edit-input knowledge-edit" value="0致/3致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">战略核心</span>
                             <input type="text" class="edit-input glory-edit" value="战略核心">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="暴/爆/构/全/攻%/警" style="color: #ff6b6b;">暴/爆/构/全/攻%/警</span></div>
                             <input type="text" class="edit-input attributes-edit" value="暴/爆/构/全/攻%/警">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">引导警戒注定搭配战略更适合</span>
                             <input type="text" class="edit-input notes-edit" value="引导警戒注定搭配战略更适合">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="3">
+                </tr><tr draggable="false" data-type="strategy" data-index="3">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="3">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: red" data-type="strategy" data-index="3">4.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">海水江崖炉</span>
                             <input type="text" class="edit-input name-edit" value="海水江崖炉">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="3">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">流云鸣沙炮</span>
                             <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">可练</span>
                             <input type="text" class="edit-input strength-edit" value="可练">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">戒卫2107</span>
                             <input type="text" class="edit-input training-edit" value="戒卫2107">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">0致</span>
                             <input type="text" class="edit-input knowledge-edit" value="0致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">自由人</span>
                             <input type="text" class="edit-input glory-edit" value="自由人">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="暴/爆/构/全/警" style="color: #ff6b6b;">暴/爆/构/全/警</span></div>
                             <input type="text" class="edit-input attributes-edit" value="暴/爆/构/全/警">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">输出/辅助/奶</span>
                             <input type="text" class="edit-input notes-edit" value="输出/辅助/奶">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="4">
+                </tr><tr draggable="false" data-type="strategy" data-index="4">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="4">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: red" data-type="strategy" data-index="4">5.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">鸟音山水钟</span>
                             <input type="text" class="edit-input name-edit" value="鸟音山水钟">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="4">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">雪融万花炮</span>
                             <input type="text" class="edit-input weapon-edit" value="雪融万花炮">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">选练</span>
                             <input type="text" class="edit-input strength-edit" value="选练">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">多谋4024</span>
                             <input type="text" class="edit-input training-edit" value="多谋4024">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">0致</span>
                             <input type="text" class="edit-input knowledge-edit" value="0致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">战略体系</span>
                             <input type="text" class="edit-input glory-edit" value="战略体系">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="暴/爆/治/警" style="color: #ff6b6b;">暴/爆/治/警</span></div>
                             <input type="text" class="edit-input attributes-edit" value="暴/爆/治/警">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">奶辅/功能</span>
                             <input type="text" class="edit-input notes-edit" value="奶辅/功能">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="5">
+                </tr><tr draggable="false" data-type="strategy" data-index="5">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="5">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: red" data-type="strategy" data-index="5">6.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">十二花卉杯</span>
                             <input type="text" class="edit-input name-edit" value="十二花卉杯">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="5">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">流云鸣沙炮</span>
                             <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">选练</span>
                             <input type="text" class="edit-input strength-edit" value="选练">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">戒卫6004</span>
                             <input type="text" class="edit-input training-edit" value="戒卫6004">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">3致</span>
                             <input type="text" class="edit-input knowledge-edit" value="3致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">选焕</span>
                             <input type="text" class="edit-input glory-edit" value="选焕">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="暴/爆/构/全/警" style="color: #ff6b6b;">暴/爆/构/全/警</span></div>
                             <input type="text" class="edit-input attributes-edit" value="暴/爆/构/全/警">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">输出/功能</span>
                             <input type="text" class="edit-input notes-edit" value="输出/功能">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="6">
+                </tr><tr draggable="false" data-type="strategy" data-index="6">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="6">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: red" data-type="strategy" data-index="6">7.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">商周十供</span>
                             <input type="text" class="edit-input name-edit" value="商周十供">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="6">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">流云鸣沙炮</span>
                             <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">可练</span>
                             <input type="text" class="edit-input strength-edit" value="可练">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">多谋7300</span>
                             <input type="text" class="edit-input training-edit" value="多谋7300">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">0致</span>
                             <input type="text" class="edit-input knowledge-edit" value="0致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">回击/自由</span>
                             <input type="text" class="edit-input glory-edit" value="回击/自由">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="暴/爆/攻%/攻" style="color: #ff6b6b;">暴/爆/攻%/攻</span></div>
                             <input type="text" class="edit-input attributes-edit" value="暴/爆/攻%/攻">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">奶辅/功能/回击体系</span>
                             <input type="text" class="edit-input notes-edit" value="奶辅/功能/回击体系">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="7">
+                </tr><tr draggable="false" data-type="strategy" data-index="7">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="7">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: red" data-type="strategy" data-index="7">8.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">利簋</span>
                             <input type="text" class="edit-input name-edit" value="利簋">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="7">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">流云鸣沙炮</span>
                             <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">可练</span>
                             <input type="text" class="edit-input strength-edit" value="可练">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">戒卫4303</span>
                             <input type="text" class="edit-input training-edit" value="戒卫4303">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">0致</span>
                             <input type="text" class="edit-input knowledge-edit" value="0致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">自由人</span>
                             <input type="text" class="edit-input glory-edit" value="自由人">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="随意/暴/爆/构/全" style="color: #ff6b6b;">随意/暴/爆/构/全</span></div>
                             <input type="text" class="edit-input attributes-edit" value="随意/暴/爆/构/全">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">功能</span>
                             <input type="text" class="edit-input notes-edit" value="功能">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="8">
+                </tr><tr draggable="false" data-type="strategy" data-index="8">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="8">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: red" data-type="strategy" data-index="8">9.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">敦煌飞天</span>
                             <input type="text" class="edit-input name-edit" value="敦煌飞天">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="8">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">流云鸣沙炮</span>
                             <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">厨子</span>
                             <input type="text" class="edit-input strength-edit" value="厨子">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">未设置</span>
                             <input type="text" class="edit-input training-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">0致</span>
                             <input type="text" class="edit-input knowledge-edit" value="0致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">自由人</span>
                             <input type="text" class="edit-input glory-edit" value="自由人">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: #ff6b6b;">示例</span></div>
                             <input type="text" class="edit-input attributes-edit" value="示例">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">奶辅</span>
                             <input type="text" class="edit-input notes-edit" value="奶辅">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="9">
+                </tr><tr draggable="false" data-type="strategy" data-index="9">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="9">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: red" data-type="strategy" data-index="9">10.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">五星出东方</span>
                             <input type="text" class="edit-input name-edit" value="五星出东方">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="9">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">流云鸣沙炮</span>
                             <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">厨子</span>
                             <input type="text" class="edit-input strength-edit" value="厨子">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">戒卫4303</span>
                             <input type="text" class="edit-input training-edit" value="戒卫4303">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">0致</span>
                             <input type="text" class="edit-input knowledge-edit" value="0致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">未开</span>
                             <input type="text" class="edit-input glory-edit" value="未开">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="爆/构/全/警" style="color: #ff6b6b;">爆/构/全/警</span></div>
                             <input type="text" class="edit-input attributes-edit" value="爆/构/全/警">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">输出</span>
                             <input type="text" class="edit-input notes-edit" value="输出">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="10">
+                </tr><tr draggable="false" data-type="strategy" data-index="10">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="10">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: red" data-type="strategy" data-index="10">11.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">莲塘乳鸭图</span>
                             <input type="text" class="edit-input name-edit" value="莲塘乳鸭图">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="10">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">流云鸣沙炮</span>
                             <input type="text" class="edit-input weapon-edit" value="流云鸣沙炮">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">大杯</span>
                             <input type="text" class="edit-input strength-edit" value="大杯">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">多谋1207</span>
                             <input type="text" class="edit-input training-edit" value="多谋1207">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">0致</span>
                             <input type="text" class="edit-input knowledge-edit" value="0致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">未开</span>
                             <input type="text" class="edit-input glory-edit" value="未开">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="暴/爆/治" style="color: #ff6b6b;">暴/爆/治</span></div>
                             <input type="text" class="edit-input attributes-edit" value="暴/爆/治">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">奶妈</span>
                             <input type="text" class="edit-input notes-edit" value="奶妈">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="11">
+                </tr><tr draggable="false" data-type="strategy" data-index="11">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="11">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: yellow" data-type="strategy" data-index="11">12.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">白龙梅瓶</span>
                             <input type="text" class="edit-input name-edit" value="白龙梅瓶">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="11">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">1</span>
                             <input type="text" class="edit-input weapon-edit" value="1">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">选练</span>
                             <input type="text" class="edit-input strength-edit" value="选练">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">6004</span>
                             <input type="text" class="edit-input training-edit" value="6004">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">3</span>
                             <input type="text" class="edit-input knowledge-edit" value="3">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">未开</span>
                             <input type="text" class="edit-input glory-edit" value="未开">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="暴/爆/构/全/警戒" style="color: #ff6b6b;">暴/爆/构/全/警戒</span></div>
                             <input type="text" class="edit-input attributes-edit" value="暴/爆/构/全/警戒">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">输出/辅助</span>
                             <input type="text" class="edit-input notes-edit" value="输出/辅助">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="12">
+                </tr><tr draggable="false" data-type="strategy" data-index="12">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="12">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: yellow" data-type="strategy" data-index="12">13.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">晋侯鸟尊</span>
                             <input type="text" class="edit-input name-edit" value="晋侯鸟尊">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="12">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">1</span>
                             <input type="text" class="edit-input weapon-edit" value="1">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">选练</span>
                             <input type="text" class="edit-input strength-edit" value="选练">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">未设置</span>
                             <input type="text" class="edit-input training-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">3</span>
                             <input type="text" class="edit-input knowledge-edit" value="3">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">未开</span>
                             <input type="text" class="edit-input glory-edit" value="未开">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: #ff6b6b;">示例</span></div>
                             <input type="text" class="edit-input attributes-edit" value="示例">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">功能</span>
                             <input type="text" class="edit-input notes-edit" value="功能">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="13">
+                </tr><tr draggable="false" data-type="strategy" data-index="13">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="13">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: yellow" data-type="strategy" data-index="13">14.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">皇后之玺</span>
                             <input type="text" class="edit-input name-edit" value="皇后之玺">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="13">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">1</span>
                             <input type="text" class="edit-input weapon-edit" value="1">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">厨子</span>
                             <input type="text" class="edit-input strength-edit" value="厨子">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">未设置</span>
                             <input type="text" class="edit-input training-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">3</span>
                             <input type="text" class="edit-input knowledge-edit" value="3">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">未开</span>
                             <input type="text" class="edit-input glory-edit" value="未开">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: #ff6b6b;">示例</span></div>
                             <input type="text" class="edit-input attributes-edit" value="示例">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes"></span>
                             <input type="text" class="edit-input notes-edit" value="">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="14">
+                </tr><tr draggable="false" data-type="strategy" data-index="14">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="14">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: yellow" data-type="strategy" data-index="14">15.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">诗文执壶</span>
                             <input type="text" class="edit-input name-edit" value="诗文执壶">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="14">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">1</span>
                             <input type="text" class="edit-input weapon-edit" value="1">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">选练</span>
                             <input type="text" class="edit-input strength-edit" value="选练">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">未设置</span>
                             <input type="text" class="edit-input training-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">3</span>
                             <input type="text" class="edit-input knowledge-edit" value="3">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">未开</span>
                             <input type="text" class="edit-input glory-edit" value="未开">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: #ff6b6b;">示例</span><span class="attr-item" data-text="1" style="color: #ff6b6b;">1</span></div>
                             <input type="text" class="edit-input attributes-edit" value="示例,1">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes"></span>
                             <input type="text" class="edit-input notes-edit" value="">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="strategy" data-index="15">
+                </tr><tr draggable="false" data-type="strategy" data-index="15">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="strategy" data-index="15">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: yellow" data-type="strategy" data-index="15">16.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">丙午神钩</span>
                             <input type="text" class="edit-input name-edit" value="丙午神钩">
                         </div>
                         <button class="delete-row" data-type="strategy" data-index="15">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">1</span>
                             <input type="text" class="edit-input weapon-edit" value="1">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">厨子</span>
                             <input type="text" class="edit-input strength-edit" value="厨子">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">1</span>
                             <input type="text" class="edit-input training-edit" value="1">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">3</span>
                             <input type="text" class="edit-input knowledge-edit" value="3">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">未开</span>
                             <input type="text" class="edit-input glory-edit" value="未开">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="攻" style="color: #ff6b6b;">攻</span></div>
                             <input type="text" class="edit-input attributes-edit" value="攻">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes"></span>
                             <input type="text" class="edit-input notes-edit" value="">
                         </div>
@@ -2084,181 +2081,181 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="ranged-tbody"><tr draggable="true" data-type="ranged" data-index="0">
+                <tbody id="ranged-tbody"><tr draggable="false" data-type="ranged" data-index="0">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="ranged" data-index="0">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: red" data-type="ranged" data-index="0">1.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">天球仪</span>
                             <input type="text" class="edit-input name-edit" value="天球仪">
                         </div>
                         <button class="delete-row" data-type="ranged" data-index="0">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">流云鸣沙弩</span>
                             <input type="text" class="edit-input weapon-edit" value="流云鸣沙弩">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">必练</span>
                             <input type="text" class="edit-input strength-edit" value="必练">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">破碎7300</span>
                             <input type="text" class="edit-input training-edit" value="破碎7300">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">1致/6致</span>
                             <input type="text" class="edit-input knowledge-edit" value="1致/6致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">未开</span>
                             <input type="text" class="edit-input glory-edit" value="未开">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="攻%/暴--爆/物/攻" style="color: #ff6b6b;">攻%/暴--爆/物/攻</span></div>
                             <input type="text" class="edit-input attributes-edit" value="攻%/暴--爆/物/攻">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">远击</span>
                             <input type="text" class="edit-input notes-edit" value="远击">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="ranged" data-index="1">
+                </tr><tr draggable="false" data-type="ranged" data-index="1">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="ranged" data-index="1">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: #a0c8f0" data-type="ranged" data-index="1">2.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">新远击角色</span>
                             <input type="text" class="edit-input name-edit" value="新远击角色">
                         </div>
                         <button class="delete-row" data-type="ranged" data-index="1">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">未设置</span>
                             <input type="text" class="edit-input weapon-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">B</span>
                             <input type="text" class="edit-input strength-edit" value="B">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">未设置</span>
                             <input type="text" class="edit-input training-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">未设置</span>
                             <input type="text" class="edit-input knowledge-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">未设置</span>
                             <input type="text" class="edit-input glory-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: #ff6b6b;">示例</span></div>
                             <input type="text" class="edit-input attributes-edit" value="示例">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes"></span>
                             <input type="text" class="edit-input notes-edit" value="">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="ranged" data-index="2">
+                </tr><tr draggable="false" data-type="ranged" data-index="2">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="ranged" data-index="2">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: #a0c8f0" data-type="ranged" data-index="2">3.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">新远击角色</span>
                             <input type="text" class="edit-input name-edit" value="新远击角色">
                         </div>
                         <button class="delete-row" data-type="ranged" data-index="2">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">未设置</span>
                             <input type="text" class="edit-input weapon-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">B</span>
                             <input type="text" class="edit-input strength-edit" value="B">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">未设置</span>
                             <input type="text" class="edit-input training-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">未设置</span>
                             <input type="text" class="edit-input knowledge-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">未设置</span>
                             <input type="text" class="edit-input glory-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: #ff6b6b;">示例</span></div>
                             <input type="text" class="edit-input attributes-edit" value="示例">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes"></span>
                             <input type="text" class="edit-input notes-edit" value="">
                         </div>
@@ -2303,61 +2300,61 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="magic-tbody"><tr draggable="true" data-type="magic" data-index="0">
+                <tbody id="magic-tbody"><tr draggable="false" data-type="magic" data-index="0">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="magic" data-index="0">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: #a0c8f0" data-type="magic" data-index="0">1.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">天球仪</span>
                             <input type="text" class="edit-input name-edit" value="天球仪">
                         </div>
                         <button class="delete-row" data-type="magic" data-index="0">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">流云鸣沙弩</span>
                             <input type="text" class="edit-input weapon-edit" value="流云鸣沙弩">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">undefined</span>
                             <input type="text" class="edit-input strength-edit" value="undefined">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">破碎7300</span>
                             <input type="text" class="edit-input training-edit" value="破碎7300">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">0致/1致/6致</span>
                             <input type="text" class="edit-input knowledge-edit" value="0致/1致/6致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">undefined</span>
                             <input type="text" class="edit-input glory-edit" value="undefined">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="攻%/暴--爆/物/攻" style="color: #ff6b6b;">攻%/暴--爆/物/攻</span></div>
                             <input type="text" class="edit-input attributes-edit" value="攻%/暴--爆/物/攻">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes"></span>
                             <input type="text" class="edit-input notes-edit" value="">
                         </div>
@@ -2402,61 +2399,61 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="light-tbody"><tr draggable="true" data-type="light" data-index="0">
+                <tbody id="light-tbody"><tr draggable="false" data-type="light" data-index="0">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="light" data-index="0">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: #a0c8f0" data-type="light" data-index="0">1.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">轻锐角色A</span>
                             <input type="text" class="edit-input name-edit" value="轻锐角色A">
                         </div>
                         <button class="delete-row" data-type="light" data-index="0">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">流云</span>
                             <input type="text" class="edit-input weapon-edit" value="流云">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">undefined</span>
                             <input type="text" class="edit-input strength-edit" value="undefined">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">穿甲3700</span>
                             <input type="text" class="edit-input training-edit" value="穿甲3700">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">3致</span>
                             <input type="text" class="edit-input knowledge-edit" value="3致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">undefined</span>
                             <input type="text" class="edit-input glory-edit" value="undefined">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"></div>
                             <input type="text" class="edit-input attributes-edit" value="">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes"></span>
                             <input type="text" class="edit-input notes-edit" value="">
                         </div>
@@ -2501,121 +2498,121 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="guard-tbody"><tr draggable="true" data-type="guard" data-index="0">
+                <tbody id="guard-tbody"><tr draggable="false" data-type="guard" data-index="0">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="guard" data-index="0">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: #a0c8f0" data-type="guard" data-index="0">1.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">宿卫角色A</span>
                             <input type="text" class="edit-input name-edit" value="宿卫角色A">
                         </div>
                         <button class="delete-row" data-type="guard" data-index="0">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">流云</span>
                             <input type="text" class="edit-input weapon-edit" value="流云">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">undefined</span>
                             <input type="text" class="edit-input strength-edit" value="undefined">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">固防0307</span>
                             <input type="text" class="edit-input training-edit" value="固防0307">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">0致/3致</span>
                             <input type="text" class="edit-input knowledge-edit" value="0致/3致">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">undefined</span>
                             <input type="text" class="edit-input glory-edit" value="undefined">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"></div>
                             <input type="text" class="edit-input attributes-edit" value="">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes"></span>
                             <input type="text" class="edit-input notes-edit" value="">
                         </div>
                     </td>
                     <td></td>
-                </tr><tr draggable="true" data-type="guard" data-index="1">
+                </tr><tr draggable="false" data-type="guard" data-index="1">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="guard" data-index="1">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: #a0c8f0" data-type="guard" data-index="1">2.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">新宿卫角色</span>
                             <input type="text" class="edit-input name-edit" value="新宿卫角色">
                         </div>
                         <button class="delete-row" data-type="guard" data-index="1">×</button>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="weapon-text weapon">未设置</span>
                             <input type="text" class="edit-input weapon-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="strength-text strength">B</span>
                             <input type="text" class="edit-input strength-edit" value="B">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="training-text training">未设置</span>
                             <input type="text" class="edit-input training-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="knowledge-text knowledge">未设置</span>
                             <input type="text" class="edit-input knowledge-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="glory-text glory">未设置</span>
                             <input type="text" class="edit-input glory-edit" value="未设置">
                         </div>
                     </td>
                     <td>
-                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
                             <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: #ff6b6b;">示例</span></div>
                             <input type="text" class="edit-input attributes-edit" value="示例">
                         </div>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes"></span>
                             <input type="text" class="edit-input notes-edit" value="">
                         </div>
@@ -2654,25 +2651,25 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="tips-tbody"><tr draggable="true" data-type="tips" data-index="0">
+                <tbody id="tips-tbody"><tr draggable="false" data-type="tips" data-index="0">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="tips" data-index="0">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: #a0c8f0" data-type="tips" data-index="0">1.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text"> https://www.bilibili.com/</span>
                             <input type="text" class="edit-input name-edit" value=" https://www.bilibili.com/">
                         </div>
                         <button class="delete-row" data-type="tips" data-index="0">×</button>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes"><a href="https://www.bilibili.com/" class="auto-link" target="_blank" rel="noopener noreferrer">https://www.bilibili.com/</a></span>
                             <input type="text" class="edit-input notes-edit" value="https://www.bilibili.com/">
                         </div>
@@ -2711,25 +2708,25 @@
                         <th width="30px"></th>
                     </tr>
                 </thead>
-                <tbody id="navigation-tbody"><tr draggable="true" data-type="navigation" data-index="0">
+                <tbody id="navigation-tbody"><tr draggable="false" data-type="navigation" data-index="0">
                     <td>
                         <input type="checkbox" class="row-selector" data-type="navigation" data-index="0">
                     </td>
                     <td class="drag-handle-row">≡</td>
                     <td>
-                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="row-number" style="color: #a0c8f0" data-type="navigation" data-index="0">1.</span>
                         </div>
                     </td>
                     <td>
-                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="name-text">新内容1</span>
                             <input type="text" class="edit-input name-edit" value="新内容1">
                         </div>
                         <button class="delete-row" data-type="navigation" data-index="0">×</button>
                     </td>
                     <td>
-                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: pointer;">
+                        <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                             <span class="notes-text notes">请输入内容</span>
                             <input type="text" class="edit-input notes-edit" value="请输入内容">
                         </div>
@@ -2757,7 +2754,7 @@
             <p class="editable-dev" data-type="text" style="margin-top: 10px;">提示: 点击序号更改序号颜色</p>
         </footer>
         
-        <div class="notification" id="notification" style="display: none;">开发者模式已开启 - 全能编辑模式启动</div>
+        <div class="notification" id="notification" style="display: none;">开发者模式已关闭 - 进入只读模式</div>
     </div>
 
     <script>
@@ -2872,8 +2869,9 @@
 
         // 将 | 替换为换行符 - 用于武器、强度、深造、致知、焕彰、备注
         function formatMultilineText(text) {
-            if (!text) return '';
-            return text.replace(/\|/g, '\n');
+            if (!text) return '';  
+            // 将 | 和 \n 都替换为 <br> 标签
+            return text.replace(/\||\n/g, '<br>');
         }
 
         // 自动识别链接并转换为可点击链接
@@ -4024,11 +4022,11 @@
             devModeBtn.addEventListener('click', function() {
                 devModeActive = !devModeActive;
                 
-                if (devModeActive) {
+                if (devModeActive) {            
                     document.body.classList.add('dev-mode');
                     devTools.style.display = 'block';
                     this.classList.add('active');
-                    this.textContent = '开发者模式 (开)';
+                    this.textContent = '开发者模式 (开)'; 
                     showNotification('开发者模式已开启 - 全能编辑模式启动');
                 } else {
                     document.body.classList.remove('dev-mode');
