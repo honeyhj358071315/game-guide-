@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>懒人躺平攻略 - 完整数据导出版</title>
+    <title>懒人躺平攻略 - 完整修复版</title>
     <style>
         * {
             margin: 0;
@@ -473,92 +473,78 @@
             background: rgba(50, 90, 130, 0.3);
         }
 
-        /* 修复表格列宽 - 更紧凑的布局 */
         .class-section th:nth-child(1),
         .class-section td:nth-child(1) {
             width: 25px;
-            /* 选择框列 - 缩小 */
             padding: 8px 5px;
         }
 
         .class-section th:nth-child(2),
         .class-section td:nth-child(2) {
             width: 30px;
-            /* 拖拽手柄列 - 缩小 */
             padding: 8px 5px;
         }
 
         .class-section th:nth-child(3),
         .class-section td:nth-child(3) {
             width: 40px;
-            /* 序号列 - 缩小 */
             padding: 8px 5px;
         }
 
         .class-section th:nth-child(4),
         .class-section td:nth-child(4) {
             width: 110px;
-            /* 角色名称 */
             padding: 8px 5px;
         }
 
         .class-section th:nth-child(5),
         .class-section td:nth-child(5) {
             width: 100px;
-            /* 武器 */
             padding: 8px 5px;
         }
 
         .class-section th:nth-child(6),
         .class-section td:nth-child(6) {
             width: 70px;
-            /* 强度 */
             padding: 8px 5px;
         }
 
         .class-section th:nth-child(7),
         .class-section td:nth-child(7) {
             width: 100px;
-            /* 深造 */
             padding: 8px 5px;
         }
 
         .class-section th:nth-child(8),
         .class-section td:nth-child(8) {
             width: 80px;
-            /* 致知 */
             padding: 8px 5px;
         }
 
         .class-section th:nth-child(9),
         .class-section td:nth-child(9) {
             width: 80px;
-            /* 焕彰 */
             padding: 8px 5px;
         }
 
         .class-section th:nth-child(10),
         .class-section td:nth-child(10) {
             width: 150px;
-            /* 词条推荐 */
             padding: 8px 5px;
         }
 
         .class-section th:nth-child(11),
         .class-section td:nth-child(11) {
             width: 200px;
-            /* 备注 */
             padding: 8px 5px;
         }
 
         .class-section th:nth-child(12),
         .class-section td:nth-child(12) {
             width: 30px;
-            /* 删除按钮 */
             padding: 8px 5px;
         }
 
-        /* 信息类板块的特殊列宽 */
         .class-section.tips th:nth-child(4),
         .class-section.tips td:nth-child(4),
         .class-section.navigation th:nth-child(4),
@@ -899,7 +885,6 @@
             text-decoration: none;
         }
 
-        /* 拖拽排序样式 */
         .dragging {
             opacity: 0.5;
             background: rgba(74, 157, 227, 0.3) !important;
@@ -917,7 +902,6 @@
             color: #a0c8f0;
         }
 
-        /* 下拉菜单相关样式 */
         .dropdown-control {
             display: flex;
             justify-content: space-between;
@@ -966,7 +950,6 @@
             margin-left: 5px;
         }
 
-        /* CSS实现下拉限制 - 简化版 */
         .class-section tbody tr:nth-child(n+4) {
             display: none;
         }
@@ -1037,29 +1020,24 @@
 
 <body>
     <div class="container">
-        <!-- 开发者模式按钮 -->
         <button class="dev-mode-btn" id="devModeBtn">开发者模式</button>
 
-        <!-- 简化版开发者工具面板 -->
         <div class="dev-tools" id="devTools">
             <div class="dev-tabs">
                 <div class="dev-tab active" data-tab="layout">布局管理</div>
                 <div class="dev-tab" data-tab="content">内容操作</div>
             </div>
 
-            <!-- 布局管理 -->
             <div class="dev-tab-content active" id="layout-tab">
                 <h3>布局管理器</h3>
                 <div class="dev-control-group">
                     <h4>内容板块管理</h4>
                     <div class="section-list" id="sectionList">
-                        <!-- 动态生成板块列表 -->
                     </div>
                     <button class="add-section-btn" id="addSectionBtn">+ 添加新板块</button>
                 </div>
             </div>
 
-            <!-- 内容操作 -->
             <div class="dev-tab-content" id="content-tab">
                 <h3>内容编辑器</h3>
                 <div class="dev-control-group">
@@ -1089,7 +1067,6 @@
             <h1 class="editable-dev" data-type="text">懒人躺平版攻略</h1>
             <div class="subtitle editable-dev" data-type="text">无责任声明：个人向理解,不做任何保证</div>
 
-            <!-- 导航按钮 -->
             <div class="nav-buttons" id="navButtons">
                 <button class="nav-btn strategy editable-dev" data-target="strategy-section" data-type="button">
                     <span>🧠</span> <span class="editable-dev" data-type="text">战略类角色</span>
@@ -1115,7 +1092,6 @@
             </div>
         </header>
 
-        <!-- 批量操作面板 - 优化为二级展开式 -->
         <div class="batch-panel" id="batchPanel">
             <div class="batch-header">
                 <button class="batch-btn" id="batchMainBtn">批量操作</button>
@@ -1135,7 +1111,6 @@
             <div class="batch-selection-info" id="selectionInfo">已选择 0 个条目</div>
         </div>
 
-        <!-- 各个内容板块 -->
         <section class="class-section strategy editable-dev" id="strategy-section" data-type="section">
             <div class="drag-handle">≡</div>
             <div class="class-header strategy">
@@ -1153,14 +1128,13 @@
                         <th class="editable-dev" data-type="text">强度</th>
                         <th class="editable-dev" data-type="text">深造</th>
                         <th class="editable-dev" data-type="text">致知</th>
-                        <th class="editable-dev" data-type="text">定位</th>
+                        <th class="editable-dev" data-type="text">焕彰</th>
                         <th class="editable-dev" data-type="text">词条推荐</th>
                         <th class="editable-dev" data-type="text">备注</th>
                         <th width="30px"></th>
                     </tr>
                 </thead>
                 <tbody id="strategy-tbody">
-                    <!-- 测试数据 -->
                     <tr draggable="true" data-type="strategy" data-index="0">
                         <td>
                             <input type="checkbox" class="row-selector" data-type="strategy" data-index="0">
@@ -1240,7 +1214,6 @@
             </div>
         </section>
 
-        <!-- 其他板块结构类似，为节省篇幅省略 -->
         <section class="class-section ranged editable-dev" id="ranged-section" data-type="section">
             <div class="drag-handle">≡</div>
             <div class="class-header ranged">
@@ -1473,6 +1446,160 @@
     </div>
 
     <script>
+        // ==================== 修复的核心JavaScript代码 ====================
+
+        // 修复1: 增强自定义板块数据收集
+        function collectCustomSections() {
+            const customSections = {};
+            document.querySelectorAll('.class-section').forEach(section => {
+                const sectionId = section.id;
+                if (sectionId.startsWith('custom-')) {
+                    const type = sectionId.replace('-section', '');
+                    const sectionName = section.querySelector('.class-header span') ? section.querySelector('.class-header span').textContent : '未命名板块';
+                    const sectionType = getSectionType(sectionId);
+
+                    customSections[type] = {
+                        sectionName: sectionName,
+                        sectionType: sectionType,
+                        sectionId: sectionId,
+                        tableStructure: getTableStructure(section, sectionType),
+                        data: collectSectionData(type)
+                    };
+                }
+            });
+            return customSections;
+        }
+
+        // 修复2: 获取表格结构
+        function getTableStructure(section, sectionType) {
+            const headers = [];
+            const thElements = section.querySelectorAll('thead th .editable-dev');
+            thElements.forEach(th => {
+                const text = th.textContent.trim();
+                if (text) headers.push(text);
+            });
+
+            return {
+                headers: headers,
+                sectionType: sectionType,
+                columnCount: headers.length
+            };
+        }
+
+        // 修复3: 修复导入所有数据
+        function importAllData(data) {
+            if (!data) {
+                showNotification('导入失败：数据为空');
+                return;
+            }
+
+            // 首先清空现有自定义板块
+            clearExistingCustomSections();
+
+            // 导入自定义板块（必须在基础数据之前）
+            if (data.customSections && Object.keys(data.customSections).length > 0) {
+                Object.keys(data.customSections).forEach(sectionType => {
+                    const sectionData = data.customSections[sectionType];
+                    setTimeout(function () {
+                        importCustomSection(sectionType, sectionData);
+                    }, 100);
+                });
+            }
+
+            // 导入基础数据
+            const baseSections = ['strategy', 'ranged', 'magic', 'light', 'guard', 'tips', 'navigation'];
+            baseSections.forEach(function (section) {
+                if (data[section]) {
+                    importSectionData(section, data[section]);
+                }
+            });
+
+            // 最后导入页面内容
+            if (data.pageContent) {
+                setTimeout(function () {
+                    importPageContent(data.pageContent);
+                }, 300);
+            }
+
+            // 重新渲染所有内容
+            setTimeout(function () {
+                renderTables();
+                showNotification('数据导入完成！自定义板块: ' + Object.keys(data.customSections || {}).length + '个');
+            }, 500);
+        }
+
+        // 修复4: 清空现有自定义板块
+        function clearExistingCustomSections() {
+            // 移除自定义板块
+            document.querySelectorAll('.class-section').forEach(function (section) {
+                if (section.id.startsWith('custom-')) {
+                    section.remove();
+                }
+            });
+
+            // 移除自定义导航按钮
+            const navButtons = document.getElementById('navButtons');
+            if (navButtons) {
+                const customButtons = navButtons.querySelectorAll('.nav-btn[data-target^="custom-"]');
+                customButtons.forEach(function (btn) {
+                    btn.remove();
+                });
+            }
+        }
+
+        // 修复5: 增强自定义板块导入
+        function importCustomSection(sectionType, sectionData) {
+            if (!sectionData) return;
+
+            const sectionName = sectionData.sectionName || '自定义板块';
+            const sectionTypeCategory = sectionData.sectionType || 'info';
+            const fullSectionId = sectionData.sectionId || (sectionType + '-section');
+
+            // 创建导航按钮
+            addNavigationButton(sectionName, fullSectionId);
+
+            // 创建内容板块
+            addContentSection(sectionName, fullSectionId, sectionType, sectionTypeCategory, sectionData.tableStructure);
+
+            // 导入数据
+            if (sectionData.data && sectionData.data.length > 0) {
+                setTimeout(function () {
+                    importSectionData(sectionType, sectionData.data);
+                }, 200);
+            }
+        }
+
+        // 修复6: 增强导航按钮创建
+        function addNavigationButton(sectionName, sectionId) {
+            const navButtons = document.getElementById('navButtons');
+            if (!navButtons) return;
+
+            // 检查是否已存在
+            const existingBtn = navButtons.querySelector('[data-target="' + sectionId + '"]');
+            if (existingBtn) return;
+
+            const newNavBtn = document.createElement('button');
+            newNavBtn.className = 'nav-btn strategy editable-dev';
+            newNavBtn.dataset.target = sectionId;
+            newNavBtn.dataset.type = 'button';
+
+            const icons = ['🌟', '🎯', '🚀', '💎', '🔔', '🎨', '📚'];
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+
+            newNavBtn.innerHTML = '<span>' + randomIcon + '</span> <span class="editable-dev" data-type="text">' + sectionName + '</span>';
+
+            newNavBtn.addEventListener('click', function () {
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+
+            navButtons.appendChild(newNavBtn);
+        }
+
+        // ==================== 其他必要函数（保持不变）====================
+
         // 简化颜色选项
         const colorOptions = [
             { name: '红色', value: '#ff6b6b' },
@@ -1503,11 +1630,11 @@
             if (!attributes || !Array.isArray(attributes)) return '';
 
             return attributes.map(attr => {
-                return `<span class="attr-item" data-text="${attr.text}" style="color: ${attr.color};">${attr.text}</span>`;
+                return '<span class="attr-item" data-text="' + attr.text + '" style="color: ' + attr.color + ';">' + attr.text + '</span>';
             }).join('');
         }
 
-        // 将 | 替换为换行符 - 用于武器、强度、深造、致知、焕彰、备注
+        // 将 | 替换为换行符
         function formatMultilineText(text) {
             if (!text) return '';
             return text.replace(/\|/g, '\n');
@@ -1517,7 +1644,6 @@
         function autoLink(text) {
             if (!text) return '';
 
-            // 先分割成行，分别处理每行的链接
             const lines = text.split('\n');
             const processedLines = lines.map(line => {
                 const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+|[^\s]+\.[^\s]{2,})/gi;
@@ -1532,11 +1658,10 @@
                         }
                     }
 
-                    return `<a href="${href}" class="auto-link" target="_blank" rel="noopener noreferrer">${url}</a>`;
+                    return '<a href="' + href + '" class="auto-link" target="_blank" rel="noopener noreferrer">' + url + '</a>';
                 });
             });
 
-            // 重新组合成带换行符的HTML
             return processedLines.join('<br>');
         }
 
@@ -1547,7 +1672,7 @@
                 return 'info';
             } else if (type.startsWith('custom-')) {
                 const data = loadData();
-                return data[type]?.sectionType || 'info';
+                return data[type] ? data[type].sectionType : 'info';
             } else {
                 return 'character';
             }
@@ -1555,11 +1680,29 @@
 
         // 渲染表格
         function renderTables() {
-            // 修复换行符显示问题
-            document.querySelectorAll('.weapon-text, .strength-text, .training-text, .knowledge-text, .glory-text, .notes-text').forEach(element => {
+            // 修复换行符显示问题（排除职业板块的备注字段）
+            document.querySelectorAll('.weapon-text, .strength-text, .training-text, .knowledge-text, .glory-text').forEach(element => {
                 const text = element.textContent || element.innerText;
                 if (text.includes('|')) {
                     element.innerHTML = text.replace(/\|/g, '\n');
+                }
+            });
+
+            // 单独处理备注字段
+            document.querySelectorAll('.notes-text').forEach(element => {
+                const text = element.textContent || element.innerText;
+                if (text.includes('|')) {
+                    const row = element.closest('tr');
+                    const type = row ? row.dataset.type : '';
+                    const isCharacterSection = ['strategy', 'ranged', 'magic', 'light', 'guard'].includes(type);
+
+                    if (isCharacterSection) {
+                        // 职业板块备注：只处理换行符，不处理链接
+                        element.innerHTML = text.replace(/\|/g, '<br>');
+                    } else {
+                        // 其他板块备注：处理换行符和链接
+                        element.innerHTML = autoLink(text.replace(/\|/g, '\n'));
+                    }
                 }
             });
 
@@ -1672,99 +1815,99 @@
             if (sectionType === 'info') {
                 // 信息类板块 - 简化版
                 row.innerHTML = `
-                <td>
-                    <input type="checkbox" class="row-selector" data-type="${type}" data-index="${index}">
-                </td>
-                <td class="drag-handle-row">≡</td>
-                <td>
-                    <div class="editable number-editable editable-dev" data-type="text">
-                        <span class="row-number" 
-                              style="color: ${character.numberColor || '#a0c8f0'}"
-                              data-type="${type}" 
-                              data-index="${index}">${rowNumber}.</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="editable name-editable editable-dev" data-type="text">
-                        <span class="name-text">${character.name}</span>
-                        <input type="text" class="edit-input name-edit" value="${character.name}">
-                    </div>
-                    <button class="delete-row" data-type="${type}" data-index="${index}">×</button>
-                </td>
-                <td>
-                    <div class="editable notes-editable editable-dev" data-type="text">
-                        <span class="notes-text notes">${autoLink(formatMultilineText(character.notes))}</span>
-                        <input type="text" class="edit-input notes-edit" value="${character.notes}">
-                    </div>
-                </td>
-                <td></td>
-            `;
+        <td>
+            <input type="checkbox" class="row-selector" data-type="${type}" data-index="${index}">
+        </td>
+        <td class="drag-handle-row">≡</td>
+        <td>
+            <div class="editable number-editable editable-dev" data-type="text">
+                <span class="row-number" 
+                      style="color: ${character.numberColor || '#a0c8f0'}"
+                      data-type="${type}" 
+                      data-index="${index}">${rowNumber}.</span>
+            </div>
+        </td>
+        <td>
+            <div class="editable name-editable editable-dev" data-type="text">
+                <span class="name-text">${character.name}</span>
+                <input type="text" class="edit-input name-edit" value="${character.name}">
+            </div>
+            <button class="delete-row" data-type="${type}" data-index="${index}">×</button>
+        </td>
+        <td>
+            <div class="editable notes-editable editable-dev" data-type="text">
+                <span class="notes-text notes">${autoLink(formatMultilineText(character.notes))}</span>
+                <input type="text" class="edit-input notes-edit" value="${character.notes}">
+            </div>
+        </td>
+        <td></td>
+    `;
             } else {
                 // 角色类板块 - 完整版（支持|换行符）
                 row.innerHTML = `
-                <td>
-                    <input type="checkbox" class="row-selector" data-type="${type}" data-index="${index}">
-                </td>
-                <td class="drag-handle-row">≡</td>
-                <td>
-                    <div class="editable number-editable editable-dev" data-type="text">
-                        <span class="row-number" 
-                              style="color: ${character.numberColor || '#a0c8f0'}"
-                              data-type="${type}" 
-                              data-index="${index}">${rowNumber}.</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="editable name-editable editable-dev" data-type="text">
-                        <span class="name-text">${character.name}</span>
-                        <input type="text" class="edit-input name-edit" value="${character.name}">
-                    </div>
-                    <button class="delete-row" data-type="${type}" data-index="${index}">×</button>
-                </td>
-                <td>
-                    <div class="editable editable-dev" data-type="text">
-                        <span class="weapon-text weapon">${formatMultilineText(character.weapon)}</span>
-                        <input type="text" class="edit-input weapon-edit" value="${character.weapon}">
-                    </div>
-                </td>
-                <td>
-                    <div class="editable editable-dev" data-type="text">
-                        <span class="strength-text strength">${formatMultilineText(character.strength)}</span>
-                        <input type="text" class="edit-input strength-edit" value="${character.strength}">
-                    </div>
-                </td>
-                <td>
-                    <div class="editable editable-dev" data-type="text">
-                        <span class="training-text training">${formatMultilineText(character.training)}</span>
-                        <input type="text" class="edit-input training-edit" value="${character.training}">
-                    </div>
-                </td>
-                <td>
-                    <div class="editable editable-dev" data-type="text">
-                        <span class="knowledge-text knowledge">${formatMultilineText(character.knowledge)}</span>
-                        <input type="text" class="edit-input knowledge-edit" value="${character.knowledge}">
-                    </div>
-                </td>
-                <td>
-                    <div class="editable editable-dev" data-type="text">
-                        <span class="glory-text glory">${formatMultilineText(character.glory)}</span>
-                        <input type="text" class="edit-input glory-edit" value="${character.glory}">
-                    </div>
-                </td>
-                <td>
-                    <div class="editable attributes-editable editable-dev" data-type="text">
-                        <div class="attributes-text attributes">${formatAttributes(character.attributes)}</div>
-                        <input type="text" class="edit-input attributes-edit" value="${character.attributes ? character.attributes.map(attr => attr.text).join(',') : ''}">
-                    </div>
-                </td>
-                <td>
-                    <div class="editable notes-editable editable-dev" data-type="text">
-                        <span class="notes-text notes">${autoLink(formatMultilineText(character.notes))}</span>
-                        <input type="text" class="edit-input notes-edit" value="${character.notes}">
-                    </div>
-                </td>
-                <td></td>
-            `;
+        <td>
+            <input type="checkbox" class="row-selector" data-type="${type}" data-index="${index}">
+        </td>
+        <td class="drag-handle-row">≡</td>
+        <td>
+            <div class="editable number-editable editable-dev" data-type="text">
+                <span class="row-number" 
+                      style="color: ${character.numberColor || '#a0c8f0'}"
+                      data-type="${type}" 
+                      data-index="${index}">${rowNumber}.</span>
+            </div>
+        </td>
+        <td>
+            <div class="editable name-editable editable-dev" data-type="text">
+                <span class="name-text">${character.name}</span>
+                <input type="text" class="edit-input name-edit" value="${character.name}">
+            </div>
+            <button class="delete-row" data-type="${type}" data-index="${index}">×</button>
+        </td>
+        <td>
+            <div class="editable editable-dev" data-type="text">
+                <span class="weapon-text weapon">${formatMultilineText(character.weapon)}</span>
+                <input type="text" class="edit-input weapon-edit" value="${character.weapon}">
+            </div>
+        </td>
+        <td>
+            <div class="editable editable-dev" data-type="text">
+                <span class="strength-text strength">${formatMultilineText(character.strength)}</span>
+                <input type="text" class="edit-input strength-edit" value="${character.strength}">
+            </div>
+        </td>
+        <td>
+            <div class="editable editable-dev" data-type="text">
+                <span class="training-text training">${formatMultilineText(character.training)}</span>
+                <input type="text" class="edit-input training-edit" value="${character.training}">
+            </div>
+        </td>
+        <td>
+            <div class="editable editable-dev" data-type="text">
+                <span class="knowledge-text knowledge">${formatMultilineText(character.knowledge)}</span>
+                <input type="text" class="edit-input knowledge-edit" value="${character.knowledge}">
+            </div>
+        </td>
+        <td>
+            <div class="editable editable-dev" data-type="text">
+                <span class="glory-text glory">${formatMultilineText(character.glory)}</span>
+                <input type="text" class="edit-input glory-edit" value="${character.glory}">
+            </div>
+        </td>
+        <td>
+            <div class="editable attributes-editable editable-dev" data-type="text">
+                <div class="attributes-text attributes">${formatAttributes(character.attributes)}</div>
+                <input type="text" class="edit-input attributes-edit" value="${character.attributes ? character.attributes.map(attr => attr.text).join(',') : ''}">
+            </div>
+        </td>
+        <td>
+            <div class="editable notes-editable editable-dev" data-type="text">
+                <span class="notes-text notes">${autoLink(formatMultilineText(character.notes))}</span>
+                <input type="text" class="edit-input notes-edit" value="${character.notes}">
+            </div>
+        </td>
+        <td></td>
+    `;
             }
 
             // 延迟绑定事件，确保DOM完全渲染
@@ -1798,14 +1941,14 @@
             const colorPicker = document.createElement('div');
             colorPicker.className = 'color-picker';
             colorPicker.innerHTML = `
-            <div class="color-options">
-                ${colorOptions.map(color => `
-                    <div class="color-option" 
-                         style="background-color: ${color.value}" 
-                         data-color="${color.value}"></div>
-                `).join('')}
-            </div>
-        `;
+    <div class="color-options">
+        ${colorOptions.map(color => `
+            <div class="color-option" 
+                 style="background-color: ${color.value}" 
+                 data-color="${color.value}"></div>
+        `).join('')}
+    </div>
+`;
 
             const rect = numberElement.getBoundingClientRect();
             colorPicker.style.position = 'fixed';
@@ -1925,14 +2068,25 @@
             });
         }
 
-        // 保存编辑 - 修复版（确保|换行符正常工作）
+        // 保存编辑 - 修复版（职业板块去掉链接但保留换行符）
         function saveEdit(input, type, index, field) {
             const textElement = input.previousElementSibling;
             const newValue = input.value;
 
+            // 判断是否为职业类板块
+            const isCharacterSection = ['strategy', 'ranged', 'magic', 'light', 'guard'].includes(type);
+
             // 直接更新DOM显示
             if (field === 'notes') {
-                textElement.innerHTML = autoLink(formatMultilineText(newValue));
+                if (isCharacterSection) {
+                    // 职业板块：去掉链接，但保留换行符（用<br>标签）
+                    const textWithLineBreaks = formatMultilineText(newValue).replace(/\n/g, '<br>');
+                    // 移除所有链接，只保留纯文本和换行
+                    textElement.innerHTML = textWithLineBreaks.replace(/<a[^>]*>(.*?)<\/a>/gi, '$1');
+                } else {
+                    // 其他板块：保留链接和换行符
+                    textElement.innerHTML = autoLink(formatMultilineText(newValue));
+                }
             } else if (field === 'weapon' || field === 'strength' || field === 'training' ||
                 field === 'knowledge' || field === 'glory') {
                 textElement.innerHTML = formatMultilineText(newValue);
@@ -2027,9 +2181,9 @@
                 sectionItem.dataset.sectionId = sectionId;
 
                 sectionItem.innerHTML = `
-                <input type="checkbox" class="section-toggle" ${isVisible ? 'checked' : ''}>
-                <span>${sectionName}</span>
-            `;
+        <input type="checkbox" class="section-toggle" ${isVisible ? 'checked' : ''}>
+        <span>${sectionName}</span>
+    `;
 
                 sectionList.appendChild(sectionItem);
 
@@ -2284,31 +2438,19 @@
             });
         }
 
-        // ==================== 完整数据导出功能 ====================
+        // 收集表格列标题
+        function collectTableHeaders() {
+            const headers = {};
+            document.querySelectorAll('.class-section').forEach(section => {
+                const sectionId = section.id;
+                const thElements = section.querySelectorAll('thead th .editable-dev');
+                const headerTexts = Array.from(thElements).map(th => {
+                    return th.textContent.trim() || th.innerText.trim();
+                }).filter(text => text !== '');
 
-        // 收集所有数据
-        function collectAllData() {
-            const data = {
-                // 基础板块数据
-                strategy: collectSectionData('strategy'),
-                ranged: collectSectionData('ranged'),
-                magic: collectSectionData('magic'),
-                light: collectSectionData('light'),
-                guard: collectSectionData('guard'),
-                tips: collectSectionData('tips'),
-                navigation: collectSectionData('navigation'),
-
-                // 自定义板块
-                customSections: collectCustomSections(),
-
-                // 页面标题和文本
-                pageContent: collectPageContent(),
-
-                // 元数据
-                exportTime: new Date().toISOString(),
-                version: '1.0'
-            };
-            return data;
+                headers[sectionId] = headerTexts;
+            });
+            return headers;
         }
 
         // 收集单个板块数据
@@ -2320,29 +2462,35 @@
             const data = [];
 
             rows.forEach((row, index) => {
-                // 获取输入框的原始值（包含|符号）
-                const rowData = {
-                    name: getInputValue(row, '.name-edit'),
-                    weapon: getInputValue(row, '.weapon-edit'),
-                    strength: getInputValue(row, '.strength-edit'),
-                    training: getInputValue(row, '.training-edit'),
-                    knowledge: getInputValue(row, '.knowledge-edit'),
-                    glory: getInputValue(row, '.glory-edit'),
-                    notes: getInputValue(row, '.notes-edit'),
-                    numberColor: row.querySelector('.row-number')?.style.color || '#a0c8f0'
-                };
+                try {
+                    // 获取输入框的原始值（包含|符号）
+                    const rowData = {
+                        name: getInputValue(row, '.name-edit') || '未命名',
+                        weapon: getInputValue(row, '.weapon-edit') || '',
+                        strength: getInputValue(row, '.strength-edit') || '',
+                        training: getInputValue(row, '.training-edit') || '',
+                        knowledge: getInputValue(row, '.knowledge-edit') || '',
+                        glory: getInputValue(row, '.glory-edit') || '',
+                        notes: getInputValue(row, '.notes-edit') || '',
+                        numberColor: row.querySelector('.row-number') ? row.querySelector('.row-number').style.color : '#a0c8f0'
+                    };
 
-                // 处理属性
-                const attributesEdit = row.querySelector('.attributes-edit');
-                if (attributesEdit && attributesEdit.value) {
-                    const attrTexts = attributesEdit.value.split(',').map(text => text.trim()).filter(text => text);
-                    rowData.attributes = attrTexts.map(text => ({
-                        text: text,
-                        color: '#ff6b6b' // 默认颜色，可以扩展为保存实际颜色
-                    }));
+                    // 处理属性
+                    const attributesEdit = row.querySelector('.attributes-edit');
+                    if (attributesEdit && attributesEdit.value) {
+                        const attrTexts = attributesEdit.value.split(',').map(text => text.trim()).filter(text => text);
+                        rowData.attributes = attrTexts.map(text => ({
+                            text: text,
+                            color: '#ff6b6b'
+                        }));
+                    } else {
+                        rowData.attributes = [];
+                    }
+
+                    data.push(rowData);
+                } catch (error) {
+                    console.error(`收集 ${type} 板块第 ${index} 行数据时出错:`, error);
                 }
-
-                data.push(rowData);
             });
 
             return data;
@@ -2354,81 +2502,76 @@
             return input ? input.value : '';
         }
 
-        // 收集自定义板块
-        function collectCustomSections() {
-            const customSections = {};
-            document.querySelectorAll('.class-section').forEach(section => {
-                const sectionId = section.id;
-                if (sectionId.startsWith('custom-')) {
-                    const type = sectionId.replace('-section', '');
-                    customSections[type] = {
-                        sectionName: section.querySelector('.class-header span')?.textContent || '',
-                        sectionType: getSectionType(sectionId),
-                        data: collectSectionData(type)
-                    };
+        // 收集页面内容
+        function collectPageContent() {
+            const navButtons = [];
+            const navButtonTargets = [];
+
+            // 收集所有导航按钮（包括自定义的）
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                const textElement = btn.querySelector('.editable-dev[data-type="text"]');
+                if (textElement) {
+                    navButtons.push(textElement.textContent.trim());
+                    navButtonTargets.push(btn.dataset.target);
                 }
             });
-            return customSections;
-        }
 
-        // 收集页面内容（标题、导航、页脚等）
-        function collectPageContent() {
             return {
                 // 主标题和副标题
-                mainTitle: document.querySelector('h1')?.textContent || '',
-                subtitle: document.querySelector('.subtitle')?.textContent || '',
+                mainTitle: document.querySelector('h1') ? document.querySelector('h1').textContent.trim() : '懒人躺平版攻略',
+                subtitle: document.querySelector('.subtitle') ? document.querySelector('.subtitle').textContent.trim() : '无责任声明：个人向理解,不做任何保证',
 
-                // 导航按钮文本 - 修复：包含所有导航按钮
-                navButtons: Array.from(document.querySelectorAll('.nav-btn .editable-dev[data-type="text"]'))
-                    .map(btn => btn.textContent.trim()),
-
-                // 导航按钮目标 - 新增：保存按钮的target信息
-                navButtonTargets: Array.from(document.querySelectorAll('.nav-btn'))
-                    .map(btn => btn.dataset.target),
+                // 导航按钮文本
+                navButtons: navButtons,
+                navButtonTargets: navButtonTargets,
 
                 // 板块标题
-                sectionHeaders: Array.from(document.querySelectorAll('.class-header span.editable-dev'))
-                    .map(header => header.textContent.trim()),
+                sectionHeaders: collectAllSectionHeaders(),
 
                 // 表格列标题
                 tableHeaders: collectTableHeaders(),
 
                 // 页脚内容
                 footer: Array.from(document.querySelectorAll('footer p.editable-dev'))
-                    .map(p => p.textContent.trim()),
+                    .map(p => p.textContent.trim()).filter(text => text),
 
                 // 下拉菜单设置
                 dropdownSettings: collectDropdownSettings(),
 
-                // 自定义板块信息 - 新增
-                customSectionsInfo: collectCustomSectionsInfo()
+                // 自定义板块信息
+                customSectionsInfo: collectEnhancedCustomSectionsInfo()
             };
         }
-        // 收集自定义板块信息
-        function collectCustomSectionsInfo() {
+
+        // 收集所有板块标题
+        function collectAllSectionHeaders() {
+            const headers = [];
+            document.querySelectorAll('.class-header span.editable-dev').forEach(header => {
+                headers.push(header.textContent.trim());
+            });
+            return headers;
+        }
+
+        // 增强的自定义板块信息收集
+        function collectEnhancedCustomSectionsInfo() {
             const customSections = {};
             document.querySelectorAll('.class-section').forEach(section => {
                 const sectionId = section.id;
                 if (sectionId.startsWith('custom-')) {
                     const type = sectionId.replace('-section', '');
+                    const headerElement = section.querySelector('.class-header span');
+                    const addButton = section.querySelector('.add-character');
+
                     customSections[type] = {
-                        sectionName: section.querySelector('.class-header span')?.textContent || '',
-                        sectionType: getSectionType(sectionId)
+                        sectionName: headerElement ? headerElement.textContent : '未命名板块',
+                        sectionType: getSectionType(sectionId),
+                        sectionId: sectionId,
+                        buttonText: addButton ? addButton.textContent : '+ 添加内容',
+                        displayName: headerElement ? headerElement.textContent : '自定义板块'
                     };
                 }
             });
             return customSections;
-        }
-
-        // 收集表格列标题
-        function collectTableHeaders() {
-            const headers = {};
-            document.querySelectorAll('.class-section').forEach(section => {
-                const sectionId = section.id;
-                const thElements = section.querySelectorAll('thead th .editable-dev');
-                headers[sectionId] = Array.from(thElements).map(th => th.textContent.trim());
-            });
-            return headers;
         }
 
         // 收集下拉菜单设置
@@ -2447,141 +2590,6 @@
             return settings;
         }
 
-        // 导入所有数据
-        function importAllData(data) {
-            if (!data) return;
-
-            // 导入页面内容
-            if (data.pageContent) {
-                importPageContent(data.pageContent);
-            }
-
-            // 导入页面内容 - 新增完整函数
-            function importPageContent(pageContent) {
-                // 导入标题
-                if (pageContent.mainTitle) {
-                    const mainTitle = document.querySelector('h1');
-                    if (mainTitle) mainTitle.textContent = pageContent.mainTitle;
-                }
-
-                if (pageContent.subtitle) {
-                    const subtitle = document.querySelector('.subtitle');
-                    if (subtitle) subtitle.textContent = pageContent.subtitle;
-                }
-
-                // 导入导航按钮文本和目标 - 修复：处理自定义导航按钮
-                if (pageContent.navButtons && pageContent.navButtonTargets) {
-                    const navButtons = document.querySelectorAll('.nav-btn');
-
-                    // 先清空现有导航按钮（除了基础按钮）
-                    const navContainer = document.getElementById('navButtons');
-                    const baseButtons = Array.from(navContainer.querySelectorAll('.nav-btn')).filter(btn => {
-                        const target = btn.dataset.target;
-                        return target && !target.startsWith('custom-');
-                    });
-
-                    navContainer.innerHTML = '';
-                    baseButtons.forEach(btn => navContainer.appendChild(btn));
-
-                    // 添加所有导航按钮（包括自定义的）
-                    pageContent.navButtons.forEach((text, index) => {
-                        if (index < baseButtons.length) {
-                            // 更新基础按钮文本
-                            const textElement = baseButtons[index].querySelector('.editable-dev[data-type="text"]');
-                            if (textElement) textElement.textContent = text;
-                        } else {
-                            // 创建自定义导航按钮
-                            const target = pageContent.navButtonTargets[index];
-                            if (target && target.startsWith('custom-')) {
-                                const newNavBtn = document.createElement('button');
-                                newNavBtn.className = 'nav-btn strategy editable-dev';
-                                newNavBtn.dataset.target = target;
-                                newNavBtn.dataset.type = 'button';
-
-                                const icons = ['🌟', '🎯', '🚀', '💎', '🔔', '🎨', '📚'];
-                                const randomIcon = icons[Math.floor(Math.random() * icons.length)];
-
-                                newNavBtn.innerHTML = `
-                        <span>${randomIcon}</span> 
-                        <span class="editable-dev" data-type="text">${text}</span>
-                    `;
-
-                                newNavBtn.addEventListener('click', function () {
-                                    const targetSection = document.getElementById(target);
-                                    if (targetSection) {
-                                        targetSection.scrollIntoView({
-                                            behavior: 'smooth',
-                                            block: 'start'
-                                        });
-                                    }
-                                });
-
-                                navContainer.appendChild(newNavBtn);
-                            }
-                        }
-                    });
-                }
-
-                // 导入板块标题
-                if (pageContent.sectionHeaders) {
-                    const headers = document.querySelectorAll('.class-header span.editable-dev');
-                    pageContent.sectionHeaders.forEach((text, index) => {
-                        if (headers[index]) {
-                            headers[index].textContent = text;
-                        }
-                    });
-                }
-
-                // 导入页脚内容
-                if (pageContent.footer) {
-                    const footerParagraphs = document.querySelectorAll('footer p.editable-dev');
-                    pageContent.footer.forEach((text, index) => {
-                        if (footerParagraphs[index]) {
-                            footerParagraphs[index].textContent = text;
-                        }
-                    });
-                }
-            }
-
-            // 导入基础板块数据
-            if (data.strategy) importSectionData('strategy', data.strategy);
-            if (data.ranged) importSectionData('ranged', data.ranged);
-            if (data.magic) importSectionData('magic', data.magic);
-            if (data.light) importSectionData('light', data.light);
-            if (data.guard) importSectionData('guard', data.guard);
-            if (data.tips) importSectionData('tips', data.tips);
-            if (data.navigation) importSectionData('navigation', data.navigation);
-
-            // 导入自定义板块 - 修复：实际创建板块
-            if (data.customSections) {
-                Object.keys(data.customSections).forEach(sectionType => {
-                    const sectionData = data.customSections[sectionType];
-                    importCustomSection(sectionType, sectionData);
-                });
-            }
-
-            // 导入页面内容
-            if (data.pageContent) {
-                importPageContent(data.pageContent);
-            }
-
-            // 完全重新渲染所有表格
-            setTimeout(() => {
-                renderTables();
-
-                // 显示导入统计信息
-                let totalCount = 0;
-                if (data.strategy) totalCount += data.strategy.length;
-                if (data.ranged) totalCount += data.ranged.length;
-                if (data.magic) totalCount += data.magic.length;
-                if (data.light) totalCount += data.light.length;
-                if (data.guard) totalCount += data.guard.length;
-                if (data.tips) totalCount += data.tips.length;
-                if (data.navigation) totalCount += data.navigation.length;
-
-                showNotification(`数据导入完成！共导入 ${totalCount} 个条目`);
-            }, 500);
-        }
         // 导入单个板块数据
         function importSectionData(type, sectionData) {
             const tbody = document.getElementById(`${type}-tbody`);
@@ -2596,34 +2604,282 @@
                 tbody.appendChild(newRow);
             });
         }
-        
-        
+
         // 导入页面内容
-        function importCustomSection(sectionType, sectionData) {
-            // 检查是否已存在该自定义板块
-            const existingSection = document.getElementById(sectionType + '-section');
-            if (existingSection) {
-                // 如果已存在，只更新数据
-                importSectionData(sectionType, sectionData.data);
-                return;
+        function importPageContent(pageContent) {
+            if (!pageContent) return;
+
+            // 导入标题
+            if (pageContent.mainTitle) {
+                const mainTitle = document.querySelector('h1');
+                if (mainTitle) mainTitle.textContent = pageContent.mainTitle;
             }
 
-            // 创建新的自定义板块
-            const sectionName = sectionData.sectionName;
-            const sectionTypeCategory = sectionData.sectionType || 'info';
-
-            // 添加导航按钮
-            addNavigationButton(sectionName, sectionType + '-section');
-
-            // 添加内容板块
-            addContentSection(sectionName, sectionType + '-section', sectionType, sectionTypeCategory);
-
-            // 导入数据
-            if (sectionData.data && sectionData.data.length > 0) {
-                importSectionData(sectionType, sectionData.data);
+            if (pageContent.subtitle) {
+                const subtitle = document.querySelector('.subtitle');
+                if (subtitle) subtitle.textContent = pageContent.subtitle;
             }
 
-            showNotification(`自定义板块 "${sectionName}" 已导入`);
+            // 导入导航按钮文本
+            if (pageContent.navButtons && pageContent.navButtonTargets) {
+                const navButtons = document.querySelectorAll('.nav-btn');
+                pageContent.navButtons.forEach((text, index) => {
+                    if (navButtons[index]) {
+                        const textElement = navButtons[index].querySelector('.editable-dev[data-type="text"]');
+                        if (textElement) {
+                            textElement.textContent = text;
+                        }
+                    }
+                });
+            }
+
+            // 导入板块标题
+            if (pageContent.sectionHeaders) {
+                const headers = document.querySelectorAll('.class-header span.editable-dev');
+                pageContent.sectionHeaders.forEach((text, index) => {
+                    if (headers[index]) {
+                        headers[index].textContent = text;
+                    }
+                });
+            }
+
+            // 导入页脚内容
+            if (pageContent.footer) {
+                const footerParagraphs = document.querySelectorAll('footer p.editable-dev');
+                pageContent.footer.forEach((text, index) => {
+                    if (footerParagraphs[index]) {
+                        footerParagraphs[index].textContent = text;
+                    }
+                });
+            }
+        }
+
+        // 添加内容板块
+        function addContentSection(sectionName, sectionId, sectionTypeId, sectionType, tableStructure) {
+            const container = document.querySelector('.container');
+            const footer = document.querySelector('footer');
+
+            const newSection = document.createElement('section');
+            newSection.className = 'class-section strategy editable-dev';
+            newSection.id = sectionId;
+            newSection.dataset.type = 'section';
+
+            // 使用保存的表格结构或默认结构
+            if (tableStructure && tableStructure.headers) {
+                newSection.innerHTML = generateCustomSectionHTML(sectionName, sectionTypeId, sectionType, tableStructure);
+            } else {
+                // 回退到默认结构
+                if (sectionType === 'character') {
+                    newSection.innerHTML = generateCharacterSectionHTML(sectionName, sectionTypeId);
+                } else {
+                    newSection.innerHTML = generateInfoSectionHTML(sectionName, sectionTypeId);
+                }
+            }
+
+            if (footer) {
+                container.insertBefore(newSection, footer);
+            } else {
+                container.appendChild(newSection);
+            }
+
+            setupNewSectionEvents(newSection, sectionTypeId, sectionType);
+
+            setTimeout(() => {
+                initDropdowns();
+                bindAllEditEvents();
+            }, 100);
+        }
+
+        // 生成角色类板块HTML
+        function generateCharacterSectionHTML(sectionName, sectionTypeId) {
+            return `
+    <div class="drag-handle">≡</div>
+    <div class="class-header strategy">
+        <span class="editable-dev" data-type="text">${sectionName}</span>
+        <button class="add-character editable-dev" data-type="${sectionTypeId}">+ 添加角色</button>
+    </div>
+    <table id="${sectionTypeId}-table">
+        <thead>
+            <tr>
+                <th width="30px"></th>
+                <th width="40px" class="editable-dev" data-type="text"></th>
+                <th class="editable-dev" data-type="text">序号</th>
+                <th class="editable-dev" data-type="text">角色名称</th>
+                <th class="editable-dev" data-type="text">武器</th>
+                <th class="editable-dev" data-type="text">强度</th>
+                <th class="editable-dev" data-type="text">深造</th>
+                <th class="editable-dev" data-type="text">致知</th>
+                <th class="editable-dev" data-type="text">焕彰</th>
+                <th class="editable-dev" data-type="text">词条推荐</th>
+                <th class="editable-dev" data-type="text">备注</th>
+                <th width="30px"></th>
+            </tr>
+        </thead>
+        <tbody id="${sectionTypeId}-tbody">
+        </tbody>
+    </table>
+    <div class="dropdown-control">
+        <div class="dropdown-info">
+            显示 <span class="current-count">3</span> / <span class="total-count">0</span> 个条目
+        </div>
+        <div>
+            <button class="dropdown-btn show-more-btn">显示更多</button>
+            <button class="dropdown-btn show-less-btn" style="display:none;">显示更少</button>
+            <span class="dropdown-setting">
+                显示数量: <input type="number" class="dropdown-input" min="1" max="50" value="3">
+            </span>
+        </div>
+    </div>
+    `;
+        }
+
+        // 生成信息类板块HTML  
+        function generateInfoSectionHTML(sectionName, sectionTypeId) {
+            return `
+    <div class="drag-handle">≡</div>
+    <div class="class-header strategy">
+        <span class="editable-dev" data-type="text">${sectionName}</span>
+        <button class="add-character editable-dev" data-type="${sectionTypeId}">+ 添加内容</button>
+    </div>
+    <table id="${sectionTypeId}-table">
+        <thead>
+            <tr>
+                <th width="30px"></th>
+                <th width="40px" class="editable-dev" data-type="text"></th>
+                <th class="editable-dev" data-type="text">序号</th>
+                <th class="editable-dev" data-type="text">内容名称</th>
+                <th class="editable-dev" data-type="text">备注</th>
+                <th width="30px"></th>
+            </tr>
+        </thead>
+        <tbody id="${sectionTypeId}-tbody">
+        </tbody>
+    </table>
+    <div class="dropdown-control">
+        <div class="dropdown-info">
+            显示 <span class="current-count">5</span> / <span class="total-count">0</span> 个条目
+        </div>
+        <div>
+            <button class="dropdown-btn show-more-btn">显示更多</button>
+            <button class="dropdown-btn show-less-btn" style="display:none;">显示更少</button>
+            <span class="dropdown-setting">
+                显示数量: <input type="number" class="dropdown-input" min="1" max="50" value="5">
+            </span>
+        </div>
+    </div>
+    `;
+        }
+
+        // 生成自定义板块HTML
+        function generateCustomSectionHTML(sectionName, sectionTypeId, sectionType, tableStructure) {
+            let theadHTML = '';
+            if (tableStructure.headers && tableStructure.headers.length > 0) {
+                theadHTML = `
+        <thead>
+            <tr>
+                <th width="30px"></th>
+                <th width="40px" class="editable-dev" data-type="text"></th>
+                ${tableStructure.headers.map(header => `<th class="editable-dev" data-type="text">${header}</th>`).join('')}
+                <th width="30px"></th>
+            </tr>
+        </thead>
+        `;
+            } else {
+                // 默认表头
+                theadHTML = `
+        <thead>
+            <tr>
+                <th width="30px"></th>
+                <th width="40px" class="editable-dev" data-type="text"></th>
+                <th class="editable-dev" data-type="text">序号</th>
+                <th class="editable-dev" data-type="text">内容名称</th>
+                <th class="editable-dev" data-type="text">备注</th>
+                <th width="30px"></th>
+            </tr>
+        </thead>
+        `;
+            }
+
+            return `
+    <div class="drag-handle">≡</div>
+    <div class="class-header strategy">
+        <span class="editable-dev" data-type="text">${sectionName}</span>
+        <button class="add-character editable-dev" data-type="${sectionTypeId}">+ 添加内容</button>
+    </div>
+    <table id="${sectionTypeId}-table">
+        ${theadHTML}
+        <tbody id="${sectionTypeId}-tbody">
+        </tbody>
+    </table>
+    <div class="dropdown-control">
+        <div class="dropdown-info">
+            显示 <span class="current-count">5</span> / <span class="total-count">0</span> 个条目
+        </div>
+        <div>
+            <button class="dropdown-btn show-more-btn">显示更多</button>
+            <button class="dropdown-btn show-less-btn" style="display:none;">显示更少</button>
+            <span class="dropdown-setting">
+                显示数量: <input type="number" class="dropdown-input" min="1" max="50" value="5">
+            </span>
+        </div>
+    </div>
+    `;
+        }
+
+        // 设置新板块事件
+        function setupNewSectionEvents(section, sectionType, sectionTypeCategory) {
+            const addBtn = section.querySelector('.add-character');
+            if (addBtn) {
+                // 完全重新绑定事件，确保不会重复绑定
+                addBtn.onclick = function (e) {
+                    e.stopPropagation();
+
+                    if (!document.body.classList.contains('dev-mode')) {
+                        showNotification('请在开发者模式下添加内容');
+                        return;
+                    }
+
+                    const tbody = section.querySelector('tbody');
+                    const rowCount = tbody.querySelectorAll('tr').length;
+
+                    let newRowData;
+                    if (sectionTypeCategory === 'info') {
+                        newRowData = {
+                            name: '新内容' + (rowCount + 1),
+                            notes: "请输入内容",
+                            numberColor: "#a0c8f0"
+                        };
+                    } else {
+                        newRowData = {
+                            name: '新' + getTypeName(sectionType) + '角色',
+                            weapon: "未设置",
+                            strength: "B",
+                            training: "未设置",
+                            knowledge: "未设置",
+                            glory: "未设置",
+                            attributes: [
+                                { text: "示例", color: "#ff6b6b" }
+                            ],
+                            notes: "",
+                            numberColor: "#a0c8f0"
+                        };
+                    }
+
+                    // 创建新行
+                    const newRow = createTableRow(newRowData, sectionType, rowCount);
+                    tbody.appendChild(newRow);
+
+                    // 重新初始化所有功能
+                    initDropdowns();
+                    bindAllEditEvents();
+                    setupDragAndDrop();
+
+                    showNotification('新条目已添加到自定义板块');
+                };
+            }
+
+            // 同时绑定表格头的编辑事件
+            bindAllEditEvents();
         }
 
         // 优化批量操作功能
@@ -2653,7 +2909,7 @@
                 }
 
                 const type = visibleSection.id.replace('-section', '');
-                const selectors = document.querySelectorAll(`.row-selector[data-type="${type}"]`);
+                const selectors = document.querySelectorAll('.row-selector[data-type="' + type + '"]');
 
                 if (selectors.length === 0) {
                     showNotification('当前板块没有可选择的条目');
@@ -2667,7 +2923,7 @@
                 });
 
                 updateSelectionInfo();
-                showNotification(`${!allSelected ? '已全选' : '已取消全选'} ${getSectionChineseName(type)} 的 ${selectors.length} 个条目`);
+                showNotification((!allSelected ? '已全选' : '已取消全选') + ' ' + getSectionChineseName(type) + ' 的 ' + selectors.length + ' 个条目');
             });
 
             // 批量修改武器
@@ -2703,7 +2959,7 @@
                     return;
                 }
 
-                const attrText = prompt(`请为 ${selectedRows.length} 个条目输入新的词条（用逗号分隔）:`, '构,全,攻%');
+                const attrText = prompt('请为 ' + selectedRows.length + ' 个条目输入新的词条（用逗号分隔）:', '构,全,攻%');
                 if (attrText !== null) {
                     selectedRows.forEach(selector => {
                         const row = selector.closest('tr');
@@ -2721,7 +2977,7 @@
                         attributesEdit.value = attrArray.join(',');
                     });
 
-                    showNotification(`已批量更新 ${selectedRows.length} 个条目的词条`);
+                    showNotification('已批量更新 ' + selectedRows.length + ' 个条目的词条');
                 }
             });
 
@@ -2741,7 +2997,7 @@
                         numberElement.style.color = color;
                     });
 
-                    showNotification(`已批量更新 ${selectedRows.length} 个条目的序号颜色`);
+                    showNotification('已批量更新 ' + selectedRows.length + ' 个条目的序号颜色');
                 }
             });
 
@@ -2753,7 +3009,7 @@
                     return;
                 }
 
-                if (!confirm(`确定要删除选中的 ${selectedRows.length} 个条目吗？此操作不可撤销！`)) {
+                if (!confirm('确定要删除选中的 ' + selectedRows.length + ' 个条目吗？此操作不可撤销！')) {
                     return;
                 }
 
@@ -2762,7 +3018,7 @@
                     row.remove();
                 });
 
-                showNotification(`已批量删除 ${selectedRows.length} 个条目`);
+                showNotification('已批量删除 ' + selectedRows.length + ' 个条目');
                 initDropdowns(); // 重新初始化下拉
             });
 
@@ -2773,7 +3029,7 @@
                     return;
                 }
 
-                const newValue = prompt(`请为 ${selectedRows.length} 个条目输入新的${fieldName}:`, defaultValue);
+                const newValue = prompt('请为 ' + selectedRows.length + ' 个条目输入新的' + fieldName + ':', defaultValue);
                 if (newValue !== null) {
                     selectedRows.forEach(selector => {
                         const row = selector.closest('tr');
@@ -2782,15 +3038,15 @@
                         if (field === 'name') {
                             editable = row.querySelector('.name-editable');
                         } else if (field === 'weapon') {
-                            editable = row.querySelector('.weapon-text')?.parentElement;
+                            editable = row.querySelector('.weapon-text').parentElement;
                         } else if (field === 'strength') {
-                            editable = row.querySelector('.strength-text')?.parentElement;
+                            editable = row.querySelector('.strength-text').parentElement;
                         } else if (field === 'training') {
-                            editable = row.querySelector('.training-text')?.parentElement;
+                            editable = row.querySelector('.training-text').parentElement;
                         } else if (field === 'knowledge') {
-                            editable = row.querySelector('.knowledge-text')?.parentElement;
+                            editable = row.querySelector('.knowledge-text').parentElement;
                         } else if (field === 'glory') {
-                            editable = row.querySelector('.glory-text')?.parentElement;
+                            editable = row.querySelector('.glory-text').parentElement;
                         } else if (field === 'notes') {
                             editable = row.querySelector('.notes-editable');
                         }
@@ -2811,7 +3067,7 @@
                         }
                     });
 
-                    showNotification(`已批量更新 ${selectedRows.length} 个条目的${fieldName}`);
+                    showNotification('已批量更新 ' + selectedRows.length + ' 个条目的' + fieldName);
                 }
             }
         }
@@ -2922,7 +3178,7 @@
                     document.querySelectorAll('.dev-tab-content').forEach(content => {
                         content.classList.remove('active');
                     });
-                    document.getElementById(`${tabName}-tab`).classList.add('active');
+                    document.getElementById(tabName + '-tab').classList.add('active');
                 });
             });
 
@@ -2944,7 +3200,33 @@
                 showNotification('所有数据已导出');
             });
 
-            // 数据导入功能 - 修复版
+            // 收集所有数据
+            function collectAllData() {
+                const data = {
+                    // 基础板块数据
+                    strategy: collectSectionData('strategy'),
+                    ranged: collectSectionData('ranged'),
+                    magic: collectSectionData('magic'),
+                    light: collectSectionData('light'),
+                    guard: collectSectionData('guard'),
+                    tips: collectSectionData('tips'),
+                    navigation: collectSectionData('navigation'),
+
+                    // 自定义板块
+                    customSections: collectCustomSections(),
+
+                    // 页面标题和文本
+                    pageContent: collectPageContent(),
+
+                    // 元数据
+                    exportTime: new Date().toISOString(),
+                    version: '1.1'
+                };
+
+                return data;
+            }
+
+            // 数据导入功能
             document.getElementById('importDataBtn').addEventListener('click', function () {
                 const input = document.createElement('input');
                 input.type = 'file';
@@ -2958,10 +3240,7 @@
                     reader.onload = function (e) {
                         try {
                             const data = JSON.parse(e.target.result);
-
-                            // 使用修复的导入函数
                             importAllData(data);
-
                         } catch (error) {
                             showNotification('导入失败：文件格式错误');
                             console.error('导入错误:', error);
@@ -2998,7 +3277,7 @@
 
             function addNewSection(sectionName) {
                 const sectionTypeChoice = prompt(
-                    `请选择"${sectionName}"的板块类型:\n\n1. 角色类 - 完整编辑栏位\n2. 信息类 - 简化编辑栏位`,
+                    '请选择"' + sectionName + '"的板块类型:\\n\\n1. 角色类 - 完整编辑栏位\\n2. 信息类 - 简化编辑栏位',
                     '2'
                 );
 
@@ -3012,195 +3291,7 @@
                 addContentSection(sectionName, fullSectionId, sectionId, sectionType);
                 updateSectionList();
 
-                showNotification(`新板块 "${sectionName}" 已添加 (${sectionType === 'character' ? '角色类' : '信息类'})`);
-            }
-
-            function addNavigationButton(sectionName, sectionId) {
-                const navButtons = document.getElementById('navButtons');
-
-                const newNavBtn = document.createElement('button');
-                newNavBtn.className = 'nav-btn strategy editable-dev';
-                newNavBtn.dataset.target = sectionId;
-                newNavBtn.dataset.type = 'button';
-
-                const icons = ['🌟', '🎯', '🚀', '💎', '🔔', '🎨', '📚'];
-                const randomIcon = icons[Math.floor(Math.random() * icons.length)];
-
-                newNavBtn.innerHTML = `
-                <span>${randomIcon}</span> 
-                <span class="editable-dev" data-type="text">${sectionName}</span>
-            `;
-
-                newNavBtn.addEventListener('click', function () {
-                    const targetSection = document.getElementById(sectionId);
-                    if (targetSection) {
-                        targetSection.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-
-                        targetSection.style.boxShadow = '0 0 0 3px rgba(74, 157, 227, 0.5)';
-                        setTimeout(() => {
-                            targetSection.style.boxShadow = '';
-                        }, 1000);
-                    }
-                });
-
-                navButtons.appendChild(newNavBtn);
-            }
-
-            function addContentSection(sectionName, sectionId, sectionTypeId, sectionType) {
-                const container = document.querySelector('.container');
-                const footer = document.querySelector('footer');
-
-                const newSection = document.createElement('section');
-                newSection.className = `class-section strategy editable-dev`;
-                newSection.id = sectionId;
-                newSection.dataset.type = 'section';
-
-                if (sectionType === 'character') {
-                    newSection.innerHTML = `
-                    <div class="drag-handle">≡</div>
-                    <div class="class-header strategy">
-                        <span class="editable-dev" data-type="text">${sectionName}</span>
-                        <button class="add-character editable-dev" data-type="${sectionTypeId}">+ 添加角色</button>
-                    </div>
-                    <table id="${sectionTypeId}-table">
-                        <thead>
-                            <tr>
-                                <th width="30px"></th>
-                                <th width="40px" class="editable-dev" data-type="text"></th>
-                                <th class="editable-dev" data-type="text">序号</th>
-                                <th class="editable-dev" data-type="text">角色名称</th>
-                                <th class="editable-dev" data-type="text">武器</th>
-                                <th class="editable-dev" data-type="text">强度</th>
-                                <th class="editable-dev" data-type="text">深造</th>
-                                <th class="editable-dev" data-type="text">致知</th>
-                                <th class="editable-dev" data-type="text">焕彰</th>
-                                <th class="editable-dev" data-type="text">词条推荐</th>
-                                <th class="editable-dev" data-type="text">备注</th>
-                                <th width="30px"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="${sectionTypeId}-tbody">
-                        </tbody>
-                    </table>
-                    <div class="dropdown-control">
-                        <div class="dropdown-info">
-                            显示 <span class="current-count">3</span> / <span class="total-count">0</span> 个条目
-                        </div>
-                        <div>
-                            <button class="dropdown-btn show-more-btn">显示更多</button>
-                            <button class="dropdown-btn show-less-btn" style="display:none;">显示更少</button>
-                            <span class="dropdown-setting">
-                                显示数量: <input type="number" class="dropdown-input" min="1" max="50" value="3">
-                            </span>
-                        </div>
-                    </div>
-                `;
-                } else {
-                    newSection.innerHTML = `
-                    <div class="drag-handle">≡</div>
-                    <div class="class-header strategy">
-                        <span class="editable-dev" data-type="text">${sectionName}</span>
-                        <button class="add-character editable-dev" data-type="${sectionTypeId}">+ 添加内容</button>
-                    </div>
-                    <table id="${sectionTypeId}-table">
-                        <thead>
-                            <tr>
-                                <th width="30px"></th>
-                                <th width="40px" class="editable-dev" data-type="text"></th>
-                                <th class="editable-dev" data-type="text">序号</th>
-                                <th class="editable-dev" data-type="text">内容名称</th>
-                                <th class="editable-dev" data-type="text">备注</th>
-                                <th width="30px"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="${sectionTypeId}-tbody">
-                        </tbody>
-                    </table>
-                    <div class="dropdown-control">
-                        <div class="dropdown-info">
-                            显示 <span class="current-count">5</span> / <span class="total-count">0</span> 个条目
-                        </div>
-                        <div>
-                            <button class="dropdown-btn show-more-btn">显示更多</button>
-                            <button class="dropdown-btn show-less-btn" style="display:none;">显示更少</button>
-                            <span class="dropdown-setting">
-                                显示数量: <input type="number" class="dropdown-input" min="1" max="50" value="5">
-                            </span>
-                        </div>
-                    </div>
-                `;
-                }
-
-                if (footer) {
-                    container.insertBefore(newSection, footer);
-                } else {
-                    container.appendChild(newSection);
-                }
-
-                setupNewSectionEvents(newSection, sectionTypeId, sectionType);
-
-                setTimeout(() => {
-                    initDropdowns();
-                    bindAllEditEvents(); // 绑定新内容的编辑事件
-                }, 100);
-            }
-
-            function setupNewSectionEvents(section, sectionType, sectionTypeCategory) {
-                const addBtn = section.querySelector('.add-character');
-                if (addBtn) {
-                    // 完全重新绑定事件，确保不会重复绑定
-                    addBtn.onclick = function (e) {
-                        e.stopPropagation();
-
-                        if (!document.body.classList.contains('dev-mode')) {
-                            showNotification('请在开发者模式下添加内容');
-                            return;
-                        }
-
-                        const tbody = section.querySelector('tbody');
-                        const rowCount = tbody.querySelectorAll('tr').length;
-
-                        let newRowData;
-                        if (sectionTypeCategory === 'info') {
-                            newRowData = {
-                                name: `新内容${rowCount + 1}`,
-                                notes: "请输入内容",
-                                numberColor: "#a0c8f0"
-                            };
-                        } else {
-                            newRowData = {
-                                name: `新${getTypeName(sectionType)}角色`,
-                                weapon: "未设置",
-                                strength: "B",
-                                training: "未设置",
-                                knowledge: "未设置",
-                                glory: "未设置",
-                                attributes: [
-                                    { text: "示例", color: "#ff6b6b" }
-                                ],
-                                notes: "",
-                                numberColor: "#a0c8f0"
-                            };
-                        }
-
-                        // 创建新行
-                        const newRow = createTableRow(newRowData, sectionType, rowCount);
-                        tbody.appendChild(newRow);
-
-                        // 重新初始化所有功能
-                        initDropdowns();
-                        bindAllEditEvents();
-                        setupDragAndDrop();
-
-                        showNotification('新条目已添加到自定义板块');
-                    };
-                }
-
-                // 同时绑定表格头的编辑事件
-                bindAllEditEvents();
+                showNotification('新板块 "' + sectionName + '" 已添加 (' + (sectionType === 'character' ? '角色类' : '信息类') + ')');
             }
 
             document.getElementById('replaceAllBtn').addEventListener('click', function () {
@@ -3224,7 +3315,7 @@
                     }
                 });
 
-                showNotification(`已替换 ${replaceCount} 处内容`);
+                showNotification('已替换 ' + replaceCount + ' 处内容');
             });
         }
 
@@ -3241,7 +3332,7 @@
             setupDevToolsToggle();
             setupTitleEditing();
 
-            // 重新绑定添加角色按钮事件 - 修复版
+            // 重新绑定添加角色按钮事件
             document.querySelectorAll('.add-character').forEach(btn => {
                 const newBtn = btn.cloneNode(true);
                 btn.parentNode.replaceChild(newBtn, btn);
@@ -3253,7 +3344,7 @@
                     }
 
                     const type = this.dataset.type;
-                    const tbody = document.getElementById(`${type}-tbody`);
+                    const tbody = document.getElementById(type + '-tbody');
                     if (!tbody) return;
 
                     const sectionType = getSectionType(type + '-section');
@@ -3262,13 +3353,13 @@
                     let newRowData;
                     if (sectionType === 'info') {
                         newRowData = {
-                            name: `新内容${tbody.children.length + 1}`,
+                            name: '新内容' + (tbody.children.length + 1),
                             notes: "请输入内容",
                             numberColor: "#a0c8f0"
                         };
                     } else {
                         newRowData = {
-                            name: `新${getTypeName(type)}角色`,
+                            name: '新' + getTypeName(type) + '角色',
                             weapon: "未设置",
                             strength: "B",
                             training: "未设置",
@@ -3279,7 +3370,7 @@
                             ],
                             notes: "",
                             numberColor: "#a0c8f0"
-                        }
+                        };
                     }
 
                     // 创建新行并添加到DOM
@@ -3311,4 +3402,224 @@
     </script>
 </body>
 
-</html>
+</html><script> 
+// 自动注入的游戏数据 
+const injectedGameData = 
+{
+  "strategy": [
+    {
+      "name": "测试角色1",
+      "weapon": "武器1|武器2",
+      "strength": "S级|T0强度",
+      "training": "深造1|深造2",
+      "knowledge": "致知1|致知2",
+      "glory": "焕彰1|焕彰2",
+      "notes": "备注1|备注2|https://example.com",
+      "numberColor": "rgb(160, 200, 240)",
+      "attributes": [
+        {
+          "text": "示例",
+          "color": "#ff6b6b"
+        }
+      ]
+    },
+    {
+      "name": "新战略角色",
+      "weapon": "未设置",
+      "strength": "1",
+      "training": "未设置",
+      "knowledge": "未设置",
+      "glory": "未设置",
+      "notes": "",
+      "numberColor": "rgb(160, 200, 240)",
+      "attributes": [
+        {
+          "text": "示例",
+          "color": "#ff6b6b"
+        }
+      ]
+    },
+    {
+      "name": "新战略角色",
+      "weapon": "未设置",
+      "strength": "1",
+      "training": "未设置",
+      "knowledge": "未设置",
+      "glory": "未设置",
+      "notes": "",
+      "numberColor": "rgb(160, 200, 240)",
+      "attributes": [
+        {
+          "text": "示例",
+          "color": "#ff6b6b"
+        }
+      ]
+    },
+    {
+      "name": "新战略角色",
+      "weapon": "未设置",
+      "strength": "B",
+      "training": "未设置",
+      "knowledge": "未设置",
+      "glory": "未设置",
+      "notes": "",
+      "numberColor": "rgb(160, 200, 240)",
+      "attributes": [
+        {
+          "text": "示例",
+          "color": "#ff6b6b"
+        }
+      ]
+    }
+  ],
+  "ranged": [],
+  "magic": [],
+  "light": [],
+  "guard": [],
+  "tips": [],
+  "navigation": [],
+  "customSections": {
+    "custom-1759652401036": {
+      "sectionName": "新板块",
+      "sectionType": "info",
+      "sectionId": "custom-1759652401036-section",
+      "tableStructure": {
+        "headers": [],
+        "sectionType": "info",
+        "columnCount": 0
+      },
+      "data": [
+        {
+          "name": "1",
+          "weapon": "",
+          "strength": "",
+          "training": "",
+          "knowledge": "",
+          "glory": "",
+          "notes": "请输入内容",
+          "numberColor": "rgb(160, 200, 240)",
+          "attributes": []
+        },
+        {
+          "name": "1",
+          "weapon": "",
+          "strength": "",
+          "training": "",
+          "knowledge": "",
+          "glory": "",
+          "notes": "请输入内容",
+          "numberColor": "rgb(160, 200, 240)",
+          "attributes": []
+        }
+      ]
+    }
+  },
+  "pageContent": {
+    "mainTitle": "懒人躺平版攻略",
+    "subtitle": "无责任声明：个人向理解,不做任何保证",
+    "navButtons": [
+      "战略类角色",
+      "远击类角色",
+      "构术类角色",
+      "轻锐类角色",
+      "宿卫类角色",
+      "新手导航",
+      "导航",
+      "新板块"
+    ],
+    "navButtonTargets": [
+      "strategy-section",
+      "ranged-section",
+      "magic-section",
+      "light-section",
+      "guard-section",
+      "tips-section",
+      "navigation-section",
+      "custom-1759652401036-section"
+    ],
+    "sectionHeaders": [
+      "🧠 战略类角色",
+      "🏹 远击类角色",
+      "🔮 构术类角色",
+      "⚡ 轻锐类角色",
+      "🛡️ 宿卫类角色",
+      "💡 新手导航",
+      "🧭 导航",
+      "新板块"
+    ],
+    "tableHeaders": {
+      "strategy-section": [],
+      "ranged-section": [],
+      "magic-section": [],
+      "light-section": [],
+      "guard-section": [],
+      "tips-section": [],
+      "navigation-section": [],
+      "custom-1759652401036-section": []
+    },
+    "footer": [
+      "缩写说明: 暴=暴击, 爆=爆伤, 构=构素伤害提升, 物=物理伤害提升, 全=伤害提升, 攻%=百分比攻击力, 攻=攻击力",
+      "词条优先级: 红色 > 蓝色 > 绿色（绿色词条可任选）",
+      "提示: 点击序号更改序号颜色"
+    ],
+    "dropdownSettings": {
+      "strategy-section": {
+        "displayLimit": 3,
+        "isExpanded": false
+      },
+      "ranged-section": {
+        "displayLimit": 3,
+        "isExpanded": true
+      },
+      "magic-section": {
+        "displayLimit": 3,
+        "isExpanded": true
+      },
+      "light-section": {
+        "displayLimit": 3,
+        "isExpanded": true
+      },
+      "guard-section": {
+        "displayLimit": 3,
+        "isExpanded": true
+      },
+      "tips-section": {
+        "displayLimit": 5,
+        "isExpanded": true
+      },
+      "navigation-section": {
+        "displayLimit": 5,
+        "isExpanded": true
+      },
+      "custom-1759652401036-section": {
+        "displayLimit": 5,
+        "isExpanded": true
+      }
+    },
+    "customSectionsInfo": {
+      "custom-1759652401036": {
+        "sectionName": "新板块",
+        "sectionType": "info",
+        "sectionId": "custom-1759652401036-section",
+        "buttonText": "+ 添加内容",
+        "displayName": "新板块"
+      }
+    }
+  },
+  "exportTime": "2025-10-05T08:20:16.143Z",
+  "version": "1.1"
+}; 
+ 
+// 页面加载完成后自动加载数据 
+if (document.readyState === 'loading') { 
+    document.addEventListener('DOMContentLoaded', function() { 
+        if (typeof importAllData === 'function') { 
+            importAllData(injectedGameData); 
+        } 
+    }); 
+} else { 
+    if (typeof importAllData === 'function') { 
+        importAllData(injectedGameData); 
+    } 
+} 
+</script> 
