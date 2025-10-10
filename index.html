@@ -1013,7 +1013,49 @@
                 padding: 8px 10px;
             }
 
+            /* ✅ 保留表格基础样式 */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
 
+            th,
+            td {
+                white-space: nowrap;
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+
+            /* ✅ 保留其他列的优化 */
+            .row-number {
+                width: 20px;
+                margin-right: 5px;
+            }
+
+            .name-text {
+                min-width: 70px;
+            }
+
+            .weapon-text {
+                min-width: 50px;
+            }
+
+            .strength-text {
+                min-width: 30px;
+            }
+
+            /* ✅ 保留词条样式 */
+            .attributes {
+                gap: 2px;
+                min-height: 25px;
+            }
+
+            .attr-item {
+                font-size: 10px;
+                padding: 1px 3px;
+            }
 
             .attributes {
                 flex-direction: column;
