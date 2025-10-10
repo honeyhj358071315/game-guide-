@@ -1014,55 +1014,29 @@
             }
 
 
-            /* 表格横向滚动优化 */
-            table {
-                white-space: nowrap;
-                -webkit-overflow-scrolling: touch;
-                /* 手机平滑滚动 */
-            }
 
-            /* 所有单元格不换行 */
-            th,
-            td {
-                white-space: nowrap;
-                padding: 8px 6px;
-                font-size: 12px;
-            }
-
-            /* 优化特定列 */
-            .row-number {
-                width: 20px;
-                margin-right: 5px;
-            }
-
-            .name-text {
-                min-width: 70px;
-            }
-
-            .weapon-text {
-                min-width: 50px;
-            }
-
-            .strength-text {
-                min-width: 30px;
-            }
-
-            /* 词条紧凑显示 */
-            .attributes {
-                gap: 2px;
-                min-height: 25px;
-            }
-
-            .attr-item {
-                font-size: 10px;
-                padding: 1px 3px;
-            }
-
-
-            /* 保持其他现有样式 */
             .attributes {
                 flex-direction: column;
                 gap: 3px;
+            }
+
+            /* 备注栏强制横向布局 */
+            .notes-editable,
+            .notes-text,
+            .notes {
+                white-space: nowrap !important;
+                /* 强制不换行 */
+                min-width: 120px;
+                max-width: 200px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                /* 超长显示省略号 */
+            }
+
+            /* 编辑状态也保持横向 */
+            .notes-edit {
+                white-space: nowrap !important;
+                min-width: 120px;
             }
 
             .nav-buttons {
@@ -1088,105 +1062,20 @@
             }
 
             .batch-controls {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dropdown-control {
                 flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
             }
 
-            /* 🆕 专门修复武器、致知、定位、备注栏 */
-            .weapon-text,
-            .knowledge-text,
-            .glory-text,
-            .notes {
-                white-space: nowrap;
-                /* 禁止换行 */
-                min-width: 60px;
-                /* 设置最小宽度 */
-                max-width: 120px;
-                /* 设置最大宽度 */
-                overflow: hidden;
-                /* 超出部分隐藏 */
-                text-overflow: ellipsis;
-                /* 显示省略号 */
+            .save-all-btn {
+                right: 140px;
+                padding: 8px 12px;
+                font-size: 0.9rem;
             }
-
-            /* 备注栏强制横向布局 */
-            .notes-editable,
-            .notes-text,
-            .notes {
-                white-space: nowrap !important;
-                /* 强制不换行 */
-                min-width: 120px;
-                max-width: 200px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                /* 超长显示省略号 */
-            }
-
-            /* 编辑状态也保持横向 */
-            .notes-edit {
-                white-space: nowrap !important;
-                min-width: 120px;
-            }
-        }
-
-
-        /* 表格列宽优化 */
-        td:nth-child(4),
-        /* 武器列 */
-        td:nth-child(7),
-        /* 致知列 */
-        td:nth-child(8),
-        /* 定位列 */
-        td:nth-child(10)
-
-        /* 备注列 */
-            {
-            min-width: 80px;
-            max-width: 120px;
-        }
-    
-
-
-        📝 具体操作步骤 .attributes {
-            flex-direction: column;
-            gap: 3px;
-        }
-
-        .nav-buttons {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .nav-btn {
-            width: 100%;
-            max-width: 250px;
-            justify-content: center;
-        }
-
-        .dev-tools {
-            width: 90%;
-            right: 5%;
-        }
-
-        .batch-panel {
-            width: 90%;
-            left: 5%;
-            transform: none;
-        }
-
-        .batch-controls {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .dropdown-control {
-            flex-direction: column;
-            gap: 10px;
-            align-items: flex-start;
-        }
-
-        .save-all-btn {
-            right: 140px;
-            padding: 8px 12px;
-            font-size: 0.9rem;
         }
     </style>
 </head>
