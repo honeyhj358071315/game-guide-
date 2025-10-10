@@ -1058,11 +1058,6 @@
                 padding: 1px 3px;
             }
 
-            /* 备注列自动换行（只有这个需要换行） */
-            .notes {
-                white-space: normal;
-                max-width: 150px;
-            }
 
             /* 保持其他现有样式 */
             .attributes {
@@ -1113,37 +1108,42 @@
                 /* 显示省略号 */
             }
 
-            /* 备注栏特殊处理 - 允许换行但限制高度 */
+            /* 备注栏强制横向布局 */
+            .notes-editable,
+            .notes-text,
             .notes {
-                white-space: normal;
-                /* 备注允许换行 */
-                max-height: 40px;
-                /* 限制最大高度 */
+                white-space: nowrap !important;
+                /* 强制不换行 */
+                min-width: 120px;
+                max-width: 200px;
                 overflow: hidden;
-                /* 超出隐藏 */
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                line-clamp: 2;
-                /* 添加标准属性 */
-                /* 最多显示2行 */
-                -webkit-box-orient: vertical;
+                text-overflow: ellipsis;
+                /* 超长显示省略号 */
             }
 
-            /* 表格列宽优化 */
-            td:nth-child(4),
-            /* 武器列 */
-            td:nth-child(7),
-            /* 致知列 */
-            td:nth-child(8),
-            /* 定位列 */
-            td:nth-child(10)
-
-            /* 备注列 */
-                {
-                min-width: 80px;
-                max-width: 120px;
+            /* 编辑状态也保持横向 */
+            .notes-edit {
+                white-space: nowrap !important;
+                min-width: 120px;
             }
         }
+
+
+        /* 表格列宽优化 */
+        td:nth-child(4),
+        /* 武器列 */
+        td:nth-child(7),
+        /* 致知列 */
+        td:nth-child(8),
+        /* 定位列 */
+        td:nth-child(10)
+
+        /* 备注列 */
+            {
+            min-width: 80px;
+            max-width: 120px;
+        }
+    
 
 
         📝 具体操作步骤 .attributes {
