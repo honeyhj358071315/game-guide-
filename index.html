@@ -1,7 +1,9 @@
-
 <!-- saved from url=(0046)file:///C:/Users/Administrator/Desktop/28.html -->
-<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 
 
 
@@ -1011,6 +1013,58 @@
                 padding: 8px 10px;
             }
 
+
+            /* 表格横向滚动优化 */
+            table {
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                /* 手机平滑滚动 */
+            }
+
+            /* 所有单元格不换行 */
+            th,
+            td {
+                white-space: nowrap;
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+
+            /* 优化特定列 */
+            .row-number {
+                width: 20px;
+                margin-right: 5px;
+            }
+
+            .name-text {
+                min-width: 70px;
+            }
+
+            .weapon-text {
+                min-width: 50px;
+            }
+
+            .strength-text {
+                min-width: 30px;
+            }
+
+            /* 词条紧凑显示 */
+            .attributes {
+                gap: 2px;
+                min-height: 25px;
+            }
+
+            .attr-item {
+                font-size: 10px;
+                padding: 1px 3px;
+            }
+
+            /* 备注列自动换行（只有这个需要换行） */
+            .notes {
+                white-space: normal;
+                max-width: 150px;
+            }
+
+            /* 保持其他现有样式 */
             .attributes {
                 flex-direction: column;
                 gap: 3px;
@@ -1039,21 +1093,53 @@
             }
 
             .batch-controls {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .dropdown-control {
                 flex-direction: column;
-                gap: 10px;
-                align-items: flex-start;
-            }
-
-            .save-all-btn {
-                right: 140px;
-                padding: 8px 12px;
-                font-size: 0.9rem;
             }
         }
+
+        📝 具体操作步骤 .attributes {
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .nav-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-btn {
+            width: 100%;
+            max-width: 250px;
+            justify-content: center;
+        }
+
+        .dev-tools {
+            width: 90%;
+            right: 5%;
+        }
+
+        .batch-panel {
+            width: 90%;
+            left: 5%;
+            transform: none;
+        }
+
+        .batch-controls {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .dropdown-control {
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .save-all-btn {
+            right: 140px;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+        }
+        
     </style>
 </head>
 
@@ -1072,28 +1158,36 @@
                 <h3>布局管理器</h3>
                 <div class="dev-control-group">
                     <h4>内容板块管理</h4>
-                    <div class="section-list" id="sectionList"><div class="section-item" draggable="true" data-section-id="strategy-section">
-        <input type="checkbox" class="section-toggle" checked="">
-        <span>🧠 战略类角色</span>
-    </div><div class="section-item" draggable="true" data-section-id="ranged-section">
-        <input type="checkbox" class="section-toggle" checked="">
-        <span>🏹 远击类角色</span>
-    </div><div class="section-item" draggable="true" data-section-id="magic-section">
-        <input type="checkbox" class="section-toggle" checked="">
-        <span>🔮 构术类角色</span>
-    </div><div class="section-item" draggable="true" data-section-id="light-section">
-        <input type="checkbox" class="section-toggle" checked="">
-        <span>⚡ 轻锐类角色</span>
-    </div><div class="section-item" draggable="true" data-section-id="guard-section">
-        <input type="checkbox" class="section-toggle" checked="">
-        <span>🛡️ 宿卫类角色</span>
-    </div><div class="section-item" draggable="true" data-section-id="tips-section">
-        <input type="checkbox" class="section-toggle" checked="">
-        <span>💡 新手导航</span>
-    </div><div class="section-item" draggable="true" data-section-id="navigation-section">
-        <input type="checkbox" class="section-toggle" checked="">
-        <span>🧭 导航</span>
-    </div></div>
+                    <div class="section-list" id="sectionList">
+                        <div class="section-item" draggable="true" data-section-id="strategy-section">
+                            <input type="checkbox" class="section-toggle" checked="">
+                            <span>🧠 战略类角色</span>
+                        </div>
+                        <div class="section-item" draggable="true" data-section-id="ranged-section">
+                            <input type="checkbox" class="section-toggle" checked="">
+                            <span>🏹 远击类角色</span>
+                        </div>
+                        <div class="section-item" draggable="true" data-section-id="magic-section">
+                            <input type="checkbox" class="section-toggle" checked="">
+                            <span>🔮 构术类角色</span>
+                        </div>
+                        <div class="section-item" draggable="true" data-section-id="light-section">
+                            <input type="checkbox" class="section-toggle" checked="">
+                            <span>⚡ 轻锐类角色</span>
+                        </div>
+                        <div class="section-item" draggable="true" data-section-id="guard-section">
+                            <input type="checkbox" class="section-toggle" checked="">
+                            <span>🛡️ 宿卫类角色</span>
+                        </div>
+                        <div class="section-item" draggable="true" data-section-id="tips-section">
+                            <input type="checkbox" class="section-toggle" checked="">
+                            <span>💡 新手导航</span>
+                        </div>
+                        <div class="section-item" draggable="true" data-section-id="navigation-section">
+                            <input type="checkbox" class="section-toggle" checked="">
+                            <span>🧭 导航</span>
+                        </div>
+                    </div>
                     <button class="add-section-btn" id="addSectionBtn">+ 添加新板块</button>
                 </div>
             </div>
@@ -1202,8 +1296,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red" data-type="strategy" data-index="1">1.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red" data-type="strategy"
+                                    data-index="1">1.</span>
                             </div>
                         </td>
                         <td>
@@ -1228,13 +1324,15 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="training-text training" style="display: inline;">多谋1207</span>
-                                <input type="text" class="edit-input training-edit" value="多谋1207" style="display: none;">
+                                <input type="text" class="edit-input training-edit" value="多谋1207"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="knowledge-text knowledge" style="display: inline;">0致/3致</span>
-                                <input type="text" class="edit-input knowledge-edit" value="0致/3致" style="display: none;">
+                                <input type="text" class="edit-input knowledge-edit" value="0致/3致"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -1244,15 +1342,19 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="构/全/攻%/攻" style="color: #ff6b6b;">构/全/攻%/攻</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="构/全/攻%/攻" style="display: none;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="构/全/攻%/攻" style="color: #ff6b6b;">构/全/攻%/攻</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="构/全/攻%/攻"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="notes-text notes" style="display: inline;">搭配：星月/愿望/银雀/睡莲等</span>
-                                <input type="text" class="edit-input notes-edit" value="常规搭配：dot体系/战略体系|也可以散搭对群" style="display: none;">
+                                <input type="text" class="edit-input notes-edit" value="常规搭配：dot体系/战略体系|也可以散搭对群"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -1263,8 +1365,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red" data-type="strategy" data-index="2">2.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red" data-type="strategy"
+                                    data-index="2">2.</span>
                             </div>
                         </td>
                         <td>
@@ -1289,7 +1393,8 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="training-text training" style="display: inline;">戒卫7201</span>
-                                <input type="text" class="edit-input training-edit" value="戒卫7201" style="display: none;">
+                                <input type="text" class="edit-input training-edit" value="戒卫7201"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -1305,27 +1410,35 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/构/全/警/攻%" style="color: #ff6b6b;">暴/爆/构/全/警/攻%</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="暴/爆/构/全/警/攻%" style="display: none;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/构/全/警/攻%" style="color: #ff6b6b;">暴/爆/构/全/警/攻%</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="暴/爆/构/全/警/攻%"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：战略体系/3致可单走<br>0致需要搭配1名弹药充足战略</span>
-                                <input type="text" class="edit-input notes-edit" value="0致体系/3致可单|引导警戒，乃战略队中枢地位" style="display: none;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：战略体系/3致可单走<br>0致需要搭配1名弹药充足战略</span>
+                                <input type="text" class="edit-input notes-edit" value="0致体系/3致可单|引导警戒，乃战略队中枢地位"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
                     </tr>
-                    <tr draggable="true" data-type="strategy" data-index="2" style="opacity: 1; display: none;" class="">
+                    <tr draggable="true" data-type="strategy" data-index="2" style="opacity: 1; display: none;"
+                        class="">
                         <td>
                             <input type="checkbox" class="row-selector" data-type="strategy" data-index="2">
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red" data-type="strategy" data-index="5">3.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red" data-type="strategy"
+                                    data-index="5">3.</span>
                             </div>
                         </td>
                         <td>
@@ -1350,7 +1463,8 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="training-text training" style="display: inline;">戒卫4303</span>
-                                <input type="text" class="edit-input training-edit" value="戒卫4303" style="display: none;">
+                                <input type="text" class="edit-input training-edit" value="戒卫4303"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -1366,14 +1480,18 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="随意or暴/爆/构/全" style="color: #ff6b6b;">随意or暴/爆/构/全</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="随意/暴/爆/构/全" style="display: none;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="随意or暴/爆/构/全" style="color: #ff6b6b;">随意or暴/爆/构/全</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="随意/暴/爆/构/全"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">目前唯一拉条，根据搭配收益不一<br>比较适合刷新CD/能量，爆发型</span>
+                                <span class="notes-text notes"
+                                    style="display: inline;">目前唯一拉条，根据搭配收益不一<br>比较适合刷新CD/能量，爆发型</span>
                                 <input type="text" class="edit-input notes-edit" value="目前唯一拉条" style="display: none;">
                             </div>
                         </td>
@@ -1385,8 +1503,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red" data-type="strategy" data-index="4">4.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red" data-type="strategy"
+                                    data-index="4">4.</span>
                             </div>
                         </td>
                         <td>
@@ -1411,7 +1531,8 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="training-text training" style="display: inline;">多谋6004</span>
-                                <input type="text" class="edit-input training-edit" value="多谋7300" style="display: none;">
+                                <input type="text" class="edit-input training-edit" value="多谋7300"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -1427,27 +1548,35 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/攻%/攻" style="color: #ff6b6b;">暴/爆/攻%/攻</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="暴/爆/攻%/攻" style="display: none;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/攻%/攻" style="color: #ff6b6b;">暴/爆/攻%/攻</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="暴/爆/攻%/攻"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：铜坐龙/金蝉等，回击器者<br>锁血适用高难，但无法抵挡斩杀</span>
-                                <input type="text" class="edit-input notes-edit" value="回击体系/特殊锁血" style="display: none;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：铜坐龙/金蝉等，回击器者<br>锁血适用高难，但无法抵挡斩杀</span>
+                                <input type="text" class="edit-input notes-edit" value="回击体系/特殊锁血"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
                     </tr>
-                    <tr draggable="true" data-type="strategy" data-index="4" style="opacity: 1; display: none;" class="">
+                    <tr draggable="true" data-type="strategy" data-index="4" style="opacity: 1; display: none;"
+                        class="">
                         <td>
                             <input type="checkbox" class="row-selector" data-type="strategy" data-index="4">
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red" data-type="strategy" data-index="3">5.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red" data-type="strategy"
+                                    data-index="3">5.</span>
                             </div>
                         </td>
                         <td>
@@ -1471,8 +1600,10 @@
                         </td>
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="training-text training" style="display: inline;">1.戒卫2107<br>2.戒卫6004</span>
-                                <input type="text" class="edit-input training-edit" value="戒卫2107" style="display: none;">
+                                <span class="training-text training"
+                                    style="display: inline;">1.戒卫2107<br>2.戒卫6004</span>
+                                <input type="text" class="edit-input training-edit" value="戒卫2107"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -1488,27 +1619,35 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="1.暴/爆/构/全/警&lt;br&gt;2.爆/构/全/警" style="color: #ff6b6b;">1.暴/爆/构/全/警<br>2.爆/构/全/警</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="暴/爆/构/全/警" style="display: none;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="1.暴/爆/构/全/警&lt;br&gt;2.爆/构/全/警"
+                                        style="color: #ff6b6b;">1.暴/爆/构/全/警<br>2.爆/构/全/警</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="暴/爆/构/全/警"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="notes-text notes" style="display: inline;">搭配：仔细阅读技能<br>可散搭但有职业效果区分</span>
-                                <input type="text" class="edit-input notes-edit" value="可体系可散搭，也可奶辅" style="display: none;">
+                                <input type="text" class="edit-input notes-edit" value="可体系可散搭，也可奶辅"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
                     </tr>
-                    <tr draggable="true" data-type="strategy" data-index="5" class="" style="opacity: 1; display: none;">
+                    <tr draggable="true" data-type="strategy" data-index="5" class=""
+                        style="opacity: 1; display: none;">
                         <td>
                             <input type="checkbox" class="row-selector" data-type="strategy" data-index="5">
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red" data-type="strategy" data-index="0">6.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red" data-type="strategy"
+                                    data-index="0">6.</span>
                             </div>
                         </td>
                         <td>
@@ -1532,8 +1671,10 @@
                         </td>
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="training-text training" style="display: inline;">1.多谋6004<br>2.戒卫6004</span>
-                                <input type="text" class="edit-input training-edit" value="多谋6004" style="display: none;">
+                                <span class="training-text training"
+                                    style="display: inline;">1.多谋6004<br>2.戒卫6004</span>
+                                <input type="text" class="edit-input training-edit" value="多谋6004"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -1549,15 +1690,21 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="1.暴/爆/构/治/攻&lt;br&gt;2.搭配召唤可选戒卫" style="color: #ff6b6b;">1.暴/爆/构/治/攻<br>2.搭配召唤可选戒卫</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="暴/爆/构/治/攻" style="display: none;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="1.暴/爆/构/治/攻&lt;br&gt;2.搭配召唤可选戒卫"
+                                        style="color: #ff6b6b;">1.暴/爆/构/治/攻<br>2.搭配召唤可选戒卫</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="暴/爆/构/治/攻"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：天球/T画/家具等<br>良好的奶量也可散搭纯奶</span>
-                                <input type="text" class="edit-input notes-edit" value="常规搭配：召唤体系|散搭奶妈" style="display: none;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：天球/T画/家具等<br>良好的奶量也可散搭纯奶</span>
+                                <input type="text" class="edit-input notes-edit" value="常规搭配：召唤体系|散搭奶妈"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -1568,8 +1715,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red" data-type="strategy" data-index="6">7.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red" data-type="strategy"
+                                    data-index="6">7.</span>
                             </div>
                         </td>
                         <td>
@@ -1594,7 +1743,8 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="training-text training" style="display: inline;">多谋4024</span>
-                                <input type="text" class="edit-input training-edit" value="多谋4024" style="display: none;">
+                                <input type="text" class="edit-input training-edit" value="多谋4024"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -1610,15 +1760,20 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/治/生" style="color: #ff6b6b;">暴/爆/治/生</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="暴/爆/治/生" style="display: none;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/治/生" style="color: #ff6b6b;">暴/爆/治/生</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="暴/爆/治/生"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：宝幢/战略/用于高压环境<br>上手门槛高，需一定深度游戏理解</span>
-                                <input type="text" class="edit-input notes-edit" value="上手门槛高，高频奶/多小功能" style="display: none;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：宝幢/战略/用于高压环境<br>上手门槛高，需一定深度游戏理解</span>
+                                <input type="text" class="edit-input notes-edit" value="上手门槛高，高频奶/多小功能"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -1629,8 +1784,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red" data-type="strategy" data-index="7">8.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red" data-type="strategy"
+                                    data-index="7">8.</span>
                             </div>
                         </td>
                         <td>
@@ -1671,15 +1828,19 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes"><span class="attr-item" data-text="暴/爆/汲/治" style="color: #ff6b6b;">暴/爆/汲/治</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes"><span class="attr-item" data-text="暴/爆/汲/治"
+                                        style="color: #ff6b6b;">暴/爆/汲/治</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="暴/爆/汲/治">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：任意----除开图鉴外<br>不推荐用红票换取</span>
-                                <input type="text" class="edit-input notes-edit" value="散搭奶辅，技能不稳定" style="display: none;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：任意----除开图鉴外<br>不推荐用红票换取</span>
+                                <input type="text" class="edit-input notes-edit" value="散搭奶辅，技能不稳定"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -1690,8 +1851,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red" data-type="strategy" data-index="8">9.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red" data-type="strategy"
+                                    data-index="8">9.</span>
                             </div>
                         </td>
                         <td>
@@ -1716,7 +1879,8 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="training-text training" style="display: inline;"> </span>
-                                <input type="text" class="edit-input training-edit" value="戒卫6004" style="display: none;">
+                                <input type="text" class="edit-input training-edit" value="戒卫6004"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -1732,9 +1896,11 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <div class="attributes-text attributes" style="display: inline;"></div>
-                                <input type="text" class="edit-input attributes-edit" value="爆/构/警/全" style="display: none;">
+                                <input type="text" class="edit-input attributes-edit" value="爆/构/警/全"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -1751,8 +1917,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red" data-type="strategy" data-index="9">10.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red" data-type="strategy"
+                                    data-index="9">10.</span>
                             </div>
                         </td>
                         <td>
@@ -1777,7 +1945,8 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="training-text training" style="display: inline;"> </span>
-                                <input type="text" class="edit-input training-edit" value="多谋6004" style="display: none;">
+                                <input type="text" class="edit-input training-edit" value="多谋6004"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -1793,9 +1962,11 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <div class="attributes-text attributes" style="display: inline;"></div>
-                                <input type="text" class="edit-input attributes-edit" value="暴/爆/治/攻%" style="display: none;">
+                                <input type="text" class="edit-input attributes-edit" value="暴/爆/治/攻%"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -1806,67 +1977,73 @@
                         </td>
                         <td></td>
                     </tr>
-                <tr draggable="true" data-type="strategy" data-index="10" style="display: none;">
-        <td>
-            <input type="checkbox" class="row-selector" data-type="strategy" data-index="10">
-        </td>
-        <td class="drag-handle-row">≡</td>
-        <td>
-            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="row-number" style="color: yellow;" data-type="strategy" data-index="10">11.</span>
-            </div>
-        </td>
-        <td>
-            <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="name-text" style="display: inline;">白龙梅瓶</span>
-                <input type="text" class="edit-input name-edit" value="新战略角色" style="display: none;">
-            </div>
-            <button class="delete-row" data-type="strategy" data-index="10">×</button>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="weapon-text weapon" style="display: inline;">流云鸣沙炮<br>金桂抱月炮</span>
-                <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="strength-text strength" style="display: inline;">选练</span>
-                <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="training-text training" style="display: inline;">戒卫6004</span>
-                <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="knowledge-text knowledge" style="display: inline;">3致</span>
-                <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="glory-text glory" style="display: inline;">输出/辅助</span>
-                <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
-                <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="notes-text notes" style="display: inline;">搭配：目前主要作用还是提供<br>脆弱和啸剑提高主C伤害</span>
-                <input type="text" class="edit-input notes-edit" value="" style="display: none;">
-            </div>
-        </td>
-        <td></td>
-    </tr></tbody>
+                    <tr draggable="true" data-type="strategy" data-index="10" style="display: none;">
+                        <td>
+                            <input type="checkbox" class="row-selector" data-type="strategy" data-index="10">
+                        </td>
+                        <td class="drag-handle-row">≡</td>
+                        <td>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: yellow;" data-type="strategy"
+                                    data-index="10">11.</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="name-text" style="display: inline;">白龙梅瓶</span>
+                                <input type="text" class="edit-input name-edit" value="新战略角色" style="display: none;">
+                            </div>
+                            <button class="delete-row" data-type="strategy" data-index="10">×</button>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="weapon-text weapon" style="display: inline;">流云鸣沙炮<br>金桂抱月炮</span>
+                                <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="strength-text strength" style="display: inline;">选练</span>
+                                <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="training-text training" style="display: inline;">戒卫6004</span>
+                                <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="knowledge-text knowledge" style="display: inline;">3致</span>
+                                <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="glory-text glory" style="display: inline;">输出/辅助</span>
+                                <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：目前主要作用还是提供<br>脆弱和啸剑提高主C伤害</span>
+                                <input type="text" class="edit-input notes-edit" value="" style="display: none;">
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
             </table>
             <div class="dropdown-control">
                 <div class="dropdown-info">
@@ -1912,7 +2089,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="ranged" data-index="0">1.</span>
                             </div>
                         </td>
@@ -1937,14 +2115,17 @@
                         </td>
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="training-text training" style="display: inline;">1.校准0550<br>2.破碎7300</span>
-                                <input type="text" class="edit-input training-edit" value="破碎7300" style="display: none;">
+                                <span class="training-text training"
+                                    style="display: inline;">1.校准0550<br>2.破碎7300</span>
+                                <input type="text" class="edit-input training-edit" value="破碎7300"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="knowledge-text knowledge" style="display: inline;">1.1致<br>2.6致</span>
-                                <input type="text" class="edit-input knowledge-edit" value="1致/6致" style="display: none;">
+                                <input type="text" class="edit-input knowledge-edit" value="1致/6致"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -1954,15 +2135,20 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="攻%/暴/爆/物/攻" style="color: #ff6b6b;">攻%/暴/爆/物/攻</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="攻%/暴/爆/物/攻" style="display: none;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="攻%/暴/爆/物/攻" style="color: #ff6b6b;">攻%/暴/爆/物/攻</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="攻%/暴/爆/物/攻"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：T画/家具/浑天/马蹄等<br>体系队，不推荐散搭</span>
-                                <input type="text" class="edit-input notes-edit" value="常规搭配：T画/家具|其他：浑天/马蹄/溪山" style="display: none;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：T画/家具/浑天/马蹄等<br>体系队，不推荐散搭</span>
+                                <input type="text" class="edit-input notes-edit" value="常规搭配：T画/家具|其他：浑天/马蹄/溪山"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -1973,7 +2159,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="ranged" data-index="10">2.</span>
                             </div>
                         </td>
@@ -2015,14 +2202,17 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes"><span class="attr-item" data-text="示例" style="color: #ff6b6b;">示例</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes"><span class="attr-item" data-text="示例"
+                                        style="color: #ff6b6b;">示例</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：连击体系/召唤体系/散搭<br>多功能，但不稳定</span>
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：连击体系/召唤体系/散搭<br>多功能，但不稳定</span>
                                 <input type="text" class="edit-input notes-edit" value="" style="display: none;">
                             </div>
                         </td>
@@ -2034,7 +2224,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="ranged" data-index="1">3.</span>
                             </div>
                         </td>
@@ -2060,7 +2251,8 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="training-text training" style="display: inline;">破碎5500</span>
-                                <input type="text" class="edit-input training-edit" value="破碎5500" style="display: none;">
+                                <input type="text" class="edit-input training-edit" value="破碎5500"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -2072,19 +2264,24 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="glory-text glory" style="display: inline;">输出<br>dot体系</span>
-                                <input type="text" class="edit-input glory-edit" value="输出|dot体系" style="display: none;">
+                                <input type="text" class="edit-input glory-edit" value="输出|dot体系"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="构/全/攻%~瞄准/攻" style="color: #ff6b6b;">构/全/攻%~瞄准/攻</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="构/全/攻%~瞄准/攻" style="display: none;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="构/全/攻%~瞄准/攻" style="color: #ff6b6b;">构/全/攻%~瞄准/攻</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="构/全/攻%~瞄准/攻"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="notes-text notes" style="display: inline;">搭配：向日/愿望/睡莲<br>单体高伤附带长线群伤</span>
-                                <input type="text" class="edit-input notes-edit" value="搭配：向日/愿望|单体高伤附带长线群伤" style="display: none;">
+                                <input type="text" class="edit-input notes-edit" value="搭配：向日/愿望|单体高伤附带长线群伤"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -2095,7 +2292,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="ranged" data-index="2">4.</span>
                             </div>
                         </td>
@@ -2120,14 +2318,17 @@
                         </td>
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="training-text training" style="display: inline;">1.破碎5500<br>2.校准0721</span>
-                                <input type="text" class="edit-input training-edit" value="破碎5500" style="display: none;">
+                                <span class="training-text training"
+                                    style="display: inline;">1.破碎5500<br>2.校准0721</span>
+                                <input type="text" class="edit-input training-edit" value="破碎5500"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="knowledge-text knowledge" style="display: inline;">0致/3致</span>
-                                <input type="text" class="edit-input knowledge-edit" value="0致/3致" style="display: none;">
+                                <input type="text" class="edit-input knowledge-edit" value="0致/3致"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -2137,15 +2338,19 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="瞄/暴/物/爆" style="color: #ff6b6b;">瞄/暴/物/爆</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="瞄/暴/物/爆" style="display: none;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="瞄/暴/物/爆" style="color: #ff6b6b;">瞄/暴/物/爆</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="瞄/暴/物/爆"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="notes-text notes" style="display: inline;">搭配：百搭啸蓄辅助<br>可低练当工具人</span>
-                                <input type="text" class="edit-input notes-edit" value="群体沉默，啸蓄辅助" style="display: none;">
+                                <input type="text" class="edit-input notes-edit" value="群体沉默，啸蓄辅助"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -2156,7 +2361,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="ranged" data-index="4">5.</span>
                             </div>
                         </td>
@@ -2198,15 +2404,20 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="物/全/暴" style="color: #ff6b6b;">物/全/暴</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="暴/爆/物/全" style="display: none;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="物/全/暴" style="color: #ff6b6b;">物/全/暴</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="暴/爆/物/全"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：铜车马/愿望杯/dot体系等<br>上手门槛高，流失队略需操作</span>
-                                <input type="text" class="edit-input notes-edit" value="上手门槛高，流失队略需操作" style="display: none;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：铜车马/愿望杯/dot体系等<br>上手门槛高，流失队略需操作</span>
+                                <input type="text" class="edit-input notes-edit" value="上手门槛高，流失队略需操作"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -2217,7 +2428,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="ranged" data-index="3">6.</span>
                             </div>
                         </td>
@@ -2243,7 +2455,8 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="training-text training" style="display: inline;">破碎7300</span>
-                                <input type="text" class="edit-input training-edit" value="破碎7300" style="display: none;">
+                                <input type="text" class="edit-input training-edit" value="破碎7300"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -2259,9 +2472,12 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="瞄~暴/爆/物" style="color: #ff6b6b;">瞄~暴/爆/物</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="暴/爆/物/全" style="display: none;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="瞄~暴/爆/物" style="color: #ff6b6b;">瞄~暴/爆/物</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="暴/爆/物/全"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -2278,7 +2494,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="ranged" data-index="5">7.</span>
                             </div>
                         </td>
@@ -2303,8 +2520,10 @@
                         </td>
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="training-text training" style="display: inline;">1.破碎7300<br>2.破碎3700</span>
-                                <input type="text" class="edit-input training-edit" value="破碎7300" style="display: none;">
+                                <span class="training-text training"
+                                    style="display: inline;">1.破碎7300<br>2.破碎3700</span>
+                                <input type="text" class="edit-input training-edit" value="破碎7300"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -2320,15 +2539,19 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="单体  1.暴/爆/物/全&lt;br&gt;群体  2.物/全/暴/攻%" style="color: #ff6b6b;">单体
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="单体  1.暴/爆/物/全&lt;br&gt;群体  2.物/全/暴/攻%" style="color: #ff6b6b;">单体
                                         1.暴/爆/物/全<br>群体 2.物/全/暴/攻%</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="暴/爆/物/全" style="display: none;">
+                                <input type="text" class="edit-input attributes-edit" value="暴/爆/物/全"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：琵琶/金瓯多段体系or单走<br>瞄准冷却词条视自身手感决定</span>
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：琵琶/金瓯多段体系or单走<br>瞄准冷却词条视自身手感决定</span>
                                 <input type="text" class="edit-input notes-edit" value="" style="display: none;">
                             </div>
                         </td>
@@ -2340,7 +2563,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="ranged" data-index="6">8.</span>
                             </div>
                         </td>
@@ -2366,7 +2590,8 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="training-text training" style="display: inline;">破碎3700</span>
-                                <input type="text" class="edit-input training-edit" value="破碎3700" style="display: none;">
+                                <input type="text" class="edit-input training-edit" value="破碎3700"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -2382,14 +2607,17 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes"><span class="attr-item" data-text="物/全/攻%/攻" style="color: #ff6b6b;">物/全/攻%/攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes"><span class="attr-item" data-text="物/全/攻%/攻"
+                                        style="color: #ff6b6b;">物/全/攻%/攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="物/全/攻%/攻">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：星月/向日/睡莲等<br>瞄准词条视自身手感决定</span>
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：星月/向日/睡莲等<br>瞄准词条视自身手感决定</span>
                                 <input type="text" class="edit-input notes-edit" value="dot体系" style="display: none;">
                             </div>
                         </td>
@@ -2401,7 +2629,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="ranged" data-index="7">9.</span>
                             </div>
                         </td>
@@ -2443,15 +2672,19 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes"><span class="attr-item" data-text="暴/爆/物/全/连" style="color: #ff6b6b;">暴/爆/物/全/连</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes"><span class="attr-item" data-text="暴/爆/物/全/连"
+                                        style="color: #ff6b6b;">暴/爆/物/全/连</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="暴/爆/物/全/连">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：万工/牛尊连击体系or散搭<br>单体输出/适合打高甲</span>
-                                <input type="text" class="edit-input notes-edit" value="单体输出/适合打高甲" style="display: none;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：万工/牛尊连击体系or散搭<br>单体输出/适合打高甲</span>
+                                <input type="text" class="edit-input notes-edit" value="单体输出/适合打高甲"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -2462,7 +2695,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="ranged" data-index="8">10.</span>
                             </div>
                         </td>
@@ -2488,7 +2722,8 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="training-text training" style="display: inline;"> </span>
-                                <input type="text" class="edit-input training-edit" value="破碎7300" style="display: none;">
+                                <input type="text" class="edit-input training-edit" value="破碎7300"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -2504,9 +2739,11 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <div class="attributes-text attributes" style="display: inline;"></div>
-                                <input type="text" class="edit-input attributes-edit" value="暴/爆/物/全" style="display: none;">
+                                <input type="text" class="edit-input attributes-edit" value="暴/爆/物/全"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -2523,7 +2760,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="ranged" data-index="9">11.</span>
                             </div>
                         </td>
@@ -2549,7 +2787,8 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="training-text training" style="display: inline;"> </span>
-                                <input type="text" class="edit-input training-edit" value="破碎7300" style="display: none;">
+                                <input type="text" class="edit-input training-edit" value="破碎7300"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -2565,9 +2804,11 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <div class="attributes-text attributes" style="display: inline;"></div>
-                                <input type="text" class="edit-input attributes-edit" value="暴/爆/物/全" style="display: none;">
+                                <input type="text" class="edit-input attributes-edit" value="暴/爆/物/全"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -2578,67 +2819,74 @@
                         </td>
                         <td></td>
                     </tr>
-                <tr draggable="true" data-type="ranged" data-index="11" class="" style="opacity: 1; display: none;">
-        <td>
-            <input type="checkbox" class="row-selector" data-type="ranged" data-index="11">
-        </td>
-        <td class="drag-handle-row">≡</td>
-        <td>
-            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="row-number" style="color: yellow;" data-type="ranged" data-index="11">12.</span>
-            </div>
-        </td>
-        <td>
-            <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="name-text" style="display: inline;">大神龛</span>
-                <input type="text" class="edit-input name-edit" value="新远击角色" style="display: none;">
-            </div>
-            <button class="delete-row" data-type="ranged" data-index="11">×</button>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="weapon-text weapon" style="display: inline;">1.流云鸣沙弩<br>2.熊猫竹弩</span>
-                <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="strength-text strength" style="display: inline;">选练<br>选焕彰</span>
-                <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="training-text training" style="display: inline;">1.破碎7300<br>2.校准3700</span>
-                <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="knowledge-text knowledge" style="display: inline;">3致</span>
-                <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="glory-text glory" style="display: inline;">输出</span>
-                <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/物/爆/瞄准/全" style="color: #ff6b6b;">暴/物/爆/瞄准/全</span></div>
-                <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="notes-text notes" style="display: inline;">搭配：百搭，缺输出可以考虑<br>但焕彰费用太高，需权衡</span>
-                <input type="text" class="edit-input notes-edit" value="" style="display: none;">
-            </div>
-        </td>
-        <td></td>
-    </tr></tbody>
+                    <tr draggable="true" data-type="ranged" data-index="11" class="" style="opacity: 1; display: none;">
+                        <td>
+                            <input type="checkbox" class="row-selector" data-type="ranged" data-index="11">
+                        </td>
+                        <td class="drag-handle-row">≡</td>
+                        <td>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: yellow;" data-type="ranged"
+                                    data-index="11">12.</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="name-text" style="display: inline;">大神龛</span>
+                                <input type="text" class="edit-input name-edit" value="新远击角色" style="display: none;">
+                            </div>
+                            <button class="delete-row" data-type="ranged" data-index="11">×</button>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="weapon-text weapon" style="display: inline;">1.流云鸣沙弩<br>2.熊猫竹弩</span>
+                                <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="strength-text strength" style="display: inline;">选练<br>选焕彰</span>
+                                <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="training-text training"
+                                    style="display: inline;">1.破碎7300<br>2.校准3700</span>
+                                <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="knowledge-text knowledge" style="display: inline;">3致</span>
+                                <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="glory-text glory" style="display: inline;">输出</span>
+                                <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/物/爆/瞄准/全" style="color: #ff6b6b;">暴/物/爆/瞄准/全</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：百搭，缺输出可以考虑<br>但焕彰费用太高，需权衡</span>
+                                <input type="text" class="edit-input notes-edit" value="" style="display: none;">
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
             </table>
             <div class="dropdown-control">
                 <div class="dropdown-info">
@@ -2684,7 +2932,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="magic" data-index="0">1.</span>
                             </div>
                         </td>
@@ -2709,7 +2958,8 @@
                         </td>
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="training-text training" style="display: inline;">1.储能7030<br>2.威慑7300</span>
+                                <span class="training-text training"
+                                    style="display: inline;">1.储能7030<br>2.威慑7300</span>
                                 <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
                             </div>
                         </td>
@@ -2726,8 +2976,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -2745,7 +2997,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="magic" data-index="1">2.</span>
                             </div>
                         </td>
@@ -2787,8 +3040,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -2806,7 +3061,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="magic" data-index="2">3.</span>
                             </div>
                         </td>
@@ -2848,8 +3104,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/治/双攻" style="color: #ff6b6b;">暴/爆/治/双攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/治/双攻" style="color: #ff6b6b;">暴/爆/治/双攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -2867,7 +3125,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="magic" data-index="4">4.</span>
                             </div>
                         </td>
@@ -2909,8 +3168,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/治/任意" style="color: #ff6b6b;">暴/治/任意</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/治/任意" style="color: #ff6b6b;">暴/治/任意</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -2928,7 +3189,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="magic" data-index="14">5.</span>
                             </div>
                         </td>
@@ -2970,8 +3232,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/治/双攻" style="color: #ff6b6b;">暴/爆/治/双攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/治/双攻" style="color: #ff6b6b;">暴/爆/治/双攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -2989,7 +3253,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="magic" data-index="8">6.</span>
                             </div>
                         </td>
@@ -3031,8 +3296,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -3050,7 +3317,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="magic" data-index="7">7.</span>
                             </div>
                         </td>
@@ -3092,8 +3360,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="构/全/双攻" style="color: #ff6b6b;">构/全/双攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="构/全/双攻" style="color: #ff6b6b;">构/全/双攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -3111,7 +3381,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="magic" data-index="3">8.</span>
                             </div>
                         </td>
@@ -3153,8 +3424,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -3172,7 +3445,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="magic" data-index="11">9.</span>
                             </div>
                         </td>
@@ -3214,14 +3488,17 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="攻%/攻/双生/防御" style="color: #ff6b6b;">攻%/攻/双生/防御</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="攻%/攻/双生/防御" style="color: #ff6b6b;">攻%/攻/双生/防御</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：天球/浑天/家具等召唤体系<br>错过天球的可以不练</span>
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：天球/浑天/家具等召唤体系<br>错过天球的可以不练</span>
                                 <input type="text" class="edit-input notes-edit" value="" style="display: none;">
                             </div>
                         </td>
@@ -3233,7 +3510,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="magic" data-index="5">10.</span>
                             </div>
                         </td>
@@ -3275,14 +3553,17 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/治/双攻" style="color: #ff6b6b;">暴/爆/治/双攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/治/双攻" style="color: #ff6b6b;">暴/爆/治/双攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：百搭,稀释较为严重<br>带香炉不常击也可循环</span>
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：百搭,稀释较为严重<br>带香炉不常击也可循环</span>
                                 <input type="text" class="edit-input notes-edit" value="" style="display: none;">
                             </div>
                         </td>
@@ -3294,7 +3575,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="magic" data-index="6">11.</span>
                             </div>
                         </td>
@@ -3336,8 +3618,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -3355,7 +3639,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="magic" data-index="9">12.</span>
                             </div>
                         </td>
@@ -3397,8 +3682,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="汲取/任意" style="color: #ff6b6b;">汲取/任意</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="汲取/任意" style="color: #ff6b6b;">汲取/任意</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -3416,8 +3703,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red;" data-type="magic" data-index="10">13.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red;" data-type="magic"
+                                    data-index="10">13.</span>
                             </div>
                         </td>
                         <td>
@@ -3458,8 +3747,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/构/全/双攻" style="color: #ff6b6b;">暴/爆/构/全/双攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -3477,8 +3768,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red;" data-type="magic" data-index="12">14.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red;" data-type="magic"
+                                    data-index="12">14.</span>
                             </div>
                         </td>
                         <td>
@@ -3519,8 +3812,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="爆/治/双攻" style="color: #ff6b6b;">爆/治/双攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="爆/治/双攻" style="color: #ff6b6b;">爆/治/双攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -3538,8 +3833,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red;" data-type="magic" data-index="13">15.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red;" data-type="magic"
+                                    data-index="13">15.</span>
                             </div>
                         </td>
                         <td>
@@ -3580,7 +3877,8 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <div class="attributes-text attributes" style="display: inline;"></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
@@ -3599,8 +3897,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red;" data-type="magic" data-index="15">16.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red;" data-type="magic"
+                                    data-index="15">16.</span>
                             </div>
                         </td>
                         <td>
@@ -3641,7 +3941,8 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <div class="attributes-text attributes" style="display: inline;"></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
@@ -3660,8 +3961,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red;" data-type="magic" data-index="16">17.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red;" data-type="magic"
+                                    data-index="16">17.</span>
                             </div>
                         </td>
                         <td>
@@ -3702,7 +4005,8 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <div class="attributes-text attributes" style="display: inline;"></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
@@ -3715,67 +4019,73 @@
                         </td>
                         <td></td>
                     </tr>
-                <tr draggable="true" data-type="magic" data-index="17" class="" style="opacity: 1; display: none;">
-        <td>
-            <input type="checkbox" class="row-selector" data-type="magic" data-index="17">
-        </td>
-        <td class="drag-handle-row">≡</td>
-        <td>
-            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="row-number" style="color: yellow;" data-type="magic" data-index="17">18.</span>
-            </div>
-        </td>
-        <td>
-            <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="name-text" style="display: inline;">长信宫灯</span>
-                <input type="text" class="edit-input name-edit" value="新构术角色" style="display: none;">
-            </div>
-            <button class="delete-row" data-type="magic" data-index="17">×</button>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="weapon-text weapon" style="display: inline;">麻雀<br>流云鸣沙乐</span>
-                <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="strength-text strength" style="display: inline;">选练<br>选焕彰</span>
-                <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="training-text training" style="display: inline;">储能5050</span>
-                <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="knowledge-text knowledge" style="display: inline;">3致</span>
-                <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="glory-text glory" style="display: inline;">奶辅</span>
-                <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/治/双攻" style="color: #ff6b6b;">暴/爆/治/双攻</span></div>
-                <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="notes-text notes" style="display: inline;">搭配：百搭，焕彰主要对策高难<br>全屏奶/净化负面buff</span>
-                <input type="text" class="edit-input notes-edit" value="" style="display: none;">
-            </div>
-        </td>
-        <td></td>
-    </tr></tbody>
+                    <tr draggable="true" data-type="magic" data-index="17" class="" style="opacity: 1; display: none;">
+                        <td>
+                            <input type="checkbox" class="row-selector" data-type="magic" data-index="17">
+                        </td>
+                        <td class="drag-handle-row">≡</td>
+                        <td>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: yellow;" data-type="magic"
+                                    data-index="17">18.</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="name-text" style="display: inline;">长信宫灯</span>
+                                <input type="text" class="edit-input name-edit" value="新构术角色" style="display: none;">
+                            </div>
+                            <button class="delete-row" data-type="magic" data-index="17">×</button>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="weapon-text weapon" style="display: inline;">麻雀<br>流云鸣沙乐</span>
+                                <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="strength-text strength" style="display: inline;">选练<br>选焕彰</span>
+                                <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="training-text training" style="display: inline;">储能5050</span>
+                                <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="knowledge-text knowledge" style="display: inline;">3致</span>
+                                <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="glory-text glory" style="display: inline;">奶辅</span>
+                                <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/治/双攻" style="color: #ff6b6b;">暴/爆/治/双攻</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：百搭，焕彰主要对策高难<br>全屏奶/净化负面buff</span>
+                                <input type="text" class="edit-input notes-edit" value="" style="display: none;">
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
             </table>
             <div class="dropdown-control">
                 <div class="dropdown-info">
@@ -3821,7 +4131,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="light" data-index="1">1.</span>
                             </div>
                         </td>
@@ -3863,8 +4174,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/常/物/全" style="color: #ff6b6b;">暴/爆/常/物/全</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/常/物/全" style="color: #ff6b6b;">暴/爆/常/物/全</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -3875,14 +4188,17 @@
                             </div>
                         </td>
                         <td></td>
-                    </tr><tr draggable="true" data-type="light" data-index="1" class="" style="opacity: 1; display: none;">
+                    </tr>
+                    <tr draggable="true" data-type="light" data-index="1" class="" style="opacity: 1; display: none;">
                         <td>
                             <input type="checkbox" class="row-selector" data-type="light" data-index="1">
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: yellow;" data-type="light" data-index="0">2.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: yellow;" data-type="light"
+                                    data-index="0">2.</span>
                             </div>
                         </td>
                         <td>
@@ -3907,13 +4223,15 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="training-text training" style="display: inline;">汲取0046</span>
-                                <input type="text" class="edit-input training-edit" value="汲取0037" style="display: none;">
+                                <input type="text" class="edit-input training-edit" value="汲取0037"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="knowledge-text knowledge" style="display: inline;">3致/6致</span>
-                                <input type="text" class="edit-input knowledge-edit" value="3致/6致" style="display: none;">
+                                <input type="text" class="edit-input knowledge-edit" value="3致/6致"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -3923,27 +4241,33 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="3致需贯穿词条&lt;br&gt;6致生存词条即可" style="color: #ff6b6b;">3致需贯穿词条<br>6致生存词条即可</span></div>
-                                <input type="text" class="edit-input attributes-edit" value="3致需贯穿词条|6致随意" style="display: none;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="3致需贯穿词条&lt;br&gt;6致生存词条即可"
+                                        style="color: #ff6b6b;">3致需贯穿词条<br>6致生存词条即可</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="3致需贯穿词条|6致随意"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="notes-text notes" style="display: inline;">搭配：百搭，新手之友<br>能抗能打带斩杀/真伤</span>
-                                <input type="text" class="edit-input notes-edit" value="新手战神，真伤/斩杀/高闪避" style="display: none;">
+                                <input type="text" class="edit-input notes-edit" value="新手战神，真伤/斩杀/高闪避"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
                     </tr>
-                    
+
                     <tr draggable="true" data-type="light" data-index="2" style="display: none;">
                         <td>
                             <input type="checkbox" class="row-selector" data-type="light" data-index="2">
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="light" data-index="2">3.</span>
                             </div>
                         </td>
@@ -3985,14 +4309,17 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="物/全/攻%/攻" style="color: #ff6b6b;">物/全/攻%/攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="物/全/攻%/攻" style="color: #ff6b6b;">物/全/攻%/攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：溪山/百花/素纱/铜奔马等<br>单体,适合BOSS战</span>
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：溪山/百花/素纱/铜奔马等<br>单体,适合BOSS战</span>
                                 <input type="text" class="edit-input notes-edit" value="" style="display: none;">
                             </div>
                         </td>
@@ -4004,7 +4331,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="light" data-index="7">4.</span>
                             </div>
                         </td>
@@ -4046,8 +4374,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/物/爆/全/攻%" style="color: #ff6b6b;">暴/物/爆/全/攻%</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/物/爆/全/攻%" style="color: #ff6b6b;">暴/物/爆/全/攻%</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -4065,7 +4395,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="light" data-index="3">5.</span>
                             </div>
                         </td>
@@ -4107,8 +4438,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/物/爆/全" style="color: #ff6b6b;">暴/物/爆/全</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/物/爆/全" style="color: #ff6b6b;">暴/物/爆/全</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -4126,7 +4459,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="light" data-index="4">6.</span>
                             </div>
                         </td>
@@ -4168,8 +4502,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/爆/连/物" style="color: #ff6b6b;">暴/爆/连/物</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/爆/连/物" style="color: #ff6b6b;">暴/爆/连/物</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -4187,7 +4523,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="light" data-index="6">7.</span>
                             </div>
                         </td>
@@ -4229,8 +4566,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="物/爆/连/全" style="color: #ff6b6b;">物/爆/连/全</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="物/爆/连/全" style="color: #ff6b6b;">物/爆/连/全</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -4248,7 +4587,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="light" data-index="5">8.</span>
                             </div>
                         </td>
@@ -4290,8 +4630,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="物/全/随意" style="color: #ff6b6b;">物/全/随意</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="物/全/随意" style="color: #ff6b6b;">物/全/随意</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -4309,7 +4651,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="light" data-index="8">9.</span>
                             </div>
                         </td>
@@ -4351,8 +4694,10 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="物/全/攻%/攻" style="color: #ff6b6b;">物/全/攻%/攻</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="物/全/攻%/攻" style="color: #ff6b6b;">物/全/攻%/攻</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
                         </td>
@@ -4370,7 +4715,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red;" data-type="light" data-index="9">10.</span>
                             </div>
                         </td>
@@ -4412,7 +4758,8 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <div class="attributes-text attributes" style="display: inline;"></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
@@ -4431,8 +4778,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red;" data-type="light" data-index="10">11.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red;" data-type="light"
+                                    data-index="10">11.</span>
                             </div>
                         </td>
                         <td>
@@ -4473,7 +4822,8 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <div class="attributes-text attributes" style="display: inline;"></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
@@ -4492,8 +4842,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: red;" data-type="light" data-index="11">12.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: red;" data-type="light"
+                                    data-index="11">12.</span>
                             </div>
                         </td>
                         <td>
@@ -4534,7 +4886,8 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <div class="attributes-text attributes" style="display: inline;"></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
@@ -4547,67 +4900,72 @@
                         </td>
                         <td></td>
                     </tr>
-                <tr draggable="true" data-type="light" data-index="12" style="display: none;">
-        <td>
-            <input type="checkbox" class="row-selector" data-type="light" data-index="12">
-        </td>
-        <td class="drag-handle-row">≡</td>
-        <td>
-            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="row-number" style="color: yellow;" data-type="light" data-index="12">13.</span>
-            </div>
-        </td>
-        <td>
-            <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="name-text" style="display: inline;">夜行铜牌</span>
-                <input type="text" class="edit-input name-edit" value="新轻锐角色" style="display: none;">
-            </div>
-            <button class="delete-row" data-type="light" data-index="12">×</button>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="weapon-text weapon" style="display: inline;">旧画刀<br>熊猫竹剑</span>
-                <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="strength-text strength" style="display: inline;">选练<br>可焕彰</span>
-                <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="training-text training" style="display: inline;">穿甲7300</span>
-                <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="knowledge-text knowledge" style="display: inline;">3致</span>
-                <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="glory-text glory" style="display: inline;">输出/功能</span>
-                <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item" data-text="暴/物/爆/全/汲" style="color: #ff6b6b;">暴/物/爆/全/汲</span></div>
-                <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
-            </div>
-        </td>
-        <td>
-            <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                <span class="notes-text notes" style="display: inline;">搭配：单走牌，发挥比较考验<br>对游戏的理解</span>
-                <input type="text" class="edit-input notes-edit" value="" style="display: none;">
-            </div>
-        </td>
-        <td></td>
-    </tr></tbody>
+                    <tr draggable="true" data-type="light" data-index="12" style="display: none;">
+                        <td>
+                            <input type="checkbox" class="row-selector" data-type="light" data-index="12">
+                        </td>
+                        <td class="drag-handle-row">≡</td>
+                        <td>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: yellow;" data-type="light"
+                                    data-index="12">13.</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable name-editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="name-text" style="display: inline;">夜行铜牌</span>
+                                <input type="text" class="edit-input name-edit" value="新轻锐角色" style="display: none;">
+                            </div>
+                            <button class="delete-row" data-type="light" data-index="12">×</button>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="weapon-text weapon" style="display: inline;">旧画刀<br>熊猫竹剑</span>
+                                <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="strength-text strength" style="display: inline;">选练<br>可焕彰</span>
+                                <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="training-text training" style="display: inline;">穿甲7300</span>
+                                <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="knowledge-text knowledge" style="display: inline;">3致</span>
+                                <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="glory-text glory" style="display: inline;">输出/功能</span>
+                                <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"
+                                        data-text="暴/物/爆/全/汲" style="color: #ff6b6b;">暴/物/爆/全/汲</span></div>
+                                <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
+                                <span class="notes-text notes" style="display: inline;">搭配：单走牌，发挥比较考验<br>对游戏的理解</span>
+                                <input type="text" class="edit-input notes-edit" value="" style="display: none;">
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
             </table>
             <div class="dropdown-control">
                 <div class="dropdown-info">
@@ -4653,7 +5011,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="guard" data-index="0">1.</span>
                             </div>
                         </td>
@@ -4696,15 +5055,19 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes"><span class="attr-item" data-text="汲取/双生命/其他" style="color: #ff6b6b;">汲取/双生命/其他</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes"><span class="attr-item" data-text="汲取/双生命/其他"
+                                        style="color: #ff6b6b;">汲取/双生命/其他</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="汲取/双生命/其他">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：0致搭配战略类触发器<br>3致单走，过渡武器有汲即可</span>
-                                <input type="text" class="edit-input notes-edit" value="0致搭配战略类触发器|3致单走，过渡武器有汲即可" style="display: none;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：0致搭配战略类触发器<br>3致单走，过渡武器有汲即可</span>
+                                <input type="text" class="edit-input notes-edit" value="0致搭配战略类触发器|3致单走，过渡武器有汲即可"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -4715,7 +5078,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="guard" data-index="1">2.</span>
                             </div>
                         </td>
@@ -4757,15 +5121,18 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes"><span class="attr-item" data-text="汲取/格挡/回击/爆/物" style="color: #ff6b6b;">汲取/格挡/回击/爆/物</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes"><span class="attr-item" data-text="汲取/格挡/回击/爆/物"
+                                        style="color: #ff6b6b;">汲取/格挡/回击/爆/物</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="汲取/格挡/回击/爆/物">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="notes-text notes" style="display: inline;">搭配：高频回击/适合单走<br>单走要有汲取词条</span>
-                                <input type="text" class="edit-input notes-edit" value="高频回击/适合单走|单走要有汲取词条" style="display: none;">
+                                <input type="text" class="edit-input notes-edit" value="高频回击/适合单走|单走要有汲取词条"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -4776,7 +5143,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="guard" data-index="2">3.</span>
                             </div>
                         </td>
@@ -4818,15 +5186,18 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes"><span class="attr-item" data-text="攻%/攻/生%/生" style="color: #ff6b6b;">攻%/攻/生%/生</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes"><span class="attr-item" data-text="攻%/攻/生%/生"
+                                        style="color: #ff6b6b;">攻%/攻/生%/生</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="攻%/攻/生%/生">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="notes-text notes" style="display: inline;">搭配：天球/帛画/召唤体系</span>
-                                <input type="text" class="edit-input notes-edit" value="搭配：天球/帛画体系队" style="display: none;">
+                                <input type="text" class="edit-input notes-edit" value="搭配：天球/帛画体系队"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -4837,7 +5208,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="guard" data-index="3">4.</span>
                             </div>
                         </td>
@@ -4869,7 +5241,8 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="knowledge-text knowledge" style="display: inline;">0致/3致</span>
-                                <input type="text" class="edit-input knowledge-edit" value="0致/3致|可焕彰" style="display: none;">
+                                <input type="text" class="edit-input knowledge-edit" value="0致/3致|可焕彰"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -4880,15 +5253,18 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes"><span class="attr-item" data-text="汲/物防/全/物" style="color: #ff6b6b;">汲/物防/全/物</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes"><span class="attr-item" data-text="汲/物防/全/物"
+                                        style="color: #ff6b6b;">汲/物防/全/物</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="汲/物防/全/物">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="notes-text notes" style="display: inline;">需要深度游戏理解<br>其破甲的适用人群</span>
-                                <input type="text" class="edit-input notes-edit" value="需要深度游戏理解|其破甲的适用人群" style="display: none;">
+                                <input type="text" class="edit-input notes-edit" value="需要深度游戏理解|其破甲的适用人群"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -4899,7 +5275,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="guard" data-index="4">5.</span>
                             </div>
                         </td>
@@ -4931,7 +5308,8 @@
                         <td>
                             <div class="editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="knowledge-text knowledge" style="display: inline;">0致</span>
-                                <input type="text" class="edit-input knowledge-edit" value="0致|可焕彰" style="display: none;">
+                                <input type="text" class="edit-input knowledge-edit" value="0致|可焕彰"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td>
@@ -4942,15 +5320,19 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes"><span class="attr-item" data-text="随意/双生命" style="color: #ff6b6b;">随意/双生命</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes"><span class="attr-item" data-text="随意/双生命"
+                                        style="color: #ff6b6b;">随意/双生命</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="随意/双生命">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">搭配：主要作为易伤光环散搭<br>泛用性高，但并不刚需</span>
-                                <input type="text" class="edit-input notes-edit" value="搭配：主要作为易伤光环散搭" style="display: none;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">搭配：主要作为易伤光环散搭<br>泛用性高，但并不刚需</span>
+                                <input type="text" class="edit-input notes-edit" value="搭配：主要作为易伤光环散搭"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -4961,7 +5343,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="guard" data-index="5">6.</span>
                             </div>
                         </td>
@@ -5004,15 +5387,19 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes"><span class="attr-item" data-text="攻/攻%/生%/生" style="color: #ff6b6b;">攻/攻%/生%/生</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes"><span class="attr-item" data-text="攻/攻%/生%/生"
+                                        style="color: #ff6b6b;">攻/攻%/生%/生</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="攻/攻%/生%/生">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes" style="display: inline;">启动略慢，身板较脆<br>群增伤，减伤，软控，免构伤</span>
-                                <input type="text" class="edit-input notes-edit" value="启动略慢，身板较脆|群增伤，减伤，软控，免构伤" style="display: none;">
+                                <span class="notes-text notes"
+                                    style="display: inline;">启动略慢，身板较脆<br>群增伤，减伤，软控，免构伤</span>
+                                <input type="text" class="edit-input notes-edit" value="启动略慢，身板较脆|群增伤，减伤，软控，免构伤"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -5023,7 +5410,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="guard" data-index="6">7.</span>
                             </div>
                         </td>
@@ -5065,15 +5453,18 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <div class="attributes-text attributes"><span class="attr-item" data-text="生%/生/受治疗" style="color: #ff6b6b;">生%/生/受治疗</span></div>
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <div class="attributes-text attributes"><span class="attr-item" data-text="生%/生/受治疗"
+                                        style="color: #ff6b6b;">生%/生/受治疗</span></div>
                                 <input type="text" class="edit-input attributes-edit" value="生%/生/受治疗">
                             </div>
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
                                 <span class="notes-text notes" style="display: inline;">5格束缚，但怪会拐弯<br>实用性较差的真伤</span>
-                                <input type="text" class="edit-input notes-edit" value="5格束缚，但怪会拐弯|实用性较差的真伤" style="display: none;">
+                                <input type="text" class="edit-input notes-edit" value="5格束缚，但怪会拐弯|实用性较差的真伤"
+                                    style="display: none;">
                             </div>
                         </td>
                         <td></td>
@@ -5084,7 +5475,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="guard" data-index="7">8.</span>
                             </div>
                         </td>
@@ -5126,7 +5518,8 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <div class="attributes-text attributes" style="display: inline;"></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
@@ -5145,7 +5538,8 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <span class="row-number" style="color: red" data-type="guard" data-index="8">9.</span>
                             </div>
                         </td>
@@ -5187,7 +5581,8 @@
                             </div>
                         </td>
                         <td>
-                            <div class="editable attributes-editable editable-dev" data-type="text" style="cursor: default;">
+                            <div class="editable attributes-editable editable-dev" data-type="text"
+                                style="cursor: default;">
                                 <div class="attributes-text attributes" style="display: inline;"></div>
                                 <input type="text" class="edit-input attributes-edit" value="示例" style="display: none;">
                             </div>
@@ -5240,8 +5635,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="tips" data-index="0">1.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="tips"
+                                    data-index="0">1.</span>
                             </div>
                         </td>
                         <td>
@@ -5253,8 +5650,12 @@
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes"><a href="https://space.bilibili.com/233432/lists/5853359?type=season" class="auto-link" target="_blank" rel="noopener noreferrer">https://space.bilibili.com/233432/lists/5853359?type=season</a></span>
-                                <input type="text" class="edit-input notes-edit" value="https://space.bilibili.com/233432/lists/5853359?type=season">
+                                <span class="notes-text notes"><a
+                                        href="https://space.bilibili.com/233432/lists/5853359?type=season"
+                                        class="auto-link" target="_blank"
+                                        rel="noopener noreferrer">https://space.bilibili.com/233432/lists/5853359?type=season</a></span>
+                                <input type="text" class="edit-input notes-edit"
+                                    value="https://space.bilibili.com/233432/lists/5853359?type=season">
                             </div>
                         </td>
                         <td></td>
@@ -5265,8 +5666,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="tips" data-index="1">2.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="tips"
+                                    data-index="1">2.</span>
                             </div>
                         </td>
                         <td>
@@ -5278,8 +5681,12 @@
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes"><a href="https://space.bilibili.com/233432/lists/6494012?type=season" class="auto-link" target="_blank" rel="noopener noreferrer">https://space.bilibili.com/233432/lists/6494012?type=season</a></span>
-                                <input type="text" class="edit-input notes-edit" value="https://space.bilibili.com/233432/lists/6494012?type=season">
+                                <span class="notes-text notes"><a
+                                        href="https://space.bilibili.com/233432/lists/6494012?type=season"
+                                        class="auto-link" target="_blank"
+                                        rel="noopener noreferrer">https://space.bilibili.com/233432/lists/6494012?type=season</a></span>
+                                <input type="text" class="edit-input notes-edit"
+                                    value="https://space.bilibili.com/233432/lists/6494012?type=season">
                             </div>
                         </td>
                         <td></td>
@@ -5290,8 +5697,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="tips" data-index="2">3.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="tips"
+                                    data-index="2">3.</span>
                             </div>
                         </td>
                         <td>
@@ -5303,8 +5712,11 @@
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes"><a href="https://www.bilibili.com/video/BV1QtWTzSEMj/" class="auto-link" target="_blank" rel="noopener noreferrer">https://www.bilibili.com/video/BV1QtWTzSEMj/</a></span>
-                                <input type="text" class="edit-input notes-edit" value="https://www.bilibili.com/video/BV1QtWTzSEMj/">
+                                <span class="notes-text notes"><a href="https://www.bilibili.com/video/BV1QtWTzSEMj/"
+                                        class="auto-link" target="_blank"
+                                        rel="noopener noreferrer">https://www.bilibili.com/video/BV1QtWTzSEMj/</a></span>
+                                <input type="text" class="edit-input notes-edit"
+                                    value="https://www.bilibili.com/video/BV1QtWTzSEMj/">
                             </div>
                         </td>
                         <td></td>
@@ -5315,8 +5727,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="tips" data-index="3">4.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="tips"
+                                    data-index="3">4.</span>
                             </div>
                         </td>
                         <td>
@@ -5328,8 +5742,11 @@
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes"><a href="https://www.bilibili.com/video/BV1d3HpzfEcn/" class="auto-link" target="_blank" rel="noopener noreferrer">https://www.bilibili.com/video/BV1d3HpzfEcn/</a></span>
-                                <input type="text" class="edit-input notes-edit" value="https://www.bilibili.com/video/BV1d3HpzfEcn/">
+                                <span class="notes-text notes"><a href="https://www.bilibili.com/video/BV1d3HpzfEcn/"
+                                        class="auto-link" target="_blank"
+                                        rel="noopener noreferrer">https://www.bilibili.com/video/BV1d3HpzfEcn/</a></span>
+                                <input type="text" class="edit-input notes-edit"
+                                    value="https://www.bilibili.com/video/BV1d3HpzfEcn/">
                             </div>
                         </td>
                         <td></td>
@@ -5340,8 +5757,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="tips" data-index="4">5.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="tips"
+                                    data-index="4">5.</span>
                             </div>
                         </td>
                         <td>
@@ -5353,8 +5772,11 @@
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes"><a href="https://www.bilibili.com/video/BV1fxp8z4Eoy/" class="auto-link" target="_blank" rel="noopener noreferrer">https://www.bilibili.com/video/BV1fxp8z4Eoy/</a></span>
-                                <input type="text" class="edit-input notes-edit" value="https://www.bilibili.com/video/BV1fxp8z4Eoy/">
+                                <span class="notes-text notes"><a href="https://www.bilibili.com/video/BV1fxp8z4Eoy/"
+                                        class="auto-link" target="_blank"
+                                        rel="noopener noreferrer">https://www.bilibili.com/video/BV1fxp8z4Eoy/</a></span>
+                                <input type="text" class="edit-input notes-edit"
+                                    value="https://www.bilibili.com/video/BV1fxp8z4Eoy/">
                             </div>
                         </td>
                         <td></td>
@@ -5365,8 +5787,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="tips" data-index="5">6.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="tips"
+                                    data-index="5">6.</span>
                             </div>
                         </td>
                         <td>
@@ -5378,8 +5802,11 @@
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes"><a href="https://www.bilibili.com/video/BV1kvHnzvEqz/" class="auto-link" target="_blank" rel="noopener noreferrer">https://www.bilibili.com/video/BV1kvHnzvEqz/</a></span>
-                                <input type="text" class="edit-input notes-edit" value="https://www.bilibili.com/video/BV1kvHnzvEqz/">
+                                <span class="notes-text notes"><a href="https://www.bilibili.com/video/BV1kvHnzvEqz/"
+                                        class="auto-link" target="_blank"
+                                        rel="noopener noreferrer">https://www.bilibili.com/video/BV1kvHnzvEqz/</a></span>
+                                <input type="text" class="edit-input notes-edit"
+                                    value="https://www.bilibili.com/video/BV1kvHnzvEqz/">
                             </div>
                         </td>
                         <td></td>
@@ -5424,8 +5851,10 @@
                         </td>
                         <td class="drag-handle-row">≡</td>
                         <td>
-                            <div class="editable number-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="navigation" data-index="0">1.</span>
+                            <div class="editable number-editable editable-dev" data-type="text"
+                                style="cursor: default;">
+                                <span class="row-number" style="color: rgb(160, 200, 240)" data-type="navigation"
+                                    data-index="0">1.</span>
                             </div>
                         </td>
                         <td>
@@ -5437,8 +5866,11 @@
                         </td>
                         <td>
                             <div class="editable notes-editable editable-dev" data-type="text" style="cursor: default;">
-                                <span class="notes-text notes">B站UP：萌新围观 <a href="https://space.bilibili.com/9393657" class="auto-link" target="_blank" rel="noopener noreferrer">https://space.bilibili.com/9393657</a></span>
-                                <input type="text" class="edit-input notes-edit" value="B站UP：萌新围观    https://space.bilibili.com/9393657">
+                                <span class="notes-text notes">B站UP：萌新围观 <a href="https://space.bilibili.com/9393657"
+                                        class="auto-link" target="_blank"
+                                        rel="noopener noreferrer">https://space.bilibili.com/9393657</a></span>
+                                <input type="text" class="edit-input notes-edit"
+                                    value="B站UP：萌新围观    https://space.bilibili.com/9393657">
                             </div>
                         </td>
                         <td></td>
@@ -7949,4 +8381,6 @@
 
 
 
-</body></html>
+</body>
+
+</html>
