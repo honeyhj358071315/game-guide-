@@ -1013,6 +1013,42 @@
                 padding: 8px 10px;
             }
 
+            @media (max-width: 768px) {
+                /* ... 之前的代码保持不变 ... */
+
+                /* 🆕 专门修复武器、致知、定位、备注栏 */
+                .weapon-text,
+                .knowledge-text,
+                .glory-text{
+                    white-space: nowrap;
+                    /* 禁止换行 */
+                    min-width: 60px;
+                    /* 设置最小宽度 */
+                    max-width: 120px;
+                    /* 设置最大宽度 */
+                    overflow: hidden;
+                    /* 超出部分隐藏 */
+                    text-overflow: ellipsis;
+                    /* 显示省略号 */
+                }
+
+
+                /* 表格列宽优化 */
+                td:nth-child(4),
+                /* 武器列 */
+                td:nth-child(7),
+                /* 致知列 */
+                td:nth-child(8),
+                /* 定位列 */
+                td:nth-child(10)
+
+                /* 备注列 */
+                    {
+                    min-width: 80px;
+                    max-width: 120px;
+                }
+            }
+
             /* ✅ 保留表格基础样式 */
             table {
                 display: block;
