@@ -10039,212 +10039,283 @@
                 }
             });
 
-            function addNewSection(sectionName) {
-                const sectionTypeChoice = prompt(
-                    '请选择"' + sectionName + '"的板块类型:\\n\\n1. 角色类 - 完整编辑栏位\\n2. 信息类 - 简化编辑栏位',
-                    '2'
-                );
+            function addContentSection(sectionName, sectionId, sectionTypeId, sectionType, tableStructure) {
+                const container = document.querySelector('.container');
+                const footer = document.querySelector('footer');
 
-                if (!sectionTypeChoice) return;
+                const newSection = document.createElement('section');
 
-                const sectionType = sectionTypeChoice === '1' ? 'character' : 'info';
-                const sectionId = 'custom-' + Date.now();
-                const fullSectionId = sectionId + '-section';
+                // 添加自定义板块类名
+                const sectionClass = sectionType === 'character' ?
+                    'class-section custom-section strategy editable-dev' :
+                    'class-section custom-section info-type strategy editable-dev';
 
-                addNavigationButton(sectionName, fullSectionId);
-                addContentSection(sectionName, fullSectionId, sectionId, sectionType);
-                updateSectionList();
+                newSection.className = sectionClass;
+                newSection.id = sectionId;
+                newSection.dataset.type = 'section';
 
-                showNotification('新板块 "' + sectionName + '" 已添加 (' + (sectionType === 'character' ? '角色类' : '信息类') + ')');
+                // 使用保存的表格结构或默认结构
+                if (tableStructure && tableStructure.headers) {
+                    newSection.innerHTML = generateCustomSectionHTML(sectionName, sectionTypeId, sectionType, tableStructure);
+                } else {
+                    // 回退到默认结构 - 修复版：添加横向滚动容器
+                    if (sectionType === 'character') {
+                        newSection.innerHTML = `
+                <div class="drag-handle">≡</div>
+                <div class="class-header strategy">
+                    <span class="editable-dev" data-type="text">${sectionName}</span>
+                    <button class="add-character editable-dev" data-type="${sectionTypeId}">+ 添加角色</button>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table id="${sectionTypeId}-table">
+                        <thead>
+                            <tr>
+                                <th width="30px"></th>
+                                <th width="40px" class="editable-dev" data-type="text"></th>
+                                <th class="editable-dev" data-type="text">序号</th>
+                                <th class="editable-dev" data-type="text">角色名称</th>
+                                <th class="editable-dev" data-type="text">武器</th>
+                                <th class="editable-dev" data-type="text">强度</th>
+                                <th class="editable-dev" data-type="text">深造</th>
+                                <th class="editable-dev" data-type="text">致知</th>
+                                <th class="editable-dev" data-type="text">定位</th>
+                                <th class="editable-dev" data-type="text">词条推荐</th>
+                                <th class="editable-dev" data-type="text">备注</th>
+                                <th width="30px"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="${sectionTypeId}-tbody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="dropdown-control">
+                    <div class="dropdown-info">
+                        显示 <span class="current-count">3</span> / <span class="total-count">0</span> 个条目
+                    </div>
+                    <div>
+                        <button class="dropdown-btn show-more-btn">显示更多</button>
+                        <button class="dropdown-btn show-less-btn" style="display:none;">显示更少</button>
+                        <span class="dropdown-setting">
+                            显示数量: <input type="number" class="dropdown-input" min="1" max="50" value="3">
+                        </span>
+                    </div>
+                </div>
+            `;
+                    } else {
+                        newSection.innerHTML = `
+                <div class="drag-handle">≡</div>
+                <div class="class-header strategy">
+                    <span class="editable-dev" data-type="text">${sectionName}</span>
+                    <button class="add-character editable-dev" data-type="${sectionTypeId}">+ 添加内容</button>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table id="${sectionTypeId}-table">
+                        <thead>
+                            <tr>
+                                <th width="30px"></th>
+                                <th width="40px" class="editable-dev" data-type="text"></th>
+                                <th class="editable-dev" data-type="text">序号</th>
+                                <th class="editable-dev" data-type="text">内容名称</th>
+                                <th class="editable-dev" data-type="text">备注</th>
+                                <th width="30px"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="${sectionTypeId}-tbody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="dropdown-control">
+                    <div class="dropdown-info">
+                        显示 <span class="current-count">5</span> / <span class="total-count">0</span> 个条目
+                    </div>
+                    <div>
+                        <button class="dropdown-btn show-more-btn">显示更多</button>
+                        <button class="dropdown-btn show-less-btn" style="display:none;">显示更少</button>
+                        <span class="dropdown-setting">
+                            显示数量: <input type="number" class="dropdown-input" min="1" max="50" value="5">
+                        </span>
+                    </div>
+                </div>
+            `;
+                    }
+                }
+
+                if (footer) {
+                    container.insertBefore(newSection, footer);
+                } else {
+                    container.appendChild(newSection);
+                }
+
+                setupNewSectionEvents(newSection, sectionTypeId, sectionType);
+
+                setTimeout(() => {
+                    initDropdowns();
+                    bindAllEditEvents();
+                }, 100);
             }
 
-            document.getElementById('replaceAllBtn').addEventListener('click', function () {
-                const findText = document.getElementById('findText').value;
-                const replaceText = document.getElementById('replaceText').value;
-
-                if (!findText) {
-                    showNotification('请输入要查找的内容');
-                    return;
-                }
-
-                let replaceCount = 0;
-
-                // 在所有可编辑文本中查找替换
-                document.querySelectorAll('.editable span:first-child').forEach(span => {
-                    const originalHTML = span.innerHTML;
-                    const newHTML = originalHTML.replace(new RegExp(findText, 'g'), replaceText);
-                    if (originalHTML !== newHTML) {
-                        span.innerHTML = newHTML;
-                        replaceCount++;
-                    }
-                });
-
-                showNotification('已替换 ' + replaceCount + ' 处内容');
-            });
-        }
-
-        // 初始化
-        document.addEventListener('DOMContentLoaded', function () {
-            // 先初始化下拉功能
-            initDropdowns();
-
-            // 然后执行其他初始化
-            renderTables();
-            setupNavigation();
-            setupEnhancedDevMode();
-            setupBatchOperations();
-            setupDevToolsToggle();
-            setupTitleEditing();
-            setupSaveAllButton(); // 初始化一键保存功能
-            setupToggleButtons(); // 添加这行 - 初始化双击显示功能
-
-            // 延迟执行，确保所有元素都已加载
-            setTimeout(() => {
-                // 设置所有下拉输入框默认值为1
-                document.querySelectorAll('.dropdown-input').forEach(input => {
-                    input.value = 1;
-                });
-
-                // 重新初始化下拉菜单，应用新的设置
+            // 初始化
+            document.addEventListener('DOMContentLoaded', function () {
+                // 先初始化下拉功能
                 initDropdowns();
 
-                console.log('所有板块显示数量已设置为1');
-            }, 1000);
+                // 然后执行其他初始化
+                renderTables();
+                setupNavigation();
+                setupEnhancedDevMode();
+                setupBatchOperations();
+                setupDevToolsToggle();
+                setupTitleEditing();
+                setupSaveAllButton(); // 初始化一键保存功能
+                setupToggleButtons(); // 添加这行 - 初始化双击显示功能
 
+                // 延迟执行，确保所有元素都已加载
+                setTimeout(() => {
+                    // 设置所有下拉输入框默认值为1
+                    document.querySelectorAll('.dropdown-input').forEach(input => {
+                        input.value = 1;
+                    });
 
-
-            // 重新绑定添加角色按钮事件
-            document.querySelectorAll('.add-character').forEach(btn => {
-                const newBtn = btn.cloneNode(true);
-                btn.parentNode.replaceChild(newBtn, btn);
-
-                newBtn.addEventListener('click', function () {
-                    if (!document.body.classList.contains('dev-mode')) {
-                        showNotification('请在开发者模式下添加条目');
-                        return;
-                    }
-
-                    const type = this.dataset.type;
-                    const tbody = document.getElementById(type + '-tbody');
-                    if (!tbody) return;
-
-                    const sectionType = getSectionType(type + '-section');
-
-                    // 创建新的空行
-                    let newRowData;
-                    if (sectionType === 'info') {
-                        newRowData = {
-                            name: '新内容' + (tbody.children.length + 1),
-                            notes: "请输入内容",
-                            numberColor: "#a0c8f0"
-                        };
-                    } else {
-                        newRowData = {
-                            name: '新' + getTypeName(type) + '角色',
-                            weapon: "未设置",
-                            strength: "B",
-                            training: "未设置",
-                            knowledge: "未设置",
-                            glory: "未设置",
-                            attributes: [
-                                { text: "示例", color: "#ff6b6b" }
-                            ],
-                            notes: "",
-                            numberColor: "#a0c8f0"
-                        };
-                    }
-
-                    // 创建新行并添加到DOM
-                    const newRow = createTableRow(newRowData, type, tbody.children.length);
-                    tbody.appendChild(newRow);
-
-                    // 重新初始化下拉功能
+                    // 重新初始化下拉菜单，应用新的设置
                     initDropdowns();
-                    // 绑定新行的编辑事件
-                    bindAllEditEvents();
-                    showNotification('新条目已添加');
 
-                    setTimeout(() => {
-                        if (typeof fixDataConsistency === 'function') {
-                            fixDataConsistency();
+                    console.log('所有板块显示数量已设置为1');
+                }, 1000);
+
+
+
+                // 重新绑定添加角色按钮事件
+                document.querySelectorAll('.add-character').forEach(btn => {
+                    const newBtn = btn.cloneNode(true);
+                    btn.parentNode.replaceChild(newBtn, btn);
+
+                    newBtn.addEventListener('click', function () {
+                        if (!document.body.classList.contains('dev-mode')) {
+                            showNotification('请在开发者模式下添加条目');
+                            return;
                         }
-                    }, 1000);
+
+                        const type = this.dataset.type;
+                        const tbody = document.getElementById(type + '-tbody');
+                        if (!tbody) return;
+
+                        const sectionType = getSectionType(type + '-section');
+
+                        // 创建新的空行
+                        let newRowData;
+                        if (sectionType === 'info') {
+                            newRowData = {
+                                name: '新内容' + (tbody.children.length + 1),
+                                notes: "请输入内容",
+                                numberColor: "#a0c8f0"
+                            };
+                        } else {
+                            newRowData = {
+                                name: '新' + getTypeName(type) + '角色',
+                                weapon: "未设置",
+                                strength: "B",
+                                training: "未设置",
+                                knowledge: "未设置",
+                                glory: "未设置",
+                                attributes: [
+                                    { text: "示例", color: "#ff6b6b" }
+                                ],
+                                notes: "",
+                                numberColor: "#a0c8f0"
+                            };
+                        }
+
+                        // 创建新行并添加到DOM
+                        const newRow = createTableRow(newRowData, type, tbody.children.length);
+                        tbody.appendChild(newRow);
+
+                        // 重新初始化下拉功能
+                        initDropdowns();
+                        // 绑定新行的编辑事件
+                        bindAllEditEvents();
+                        showNotification('新条目已添加');
+
+                        setTimeout(() => {
+                            if (typeof fixDataConsistency === 'function') {
+                                fixDataConsistency();
+                            }
+                        }, 1000);
+                    });
                 });
             });
-        });
 
-        // 双击页面顶部显示/隐藏按钮
-        function setupToggleButtons() {
-            let clickCount = 0;
-            let clickTimer;
+            // 双击页面顶部显示/隐藏按钮
+            function setupToggleButtons() {
+                let clickCount = 0;
+                let clickTimer;
 
-            document.addEventListener('click', function (e) {
-                // 只在页面顶部50px区域内检测双击
-                if (e.clientY < 50) {
-                    clickCount++;
+                document.addEventListener('click', function (e) {
+                    // 只在页面顶部50px区域内检测双击
+                    if (e.clientY < 50) {
+                        clickCount++;
 
-                    if (clickCount === 1) {
-                        clickTimer = setTimeout(() => {
+                        if (clickCount === 1) {
+                            clickTimer = setTimeout(() => {
+                                clickCount = 0;
+                            }, 500);
+                        } else if (clickCount === 2) {
+                            clearTimeout(clickTimer);
                             clickCount = 0;
-                        }, 500);
-                    } else if (clickCount === 2) {
-                        clearTimeout(clickTimer);
+
+                            // 切换按钮显示状态
+                            document.body.classList.toggle('buttons-visible');
+                            const isVisible = document.body.classList.contains('buttons-visible');
+                            showNotification(isVisible ? '🔧 开发者按钮已显示' : '🔧 开发者按钮已隐藏');
+                        }
+                    } else {
                         clickCount = 0;
-
-                        // 切换按钮显示状态
-                        document.body.classList.toggle('buttons-visible');
-                        const isVisible = document.body.classList.contains('buttons-visible');
-                        showNotification(isVisible ? '🔧 开发者按钮已显示' : '🔧 开发者按钮已隐藏');
                     }
-                } else {
-                    clickCount = 0;
-                }
-            });
-
-        }
-
-        // 辅助函数
-        function getTypeName(type) {
-            const names = {
-                strategy: '战略',
-                ranged: '远击',
-                magic: '构术',
-                light: '轻锐',
-                guard: '宿卫',
-                tips: '注意事项',
-                navigation: '规则'
-            };
-            return names[type] || '内容';
-
-        }
-        // 🆕 位置3：在这里添加两个新函数
-        function initDevModeElements(element) {
-            if (!document.body.classList.contains('dev-mode')) return;
-
-            const dragHandles = element.querySelectorAll('.drag-handle');
-            dragHandles.forEach(handle => {
-                handle.style.display = 'flex';
-            });
-
-            const addButtons = element.querySelectorAll('.add-character');
-            addButtons.forEach(btn => {
-                btn.style.display = 'inline-block';
-            });
-
-            const deleteButtons = element.querySelectorAll('.delete-row');
-            deleteButtons.forEach(btn => {
-                btn.style.display = 'flex';
-            });
-        }
-
-        function bindDevEditEvents(element) {
-            const editables = element.querySelectorAll('.editable-dev[data-type="text"]');
-            editables.forEach(editable => {
-                editable.addEventListener('dblclick', function (e) {
-                    makeElementEditable(this);
                 });
-            });
-        }
+
+            }
+
+            // 辅助函数
+            function getTypeName(type) {
+                const names = {
+                    strategy: '战略',
+                    ranged: '远击',
+                    magic: '构术',
+                    light: '轻锐',
+                    guard: '宿卫',
+                    tips: '注意事项',
+                    navigation: '规则'
+                };
+                return names[type] || '内容';
+
+            }
+            // 🆕 位置3：在这里添加两个新函数
+            function initDevModeElements(element) {
+                if (!document.body.classList.contains('dev-mode')) return;
+
+                const dragHandles = element.querySelectorAll('.drag-handle');
+                dragHandles.forEach(handle => {
+                    handle.style.display = 'flex';
+                });
+
+                const addButtons = element.querySelectorAll('.add-character');
+                addButtons.forEach(btn => {
+                    btn.style.display = 'inline-block';
+                });
+
+                const deleteButtons = element.querySelectorAll('.delete-row');
+                deleteButtons.forEach(btn => {
+                    btn.style.display = 'flex';
+                });
+            }
+
+            function bindDevEditEvents(element) {
+                const editables = element.querySelectorAll('.editable-dev[data-type="text"]');
+                editables.forEach(editable => {
+                    editable.addEventListener('dblclick', function (e) {
+                        makeElementEditable(this);
+                    });
+                });
+            }
     </script>
 
 
