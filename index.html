@@ -1179,26 +1179,119 @@
                 margin-right: 8px !important;
             }
 
-            /* 只修复备注栏重叠问题，不影响其他列 */
-            .class-section td:nth-last-child(2) {
-                /* 备注栏通常是倒数第二列 */
-                clear: both;
-                display: block;
-                width: 100%;
-                margin-top: 8px;
-                border-top: 1px dashed rgba(255, 255, 255, 0.2);
-                padding-top: 8px;
-            }
-
-            /* 修复序号后的内容换行 */
-            .class-section td:nth-child(3) {
-                /* 序号后的内容列 */
-                display: block;
-                width: 100%;
-                margin-bottom: 5px;
-            }
-
         }
+
+        /* 修复自定义板块的表格布局 */
+        .class-section.custom-section table {
+            min-width: 800px;
+            /* 确保手机端有足够宽度 */
+            background: rgba(40, 50, 60, 0.5);
+        }
+
+        /* 精确定义自定义板块的列宽 - 角色类 */
+        .class-section.custom-section th:nth-child(1),
+        .class-section.custom-section td:nth-child(1) {
+            width: 25px;
+            padding: 8px 5px;
+        }
+
+        .class-section.custom-section th:nth-child(2),
+        .class-section.custom-section td:nth-child(2) {
+            width: 30px;
+            padding: 8px 5px;
+        }
+
+        .class-section.custom-section th:nth-child(3),
+        .class-section.custom-section td:nth-child(3) {
+            width: 40px;
+            padding: 8px 5px;
+        }
+
+        .class-section.custom-section th:nth-child(4),
+        .class-section.custom-section td:nth-child(4) {
+            width: 110px;
+            padding: 8px 5px;
+        }
+
+        .class-section.custom-section th:nth-child(5),
+        .class-section.custom-section td:nth-child(5) {
+            width: 100px;
+            padding: 8px 5px;
+        }
+
+        .class-section.custom-section th:nth-child(6),
+        .class-section.custom-section td:nth-child(6) {
+            width: 70px;
+            padding: 8px 5px;
+        }
+
+        .class-section.custom-section th:nth-child(7),
+        .class-section.custom-section td:nth-child(7) {
+            width: 100px;
+            padding: 8px 5px;
+        }
+
+        .class-section.custom-section th:nth-child(8),
+        .class-section.custom-section td:nth-child(8) {
+            width: 80px;
+            padding: 8px 5px;
+        }
+
+        .class-section.custom-section th:nth-child(9),
+        .class-section.custom-section td:nth-child(9) {
+            width: 80px;
+            padding: 8px 5px;
+        }
+
+        .class-section.custom-section th:nth-child(10),
+        .class-section.custom-section td:nth-child(10) {
+            width: 150px;
+            padding: 8px 5px;
+        }
+
+        .class-section.custom-section th:nth-child(11),
+        .class-section.custom-section td:nth-child(11) {
+            width: 200px;
+            padding: 8px 5px;
+        }
+
+        .class-section.custom-section th:nth-child(12),
+        .class-section.custom-section td:nth-child(12) {
+            width: 30px;
+            padding: 8px 5px;
+        }
+
+        /* 信息类自定义板块的特殊列宽 */
+        .class-section.custom-section.info-type th:nth-child(4),
+        .class-section.custom-section.info-type td:nth-child(4) {
+            width: 300px;
+        }
+
+        .class-section.custom-section.info-type th:nth-child(5),
+        .class-section.custom-section.info-type td:nth-child(5) {
+            width: 400px;
+        }
+
+        /* 手机端自定义板块适配 */
+        @media (max-width: 768px) {
+            .class-section.custom-section table {
+                min-width: 800px;
+                /* 角色类板块 */
+            }
+
+            .class-section.custom-section.info-type table {
+                min-width: 600px;
+                /* 信息类板块可以窄一些 */
+            }
+
+            .class-section.custom-section th,
+            .class-section.custom-section td {
+                padding: 8px 6px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* ========== 自定义板块CSS修复结束 ========== */
     </style>
 </head>
 
