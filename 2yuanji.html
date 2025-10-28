@@ -1,0 +1,2735 @@
+
+<!-- saved from url=(0032)file:///F:/WHMIsite/2yuanji.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>战略类角色 - 懒人躺平攻略</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: rgba(16, 36, 54, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            border-left: 6px solid #4a9de3;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #4a9de3;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-header .subtitle {
+            font-size: 1.2rem;
+            color: #a0c8f0;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 193, 7, 0.3);
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 193, 7, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* 开发者模式按钮 */
+        .dev-mode-btn,
+        .save-all-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 193, 7, 0.8);
+            border: none;
+            border-radius: 5px;
+            color: #333;
+            padding: 8px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s;
+            display: none;
+        }
+
+        .buttons-visible .dev-mode-btn,
+        .buttons-visible .save-all-btn {
+            display: block;
+        }
+
+        .dev-mode-btn:hover,
+        .save-all-btn:hover {
+            background: rgba(255, 193, 7, 1);
+            transform: scale(1.05);
+        }
+
+        .dev-mode-btn.active {
+            background: rgba(76, 175, 80, 0.8);
+            color: white;
+        }
+
+        .save-all-btn {
+            right: 160px;
+            background: rgba(76, 217, 100, 0.8);
+            color: #fff;
+        }
+
+        .save-all-btn:hover {
+            background: rgba(76, 217, 100, 1);
+        }
+
+        /* 开发者工具面板 */
+        .dev-tools {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background: rgba(30, 40, 50, 0.95);
+            border-radius: 5px;
+            padding: 15px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 300px;
+        }
+
+        .dev-mode .dev-tools {
+            display: block;
+        }
+
+        .dev-tools h3 {
+            margin-bottom: 15px;
+            color: #4a9de3;
+            text-align: center;
+        }
+
+        .dev-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .batch-btn {
+            background: rgba(74, 157, 227, 0.7);
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .batch-btn:hover {
+            background: rgba(74, 157, 227, 0.9);
+        }
+
+        .batch-btn.delete {
+            background: rgba(255, 107, 107, 0.7);
+        }
+
+        .batch-btn.delete:hover {
+            background: rgba(255, 107, 107, 0.9);
+        }
+
+        /* 表格样式 */
+        .class-section {
+            margin-bottom: 30px;
+            background: rgba(16, 36, 54, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .class-header {
+            padding: 20px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: rgba(30, 60, 90, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 6px solid #4a9de3;
+        }
+
+        .add-character {
+            background: rgba(107, 207, 127, 0.3);
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: none;
+        }
+
+        .dev-mode .add-character {
+            display: inline-block;
+        }
+
+        .add-character:hover {
+            background: rgba(107, 207, 127, 0.5);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        th {
+            background: rgba(40, 70, 100, 0.9);
+            padding: 8px 6px;
+            /* 修改：从 15px 10px 改为 8px 6px */
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(74, 157, 227, 0.5);
+        }
+
+        td {
+            padding: 8px 6px;
+            /* 修改：从 15px 10px 改为 8px 6px */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        tr:nth-child(even) {
+            background: rgba(30, 50, 70, 0.4);
+        }
+
+        tr:hover {
+            background: rgba(50, 90, 130, 0.3);
+        }
+
+        .editable {
+            cursor: pointer;
+            padding: 5px 8px;
+            border-radius: 4px;
+            position: relative;
+            min-height: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .dev-mode .editable:hover {
+            background: rgba(255, 255, 255, 0.05);
+            outline: 1px dashed #4a9de3;
+        }
+
+        .edit-input {
+            display: none;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            color: #fff;
+            padding: 8px 10px;
+            font-size: inherit;
+            font-family: inherit;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .edit-input:focus {
+            outline: none;
+            border-color: #4a9de3;
+            box-shadow: 0 0 0 2px rgba(74, 157, 227, 0.3);
+        }
+
+        .delete-row {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 107, 107, 0.3);
+            border: none;
+            border-radius: 3px;
+            color: #fff;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: none;
+        }
+
+        .dev-mode .delete-row {
+            display: flex;
+        }
+
+        tr:hover .delete-row {
+            opacity: 1;
+        }
+
+        .delete-row:hover {
+            background: rgba(255, 107, 107, 0.5);
+        }
+
+        /* 颜色样式 */
+        .weapon {
+            color: #ff9e64;
+        }
+
+        .strength {
+            color: #ff9e64;
+            font-weight: bold;
+        }
+
+        .training {
+            color: #ba68c8;
+        }
+
+        .knowledge {
+            color: #6bcf7f;
+        }
+
+        .glory {
+            color: #ffd700;
+        }
+
+        .notes {
+            color: #4a9de3;
+        }
+
+        .attributes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            min-height: 30px;
+        }
+
+        .attr-item {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: transparent;
+            /* 透明背景 */
+            color: inherit;
+            /* 继承文字颜色 */
+            cursor: pointer;
+        }
+
+        .dev-mode .attr-item:hover {
+            transform: scale(1.05);
+        }
+
+        .row-number {
+            display: inline-block;
+            width: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: #a0c8f0;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .dev-mode .row-number:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px dashed #4a9de3;
+        }
+
+        .dropdown-control {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(30, 60, 90, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-info {
+            font-size: 1rem;
+            color: #a0c8f0;
+        }
+
+        .dropdown-btn {
+            background: rgba(74, 157, 227, 0.5);
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(74, 157, 227, 0.7);
+        }
+
+        .dropdown-setting {
+            display: none;
+        }
+
+        .dev-mode .dropdown-setting {
+            display: inline-block;
+        }
+
+        .dropdown-setting input {
+            width: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            color: white;
+            padding: 3px 5px;
+            margin-left: 5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: #a0c8f0;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(107, 207, 127, 0.9);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                width: 100%;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            table {
+                width: 100%;
+                min-width: 900px;
+                table-layout: fixed;
+            }
+
+            /* 备注栏特殊处理 */
+            th:nth-child(9),
+            td:nth-child(9) {
+                white-space: normal;
+                word-wrap: break-word;
+                word-break: break-word;
+                min-width: 150px;
+                max-width: 200px;
+            }
+
+            th,
+            td {
+                padding: 6px 4px;
+                /* 手机端更小的内边距 */
+                font-size: 0.9rem;
+                white-space: nowrap;
+            }
+
+            .dropdown-control {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .dev-tools {
+                width: 90%;
+                right: 5%;
+            }
+
+            .save-all-btn {
+                right: 140px;
+            }
+
+            .class-section {
+                overflow-x: auto;
+            }
+
+        }
+    </style>
+</head>
+
+<body class="">
+    <button class="dev-mode-btn" id="devModeBtn">开发者模式</button>
+    <div class="notification" id="notification" style="display: none;">🔧 开发者按钮已隐藏</div>
+
+    <div class="dev-tools" id="devTools">
+        <h3>数据管理</h3>
+        <div class="dev-controls">
+            <button class="batch-btn" id="exportDataBtn">导出JSON数据</button>
+            <button class="batch-btn" id="importDataBtn">导入JSON数据</button>
+            <button class="batch-btn delete" id="clearDataBtn">清空所有数据</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>🏹远击类角色攻略</h1>
+            <div class="subtitle">多为输出模版，超远距离攻击自身安全性无虑，若怪近身或在敌方攻击范围内，则很难兼顾输出和生存</div>
+            <a href="file:///F:/WHMIsite/index.html" class="back-btn">
+                <span>🏠</span> 返回导航首页
+            </a>
+        </div>
+
+        <section class="class-section strategy">
+            <div class="class-header">
+                <span>远击类角色</span>
+                <button class="add-character" id="addStrategyBtn">+ 添加角色</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="40px">序号</th>
+                        <th width="90px">角色名称</th>
+                        <th width="90px">武器</th>
+                        <th width="60px">强度</th>
+                        <th width="90px">深造推荐</th>
+                        <th width="90px">致知要求</th>
+                        <th width="90px">定位</th>
+                        <th width="150px">词条推荐</th>
+                        <th width="200px">备注说明</th>
+                        <th width="30px"></th>
+                    </tr>
+                </thead>
+                <tbody id="strategy-tbody"><tr data-type="strategy" data-index="0" style="opacity: 1; transform: translateX(0px); transition: 0.5s;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">1.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ff6b6b">限定-天球仪</span></span>
+                            <input type="text" class="edit-input name-edit" value="re限定·天球仪" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">1.熊猫竹弩<br>2.流云鸣沙弩</span>
+                            <input type="text" class="edit-input weapon-edit" value="1.熊猫竹弩&lt;br&gt;2.流云鸣沙弩" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">必练</span>
+                            <input type="text" class="edit-input strength-edit" value="必练" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">1.瞄准0550<br>2.破碎3700</span>
+                            <input type="text" class="edit-input training-edit" value="1.瞄准0550&lt;br&gt;2.破碎3700" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">1.1致<br>2.6致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="1.1致&lt;br&gt;2.6致" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">召唤核心<br>输出</span>
+                            <input type="text" class="edit-input glory-edit" value="召唤核心&lt;br&gt;输出" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"><span style="color: #ff6b6b">攻%/暴/爆/物/攻</span></span></div>
+                            <input type="text" class="edit-input attributes-edit" value="re攻%/暴/爆/物/攻" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">搭配：T画/家具/浑天/马蹄等<br>体系队，不推荐散搭</span>
+                            <input type="text" class="edit-input notes-edit" value="搭配：T画/家具/浑天/马蹄等&lt;br&gt;体系队，不推荐散搭" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="1" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">2.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ff6b6b">限定-麟趾马蹄金</span></span>
+                            <input type="text" class="edit-input name-edit" value="re限定·麟趾马蹄金" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">流云鸣沙弩</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙弩" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">可练</span>
+                            <input type="text" class="edit-input strength-edit" value="可练" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">破碎7300</span>
+                            <input type="text" class="edit-input training-edit" value="破碎7300" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">1致/3致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="1致/3致" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">输出/功能</span>
+                            <input type="text" class="edit-input glory-edit" value="输出/功能" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"><span style="color: #ff6b6b">暴/爆/物/全</span></span></div>
+                            <input type="text" class="edit-input attributes-edit" value="re暴/爆/物/全" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">搭配：连击体系/召唤体系/散搭<br>多功能，但不稳定</span>
+                            <input type="text" class="edit-input notes-edit" value="搭配：连击体系/召唤体系/散搭&lt;br&gt;多功能，但不稳定" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="2" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">3.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ff6b6b">星月夜</span></span>
+                            <input type="text" class="edit-input name-edit" value="re星月夜" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">流云鸣沙弩</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙弩" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">必练</span>
+                            <input type="text" class="edit-input strength-edit" value="必练" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">破碎3700</span>
+                            <input type="text" class="edit-input training-edit" value="破碎3700" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">3致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="3致" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">输出<br>dot体系</span>
+                            <input type="text" class="edit-input glory-edit" value="输出&lt;br&gt;dot体系" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"><span style="color: #ff6b6b">构/全/攻%<br>构/瞄准/全</span></span></div>
+                            <input type="text" class="edit-input attributes-edit" value="re构/全/攻%|构/瞄准/全" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">搭配：向日/愿望/睡莲<br>单体高伤附带长线群伤</span>
+                            <input type="text" class="edit-input notes-edit" value="搭配：向日/愿望/睡莲&lt;br&gt;单体高伤附带长线群伤" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="3" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">4.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ff6b6b">三兔藻井</span></span>
+                            <input type="text" class="edit-input name-edit" value="re三兔藻井" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">1.流云鸣沙弩<br>2.过渡：随意</span>
+                            <input type="text" class="edit-input weapon-edit" value="1.流云鸣沙弩&lt;br&gt;2.过渡：随意" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">可练</span>
+                            <input type="text" class="edit-input strength-edit" value="可练" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">1.破碎5500<br>2.校准0721</span>
+                            <input type="text" class="edit-input training-edit" value="1.破碎5500&lt;br&gt;2.校准0721" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">0致/3致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="0致/3致" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">辅助<br>群体沉默</span>
+                            <input type="text" class="edit-input glory-edit" value="辅助&lt;br&gt;群体沉默" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"><span style="color: #ff6b6b">瞄/暴/物/爆</span></span></div>
+                            <input type="text" class="edit-input attributes-edit" value="re瞄/暴/物/爆" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">搭配：百搭啸蓄辅助<br>可低练当工具人</span>
+                            <input type="text" class="edit-input notes-edit" value="搭配：百搭啸蓄辅助&lt;br&gt;可低练当工具人" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="4" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">5.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ff6b6b">青铜仙鹤</span></span>
+                            <input type="text" class="edit-input name-edit" value="re青铜仙鹤" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">铜犴弩</span>
+                            <input type="text" class="edit-input weapon-edit" value="铜犴弩" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">可练</span>
+                            <input type="text" class="edit-input strength-edit" value="可练" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">破碎5500</span>
+                            <input type="text" class="edit-input training-edit" value="破碎5500" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">0致/3致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="0致/3致" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">流失核心</span>
+                            <input type="text" class="edit-input glory-edit" value="流失核心" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"><span style="color: #ff6b6b">暴/爆/物/全</span></span></div>
+                            <input type="text" class="edit-input attributes-edit" value="re暴/爆/物/全" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">搭配：铜车马/愿望杯/dot体系等<br>上手门槛高，流失队略需操作</span>
+                            <input type="text" class="edit-input notes-edit" value="搭配：铜车马/愿望杯/dot体系等&lt;br&gt;上手门槛高，流失队略需操作" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="5" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">6.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ff6b6b">万工轿</span></span>
+                            <input type="text" class="edit-input name-edit" value="re万工轿" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">流云鸣沙弩<br>古典松木弩</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙弩&lt;br&gt;古典松木弩" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">选练</span>
+                            <input type="text" class="edit-input strength-edit" value="选练" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">破碎7300</span>
+                            <input type="text" class="edit-input training-edit" value="破碎7300" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">0致/3致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="0致/3致" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">输出<br>连击核心</span>
+                            <input type="text" class="edit-input glory-edit" value="输出&lt;br&gt;连击核心" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"><span style="color: #ff6b6b">暴/爆/物/全</span></span></div>
+                            <input type="text" class="edit-input attributes-edit" value="re暴/爆/物/全" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">搭配:牛尊/雪景/马蹄金等<br>单体输出</span>
+                            <input type="text" class="edit-input notes-edit" value="搭配:牛尊/雪景/马蹄金等&lt;br&gt;单体输出" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="6" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">7.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ff6b6b">彩凤鸣岐</span></span>
+                            <input type="text" class="edit-input name-edit" value="re彩凤鸣岐" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">流云鸣沙弩<br>古典松木弩</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙弩&lt;br&gt;古典松木弩" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">选练</span>
+                            <input type="text" class="edit-input strength-edit" value="选练" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">1.破碎7300<br>2.破碎3700</span>
+                            <input type="text" class="edit-input training-edit" value="1.破碎7300&lt;br&gt;2.破碎3700" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">0致<br>选3致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="0致&lt;br&gt;选3致" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">输出<br>多段体系</span>
+                            <input type="text" class="edit-input glory-edit" value="输出&lt;br&gt;多段体系" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"><span style="color: #ff6b6b">单体1.暴/爆/物/全<br>群体2.物/全/暴/攻%</span></span></div>
+                            <input type="text" class="edit-input attributes-edit" value="re单体1.暴/爆/物/全|群体2.物/全/暴/攻%" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">搭配：琵琶/金瓯多段体系or单走<br>瞄准冷却词条视自身手感决定</span>
+                            <input type="text" class="edit-input notes-edit" value="搭配：琵琶/金瓯多段体系or单走&lt;br&gt;瞄准冷却词条视自身手感决定" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="7" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">8.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ff6b6b">愿望杯</span></span>
+                            <input type="text" class="edit-input name-edit" value="re愿望杯" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">古典松木弩</span>
+                            <input type="text" class="edit-input weapon-edit" value="古典松木弩" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">选练</span>
+                            <input type="text" class="edit-input strength-edit" value="选练" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">破碎3700</span>
+                            <input type="text" class="edit-input training-edit" value="破碎3700" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">0致<br>选3致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="0致&lt;br&gt;选3致" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">输出<br>dot体系</span>
+                            <input type="text" class="edit-input glory-edit" value="输出&lt;br&gt;dot体系" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"><span style="color: #ff6b6b">物/全/攻%/攻</span></span></div>
+                            <input type="text" class="edit-input attributes-edit" value="re物/全/攻%/攻" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">搭配：星月/向日/睡莲等<br>瞄准词条视自身手感决定</span>
+                            <input type="text" class="edit-input notes-edit" value="搭配：星月/向日/睡莲等&lt;br&gt;瞄准词条视自身手感决定" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="8" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">9.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ff6b6b">狸猫盘</span></span>
+                            <input type="text" class="edit-input name-edit" value="re狸猫盘" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">流云鸣沙弩</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙弩" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">选练<br>选焕彰</span>
+                            <input type="text" class="edit-input strength-edit" value="选练&lt;br&gt;选焕彰" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">校准2710</span>
+                            <input type="text" class="edit-input training-edit" value="校准2710" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">0致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="0致" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">输出/破甲<br>连击体系</span>
+                            <input type="text" class="edit-input glory-edit" value="输出/破甲&lt;br&gt;连击体系" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"><span style="color: #ff6b6b">暴/爆/物/全/连</span></span></div>
+                            <input type="text" class="edit-input attributes-edit" value="re暴/爆/物/全/连" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">搭配：万工/牛尊连击体系or散搭<br>单体输出/适合打高甲</span>
+                            <input type="text" class="edit-input notes-edit" value="搭配：万工/牛尊连击体系or散搭&lt;br&gt;单体输出/适合打高甲" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="9" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">10.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ff6b6b">云雷纹大铙</span></span>
+                            <input type="text" class="edit-input name-edit" value="re云雷纹大铙" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">B</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="致知0" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">已进养老院：不推荐前期投入资源</span>
+                            <input type="text" class="edit-input notes-edit" value="已进养老院：不推荐前期投入资源" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="10" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">11.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ff6b6b">宋金项饰</span></span>
+                            <input type="text" class="edit-input name-edit" value="re宋金项饰" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">B</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="致知0" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">已进拍卖行，起拍1元</span>
+                            <input type="text" class="edit-input notes-edit" value="已进拍卖行，起拍1元" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="11" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">12.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;">----------</span>
+                            <input type="text" class="edit-input name-edit" value="ye大神龛" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">----------</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙弩" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">------</span>
+                            <input type="text" class="edit-input strength-edit" value="选练&lt;br&gt;选焕彰" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">----------</span>
+                            <input type="text" class="edit-input training-edit" value="校准5500" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">---------</span>
+                            <input type="text" class="edit-input knowledge-edit" value="3致" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">---------</span>
+                            <input type="text" class="edit-input glory-edit" value="输出" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">---------------------</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="re暴/爆/物/双攻" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">----------------------</span>
+                            <input type="text" class="edit-input notes-edit" value="搭配：百搭，缺输出可以考虑&lt;br&gt;但焕彰费用太高，需权衡" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="12" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">13.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ffc107">大神龛</span></span>
+                            <input type="text" class="edit-input name-edit" value="ye跪射俑" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">流云鸣沙弩</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">选练<br>选焕彰</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">校准5500</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">3致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">输出</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"><span style="color: #ff6b6b">暴/爆/物/双攻</span></span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">搭配：百搭，缺输出可以考虑<br>但焕彰费用太高，需权衡</span>
+                            <input type="text" class="edit-input notes-edit" value="不推荐前期投入资源" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="13" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">14.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ffc107">针铺铜版</span></span>
+                            <input type="text" class="edit-input name-edit" value="ye针铺铜版" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">B</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">不推荐前期投入资源</span>
+                            <input type="text" class="edit-input notes-edit" value="不推荐前期投入资源" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="14" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">15.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ffc107">万国全图</span></span>
+                            <input type="text" class="edit-input name-edit" value="ye万国全图" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">B</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">不推荐前期投入资源</span>
+                            <input type="text" class="edit-input notes-edit" value="不推荐前期投入资源" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="15" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">16.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ffc107">鹿角立鹤</span></span>
+                            <input type="text" class="edit-input name-edit" value="ye鹿角立鹤" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">B</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">不推荐前期投入资源</span>
+                            <input type="text" class="edit-input notes-edit" value="不推荐前期投入资源" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="16" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">17.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ffc107">茶叶生产画</span></span>
+                            <input type="text" class="edit-input name-edit" value="ye茶叶生产画" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">B</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">不推荐前期投入资源</span>
+                            <input type="text" class="edit-input notes-edit" value="不推荐前期投入资源" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="17" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">18.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ffc107">自来火二号</span></span>
+                            <input type="text" class="edit-input name-edit" value="ye自来火二号" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">B</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">不推荐前期投入资源</span>
+                            <input type="text" class="edit-input notes-edit" value="不推荐前期投入资源" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="18" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">19.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ffc107">外销壁纸</span></span>
+                            <input type="text" class="edit-input name-edit" value="ye外销壁纸" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">B</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">不推荐前期投入资源</span>
+                            <input type="text" class="edit-input notes-edit" value="不推荐前期投入资源" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="19" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">20.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ffc107">克拉克瓷</span></span>
+                            <input type="text" class="edit-input name-edit" value="bu粉白双耳瓶" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">B</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">不推荐前期投入资源</span>
+                            <input type="text" class="edit-input notes-edit" value="不推荐前期投入资源" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="20" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">21.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ffc107">跪射俑</span></span>
+                            <input type="text" class="edit-input name-edit" value="bu格萨尔唐卡" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">B</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">不推荐前期投入资源</span>
+                            <input type="text" class="edit-input notes-edit" value="不推荐前期投入资源" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="21" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">22.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;">----------</span>
+                            <input type="text" class="edit-input name-edit" value="bu山水人物镜" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">----------</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">------</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">----------</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">---------</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">---------</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">---------------------</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">----------------------</span>
+                            <input type="text" class="edit-input notes-edit" value="不推荐前期投入资源" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="22" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">23.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #4a9de3">山水人物镜</span></span>
+                            <input type="text" class="edit-input name-edit" value="bu可爱花束" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">B</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">不推荐前期投入资源</span>
+                            <input type="text" class="edit-input notes-edit" value="不推荐前期投入资源" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="23" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">24.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #4a9de3">可爱花束</span></span>
+                            <input type="text" class="edit-input name-edit" value="bu心形枪" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">B</span>
+                            <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input knowledge-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">未设置</span>
+                            <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                            <input type="text" class="edit-input attributes-edit" value="[object Object]" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">不推荐前期投入资源</span>
+                            <input type="text" class="edit-input notes-edit" value="不推荐前期投入资源" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="24" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                <td>
+                    <div class="editable">
+                        <span class="row-number" style="color: #a0c8f0;">25.</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="name-text" style="display: inline;"><span style="color: #4a9de3">心形枪</span></span>
+                        <input type="text" class="edit-input name-edit" value="新角色" style="display: none;">
+                    </div>
+                    <button class="delete-row">×</button>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="weapon-text weapon" style="display: inline;">未设置</span>
+                        <input type="text" class="edit-input weapon-edit" value="未设置" style="display: none;">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="strength-text strength" style="display: inline;">B</span>
+                        <input type="text" class="edit-input strength-edit" value="B" style="display: none;">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="training-text training" style="display: inline;">未设置</span>
+                        <input type="text" class="edit-input training-edit" value="未设置" style="display: none;">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                        <input type="text" class="edit-input knowledge-edit" value="致知0" style="display: none;">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="glory-text glory" style="display: inline;">未设置</span>
+                        <input type="text" class="edit-input glory-edit" value="未设置" style="display: none;">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                        <input type="text" class="edit-input attributes-edit" value="示例词条" style="display: none;">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="notes-text notes" style="display: inline;">不推荐前期投入资源</span>
+                        <input type="text" class="edit-input notes-edit" value="请输入备注" style="display: none;">
+                    </div>
+                </td>
+                <td></td>
+            </tr><tr data-type="strategy" data-index="25" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                <td>
+                    <div class="editable">
+                        <span class="row-number" style="color: #a0c8f0;">26.</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="name-text" style="display: inline;"><span style="color: #4a9de3">粉白双耳瓶</span></span>
+                        <input type="text" class="edit-input name-edit" value="新角色" style="display: none;">
+                    </div>
+                    <button class="delete-row">×</button>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="weapon-text weapon">未设置</span>
+                        <input type="text" class="edit-input weapon-edit" value="未设置">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="strength-text strength">B</span>
+                        <input type="text" class="edit-input strength-edit" value="B">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="training-text training">未设置</span>
+                        <input type="text" class="edit-input training-edit" value="未设置">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                        <input type="text" class="edit-input knowledge-edit" value="致知0" style="display: none;">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="glory-text glory">未设置</span>
+                        <input type="text" class="edit-input glory-edit" value="未设置">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                        <input type="text" class="edit-input attributes-edit" value="示例词条" style="display: none;">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="notes-text notes" style="display: inline;">不推荐前期投入资源</span>
+                        <input type="text" class="edit-input notes-edit" value="请输入备注" style="display: none;">
+                    </div>
+                </td>
+                <td></td>
+            </tr><tr data-type="strategy" data-index="26" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                <td>
+                    <div class="editable">
+                        <span class="row-number" style="color: #a0c8f0;">27.</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="name-text" style="display: inline;"><span style="color: #4a9de3">格萨尔唐卡</span></span>
+                        <input type="text" class="edit-input name-edit" value="新角色" style="display: none;">
+                    </div>
+                    <button class="delete-row">×</button>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="weapon-text weapon">未设置</span>
+                        <input type="text" class="edit-input weapon-edit" value="未设置">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="strength-text strength">B</span>
+                        <input type="text" class="edit-input strength-edit" value="B">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="training-text training">未设置</span>
+                        <input type="text" class="edit-input training-edit" value="未设置">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="knowledge-text knowledge" style="display: inline;">未设置</span>
+                        <input type="text" class="edit-input knowledge-edit" value="致知0" style="display: none;">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="glory-text glory">未设置</span>
+                        <input type="text" class="edit-input glory-edit" value="未设置">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <div class="attributes-text attributes" style="display: inline;"><span class="attr-item">[object Object]</span></div>
+                        <input type="text" class="edit-input attributes-edit" value="示例词条" style="display: none;">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="notes-text notes" style="display: inline;">不推荐前期投入资源</span>
+                        <input type="text" class="edit-input notes-edit" value="请输入备注" style="display: none;">
+                    </div>
+                </td>
+                <td></td>
+            </tr></tbody>
+            </table>
+            <div class="dropdown-control">
+                <div class="dropdown-info">
+                    显示 <span class="current-count">1</span> / <span class="total-count">27</span> 个角色
+                </div>
+                <div>
+                    <button class="dropdown-btn show-more-btn" style="display: inline-block;">显示更多</button>
+                    <button class="dropdown-btn show-less-btn" style="display: none;">显示更少</button>
+                    <span class="dropdown-setting">
+                        显示数量: <input type="number" class="dropdown-input" min="1" max="50" value="2">
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>缩写说明: 暴=暴击, 爆=爆伤, 构=构素伤害提升, 物=物理伤害提升, 全=伤害提升, 攻%=百分比攻击力,
+                攻=攻击力,汲=生命汲取，生=生命，治=治疗量提升，受=受治疗提升，%=百分比，双生=百分比生命和固定生命</p>
+            <p>可练=练了不亏，选练=根据自身情况。可焕彰/选焕彰一样。</p>
+            <p style="margin-top: 15px; color: #ff6b6b;">⚠️ 数据仅供参考，实际效果可能因版本更新而调整</p>
+        </footer>
+    </div>
+
+    <script>
+        // 双击显示/隐藏按钮功能
+        function setupToggleButtons() {
+            let clickCount = 0;
+            let clickTimer;
+
+            document.addEventListener('click', function (e) {
+                // 只在页面顶部50px区域内检测双击
+                if (e.clientY < 50) {
+                    clickCount++;
+
+                    if (clickCount === 1) {
+                        clickTimer = setTimeout(() => {
+                            clickCount = 0;
+                        }, 500);
+                    } else if (clickCount === 2) {
+                        clearTimeout(clickTimer);
+                        clickCount = 0;
+
+                        // 切换按钮显示状态
+                        document.body.classList.toggle('buttons-visible');
+                        const isVisible = document.body.classList.contains('buttons-visible');
+                        showNotification(isVisible ? '🔧 开发者按钮已显示' : '🔧 开发者按钮已隐藏');
+                    }
+                } else {
+                    clickCount = 0;
+                }
+            });
+        }
+
+        // 开发者模式切换
+        const devModeBtn = document.getElementById('devModeBtn');
+        let devModeActive = false;
+
+        devModeBtn.addEventListener('click', function () {
+            devModeActive = !devModeActive;
+            document.body.classList.toggle('dev-mode');
+
+            if (devModeActive) {
+                this.classList.add('active');
+                this.textContent = '开发者模式 (开)';
+                showNotification('开发者模式已开启 - 可以编辑内容');
+            } else {
+                this.classList.remove('active');
+                this.textContent = '开发者模式';
+                showNotification('开发者模式已关闭');
+            }
+
+            bindAllEditEvents();
+            initDropdowns();
+        });
+
+        // 显示通知
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+
+        // 添加角色行
+        document.getElementById('addStrategyBtn').addEventListener('click', function () {
+            if (!devModeActive) {
+                showNotification('请先开启开发者模式');
+                return;
+            }
+
+            const tbody = document.getElementById('strategy-tbody');
+            const rowCount = tbody.querySelectorAll('tr').length;
+            const newIndex = rowCount;
+
+            const newRow = document.createElement('tr');
+            newRow.dataset.type = 'strategy';
+            newRow.dataset.index = newIndex;
+
+            newRow.innerHTML = `
+                <td>
+                    <div class="editable">
+                        <span class="row-number" style="color: #a0c8f0;">${rowCount + 1}.</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="name-text">新角色</span>
+                        <input type="text" class="edit-input name-edit" value="新角色">
+                    </div>
+                    <button class="delete-row">×</button>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="weapon-text weapon">未设置</span>
+                        <input type="text" class="edit-input weapon-edit" value="未设置">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="strength-text strength">B</span>
+                        <input type="text" class="edit-input strength-edit" value="B">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="training-text training">未设置</span>
+                        <input type="text" class="edit-input training-edit" value="未设置">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="knowledge-text knowledge">致知0</span>
+                        <input type="text" class="edit-input knowledge-edit" value="致知0">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="glory-text glory">未设置</span>
+                        <input type="text" class="edit-input glory-edit" value="未设置">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <div class="attributes-text attributes">
+                            <span class="attr-item">示例词条</span>
+                        </div>
+                        <input type="text" class="edit-input attributes-edit" value="示例词条">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="notes-text notes">请输入备注</span>
+                        <input type="text" class="edit-input notes-edit" value="请输入备注">
+                    </div>
+                </td>
+                <td></td>
+            `;
+
+            tbody.appendChild(newRow);
+            bindRowEvents(newRow);
+            updateRowNumbers();
+            initDropdowns();
+            showNotification('新角色已添加');
+        });
+
+        // 绑定行事件
+        function bindRowEvents(row) {
+            const deleteBtn = row.querySelector('.delete-row');
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    if (confirm('确定要删除这个角色吗？')) {
+                        row.remove();
+                        updateRowNumbers();
+                        initDropdowns();
+                        showNotification('角色已删除');
+                    }
+                });
+            }
+
+            // 绑定所有可编辑字段
+            const editables = row.querySelectorAll('.editable');
+            editables.forEach(editable => {
+                setupEditEvent(editable);
+            });
+        }
+
+        // 设置编辑事件
+        function setupEditEvent(editable) {
+            const textElement = editable.querySelector('span:first-child');
+            const inputElement = editable.querySelector('.edit-input');
+
+            if (!textElement || !inputElement) return;
+
+            editable.addEventListener('click', function (e) {
+                if (!devModeActive) return;
+                e.stopPropagation();
+
+                textElement.style.display = 'none';
+                inputElement.style.display = 'block';
+                inputElement.focus();
+                inputElement.select();
+            });
+
+            inputElement.addEventListener('blur', function () {
+                saveEdit(this);
+            });
+
+            inputElement.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    saveEdit(this);
+                }
+                if (e.key === 'Escape') {
+                    cancelEdit(this);
+                }
+            });
+        }
+
+
+
+        // 保存编辑
+        function saveEdit(input) {
+
+            const textElement = input.previousElementSibling;
+            let newValue = input.value;
+
+            // 颜色代码处理函数
+            function processColorCodes(text) {
+                const colorMap = {
+                    're': '#ff6b6b', // 红色
+                    'bu': '#4a9de3', // 蓝色
+                    'gr': '#6bcf7f', // 绿色
+                    'ye': '#ffc107', // 黄色
+                    'pi': '#ba68c8'  // 紫色
+                };
+
+                // 匹配颜色代码模式：两个字母+文字
+                return text.replace(/(re|bu|gr|ye|pi)([^\s]+)/g, function (match, colorCode, content) {
+                    const color = colorMap[colorCode];
+                    if (color) {
+                        return `<span style="color: ${color}">${content}</span>`;
+                    }
+                    return match;
+                });
+            }
+
+            // 处理特殊字段的显示
+            if (input.classList.contains('weapon-edit')) {
+                textElement.innerHTML = processColorCodes(newValue.replace(/\|/g, '<br>'));
+            } else if (input.classList.contains('training-edit') ||
+                input.classList.contains('glory-edit')) {
+                textElement.innerHTML = processColorCodes(newValue.replace(/\|/g, '<br>'));
+            } else if (input.classList.contains('attributes-edit')) {
+                // 处理词条 - 先处理颜色，再分割词条
+                const attrArray = newValue.split(',').map(text => text.trim()).filter(text => text);
+                textElement.innerHTML = attrArray.map(text => {
+                    // 对每个词条单独处理颜色
+                    const coloredText = processColorCodes(text.replace(/\|/g, '<br>'))
+                    return `<span class="attr-item">${coloredText}</span>`;
+                }).join('');
+            } else if (input.classList.contains('notes-edit')) {
+                // 备注字段直接处理颜色
+                textElement.innerHTML = processColorCodes(newValue.replace(/\|/g, '<br>'))
+            } else if (input.classList.contains('strength-edit') ||
+                input.classList.contains('knowledge-edit')) {
+                // 强度和致知字段也支持颜色
+                textElement.innerHTML = processColorCodes(newValue.replace(/\|/g, '<br>'))
+            } else {
+                // 其他字段（如名称）
+                textElement.innerHTML = processColorCodes(newValue);
+            }
+
+            input.style.display = 'none';
+            textElement.style.display = 'inline';
+
+            showNotification('内容已更新');
+        }
+
+        // 取消编辑
+        function cancelEdit(input) {
+            const textElement = input.previousElementSibling;
+            input.style.display = 'none';
+            textElement.style.display = 'inline';
+        }
+
+        // 更新行号
+        function updateRowNumbers() {
+            const rows = document.querySelectorAll('#strategy-tbody tr');
+            rows.forEach((row, index) => {
+                const numberElement = row.querySelector('.row-number');
+                if (numberElement) {
+                    numberElement.textContent = `${index + 1}.`;
+                    row.dataset.index = index;
+                }
+            });
+        }
+
+        // 绑定所有编辑事件
+        function bindAllEditEvents() {
+            document.querySelectorAll('#strategy-tbody tr').forEach(row => {
+                bindRowEvents(row);
+            });
+        }
+
+        // 下拉显示控制
+        function initDropdowns() {
+            const tbody = document.getElementById('strategy-tbody');
+            const rows = tbody.querySelectorAll('tr');
+            const totalCount = rows.length;
+            const dropdownInput = document.querySelector('.dropdown-input');
+            const currentLimit = dropdownInput ? parseInt(dropdownInput.value) : 2;
+
+            // 更新显示数量信息
+            const currentCount = Math.min(currentLimit, totalCount);
+            document.querySelector('.current-count').textContent = currentCount;
+            document.querySelector('.total-count').textContent = totalCount;
+
+            // 设置显示更多/更少按钮状态
+            const showMoreBtn = document.querySelector('.show-more-btn');
+            const showLessBtn = document.querySelector('.show-less-btn');
+
+            if (totalCount <= currentLimit) {
+                showMoreBtn.style.display = 'none';
+                showLessBtn.style.display = 'none';
+                rows.forEach(row => row.style.display = '');
+            } else {
+                showMoreBtn.style.display = 'inline-block';
+                showLessBtn.style.display = 'none';
+                rows.forEach((row, index) => {
+                    row.style.display = index < currentLimit ? '' : 'none';
+                });
+            }
+
+            // 显示更多按钮事件
+            showMoreBtn.onclick = function () {
+                rows.forEach(row => row.style.display = '');
+                showMoreBtn.style.display = 'none';
+                showLessBtn.style.display = 'inline-block';
+                document.querySelector('.current-count').textContent = totalCount;
+            };
+
+            // 显示更少按钮事件
+            showLessBtn.onclick = function () {
+                const newLimit = dropdownInput ? parseInt(dropdownInput.value) : 2;
+                rows.forEach((row, index) => {
+                    row.style.display = index < newLimit ? '' : 'none';
+                });
+                showMoreBtn.style.display = 'inline-block';
+                showLessBtn.style.display = 'none';
+                document.querySelector('.current-count').textContent = Math.min(newLimit, totalCount);
+            };
+
+            // 下拉输入框事件
+            if (dropdownInput) {
+                dropdownInput.onchange = function () {
+                    if (!devModeActive) return;
+                    const newValue = parseInt(this.value);
+                    if (newValue > 0 && newValue <= 50) {
+                        rows.forEach((row, index) => {
+                            row.style.display = index < newValue ? '' : 'none';
+                        });
+                        const newCount = Math.min(newValue, totalCount);
+                        document.querySelector('.current-count').textContent = newCount;
+
+                        if (totalCount <= newValue) {
+                            showMoreBtn.style.display = 'none';
+                            showLessBtn.style.display = 'none';
+                        } else {
+                            showMoreBtn.style.display = 'inline-block';
+                            showLessBtn.style.display = 'none';
+                        }
+                    }
+                };
+            }
+        }
+
+        // ==================== 数据导出导入功能 ====================
+
+        // 导出数据
+        document.getElementById('exportDataBtn').addEventListener('click', exportData);
+
+        function exportData() {
+            const data = collectAllData();
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+
+            const url = URL.createObjectURL(dataBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '战略角色数据-' + new Date().toISOString().split('T')[0] + '.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showNotification('数据已导出为JSON文件');
+        }
+
+        // 导入数据
+        document.getElementById('importDataBtn').addEventListener('click', function () {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+
+            input.addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        importData(data);
+                    } catch (error) {
+                        showNotification('导入失败：文件格式错误');
+                        console.error('导入错误:', error);
+                    }
+                };
+                reader.readAsText(file);
+            });
+
+            input.click();
+        });
+
+        // 清空数据
+        document.getElementById('clearDataBtn').addEventListener('click', function () {
+            if (confirm('确定要清空所有角色数据吗？此操作不可撤销！')) {
+                const tbody = document.getElementById('strategy-tbody');
+                tbody.innerHTML = '';
+                initDropdowns();
+                showNotification('所有数据已清空');
+            }
+        });
+
+        // 收集所有数据
+        function collectAllData() {
+            const rows = document.querySelectorAll('#strategy-tbody tr');
+            const data = [];
+
+            rows.forEach((row, index) => {
+                const rowData = {
+                    name: getInputValue(row, '.name-edit'),
+                    weapon: getInputValue(row, '.weapon-edit'),
+                    strength: getInputValue(row, '.strength-edit'),
+                    training: getInputValue(row, '.training-edit'),
+                    knowledge: getInputValue(row, '.knowledge-edit'),
+                    glory: getInputValue(row, '.glory-edit'),
+                    notes: getInputValue(row, '.notes-edit'),
+                    attributes: getAttributesValue(row)
+                };
+                data.push(rowData);
+            });
+
+            return {
+                strategy: data,
+                exportTime: new Date().toISOString(),
+                version: '1.0'
+            };
+        }
+
+        // 导入数据
+        function importData(data) {
+            if (!data || !data.strategy) {
+                showNotification('导入失败：数据格式不正确');
+                return;
+            }
+
+            // 简单处理：在导入时转换所有数据的换行符
+            data.strategy.forEach(character => {
+                Object.keys(character).forEach(key => {
+                    if (typeof character[key] === 'string') {
+                        character[key] = character[key].replace(/\|/g, '<br>');
+                    }
+                });
+            });
+
+            const tbody = document.getElementById('strategy-tbody');
+            tbody.innerHTML = '';
+
+            data.strategy.forEach((character, index) => {
+                const newRow = document.createElement('tr');
+                newRow.dataset.type = 'strategy';
+                newRow.dataset.index = index;
+
+                newRow.innerHTML = `
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">${index + 1}.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="name-text">${character.name || '未命名'}</span>
+                            <input type="text" class="edit-input name-edit" value="${character.name || '未命名'}">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon">${character.weapon || '未设置'}</span>
+                            <input type="text" class="edit-input weapon-edit" value="${character.weapon || '未设置'}">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength">${character.strength || 'B'}</span>
+                            <input type="text" class="edit-input strength-edit" value="${character.strength || 'B'}">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training">${character.training || '未设置'}</span>
+                            <input type="text" class="edit-input training-edit" value="${character.training || '未设置'}">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge">${character.knowledge || '致知0'}</span>
+                            <input type="text" class="edit-input knowledge-edit" value="${character.knowledge || '致知0'}">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory">${character.glory || '未设置'}</span>
+                            <input type="text" class="edit-input glory-edit" value="${character.glory || '未设置'}">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes">
+                                ${formatAttributes(character.attributes)}
+                            </div>
+                            <input type="text" class="edit-input attributes-edit" value="${getAttributesString(character.attributes)}">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes">${character.notes || ''}</span>
+                            <input type="text" class="edit-input notes-edit" value="${character.notes || ''}">
+                        </div>
+                    </td>
+                    <td></td>
+                `;
+
+                tbody.appendChild(newRow);
+                bindRowEvents(newRow);
+            });
+
+            updateRowNumbers();
+            initDropdowns();
+            showNotification(`成功导入 ${data.strategy.length} 个角色数据`);
+
+            // 批量处理所有字段的颜色
+            setTimeout(() => {
+                document.querySelectorAll('#strategy-tbody .edit-input').forEach(input => {
+                    // 直接调用 saveEdit 处理每个输入框
+                    saveEdit(input);
+                });
+            }, 100);
+
+
+        }
+
+        // 辅助函数
+        function getInputValue(row, selector) {
+            const input = row.querySelector(selector);
+            return input ? input.value : '';
+        }
+
+        function getAttributesValue(row) {
+            const input = row.querySelector('.attributes-edit');
+            if (!input || !input.value) return [];
+
+            return input.value.split(',').map(text => text.trim()).filter(text => text);
+        }
+
+        function getAttributesString(attributes) {
+            if (!attributes || !Array.isArray(attributes)) return '';
+            return attributes.join(', ');
+        }
+
+        function formatAttributes(attributes) {
+            if (!attributes || !Array.isArray(attributes)) return '';
+            return attributes.map(text => `<span class="attr-item">${text}</span>`).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            setupToggleButtons();
+            bindAllEditEvents();
+            initDropdowns();
+
+            // 新增：页面加载时处理换行符
+            function processExistingDataLineBreaks() {
+                const rows = document.querySelectorAll('#strategy-tbody tr');
+
+                rows.forEach(row => {
+                    // 处理词条字段
+                    const attributesElement = row.querySelector('.attributes-text');
+                    if (attributesElement) {
+                        const attrItems = attributesElement.querySelectorAll('.attr-item');
+                        attrItems.forEach(item => {
+                            let rawText = item.textContent || item.innerText;
+                            // 直接替换颜色代码
+                            rawText = rawText.replace(/re([^\s]+)/g, '<span style="color:#ff6b6b">$1</span>');
+                            rawText = rawText.replace(/bu([^\s]+)/g, '<span style="color:#4a9de3">$1</span>');
+                            rawText = rawText.replace(/gr([^\s]+)/g, '<span style="color:#6bcf7f">$1</span>');
+                            rawText = rawText.replace(/ye([^\s]+)/g, '<span style="color:#ffc107">$1</span>');
+                            rawText = rawText.replace(/pi([^\s]+)/g, '<span style="color:#ba68c8">$1</span>');
+                            // 处理换行符
+                            item.innerHTML = rawText.replace(/\|/g, '<br>');
+                        });
+                    }
+                });
+            }
+
+            // 页面加载动画
+            const rows = document.querySelectorAll('#strategy-tbody tr');
+            rows.forEach((row, index) => {
+                row.style.opacity = '0';
+                row.style.transform = 'translateX(-20px)';
+
+                setTimeout(() => {
+                    row.style.transition = 'all 0.5s ease';
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateX(0)';
+                }, index * 100 + 300);
+            });
+        });
+
+        // 新增函数：处理现有数据的换行符
+        function processExistingDataLineBreaks() {
+            const rows = document.querySelectorAll('#strategy-tbody tr');
+
+            rows.forEach(row => {
+                // 处理所有支持换行的字段
+                const fieldsToProcess = [
+                    '.weapon-text',
+                    '.training-text',
+                    '.glory-text',
+                    '.notes-text',
+                    '.strength-text',
+                    '.knowledge-text'
+                ];
+
+                fieldsToProcess.forEach(selector => {
+                    const element = row.querySelector(selector);
+                    if (element) {
+                        // 获取原始文本内容（去除HTML标签）
+                        const rawText = element.textContent || element.innerText;
+                        // 处理换行符
+                        element.innerHTML = rawText.replace(/\|/g, '<br>');
+                    }
+                });
+
+                // 特殊处理词条字段
+                const attributesElement = row.querySelector('.attributes-text');
+                if (attributesElement) {
+                    const attrItems = attributesElement.querySelectorAll('.attr-item');
+                    attrItems.forEach(item => {
+                        const rawText = item.textContent || item.innerText;
+                        item.innerHTML = processColorCodes(rawText.replace(/\|/g, '<br>'));
+                    });
+                }
+            });
+        }
+    </script>
+
+
+
+
+
+
+</body></html>
