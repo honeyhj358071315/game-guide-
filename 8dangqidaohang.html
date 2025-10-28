@@ -1,0 +1,1288 @@
+
+<!-- saved from url=(0058)file:///F:/WHMIsite/8dangqidaohang.html#navigation-section -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新手导航 - 懒人躺平攻略</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: rgba(16, 36, 54, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            border-left: 6px solid #ffc107;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #ffc107;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-header .subtitle {
+            font-size: 1.2rem;
+            color: #a0c8f0;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 193, 7, 0.3);
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            color: #fff;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 193, 7, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* 开发者模式按钮 */
+        .dev-mode-btn,
+        .save-all-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 193, 7, 0.8);
+            border: none;
+            border-radius: 5px;
+            color: #333;
+            padding: 8px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s;
+            display: none;
+        }
+
+        .buttons-visible .dev-mode-btn,
+        .buttons-visible .save-all-btn {
+            display: block;
+        }
+
+        .dev-mode-btn:hover,
+        .save-all-btn:hover {
+            background: rgba(255, 193, 7, 1);
+            transform: scale(1.05);
+        }
+
+        .dev-mode-btn.active {
+            background: rgba(76, 175, 80, 0.8);
+            color: white;
+        }
+
+        .save-all-btn {
+            right: 160px;
+            background: rgba(76, 217, 100, 0.8);
+            color: #fff;
+        }
+
+        .save-all-btn:hover {
+            background: rgba(76, 217, 100, 1);
+        }
+
+        /* 开发者工具面板 */
+        .dev-tools {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background: rgba(30, 40, 50, 0.95);
+            border-radius: 5px;
+            padding: 15px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 300px;
+        }
+
+        .dev-mode .dev-tools {
+            display: block;
+        }
+
+        .dev-tools h3 {
+            margin-bottom: 15px;
+            color: #ffc107;
+            text-align: center;
+        }
+
+        .dev-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .batch-btn {
+            background: rgba(255, 193, 7, 0.7);
+            border: none;
+            border-radius: 4px;
+            color: #333;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .batch-btn:hover {
+            background: rgba(255, 193, 7, 0.9);
+        }
+
+        .batch-btn.delete {
+            background: rgba(255, 107, 107, 0.7);
+            color: #fff;
+        }
+
+        .batch-btn.delete:hover {
+            background: rgba(255, 107, 107, 0.9);
+        }
+
+        /* 信息栏板块样式 */
+        .tips-section {
+            margin-bottom: 30px;
+            background: rgba(16, 36, 54, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transition: all 0.3s;
+            border-left: 6px solid #ffc107;
+        }
+
+        .tips-header {
+            padding: 20px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: rgba(44, 62, 80, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #ffc107;
+        }
+
+        .add-tip {
+            background: rgba(107, 207, 127, 0.3);
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: none;
+        }
+
+        .dev-mode .add-tip {
+            display: inline-block;
+        }
+
+        .add-tip:hover {
+            background: rgba(107, 207, 127, 0.5);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        th {
+            background: rgba(50, 70, 90, 0.9);
+            padding: 8px 6px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(255, 193, 7, 0.5);
+            color: #ffc107;
+        }
+
+        td {
+            padding: 8px 6px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) {
+            background: rgba(30, 50, 70, 0.4);
+        }
+
+        tr:hover {
+            background: rgba(60, 80, 100, 0.3);
+        }
+
+        /* 列宽设置 */
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 40px;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+            width: 300px;
+        }
+
+        th:nth-child(3),
+        td:nth-child(3) {
+            width: 900px;
+        }
+
+        th:nth-child(4),
+        td:nth-child(4) {
+            width: 30px;
+        }
+
+        .editable {
+            cursor: pointer;
+            padding: 5px 8px;
+            border-radius: 4px;
+            position: relative;
+            min-height: 30px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .dev-mode .editable:hover {
+            background: rgba(255, 255, 255, 0.05);
+            outline: 1px dashed #ffc107;
+        }
+
+        .edit-input {
+            display: none;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            color: #fff;
+            padding: 5px 8px;
+            font-size: inherit;
+            font-family: inherit;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .edit-input:focus {
+            outline: none;
+            border-color: #ffc107;
+            box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.3);
+        }
+
+        .delete-row {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 107, 107, 0.3);
+            border: none;
+            border-radius: 3px;
+            color: #fff;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: none;
+        }
+
+        .dev-mode .delete-row {
+            display: flex;
+        }
+
+        tr:hover .delete-row {
+            opacity: 1;
+        }
+
+        .delete-row:hover {
+            background: rgba(255, 107, 107, 0.5);
+        }
+
+        /* 信息栏特定样式 */
+        .tip-title {
+            color: #4a9de3;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .tip-content {
+            color: #e0e0e0;
+            line-height: 1.5;
+            white-space: pre-line;
+        }
+
+        .row-number {
+            display: inline-block;
+            width: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: #ffc107;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .dev-mode .row-number:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px dashed #ffc107;
+        }
+
+        .dropdown-control {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(44, 62, 80, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-info {
+            font-size: 1rem;
+            color: #a0c8f0;
+        }
+
+        .dropdown-btn {
+            background: rgba(255, 193, 7, 0.5);
+            border: none;
+            border-radius: 6px;
+            color: #333;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(255, 193, 7, 0.7);
+        }
+
+        .dropdown-setting {
+            display: none;
+        }
+
+        .dev-mode .dropdown-setting {
+            display: inline-block;
+        }
+
+        .dropdown-setting input {
+            width: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            color: white;
+            padding: 3px 5px;
+            margin-left: 5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            color: #a0c8f0;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(107, 207, 127, 0.9);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            display: none;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                width: 100%;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            table {
+                width: 100%;
+                min-width: 600px;
+                table-layout: fixed;
+            }
+
+            th,
+            td {
+                padding: 6px 4px;
+                font-size: 0.9rem;
+            }
+
+            .dropdown-control {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .dev-tools {
+                width: 90%;
+                right: 5%;
+            }
+
+            .save-all-btn {
+                right: 140px;
+            }
+
+            .tips-section {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+
+<body class="">
+    <button class="dev-mode-btn" id="devModeBtn">开发者模式</button>
+    <div class="notification" id="notification" style="display: none;">🔧 开发者按钮已隐藏</div>
+
+    <div class="dev-tools" id="devTools">
+        <h3>数据管理</h3>
+        <div class="dev-controls">
+            <button class="batch-btn" id="exportDataBtn">导出JSON数据</button>
+            <button class="batch-btn" id="importDataBtn">导入JSON数据</button>
+            <button class="batch-btn" id="duplicateSectionBtn">复制当前板块</button>
+            <button class="batch-btn delete" id="clearDataBtn">清空所有数据</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>🧱 未完工</h1>
+            <div class="subtitle">🧱</div>
+            <a href="F:\WHMIsite/index.html" class="back-btn">
+                <span>🏠</span> 返回导航首页
+            </a>
+        </div>
+
+        <section class="tips-section" id="tips-section-1">
+            <div class="tips-header">
+                <span>新手注意事项</span>
+                <button class="add-tip" data-section="tips-section-1">+ 添加注意事项</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>注意事项</th>
+                        <th>详细说明</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="tips-section-1-tbody"></tbody>
+            </table>
+            <div class="dropdown-control">
+                <div class="dropdown-info">
+                    显示 <span class="current-count">0</span> / <span class="total-count">0</span> 条注意事项
+                </div>
+                <div>
+                    <button class="dropdown-btn show-more-btn" style="display: none;">显示更多</button>
+                    <button class="dropdown-btn show-less-btn" style="display: none;">显示更少</button>
+                    <span class="dropdown-setting">
+                        显示数量: <input type="number" class="dropdown-input" min="1" max="50" value="5">
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>温馨提示：以上内容为玩家经验总结，实际游戏体验可能因版本更新和个人玩法而有所不同</p>
+            <p style="margin-top: 15px; color: #ff6b6b;">⚠️ 数据仅供参考，请以游戏内实际情况为准</p>
+        </footer>
+    </div>
+
+    <script>
+        // 双击显示/隐藏按钮功能
+        function setupToggleButtons() {
+            let clickCount = 0;
+            let clickTimer;
+
+            document.addEventListener('click', function (e) {
+                if (e.clientY < 50) {
+                    clickCount++;
+
+                    if (clickCount === 1) {
+                        clickTimer = setTimeout(() => {
+                            clickCount = 0;
+                        }, 500);
+                    } else if (clickCount === 2) {
+                        clearTimeout(clickTimer);
+                        clickCount = 0;
+
+                        document.body.classList.toggle('buttons-visible');
+                        const isVisible = document.body.classList.contains('buttons-visible');
+                        showNotification(isVisible ? '🔧 开发者按钮已显示' : '🔧 开发者按钮已隐藏');
+                    }
+                } else {
+                    clickCount = 0;
+                }
+            });
+        }
+
+        // 开发者模式切换
+        const devModeBtn = document.getElementById('devModeBtn');
+        let devModeActive = false;
+
+        devModeBtn.addEventListener('click', function () {
+            devModeActive = !devModeActive;
+            document.body.classList.toggle('dev-mode');
+
+            if (devModeActive) {
+                this.classList.add('active');
+                this.textContent = '开发者模式 (开)';
+                showNotification('开发者模式已开启 - 可以编辑内容');
+            } else {
+                this.classList.remove('active');
+                this.textContent = '开发者模式';
+                showNotification('开发者模式已关闭');
+            }
+
+            bindAllEditEvents();
+            initDropdowns();
+        });
+
+        // 显示通知
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+
+        // 自动识别链接并转换为可点击链接
+        function autoLink(text) {
+            if (!text) return '';
+
+            // 匹配URL正则表达式
+            const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+|[^\s]+\.[^\s]{2,})/gi;
+
+            return text.replace(urlRegex, function (url) {
+                let href = url;
+                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                    href = 'https://' + url;
+                }
+                return '<a href="' + href + '" target="_blank" rel="noopener noreferrer" style="color: #6bcf7f; text-decoration: none; border-bottom: 1px dotted #6bcf7f;">' + url + '</a>';
+            });
+        }
+
+        // 复制板块功能
+        document.getElementById('duplicateSectionBtn').addEventListener('click', function () {
+            if (!devModeActive) {
+                showNotification('请先开启开发者模式');
+                return;
+            }
+
+            duplicateCurrentSection();
+        });
+
+        function duplicateCurrentSection() {
+            // 获取所有板块
+            const sections = document.querySelectorAll('.tips-section');
+            const currentSection = sections[sections.length - 1];
+
+            if (!currentSection) {
+                showNotification('没有找到可复制的板块');
+                return;
+            }
+
+            // 深拷贝板块
+            const clone = currentSection.cloneNode(true);
+
+            // 生成新ID
+            const newId = 'tips-section-' + Date.now();
+            clone.id = newId;
+
+            // 修改标题
+            const header = clone.querySelector('.tips-header span');
+            const originalTitle = header.textContent;
+            header.textContent = originalTitle + ' (副本)';
+
+            // 更新添加按钮的data-section
+            const addButton = clone.querySelector('.add-tip');
+            if (addButton) {
+                addButton.dataset.section = newId;
+            }
+
+            // 更新tbody的ID
+            const tbody = clone.querySelector('tbody');
+            if (tbody) {
+                tbody.id = newId + '-tbody';
+            }
+
+            // 清空表格数据但保留表头
+            if (tbody) {
+                tbody.innerHTML = '';
+            }
+
+            // 重置显示计数
+            const currentCount = clone.querySelector('.current-count');
+            const totalCount = clone.querySelector('.total-count');
+            if (currentCount) currentCount.textContent = '0';
+            if (totalCount) totalCount.textContent = '0';
+
+            // 插入到当前板块后面
+            currentSection.after(clone);
+
+            // 重新绑定新板块的事件
+            bindSectionEvents(clone);
+
+            showNotification('新板块已创建，请修改标题和内容');
+        }
+
+        // 绑定板块事件
+        function bindSectionEvents(section) {
+            const addButton = section.querySelector('.add-tip');
+            const tbody = section.querySelector('tbody');
+
+            if (addButton && tbody) {
+                // 移除旧事件，绑定新事件
+                const newAddButton = addButton.cloneNode(true);
+                addButton.parentNode.replaceChild(newAddButton, addButton);
+
+                newAddButton.addEventListener('click', function () {
+                    if (!devModeActive) {
+                        showNotification('请先开启开发者模式');
+                        return;
+                    }
+
+                    const rowCount = tbody.querySelectorAll('tr').length;
+                    const newRow = createNewTipRow(rowCount);
+                    tbody.appendChild(newRow);
+                    bindRowEvents(newRow);
+                    updateRowNumbersInSection(section);
+                    initDropdowns();
+                    showNotification('新注意事项已添加到新板块');
+                });
+            }
+
+            // 重新初始化下拉控制
+            initDropdowns();
+        }
+
+        // 创建新行
+        function createNewTipRow(index) {
+            const newRow = document.createElement('tr');
+            newRow.dataset.type = 'tips';
+            newRow.dataset.index = index;
+
+            newRow.innerHTML = `
+                <td>
+                    <div class="editable">
+                        <span class="row-number">${index + 1}.</span>
+                        <input type="text" class="edit-input number-edit" value="${index + 1}">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="tip-title">新注意事项</span>
+                        <input type="text" class="edit-input title-edit" value="新注意事项">
+                    </div>
+                    <button class="delete-row">×</button>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="tip-content">请输入详细说明内容...</span>
+                        <textarea class="edit-input content-edit">请输入详细说明内容...</textarea>
+                    </div>
+                </td>
+                <td></td>
+            `;
+
+            return newRow;
+        }
+
+        // 更新指定板块的行号
+        function updateRowNumbersInSection(section) {
+            const rows = section.querySelectorAll('tbody tr');
+            rows.forEach((row, index) => {
+                const numberElement = row.querySelector('.row-number');
+                const numberInput = row.querySelector('.number-edit');
+                if (numberElement && numberInput) {
+                    numberElement.textContent = numberInput.value + '.';
+                    row.dataset.index = index;
+                }
+            });
+        }
+
+        // 添加注意事项（原有功能）
+        document.querySelectorAll('.add-tip').forEach(button => {
+            button.addEventListener('click', function () {
+                if (!devModeActive) {
+                    showNotification('请先开启开发者模式');
+                    return;
+                }
+
+                const sectionId = this.dataset.section;
+                const tbody = document.getElementById(sectionId + '-tbody');
+                const rowCount = tbody.querySelectorAll('tr').length;
+                const newIndex = rowCount;
+
+                const newRow = document.createElement('tr');
+                newRow.dataset.type = 'tips';
+                newRow.dataset.index = newIndex;
+
+                newRow.innerHTML = `
+                    <td>
+                        <div class="editable">
+                            <span class="row-number">${rowCount + 1}.</span>
+                            <input type="text" class="edit-input number-edit" value="${rowCount + 1}">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="tip-title">新注意事项</span>
+                            <input type="text" class="edit-input title-edit" value="新注意事项">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="tip-content">请输入详细说明内容...</span>
+                            <textarea class="edit-input content-edit">请输入详细说明内容...</textarea>
+                        </div>
+                    </td>
+                    <td></td>
+                `;
+
+                tbody.appendChild(newRow);
+                bindRowEvents(newRow);
+                updateRowNumbers();
+                initDropdowns();
+                showNotification('新注意事项已添加');
+            });
+        });
+
+        // 绑定行事件
+        function bindRowEvents(row) {
+            const deleteBtn = row.querySelector('.delete-row');
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    if (confirm('确定要删除这个注意事项吗？')) {
+                        row.remove();
+                        updateRowNumbers();
+                        initDropdowns();
+                        showNotification('注意事项已删除');
+                    }
+                });
+            }
+
+            // 绑定所有可编辑字段
+            const editables = row.querySelectorAll('.editable');
+            editables.forEach(editable => {
+                setupEditEvent(editable);
+            });
+        }
+
+        // 设置编辑事件
+        function setupEditEvent(editable) {
+            const textElement = editable.querySelector('span:first-child');
+            const inputElement = editable.querySelector('.edit-input');
+
+            if (!textElement || !inputElement) return;
+
+            editable.addEventListener('click', function (e) {
+                if (!devModeActive) return;
+                e.stopPropagation();
+
+                textElement.style.display = 'none';
+                inputElement.style.display = 'block';
+                inputElement.focus();
+
+                // 对于textarea，自动调整高度
+                if (inputElement.tagName === 'TEXTAREA') {
+                    inputElement.style.height = 'auto';
+                    inputElement.style.height = inputElement.scrollHeight + 'px';
+                } else {
+                    inputElement.select();
+                }
+            });
+
+            inputElement.addEventListener('blur', function () {
+                saveEdit(this);
+            });
+
+            inputElement.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' && this.tagName !== 'TEXTAREA') {
+                    saveEdit(this);
+                }
+                if (e.key === 'Escape') {
+                    cancelEdit(this);
+                }
+            });
+
+            // 自动调整textarea高度
+            if (inputElement.tagName === 'TEXTAREA') {
+                inputElement.addEventListener('input', function () {
+                    this.style.height = 'auto';
+                    this.style.height = this.scrollHeight + 'px';
+                });
+            }
+        }
+
+        // 保存编辑
+        function saveEdit(input) {
+            const textElement = input.previousElementSibling;
+            let newValue = input.value;
+
+            if (input.classList.contains('content-edit')) {
+                // 自动识别链接并转换为可点击链接
+                const linkedText = autoLink(newValue);
+                textElement.innerHTML = linkedText.replace(/\n/g, '<br>');
+            } else if (input.classList.contains('number-edit')) {
+                // 如果是序号编辑，验证数字
+                const newNumber = parseInt(newValue);
+                if (!isNaN(newNumber) && newNumber > 0) {
+                    textElement.textContent = newValue + '.';
+                    // 延迟一点时间后排序，让用户看到修改效果
+                    setTimeout(sortByNumber, 100);
+                } else {
+                    // 数字无效，恢复原值
+                    textElement.textContent = input.defaultValue + '.';
+                    showNotification('序号必须是大于0的数字');
+                }
+            } else {
+                textElement.innerHTML = newValue;
+            }
+
+            input.style.display = 'none';
+            textElement.style.display = 'inline';
+
+            if (!input.classList.contains('number-edit')) {
+                showNotification('内容已更新');
+            }
+        }
+
+        // 按序号排序
+        function sortByNumber() {
+            const sections = document.querySelectorAll('.tips-section');
+            sections.forEach(section => {
+                const tbody = section.querySelector('tbody');
+                if (!tbody) return;
+
+                const rows = Array.from(tbody.querySelectorAll('tr'));
+
+                // 按序号数字排序
+                rows.sort((a, b) => {
+                    const numA = parseInt(a.querySelector('.number-edit').value) || 0;
+                    const numB = parseInt(b.querySelector('.number-edit').value) || 0;
+                    return numA - numB;
+                });
+
+                // 重新插入排序
+                rows.forEach(row => tbody.appendChild(row));
+
+                // 更新显示序号
+                updateRowNumbersInSection(section);
+            });
+
+            showNotification('已按序号重新排序');
+        }
+
+        // 取消编辑
+        function cancelEdit(input) {
+            const textElement = input.previousElementSibling;
+            input.style.display = 'none';
+            textElement.style.display = 'inline';
+        }
+
+        // 更新行号显示
+        function updateRowNumbers() {
+            const sections = document.querySelectorAll('.tips-section');
+            sections.forEach(section => {
+                updateRowNumbersInSection(section);
+            });
+        }
+
+        // 绑定所有编辑事件
+        function bindAllEditEvents() {
+            document.querySelectorAll('#tips-tbody tr').forEach(row => {
+                bindRowEvents(row);
+            });
+        }
+
+        // 下拉显示控制
+        function initDropdowns() {
+            document.querySelectorAll('.tips-section').forEach(section => {
+                const tbody = section.querySelector('tbody');
+                if (!tbody) return;
+
+                const rows = tbody.querySelectorAll('tr');
+                const totalCount = rows.length;
+                const dropdownInput = section.querySelector('.dropdown-input');
+                const currentLimit = dropdownInput ? parseInt(dropdownInput.value) : 5;
+
+                // 更新显示数量信息
+                const currentCount = Math.min(currentLimit, totalCount);
+                const countElement = section.querySelector('.current-count');
+                const totalElement = section.querySelector('.total-count');
+                if (countElement) countElement.textContent = currentCount;
+                if (totalElement) totalElement.textContent = totalCount;
+
+                // 设置显示更多/更少按钮状态
+                const showMoreBtn = section.querySelector('.show-more-btn');
+                const showLessBtn = section.querySelector('.show-less-btn');
+
+                if (totalCount <= currentLimit) {
+                    if (showMoreBtn) showMoreBtn.style.display = 'none';
+                    if (showLessBtn) showLessBtn.style.display = 'none';
+                    rows.forEach(row => row.style.display = '');
+                } else {
+                    if (showMoreBtn) showMoreBtn.style.display = 'inline-block';
+                    if (showLessBtn) showLessBtn.style.display = 'none';
+                    rows.forEach((row, index) => {
+                        row.style.display = index < currentLimit ? '' : 'none';
+                    });
+                }
+
+                // 显示更多按钮事件
+                if (showMoreBtn) {
+                    showMoreBtn.onclick = function () {
+                        rows.forEach(row => row.style.display = '');
+                        showMoreBtn.style.display = 'none';
+                        if (showLessBtn) showLessBtn.style.display = 'inline-block';
+                        if (countElement) countElement.textContent = totalCount;
+                    };
+                }
+
+                // 显示更少按钮事件
+                if (showLessBtn) {
+                    showLessBtn.onclick = function () {
+                        const newLimit = dropdownInput ? parseInt(dropdownInput.value) : 5;
+                        rows.forEach((row, index) => {
+                            row.style.display = index < newLimit ? '' : 'none';
+                        });
+                        if (showMoreBtn) showMoreBtn.style.display = 'inline-block';
+                        showLessBtn.style.display = 'none';
+                        const newCount = Math.min(newLimit, totalCount);
+                        if (countElement) countElement.textContent = newCount;
+                    };
+                }
+
+                // 下拉输入框事件
+                if (dropdownInput) {
+                    dropdownInput.onchange = function () {
+                        if (!devModeActive) return;
+                        const newValue = parseInt(this.value);
+                        if (newValue > 0 && newValue <= 50) {
+                            rows.forEach((row, index) => {
+                                row.style.display = index < newValue ? '' : 'none';
+                            });
+                            const newCount = Math.min(newValue, totalCount);
+                            if (countElement) countElement.textContent = newCount;
+
+                            if (totalCount <= newValue) {
+                                if (showMoreBtn) showMoreBtn.style.display = 'none';
+                                if (showLessBtn) showLessBtn.style.display = 'none';
+                            } else {
+                                if (showMoreBtn) showMoreBtn.style.display = 'inline-block';
+                                if (showLessBtn) showLessBtn.style.display = 'none';
+                            }
+                        }
+                    };
+                }
+            });
+        }
+
+        // ==================== 数据导出导入功能 ====================
+
+        // 导出数据
+        document.getElementById('exportDataBtn').addEventListener('click', exportData);
+
+        function exportData() {
+            const data = collectAllData();
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+
+            const url = URL.createObjectURL(dataBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '新手导航数据-' + new Date().toISOString().split('T')[0] + '.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showNotification('数据已导出为JSON文件');
+        }
+
+        // 导入数据
+        document.getElementById('importDataBtn').addEventListener('click', function () {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+
+            input.addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        importData(data);
+                    } catch (error) {
+                        showNotification('导入失败：文件格式错误');
+                        console.error('导入错误:', error);
+                    }
+                };
+                reader.readAsText(file);
+            });
+
+            input.click();
+        });
+
+        // 清空数据
+        document.getElementById('clearDataBtn').addEventListener('click', function () {
+            if (confirm('确定要清空所有注意事项吗？此操作不可撤销！')) {
+                const sections = document.querySelectorAll('.tips-section');
+                sections.forEach(section => {
+                    const tbody = section.querySelector('tbody');
+                    if (tbody) tbody.innerHTML = '';
+                });
+                initDropdowns();
+                showNotification('所有数据已清空');
+            }
+        });
+
+        // 收集所有数据
+        function collectAllData() {
+            const sections = document.querySelectorAll('.tips-section');
+            const data = {
+                sections: [],
+                exportTime: new Date().toISOString(),
+                version: '2.0'
+            };
+
+            sections.forEach((section, index) => {
+                const sectionData = {
+                    id: section.id,
+                    title: section.querySelector('.tips-header span').textContent,
+                    tips: []
+                };
+
+                const tbody = section.querySelector('tbody');
+                if (tbody) {
+                    const rows = tbody.querySelectorAll('tr');
+                    rows.forEach((row, rowIndex) => {
+                        const rowData = {
+                            number: getInputValue(row, '.number-edit'),
+                            title: getInputValue(row, '.title-edit'),
+                            content: getInputValue(row, '.content-edit')
+                        };
+                        sectionData.tips.push(rowData);
+                    });
+                }
+
+                data.sections.push(sectionData);
+            });
+
+            return data;
+        }
+
+        // 导入数据
+        function importData(data) {
+            if (!data || !data.sections) {
+                showNotification('导入失败：数据格式不正确');
+                return;
+            }
+
+            // 清空现有所有板块
+            const existingSections = document.querySelectorAll('.tips-section');
+            existingSections.forEach((section, index) => {
+                if (index > 0) { // 保留第一个板块，删除其他
+                    section.remove();
+                }
+            });
+
+            // 导入数据
+            data.sections.forEach((sectionData, index) => {
+                if (index === 0) {
+                    // 更新第一个板块
+                    const firstSection = document.querySelector('.tips-section');
+                    const tbody = firstSection.querySelector('tbody');
+                    if (tbody) {
+                        tbody.innerHTML = '';
+                    }
+
+                    // 更新标题
+                    const header = firstSection.querySelector('.tips-header span');
+                    if (header) {
+                        header.textContent = sectionData.title;
+                    }
+
+                    // 添加数据行
+                    sectionData.tips.forEach((tip, tipIndex) => {
+                        const newRow = createNewTipRowFromData(tip, tipIndex);
+                        if (tbody) tbody.appendChild(newRow);
+                        bindRowEvents(newRow);
+                    });
+                } else {
+                    // 创建新板块
+                    createSectionFromData(sectionData);
+                }
+            });
+
+            updateRowNumbers();
+            initDropdowns();
+            showNotification(`成功导入 ${data.sections.length} 个板块的数据`);
+        }
+
+        // 从数据创建新板块
+        function createSectionFromData(sectionData) {
+            const sections = document.querySelectorAll('.tips-section');
+            const currentSection = sections[sections.length - 1];
+
+            // 深拷贝最后一个板块作为模板
+            const clone = currentSection.cloneNode(true);
+
+            // 设置新ID
+            clone.id = sectionData.id || ('tips-section-' + Date.now());
+
+            // 更新标题
+            const header = clone.querySelector('.tips-header span');
+            if (header) {
+                header.textContent = sectionData.title;
+            }
+
+            // 更新添加按钮的data-section
+            const addButton = clone.querySelector('.add-tip');
+            if (addButton) {
+                addButton.dataset.section = clone.id;
+            }
+
+            // 更新tbody的ID
+            const tbody = clone.querySelector('tbody');
+            if (tbody) {
+                tbody.id = clone.id + '-tbody';
+                tbody.innerHTML = '';
+
+                // 添加数据行
+                sectionData.tips.forEach((tip, tipIndex) => {
+                    const newRow = createNewTipRowFromData(tip, tipIndex);
+                    tbody.appendChild(newRow);
+                    bindRowEvents(newRow);
+                });
+            }
+
+            // 插入到当前板块后面
+            currentSection.after(clone);
+
+            // 重新绑定新板块的事件
+            bindSectionEvents(clone);
+        }
+
+        // 从数据创建新行
+        function createNewTipRowFromData(tip, index) {
+            const newRow = document.createElement('tr');
+            newRow.dataset.type = 'tips';
+            newRow.dataset.index = index;
+
+            newRow.innerHTML = `
+                <td>
+                    <div class="editable">
+                        <span class="row-number">${tip.number || (index + 1)}.</span>
+                        <input type="text" class="edit-input number-edit" value="${tip.number || (index + 1)}">
+                    </div>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="tip-title">${tip.title || '未命名'}</span>
+                        <input type="text" class="edit-input title-edit" value="${tip.title || '未命名'}">
+                    </div>
+                    <button class="delete-row">×</button>
+                </td>
+                <td>
+                    <div class="editable">
+                        <span class="tip-content">${tip.content || ''}</span>
+                        <textarea class="edit-input content-edit">${tip.content || ''}</textarea>
+                    </div>
+                </td>
+                <td></td>
+            `;
+
+            return newRow;
+        }
+
+        // 辅助函数
+        function getInputValue(row, selector) {
+            const input = row.querySelector(selector);
+            return input ? input.value : '';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            setupToggleButtons();
+            bindAllEditEvents();
+            initDropdowns();
+
+            // 绑定初始板块事件
+            document.querySelectorAll('.tips-section').forEach(section => {
+                bindSectionEvents(section);
+            });
+
+            // 页面加载动画
+            const rows = document.querySelectorAll('.tips-section tbody tr');
+            rows.forEach((row, index) => {
+                row.style.opacity = '0';
+                row.style.transform = 'translateX(-20px)';
+
+                setTimeout(() => {
+                    row.style.transition = 'all 0.5s ease';
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateX(0)';
+                }, index * 100 + 300);
+            });
+        });
+    </script>
+
+
+</body></html>
