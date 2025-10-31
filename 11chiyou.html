@@ -135,33 +135,31 @@
            <div class="strawpoll-embed" id="strawpoll_w4nWWmwGqnA" style="height: 4192px; max-width: 640px; width: 100%; margin: 0 auto; display: flex; flex-direction: column;"><iframe title="StrawPoll Embed" id="strawpoll_iframe_w4nWWmwGqnA" src="https://strawpoll.com/embed/w4nWWmwGqnA" style="position: static; visibility: visible; display: block; width: 100%; flex-grow: 1;" frameborder="0" allowfullscreen allowtransparency>Loading...</iframe><script async src="https://cdn.strawpoll.com/dist/widgets.js" charset="utf-8"></script></div>
                 </div>
             </div>
- <!-- 评论区 -->
+<!-- 评论区 -->
 <div id="comments-section" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
     <h3>💬 用户评论</h3>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
-        <!-- 左侧：评论提交 -->
-        <div class="comment-form" style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
-            <h4>✍️ 我要评论</h4>
-            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT6wGhIlKLmDABeBiNlu1rAU2L8OjDl7OsjhajF8t5hPy9ft4i8vTjBB4pda__1KrqchNy0VlByD_el/pubhtml?widget=true&amp;headers=false" 
-                    width="100%" height="300" frameborder="0" marginheight="0" marginwidth="0" 
-                    style="border: 1px solid #ddd; border-radius: 4px; background: white;">
-            </iframe>
-        </div>
+    <!-- 评论提交表单 -->
+    <div class="comment-form" style="margin-bottom: 30px;">
+        <h4>✍️ 我要评论</h4>
+        <p style="color: #666; font-size: 0.9em;">填写下方表单提交您的评论</p>
+        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT6wGhIlKLmDABeBiNlu1rAU2L8OjDl7OsjhajF8t5hPy9ft4i8vTjBB4pda__1KrqchNy0VlByD_el/pubhtml?widget=true&amp;headers=false" 
+                width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0" 
+                style="border: 1px solid #ddd; border-radius: 8px;">
+        </iframe>
+    </div>
 
-        <!-- 右侧：评论展示 -->
-        <div class="comments-display" style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
-            <h4>💭 最新评论</h4>
-            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT6wGhllKLmDABeBiNlu1rAU2L8OjDI7OsjhajF8t5hPy9ft4i8vTjBB4pda__1KrqchNyOVlByD_el/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" 
-                    width="100%" height="300" frameborder="0" 
-                    style="border: 1px solid #ddd; border-radius: 4px; background: white;">
-            </iframe>
-        </div>
+    <!-- 评论展示区域 -->
+    <div class="comments-display">
+        <h4>📝 最新评论</h4>
+        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT6wGhllKLmDABeBiNlu1rAU2L8OjDI7OsjhajF8t5hPy9ft4i8vTjBB4pda__1KrqchNyOVlByD_el/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false&amp;chrome=false" 
+                width="100%" height="500" frameborder="0" 
+                style="border: 1px solid #ddd; border-radius: 8px;">
+        </iframe>
+        <p style="font-size: 0.8em; color: #666; text-align: center; margin-top: 10px;">
+            评论提交后需要几分钟才会显示在这里
+        </p>
     </div>
 </div>
-        <footer>
-            <p>© 2024 懒人躺平攻略 - 所有投票结果仅代表玩家个人观点</p>
-        </footer>
-    </div>
 </body>
 </html>
