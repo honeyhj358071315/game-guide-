@@ -1,0 +1,21 @@
+# staticman.yml
+comments:
+  allowedFields: ["name", "email", "message", "replyTo"]
+  requiredFields: ["name", "message"]
+  branch: "main"
+  format: "yaml"
+  moderation: true
+  name:
+    type: "string"
+    required: true
+    maxLength: 50
+  email:
+    type: "string"
+    required: false
+  message:
+    type: "string"
+    required: true
+    maxLength: 1000
+  replyTo:
+    type: "string"
+    required: false
