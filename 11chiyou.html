@@ -180,7 +180,7 @@
 // 加载并显示评论
 async function loadComments() {
     try {
-        const response = await fetch('https://api.staticman.net/v3/entry/github/你的用户名/你的仓库名/main/comments/posts/star-wars-poll-page');
+        const response = await fetch('https://api.staticman.net/v3/entry/github/honeyhj358071315/game-guide-/main/comments/posts/star-wars-poll-page');
         const comments = await response.json();
         
         displayComments(comments);
