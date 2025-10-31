@@ -135,6 +135,111 @@
            <div class="strawpoll-embed" id="strawpoll_w4nWWmwGqnA" style="height: 4192px; max-width: 640px; width: 100%; margin: 0 auto; display: flex; flex-direction: column;"><iframe title="StrawPoll Embed" id="strawpoll_iframe_w4nWWmwGqnA" src="https://strawpoll.com/embed/w4nWWmwGqnA" style="position: static; visibility: visible; display: block; width: 100%; flex-grow: 1;" frameborder="0" allowfullscreen allowtransparency>Loading...</iframe><script async src="https://cdn.strawpoll.com/dist/widgets.js" charset="utf-8"></script></div>
                 </div>
             </div>
+    <!-- 评论区 -->
+<div id="comments-section" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
+    <h3>💬 用户评论</h3>
+
+    <!-- 评论提交表单 -->
+    <div class="comment-form">
+        <iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" 
+                width="100%" height="300" frameborder="0" marginheight="0" marginwidth="0" style="border: 1px solid #ccc;">加载中…</iframe>
+    </div>
+
+    <!-- 评论展示区域 -->
+    <div id="comments-display" style="margin-top: 30px;">
+        <p>正在加载评论...</p>
+    </div>
+</div>
+
+<script>
+// ！！！重要：替换下面两个值 ！！！
+
+// 1. 替换成您刚刚通过“发布到网页”获得的链接
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT6wGhIlKLmDABeBiNlu1rAU2L8OjDl7OsjhajF8t5hPy9ft4i8vTjBB4pda__1KrqchNy0VlByD_el/pubhtml';
+
+// 2. 为此页面设置一个唯一标识符，比如“movie-poll-1”
+const CURRENT_PAGE_SLUG = 'star-wars-poll';
+
+// 获取并显示评论
+async function fetchAndDisplayComments() {
+    try {
+        const response = await fetch(SHEET_URL);
+        const csvText = await response.text();
+        
+        // 将CSV转换为数组
+        const lines = csvText.split('\n').filter(line => line.trim());
+        const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+        
+        const comments = [];
+        for (let i = 1; i < lines.length; i++) {
+            const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+            const comment = {};
+            headers.forEach((header, index) => {
+                comment[header] = values[index] || '';
+            });
+            comments.push(comment);
+        }
+        
+        // 过滤当前页面的评论并按时间倒序排列
+        const pageComments = comments
+            .filter(comment => comment['页面标识'] === CURRENT_PAGE_SLUG)
+            .sort((a, b) => new Date(b['时间戳']) - new Date(a['时间戳']));
+        
+        displayComments(pageComments);
+    } catch (error) {
+        console.error('获取评论失败:', error);
+        document.getElementById('comments-display').innerHTML = '<p>⚠️ 加载评论失败，请刷新页面重试。</p>';
+    }
+}
+
+// 显示评论
+function displayComments(comments) {
+    const container = document.getElementById('comments-display');
+    
+    if (!comments || comments.length === 0) {
+        container.innerHTML = '<p>🪹 暂无评论，快来发表第一条吧！</p>';
+        return;
+    }
+
+    let html = `<p>📝 共 <strong>${comments.length}</strong> 条评论：</p>`;
+    
+    comments.forEach(comment => {
+        const time = new Date(comment['时间戳']).toLocaleString('zh-CN');
+        const name = comment['昵称'] || '匿名网友';
+        const content = comment['评论内容'] || '';
+        
+        html += `
+            <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin: 15px 0; background: #f9f9f9;">
+                <div style="font-weight: bold; color: #2c3e50;">
+                    👤 ${escapeHtml(name)}
+                    <span style="font-size: 0.8em; font-weight: normal; color: #7f8c8d; margin-left: 10px;">
+                        🕐 ${time}
+                    </span>
+                </div>
+                <div style="margin-top: 10px; line-height: 1.5; color: #34495e; padding: 10px; background: white; border-radius: 4px;">
+                    ${escapeHtml(content).replace(/\n/g, '<br>')}
+                </div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+// HTML转义，防止特殊字符问题
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// 页面加载完成后获取评论
+document.addEventListener('DOMContentLoaded', fetchAndDisplayComments);
+
+// 可选：每60秒自动刷新评论
+// setInterval(fetchAndDisplayComments, 60000);
+</script>
+    
         </section>
 
         <footer>
