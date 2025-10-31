@@ -134,106 +134,83 @@
             <!-- 投票嵌入区域 -->
            <div class="strawpoll-embed" id="strawpoll_w4nWWmwGqnA" style="height: 4192px; max-width: 640px; width: 100%; margin: 0 auto; display: flex; flex-direction: column;"><iframe title="StrawPoll Embed" id="strawpoll_iframe_w4nWWmwGqnA" src="https://strawpoll.com/embed/w4nWWmwGqnA" style="position: static; visibility: visible; display: block; width: 100%; flex-grow: 1;" frameborder="0" allowfullscreen allowtransparency>Loading...</iframe><script async src="https://cdn.strawpoll.com/dist/widgets.js" charset="utf-8"></script></div>
                 </div>
-<!-- 深蓝色主题的左右分栏评论区 -->
-<div id="comments-section" style="margin-top: 40px; padding-top: 20px;">
+<!-- 深蓝色主题的上下排列评论区 -->
+<div id="comments-section" style="margin-top: 40px; padding-top: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
     <h3 style="color: #e0e1dd; text-align: center; margin-bottom: 30px; font-size: 1.8em;">💬 玩家讨论区</h3>
     
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px;">
+    <!-- 上半部分：玩家反馈 -->
+    <div style="
+        background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        border: 2px solid #415a77;
+        margin-bottom: 25px;
+        position: relative;
+        overflow: hidden;
+    ">
+        <!-- 顶部光效 -->
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, #4cc9f0, #4361ee, transparent);"></div>
         
-        <!-- 左半边：评论提交 - 深蓝色主题 -->
+        <h4 style="color: #e0e1dd; margin: 0 0 15px 0; font-size: 1.3em; text-align: center;">🔄 玩家反馈</h4>
+        <p style="color: #778da9; margin-bottom: 15px; font-size: 0.9em; text-align: center;">最新评论实时显示</p>
+        
         <div style="
-            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-            border: 2px solid #415a77;
-            height: 550px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
+            background: rgba(13, 27, 42, 0.7);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #1b263b;
+            backdrop-filter: blur(10px);
         ">
-            <!-- 顶部光效 -->
-            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, #4cc9f0, #4361ee, transparent);"></div>
-            
-            <h4 style="color: #e0e1dd; margin: 0 0 15px 0; font-size: 1.3em;">🗣️ 发表评论</h4>
-            <p style="color: #778da9; margin-bottom: 15px; font-size: 0.9em;">直接填写，无需注册</p>
-            
-            <div style="
-                background: rgba(13, 27, 42, 0.7);
-                border-radius: 12px;
-                padding: 15px;
-                border: 1px solid #1b263b;
-                flex: 1;
-                backdrop-filter: blur(10px);
-            ">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdPnurTMCyWZaSg7aNWOXai-TQmdkFec0_uqeAnjnglt5o0gQ/viewform?embedded=true" 
-                        width="100%"
-                        height="100%"
-                        frameborder="0"
-                        style="border-radius: 8px; border: 1px solid #415a77;">
-                    正在加载表单...
-                </iframe>
-            </div>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT6wGhIlKLmDABeBiNlu1rAU2L8OjDl7OsjhajF8t5hPy9ft4i8vTjBB4pda__1KrqchNy0VlByD_el/pubhtml?widget=true&amp;headers=false"
+                    width="100%" 
+                    height="400" 
+                    frameborder="0"
+                    style="border-radius: 8px; border: 1px solid #415a77;">
+                正在加载评论...
+            </iframe>
         </div>
+        
+        <p style="text-align: center; font-size: 0.8em; color: #778da9; margin-top: 10px;">
+            最后更新: <span id="update-time"></span>
+            <script>
+                document.getElementById('update-time').textContent = new Date().toLocaleString('zh-CN');
+            </script>
+        </p>
+    </div>
 
-        <!-- 右半边：玩家反馈 - 深蓝色主题 -->
+    <!-- 下半部分：评论提交 -->
+    <div style="
+        background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        border: 2px solid #415a77;
+        position: relative;
+        overflow: hidden;
+    ">
+        <!-- 顶部光效 -->
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, #4cc9f0, #4361ee, transparent);"></div>
+        
+        <h4 style="color: #e0e1dd; margin: 0 0 15px 0; font-size: 1.3em; text-align: center;">🗣️ 发表评论</h4>
+        <p style="color: #778da9; margin-bottom: 15px; font-size: 0.9em; text-align: center;">直接填写，无需注册</p>
+        
         <div style="
-            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-            border: 2px solid #415a77;
-            height: 550px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
+            background: rgba(13, 27, 42, 0.7);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #1b263b;
+            backdrop-filter: blur(10px);
         ">
-            <!-- 顶部光效 -->
-            <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, #4cc9f0, #4361ee, transparent);"></div>
-            
-            <h4 style="color: #e0e1dd; margin: 0 0 15px 0; font-size: 1.3em;">🔄 玩家反馈</h4>
-            <p style="color: #778da9; margin-bottom: 15px; font-size: 0.9em;">最新评论实时显示</p>
-            
-            <div style="
-                background: rgba(13, 27, 42, 0.7);
-                border-radius: 12px;
-                padding: 15px;
-                border: 1px solid #1b263b;
-                flex: 1;
-                backdrop-filter: blur(10px);
-            ">
-                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT6wGhIlKLmDABeBiNlu1rAU2L8OjDl7OsjhajF8t5hPy9ft4i8vTjBB4pda__1KrqchNy0VlByD_el/pubhtml?widget=true&amp;headers=false"
-                        width="100%" 
-                        height="100%" 
-                        frameborder="0"
-                        style="border-radius: 8px; border: 1px solid #415a77;">
-                    正在加载评论...
-                </iframe>
-            </div>
-            
-            <p style="text-align: center; font-size: 0.8em; color: #778da9; margin-top: 10px;">
-                最后更新: <span id="update-time"></span>
-                <script>
-                    document.getElementById('update-time').textContent = new Date().toLocaleString('zh-CN');
-                </script>
-            </p>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdPnurTMCyWZaSg7aNWOXai-TQmdkFec0_uqeAnjnglt5o0gQ/viewform?embedded=true" 
+                    width="100%"
+                    height="400"
+                    frameborder="0"
+                    style="border-radius: 8px; border: 1px solid #415a77;">
+                正在加载表单...
+            </iframe>
         </div>
     </div>
 </div>
-
-<!-- 手机端响应式样式 -->
-<style>
-@media (max-width: 768px) {
-    #comments-section > div {
-        grid-template-columns: 1fr;
-    }
-    
-    #comments-section > div > div {
-        height: 500px;
-    }
-}
-</style>
 </body>
 </html>
