@@ -137,36 +137,39 @@
 <!-- 最终版 - Google Forms 评论区 -->
 <div id="comments-section" style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
     <h3>💬 玩家讨论区</h3>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+        
+        <!-- 左半边：评论提交 -->
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+            <h4 style="margin-top: 0;">🗣️ 发表评论</h4>
+            <p style="color: #666; margin-bottom: 15px; font-size: 0.9em;">直接填写，无需注册</p>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdPnurTMCyWZaSg7aNWOXai-TQmdkFec0_uqeAnjnglt5o0gQ/viewform?embedded=true"
+                    width="100%"
+                    height="500"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    style="border: 1px solid #ddd; border-radius: 8px;">
+                加载中…
+            </iframe>
+        </div>
 
-    <!-- 评论提交区 - 直接嵌入 -->
-    <div style="margin-bottom: 40px;">
-        <h4>🗣️ 分享你的观点</h4>
-        <p style="color: #666; margin-bottom: 15px;">在下方表单直接评论，无需注册</p>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdPnurTMCyWZaSg7aNWOXai-TQmdkFec0_uqeAnjnglt5o0gQ/viewform?embedded=true"
-                width="100%"
-                height="600"
-                frameborder="0"
-                marginheight="0"
-                marginwidth="0"
-                style="border: 1px solid #ddd; border-radius: 8px;">
-            加载中…
-        </iframe>
-    </div>
-
-    <!-- 评论展示区 -->
-    <div>
-        <h4>🔄 最新玩家反馈</h4>
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT6wGhIlKLmDABeBiNlu1rAU2L8OjDl7OsjhajF8t5hPy9ft4i8vTjBB4pda__1KrqchNy0VlByD_el/pubhtml?gid=0&single=true&widget=true&headers=false&chrome=false&range=A1:D100"
-                width="100%" 
-                height="600" 
-                frameborder="0"
-                style="border: 1px solid #ddd; border-radius: 8px; background: white;"
-                loading="lazy">
-        </iframe>
-        <p style="text-align: center; font-size: 0.8em; color: #666; margin-top: 10px;">
-            最后更新: <span id="update-time"></span>
-            <script>document.getElementById('update-time').textContent = new Date().toLocaleString('zh-CN');</script>
-        </p>
+        <!-- 右半边：玩家反馈 -->
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+            <h4 style="margin-top: 0;">🔄 玩家反馈</h4>
+            <p style="color: #666; margin-bottom: 15px; font-size: 0.9em;">最新玩家评论实时显示</p>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT6wGhIlKLmDABeBiNlu1rAU2L8OjDl7OsjhajF8t5hPy9ft4i8vTjBB4pda__1KrqchNy0VlByD_el/pubhtml?gid=760031014&amp;single=true&amp;widget=true&amp;headers=false"
+                    width="100%" 
+                    height="500" 
+                    frameborder="0"
+                    style="border: 1px solid #ddd; border-radius: 8px; background: white;">
+            </iframe>
+            <p style="text-align: center; font-size: 0.8em; color: #666; margin-top: 10px;">
+                最后更新: <span id="update-time"></span>
+                <script>document.getElementById('update-time').textContent = new Date().toLocaleString('zh-CN');</script>
+            </p>
+        </div>
     </div>
 </div>
 </body>
