@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玩家讨论区</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0f1c;
+            color: #e0e1dd;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .comments-section {
+            margin: 40px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #4cc9f0, #4361ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .layout-2col {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "comments"
+                    "form";
+            }
+
+            .comment-card:nth-child(1) {
+                grid-area: form;
+                order: 2;
+            }
+
+            .comment-card:nth-child(2) {
+                grid-area: comments;
+                order: 1;
+            }
+
+            .comments-list {
+                height: 400px;
+            }
+        }
+
+        .comment-card {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            border-radius: 16px;
+            padding: 25px;
+            border: 2px solid #415a77;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #4cc9f0, #4361ee, transparent);
+        }
+
+        .card-title {
+            color: #e0e1dd;
+            margin: 0 0 15px 0;
+            font-size: 1.4em;
+            text-align: center;
+        }
+
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-label {
+            color: #778da9;
+            font-size: 0.9em;
+        }
+
+        .form-input,
+        .form-textarea {
+            padding: 12px;
+            border: 1px solid #415a77;
+            border-radius: 8px;
+            background: rgba(13, 27, 42, 0.6);
+            color: #e0e1dd;
+            font-size: 1em;
+        }
+
+        .form-textarea {
+            height: 120px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .submit-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #4361ee, #4cc9f0);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .comments-list {
+            height: 500px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .comment-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            border-left: 4px solid #4361ee;
+            animation: fadeIn 0.3s ease-in;
+            position: relative;
+        }
+
+        .batch-mode .comment-item {
+            padding-left: 40px;
+        }
+
+        .comment-checkbox {
+            position: absolute;
+            left: 10px;
+            top: 15px;
+            width: 18px;
+            height: 18px;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 0.8em;
+            cursor: pointer;
+            display: none;
+        }
+
+        .delete-mode .delete-btn {
+            display: block;
+        }
+
+        .delete-mode .comment-item {
+            border-left-color: #ef4444;
+        }
+
+        .batch-mode .delete-btn {
+            display: none;
+        }
+
+        .batch-mode .comment-item {
+            border-left-color: #f59e0b;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .comment-author {
+            color: #4cc9f0;
+            font-weight: bold;
+        }
+
+        .comment-time {
+            color: #778da9;
+            font-size: 0.8em;
+        }
+
+        .comment-content {
+            color: #e0e1dd;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .loading,
+        .error,
+        .empty {
+            text-align: center;
+            color: #778da9;
+            padding: 40px;
+        }
+
+        .error {
+            color: #f87171;
+        }
+
+        .update-info {
+            text-align: center;
+            color: #778da9;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .admin-panel {
+            margin-top: 30px;
+        }
+
+        .admin-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #415a77;
+            border-radius: 6px;
+            background: rgba(13, 27, 42, 0.6);
+            color: #e0e1dd;
+            margin-bottom: 15px;
+        }
+
+        .admin-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .login-btn {
+            background: #4361ee;
+            color: white;
+        }
+
+        .logout-btn {
+            background: #f87171;
+            color: white;
+        }
+
+        .delete-mode-btn {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .batch-mode-btn {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .refresh-btn {
+            background: #10b981;
+            color: white;
+        }
+
+        .batch-actions {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .batch-action-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+
+        .select-all-btn {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .delete-selected-btn {
+            background: #ef4444;
+            color: white;
+        }
+
+        .cancel-batch-btn {
+            background: #6b7280;
+            color: white;
+        }
+
+        .admin-controls {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .selected-count {
+            color: #f59e0b;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="comments-section">
+            <h1 class="section-title">💬 玩家讨论区</h1>
+
+            <div class="layout-2col">
+                <!-- 评论提交表单 -->
+                <div class="comment-card">
+                    <h2 class="card-title">🗣️ 发表评论</h2>
+                    <form class="comment-form" id="commentForm">
+                        <div class="form-group">
+                            <label class="form-label">昵称（可选）</label>
+                            <input type="text" class="form-input" id="username" placeholder="匿名玩家">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">评论内容 *</label>
+                            <textarea class="form-textarea" id="content" placeholder="分享您的游戏心得..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            📝 发表评论
+                        </button>
+                    </form>
+                </div>
+
+                <!-- 评论展示区域 -->
+                <div class="comment-card">
+                    <h2 class="card-title">🔄 玩家反馈</h2>
+                    <div class="comments-list" id="commentsList">
+                        <div class="loading">加载评论中...</div>
+                    </div>
+                    <p class="update-info">
+                        最后更新: <span id="updateTime"></span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 管理员面板 -->
+            <div class="comment-card admin-panel" id="adminPanel">
+                <h2 class="card-title">🔧 评论管理</h2>
+                <input type="password" class="admin-input" id="adminKey" placeholder="输入管理员密钥">
+                <div>
+                    <button class="admin-btn login-btn" onclick="loginAdmin()">管理员登录</button>
+                    <button class="admin-btn logout-btn" onclick="logoutAdmin()">退出管理</button>
+                </div>
+
+                <div class="admin-controls" id="adminControls">
+                    <h3 style="color: #e0e1dd; margin-bottom: 15px;">管理操作</h3>
+                    <button class="admin-btn delete-mode-btn" onclick="showDeleteMode()">🗑️ 单条删除模式</button>
+                    <button class="admin-btn batch-mode-btn" onclick="showBatchMode()">📑 批量删除模式</button>
+                    <button class="admin-btn refresh-btn" onclick="refreshComments()">🔄 刷新评论</button>
+
+                    <!-- 批量操作面板 -->
+                    <div class="batch-actions" id="batchActions">
+                        <div style="margin-bottom: 10px;">
+                            <button class="batch-action-btn select-all-btn" onclick="selectAllComments()">全选</button>
+                            <button class="batch-action-btn delete-selected-btn"
+                                onclick="deleteSelectedComments()">删除选中</button>
+                            <button class="batch-action-btn cancel-batch-btn" onclick="cancelBatchMode()">取消</button>
+                            <span class="selected-count" id="selectedCount">已选择 0 条评论</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API配置 - 每个站点不同！
+        const API_BASE = 'https://comment-api.honeyhj.workers.dev';
+        const SITE_ID = 'site1'; // ⚠️ 重要：每个站点要改这个值！
+
+        // DOM元素
+        const commentForm = document.getElementById('commentForm');
+        const commentsList = document.getElementById('commentsList');
+        const updateTime = document.getElementById('updateTime');
+        const submitBtn = document.getElementById('submitBtn');
+        const adminPanel = document.getElementById('adminPanel');
+        const adminControls = document.getElementById('adminControls');
+        const batchActions = document.getElementById('batchActions');
+        const selectedCount = document.getElementById('selectedCount');
+
+        // 管理员状态
+        let isAdmin = false;
+        let adminToken = '';
+        let deleteMode = false;
+        let batchMode = false;
+        let selectedComments = new Set();
+
+        // 加载评论
+        async function loadComments() {
+            try {
+                commentsList.innerHTML = '<div class="loading">加载评论中...</div>';
+
+                const response = await fetch(`${API_BASE}/comments?site=${SITE_ID}`);
+                if (!response.ok) throw new Error('API请求失败');
+
+                const comments = await response.json();
+                displayComments(comments);
+                updateTime.textContent = new Date().toLocaleString('zh-CN');
+
+            } catch (error) {
+                console.error('加载评论失败:', error);
+                commentsList.innerHTML = '<div class="error">加载评论失败，请刷新重试</div>';
+            }
+        }
+
+        // 显示评论
+        function displayComments(comments) {
+            if (!comments || comments.length === 0) {
+                commentsList.innerHTML = '<div class="empty">暂无评论，快来发表第一条吧！</div>';
+                return;
+            }
+
+            // 根据模式设置CSS类
+            commentsList.classList.remove('delete-mode', 'batch-mode');
+            if (deleteMode) {
+                commentsList.classList.add('delete-mode');
+            } else if (batchMode) {
+                commentsList.classList.add('batch-mode');
+            }
+
+            commentsList.innerHTML = comments.map(comment => `
+                <div class="comment-item">
+                    ${batchMode ? `
+                        <input type="checkbox" class="comment-checkbox" value="${comment.id}" 
+                               onchange="toggleCommentSelection(${comment.id})"
+                               ${selectedComments.has(comment.id) ? 'checked' : ''}>
+                    ` : ''}
+                    ${deleteMode ? `<button class="delete-btn" onclick="deleteComment(${comment.id})">删除</button>` : ''}
+                    <div class="comment-header">
+                        <span class="comment-author">${escapeHtml(comment.username)}</span>
+                        <span class="comment-time">${formatTime(comment.timestamp)}</span>
+                    </div>
+                    <div class="comment-content">${escapeHtml(comment.content)}</div>
+                </div>
+            `).join('');
+
+            updateSelectedCount();
+        }
+
+        // 提交评论
+        commentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const content = document.getElementById('content').value.trim();
+
+            if (!content) {
+                alert('请输入评论内容');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = '提交中...';
+
+            try {
+                const response = await fetch(`${API_BASE}/submit?site=${SITE_ID}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        content: content
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || '提交失败');
+                }
+
+                const result = await response.json();
+
+                // 清空表单
+                commentForm.reset();
+                document.getElementById('username').value = '';
+
+                // 重新加载评论
+                await loadComments();
+
+                // 显示成功消息
+                submitBtn.textContent = '✅ 发表成功';
+                setTimeout(() => {
+                    submitBtn.textContent = '📝 发表评论';
+                    submitBtn.disabled = false;
+                }, 2000);
+
+            } catch (error) {
+                console.error('提交评论失败:', error);
+                submitBtn.textContent = '❌ 提交失败';
+                setTimeout(() => {
+                    submitBtn.textContent = '📝 发表评论';
+                    submitBtn.disabled = false;
+                }, 2000);
+            }
+        });
+
+        // 管理员功能
+        async function loginAdmin() {
+            const key = document.getElementById('adminKey').value.trim();
+            if (!key) {
+                alert('请输入管理员密钥');
+                return;
+            }
+
+            adminToken = key;
+            isAdmin = true;
+            adminControls.style.display = 'block';
+            document.getElementById('adminKey').value = '';
+            alert('管理员登录成功！');
+        }
+
+        function logoutAdmin() {
+            isAdmin = false;
+            adminToken = '';
+            deleteMode = false;
+            batchMode = false;
+            selectedComments.clear();
+            adminControls.style.display = 'none';
+            batchActions.style.display = 'none';
+            commentsList.classList.remove('delete-mode', 'batch-mode');
+            loadComments(); // 重新加载隐藏操作按钮
+            alert('已退出管理模式');
+        }
+
+        function showDeleteMode() {
+            if (!isAdmin) {
+                alert('请先登录管理员');
+                return;
+            }
+
+            deleteMode = true;
+            batchMode = false;
+            selectedComments.clear();
+            batchActions.style.display = 'none';
+            loadComments();
+            alert('单条删除模式已开启，点击评论右上角的删除按钮即可删除');
+        }
+
+        function showBatchMode() {
+            if (!isAdmin) {
+                alert('请先登录管理员');
+                return;
+            }
+
+            batchMode = true;
+            deleteMode = false;
+            selectedComments.clear();
+            batchActions.style.display = 'block';
+            loadComments();
+            alert('批量删除模式已开启，选择评论后点击删除选中');
+        }
+
+        function cancelBatchMode() {
+            batchMode = false;
+            selectedComments.clear();
+            batchActions.style.display = 'none';
+            loadComments();
+        }
+
+        function toggleCommentSelection(commentId) {
+            if (selectedComments.has(commentId)) {
+                selectedComments.delete(commentId);
+            } else {
+                selectedComments.add(commentId);
+            }
+            updateSelectedCount();
+        }
+
+        function selectAllComments() {
+            const checkboxes = document.querySelectorAll('.comment-checkbox');
+            selectedComments.clear();
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = true;
+                selectedComments.add(parseInt(checkbox.value));
+            });
+            updateSelectedCount();
+        }
+
+        function updateSelectedCount() {
+            selectedCount.textContent = `已选择 ${selectedComments.size} 条评论`;
+        }
+
+        async function deleteSelectedComments() {
+            if (!isAdmin || !adminToken) {
+                alert('请先登录管理员');
+                return;
+            }
+
+            if (selectedComments.size === 0) {
+                alert('请先选择要删除的评论');
+                return;
+            }
+
+            if (!confirm(`确定要删除选中的 ${selectedComments.size} 条评论吗？此操作不可恢复！`)) {
+                return;
+            }
+
+            try {
+                // 逐个删除选中的评论
+                const deletePromises = Array.from(selectedComments).map(commentId =>
+                    fetch(`${API_BASE}/admin/delete?site=${SITE_ID}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${adminToken}`
+                        },
+                        body: JSON.stringify({
+                            commentId: commentId
+                        })
+                    })
+                );
+
+                const results = await Promise.all(deletePromises);
+                const failedDeletes = results.filter(response => !response.ok);
+
+                if (failedDeletes.length > 0) {
+                    throw new Error(`部分评论删除失败（${failedDeletes.length}条）`);
+                }
+
+                alert(`成功删除 ${selectedComments.size} 条评论！`);
+                selectedComments.clear();
+                loadComments(); // 重新加载评论列表
+
+            } catch (error) {
+                console.error('批量删除评论失败:', error);
+                alert('删除失败: ' + error.message);
+            }
+        }
+
+        async function deleteComment(commentId) {
+            if (!isAdmin || !adminToken) {
+                alert('请先登录管理员');
+                return;
+            }
+
+            if (!confirm('确定要删除这条评论吗？此操作不可恢复！')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/admin/delete?site=${SITE_ID}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${adminToken}`
+                    },
+                    body: JSON.stringify({
+                        commentId: commentId
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || '删除失败');
+                }
+
+                const result = await response.json();
+                alert('评论删除成功！');
+                loadComments(); // 重新加载评论列表
+
+            } catch (error) {
+                console.error('删除评论失败:', error);
+                alert('删除失败: ' + error.message);
+            }
+        }
+
+        function refreshComments() {
+            loadComments();
+            alert('评论列表已刷新');
+        }
+
+        // 工具函数
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatTime(timestamp) {
+            if (!timestamp) return '刚刚';
+
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = now - date;
+
+            if (diff < 60 * 1000) return '刚刚';
+            if (diff < 60 * 60 * 1000) return `${Math.floor(diff / (60 * 1000))}分钟前`;
+            if (diff < 24 * 60 * 60 * 1000) return `${Math.floor(diff / (60 * 60 * 1000))}小时前`;
+
+            return date.toLocaleString('zh-CN');
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComments();
+
+            // 每30秒自动刷新评论
+            setInterval(loadComments, 30000);
+        });
+    </script>
+</body>
+
+</html>
