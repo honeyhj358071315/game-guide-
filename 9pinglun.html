@@ -335,231 +335,231 @@
     </div>
 
     <script>
-    // API配置
-    const API_BASE = 'https://comments.whmx.top';
-    const SITE_ID = 'site1'; // 您的站点ID
-    
-    // DOM元素
-    const commentForm = document.getElementById('commentForm');
-    const commentsList = document.getElementById('commentsList');
-    const updateTime = document.getElementById('updateTime');
-    const submitBtn = document.getElementById('submitBtn');
-    const adminPanel = document.getElementById('adminPanel');
-    const adminControls = document.getElementById('adminControls');
-
-    // 管理员状态
-    let isAdmin = false;
-    let adminToken = '';
-    let deleteMode = false;
-
-    // 加载评论
-    async function loadComments() {
-        try {
-            commentsList.innerHTML = '<div class="loading">加载评论中...</div>';
-            
-            const response = await fetch(`${API_BASE}/comments?site=${SITE_ID}`);
-            if (!response.ok) throw new Error('API请求失败');
-            
-            const comments = await response.json();
-            displayComments(comments);
-            updateTime.textContent = new Date().toLocaleString('zh-CN');
-            
-        } catch (error) {
-            console.error('加载评论失败:', error);
-            commentsList.innerHTML = '<div class="error">加载评论失败，请刷新重试</div>';
-        }
-    }
-
-    // 显示评论
-    function displayComments(comments) {
-        if (!comments || comments.length === 0) {
-            commentsList.innerHTML = '<div class="empty">暂无评论，快来发表第一条吧！</div>';
-            return;
-        }
+        // API配置
+        const API_BASE = 'https://comments.whmx.top';
+        const SITE_ID = 'site1';
         
-        // 根据删除模式设置CSS类
-        if (deleteMode) {
-            commentsList.classList.add('delete-mode');
-        } else {
-            commentsList.classList.remove('delete-mode');
+        // DOM元素
+        const commentForm = document.getElementById('commentForm');
+        const commentsList = document.getElementById('commentsList');
+        const updateTime = document.getElementById('updateTime');
+        const submitBtn = document.getElementById('submitBtn');
+        const adminPanel = document.getElementById('adminPanel');
+        const adminControls = document.getElementById('adminControls');
+
+        // 管理员状态
+        let isAdmin = false;
+        let adminToken = '';
+        let deleteMode = false;
+
+        // 加载评论
+        async function loadComments() {
+            try {
+                commentsList.innerHTML = '<div class="loading">加载评论中...</div>';
+                
+                const response = await fetch(`${API_BASE}/comments`);
+                if (!response.ok) throw new Error('API请求失败');
+                
+                const comments = await response.json();
+                displayComments(comments);
+                updateTime.textContent = new Date().toLocaleString('zh-CN');
+                
+            } catch (error) {
+                console.error('加载评论失败:', error);
+                commentsList.innerHTML = '<div class="error">加载评论失败，请刷新重试</div>';
+            }
         }
-        
-        commentsList.innerHTML = comments.map(comment => `
-            <div class="comment-item">
-                ${deleteMode ? `<button class="delete-btn" onclick="deleteComment(${comment.id})">删除</button>` : ''}
-                <div class="comment-header">
-                    <span class="comment-author">${escapeHtml(comment.username)}</span>
-                    <span class="comment-time">${formatTime(comment.timestamp)}</span>
+
+        // 显示评论
+        function displayComments(comments) {
+            if (!comments || comments.length === 0) {
+                commentsList.innerHTML = '<div class="empty">暂无评论，快来发表第一条吧！</div>';
+                return;
+            }
+            
+            // 根据删除模式设置CSS类
+            if (deleteMode) {
+                commentsList.classList.add('delete-mode');
+            } else {
+                commentsList.classList.remove('delete-mode');
+            }
+            
+            commentsList.innerHTML = comments.map(comment => `
+                <div class="comment-item">
+                    ${deleteMode ? `<button class="delete-btn" onclick="deleteComment(${comment.id})">删除</button>` : ''}
+                    <div class="comment-header">
+                        <span class="comment-author">${escapeHtml(comment.username)}</span>
+                        <span class="comment-time">${formatTime(comment.timestamp)}</span>
+                    </div>
+                    <div class="comment-content">${escapeHtml(comment.content)}</div>
                 </div>
-                <div class="comment-content">${escapeHtml(comment.content)}</div>
-            </div>
-        `).join('');
-    }
-
-    // 提交评论
-    commentForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const username = document.getElementById('username').value.trim() || '匿名玩家';
-        const content = document.getElementById('content').value.trim();
-        
-        if (!content) {
-            alert('请输入评论内容');
-            return;
+            `).join('');
         }
-        
-        submitBtn.disabled = true;
-        submitBtn.textContent = '提交中...';
-        
-        try {
-            const response = await fetch(`${API_BASE}/submit?site=${SITE_ID}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username: username,
-                    content: content
-                })
-            });
+
+        // 提交评论
+        commentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
             
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || '提交失败');
+            const username = document.getElementById('username').value.trim();
+            const content = document.getElementById('content').value.trim();
+            
+            if (!content) {
+                alert('请输入评论内容');
+                return;
             }
             
-            const result = await response.json();
+            submitBtn.disabled = true;
+            submitBtn.textContent = '提交中...';
             
-            // 清空表单
-            document.getElementById('content').value = '';
-            
-            // 重新加载评论
-            await loadComments();
-            
-            // 显示成功消息
-            submitBtn.textContent = '✅ 发表成功';
-            setTimeout(() => {
-                submitBtn.textContent = '📝 发表评论';
-                submitBtn.disabled = false;
-            }, 2000);
-            
-        } catch (error) {
-            console.error('提交评论失败:', error);
-            submitBtn.textContent = '❌ 提交失败';
-            setTimeout(() => {
-                submitBtn.textContent = '📝 发表评论';
-                submitBtn.disabled = false;
-            }, 2000);
-            alert('提交失败: ' + error.message);
-        }
-    });
+            try {
+                const response = await fetch(`${API_BASE}/submit`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        content: content
+                    })
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || '提交失败');
+                }
+                
+                const result = await response.json();
+                
+                // 清空表单
+                commentForm.reset();
+                document.getElementById('username').value = '';
+                
+                // 重新加载评论
+                await loadComments();
+                
+                // 显示成功消息
+                submitBtn.textContent = '✅ 发表成功';
+                setTimeout(() => {
+                    submitBtn.textContent = '📝 发表评论';
+                    submitBtn.disabled = false;
+                }, 2000);
+                
+            } catch (error) {
+                console.error('提交评论失败:', error);
+                submitBtn.textContent = '❌ 提交失败';
+                setTimeout(() => {
+                    submitBtn.textContent = '📝 发表评论';
+                    submitBtn.disabled = false;
+                }, 2000);
+            }
+        });
 
-    // 管理员功能
-    async function loginAdmin() {
-        const key = document.getElementById('adminKey').value.trim();
-        if (!key) {
-            alert('请输入管理员密钥');
-            return;
-        }
-        
-        adminToken = key;
-        isAdmin = true;
-        adminControls.style.display = 'block';
-        document.getElementById('adminKey').value = '';
-        alert('管理员登录成功！');
-    }
-
-    function logoutAdmin() {
-        isAdmin = false;
-        adminToken = '';
-        deleteMode = false;
-        adminControls.style.display = 'none';
-        commentsList.classList.remove('delete-mode');
-        loadComments();
-        alert('已退出管理模式');
-    }
-
-    function showDeleteMode() {
-        if (!isAdmin) {
-            alert('请先登录管理员');
-            return;
-        }
-        
-        deleteMode = true;
-        loadComments();
-        alert('删除模式已开启，点击评论右上角的删除按钮即可删除');
-    }
-
-    async function deleteComment(commentId) {
-        if (!isAdmin || !adminToken) {
-            alert('请先登录管理员');
-            return;
-        }
-        
-        if (!confirm('确定要删除这条评论吗？此操作不可恢复！')) {
-            return;
-        }
-        
-        try {
-            const response = await fetch(`${API_BASE}/admin/delete?site=${SITE_ID}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${adminToken}`
-                },
-                body: JSON.stringify({
-                    commentId: commentId
-                })
-            });
-            
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || '删除失败');
+        // 管理员功能
+        async function loginAdmin() {
+            const key = document.getElementById('adminKey').value.trim();
+            if (!key) {
+                alert('请输入管理员密钥');
+                return;
             }
             
-            const result = await response.json();
-            alert('评论删除成功！');
+            adminToken = key;
+            isAdmin = true;
+            adminControls.style.display = 'block';
+            document.getElementById('adminKey').value = '';
+            alert('管理员登录成功！');
+        }
+
+        function logoutAdmin() {
+            isAdmin = false;
+            adminToken = '';
+            deleteMode = false;
+            adminControls.style.display = 'none';
+            commentsList.classList.remove('delete-mode');
+            loadComments(); // 重新加载隐藏删除按钮
+            alert('已退出管理模式');
+        }
+
+        function showDeleteMode() {
+            if (!isAdmin) {
+                alert('请先登录管理员');
+                return;
+            }
+            
+            deleteMode = true;
+            loadComments(); // 重新加载显示删除按钮
+            alert('删除模式已开启，点击评论右上角的删除按钮即可删除');
+        }
+
+        async function deleteComment(commentId) {
+            if (!isAdmin || !adminToken) {
+                alert('请先登录管理员');
+                return;
+            }
+            
+            if (!confirm('确定要删除这条评论吗？此操作不可恢复！')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/admin/delete`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${adminToken}`
+                    },
+                    body: JSON.stringify({
+                        commentId: commentId
+                    })
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || '删除失败');
+                }
+                
+                const result = await response.json();
+                alert('评论删除成功！');
+                loadComments(); // 重新加载评论列表
+                
+            } catch (error) {
+                console.error('删除评论失败:', error);
+                alert('删除失败: ' + error.message);
+            }
+        }
+
+        function refreshComments() {
+            loadComments();
+            alert('评论列表已刷新');
+        }
+
+        // 工具函数
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatTime(timestamp) {
+            if (!timestamp) return '刚刚';
+            
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = now - date;
+            
+            if (diff < 60 * 1000) return '刚刚';
+            if (diff < 60 * 60 * 1000) return `${Math.floor(diff / (60 * 1000))}分钟前`;
+            if (diff < 24 * 60 * 60 * 1000) return `${Math.floor(diff / (60 * 60 * 1000))}小时前`;
+            
+            return date.toLocaleString('zh-CN');
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
             loadComments();
             
-        } catch (error) {
-            console.error('删除评论失败:', error);
-            alert('删除失败: ' + error.message);
-        }
-    }
-
-    function refreshComments() {
-        loadComments();
-        alert('评论列表已刷新');
-    }
-
-    // 工具函数
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    function formatTime(timestamp) {
-        if (!timestamp) return '刚刚';
-        
-        const date = new Date(timestamp);
-        const now = new Date();
-        const diff = now - date;
-        
-        if (diff < 60 * 1000) return '刚刚';
-        if (diff < 60 * 60 * 1000) return `${Math.floor(diff / (60 * 1000))}分钟前`;
-        if (diff < 24 * 60 * 60 * 1000) return `${Math.floor(diff / (60 * 60 * 1000))}小时前`;
-        
-        return date.toLocaleString('zh-CN');
-    }
-
-    // 初始化
-    document.addEventListener('DOMContentLoaded', () => {
-        loadComments();
-        
-        // 每30秒自动刷新评论
-        setInterval(loadComments, 30000);
-    });
-</script>
+            // 每30秒自动刷新评论
+            setInterval(loadComments, 30000);
+        });
+    </script>
 </body>
 </html>
