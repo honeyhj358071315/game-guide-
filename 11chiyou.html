@@ -596,10 +596,18 @@
                 // 处理删除模式
                 if (state.deleteMode) {
                     commentsList.classList.add('delete-mode');
-                    document.getElementById('batchControls').classList.add('active');
+                    // 安全地访问batchControls元素（如果存在）
+                    const batchControls = document.getElementById('batchControls');
+                    if (batchControls) {
+                        batchControls.classList.add('active');
+                    }
                 } else {
                     commentsList.classList.remove('delete-mode');
-                    document.getElementById('batchControls').classList.remove('active');
+                    // 安全地访问batchControls元素（如果存在）
+                    const batchControls = document.getElementById('batchControls');
+                    if (batchControls) {
+                        batchControls.classList.remove('active');
+                    }
                 }
 
                 // 按ID倒序排列，确保新评论在前面
