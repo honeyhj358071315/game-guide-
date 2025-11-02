@@ -51,31 +51,32 @@
         }
 
         .back-btn {
-    position: fixed; /* 定位方式：固定定位 */
-    top: 1px; /* 顶部距离：1像素 */
-    left: 50%; /* 左侧距离：50% - 这是实现居中的关键 */
-    transform: translateX(-50%); /* 水平变换：向左移动自身宽度的50% - 这也是实现居中的关键 */
-    z-index: 1000; /* 层级索引：1000（确保在其他元素上方） */
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 193, 7, 0.288);
-    border: 2px solid #ffc107;
-    border-radius: 8px;
-    color: #fff;
-    padding: 4px 10px;
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: all 0.3s;
-    margin-top: 5px;
-    /* 添加响应式确保在手机上也能正常居中 */
-    max-width: 90%; /* 防止在小屏幕上过宽 */
-    box-sizing: border-box; /* 确保padding不会增加元素总宽度 */
-}
+            position: fixed;
+            top: 1px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 193, 7, 0.288);
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            color: #fff;
+            padding: 4px 10px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 5px;
+            /* 添加响应式确保在手机上也能正常居中 */
+            max-width: 90%;
+            /* 防止在小屏幕上过宽 */
+            box-sizing: border-box;
+            /* 确保padding不会增加元素总宽度 */
+        }
 
         .back-btn:hover {
             background: rgba(255, 193, 7, 0.5);
-            transform: translateY(-2px);
+          
         }
 
         /* 开发者模式按钮 */
