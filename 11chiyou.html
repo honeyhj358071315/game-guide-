@@ -403,10 +403,7 @@
             <div class="comment-card">
                 <h2 class="card-title">🗣️ 发表评论</h2>
                 <form class="comment-form" id="commentForm">
-                    <div class="form-group">
-                        <label class="form-label">昵称（可选）</label>
-                        <input type="text" class="form-input" id="username" placeholder="匿名玩家">
-                    </div>
+
                     <div class="form-group">
                         <label class="form-label">评论内容 *</label>
                         <textarea class="form-textarea" id="content" placeholder="分享您的投票理由或游戏心得..." required></textarea>
@@ -419,7 +416,7 @@
 
             <!-- 评论展示区域 -->
             <div class="comment-card">
-                <h2 class="card-title">🔄 玩家反馈</h2>
+                <h2 class="card-title">🔄评论区h2>
                 <div class="comments-list" id="commentsList">
                     <div class="loading">加载评论中...</div>
                 </div>
@@ -671,7 +668,7 @@
                         },
                         body: JSON.stringify({
                             content: content,
-                            username: utils.generateRandomUsername() // 使用随机用户名
+                            username: utils.generateRandomUsername() // 自动生成随机用户名
                         })
                     });
 
@@ -687,8 +684,12 @@
 
                     // 清空表单
                     document.getElementById('content').value = '';
-                    document.getElementById('charCount').textContent = '0/500 字';
-                    document.getElementById('charCount').className = 'char-count';
+                    // 安全地设置字符计数（如果元素存在）
+                    const charCount = document.getElementById('charCount');
+                    if (charCount) {
+                        charCount.textContent = '0/500 字';
+                        charCount.className = 'char-count';
+                    }
 
                     // 重新加载评论
                     await this.loadComments();
