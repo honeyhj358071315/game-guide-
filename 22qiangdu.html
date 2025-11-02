@@ -103,7 +103,31 @@
             font-size: 0.9rem;
         }
 
-        /* 响应式设计 */
+        /* 评论区样式 - 与原版保持一致，使用更宽的容器 */
+        .comments-section {
+            margin: 40px 0;
+            max-width: 1200px; /* 改为和原版一样的宽度 */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #4cc9f0, #4361ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .layout-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -120,20 +144,254 @@
             .poll-container {
                 padding: 15px;
             }
+            
+            .layout-2col {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "comments"
+                    "form";
+            }
+            
+            .comment-card:nth-child(1) {
+                grid-area: form;
+                order: 2;
+            }
+            
+            .comment-card:nth-child(2) {
+                grid-area: comments;
+                order: 1;
+            }
+            
+            .comments-list {
+                height: 400px;
+            }
+        }
+        
+        .comment-card {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            border-radius: 16px;
+            padding: 25px;
+            border: 2px solid #415a77;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .comment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #4cc9f0, #4361ee, transparent);
+        }
+        
+        .card-title {
+            color: #e0e1dd;
+            margin: 0 0 15px 0;
+            font-size: 1.4em;
+            text-align: center;
+        }
+        
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .form-label {
+            color: #778da9;
+            font-size: 0.9em;
+        }
+        
+        .form-input, .form-textarea {
+            padding: 12px;
+            border: 1px solid #415a77;
+            border-radius: 8px;
+            background: rgba(13, 27, 42, 0.6);
+            color: #e0e1dd;
+            font-size: 1em;
+        }
+        
+        .form-textarea {
+            height: 120px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .submit-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #4361ee, #4cc9f0);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .comments-list {
+            height: 500px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .comment-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            border-left: 4px solid #4361ee;
+            animation: fadeIn 0.3s ease-in;
+            position: relative;
+        }
+        
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 0.8em;
+            cursor: pointer;
+            display: none;
+        }
+        
+        .delete-mode .delete-btn {
+            display: block;
+        }
+        
+        .delete-mode .comment-item {
+            border-left-color: #ef4444;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .comment-author {
+            color: #4cc9f0;
+            font-weight: bold;
+        }
+        
+        .comment-time {
+            color: #778da9;
+            font-size: 0.8em;
+        }
+        
+        .comment-content {
+            color: #e0e1dd;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+        
+        .loading, .error, .empty {
+            text-align: center;
+            color: #778da9;
+            padding: 40px;
+        }
+        
+        .error {
+            color: #f87171;
+        }
+        
+        .update-info {
+            text-align: center;
+            color: #778da9;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+        
+        .admin-panel {
+            margin-top: 30px;
+        }
+        
+        .admin-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #415a77;
+            border-radius: 6px;
+            background: rgba(13,27,42,0.6);
+            color: #e0e1dd;
+            margin-bottom: 15px;
+        }
+        
+        .admin-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        
+        .login-btn {
+            background: #4361ee;
+            color: white;
+        }
+        
+        .logout-btn {
+            background: #f87171;
+            color: white;
+        }
+        
+        .delete-mode-btn {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .refresh-btn {
+            background: #10b981;
+            color: white;
+        }
+        
+        .admin-controls {
+            margin-top: 20px;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>💪强度投票</h1>
+            <h1>强度投票</h1>
             <div class="subtitle">发起你得投票，选择你得敌人</div>
             <a href="index.html" class="back-btn">← 返回攻略主页</a>
         </header>
 
-            <!-- 投票嵌入区域 -->
-           <div class="strawpoll-embed" id="strawpoll_bVg8B7V1NyY" style="height: 4192px; max-width: 640px; width: 100%; margin: 0 auto; display: flex; flex-direction: column;"><iframe title="StrawPoll Embed" id="strawpoll_iframe_bVg8B7V1NyY" src="https://strawpoll.com/embed/bVg8B7V1NyY" style="position: static; visibility: visible; display: block; width: 100%; flex-grow: 1;" frameborder="0" allowfullscreen allowtransparency>Loading...</iframe><script async src="https://cdn.strawpoll.com/dist/widgets.js" charset="utf-8"></script></div>
-            <!-- 评论区 - 使用独立的宽容器 -->
+        <!-- 投票嵌入区域 -->
+        <div class="strawpoll-embed" id="strawpoll_bVg8B7V1NyY" style="height: 4192px; max-width: 640px; width: 100%; margin: 0 auto; display: flex; flex-direction: column;"><iframe title="StrawPoll Embed" id="strawpoll_iframe_bVg8B7V1NyY" src="https://strawpoll.com/embed/bVg8B7V1NyY" style="position: static; visibility: visible; display: block; width: 100%; flex-grow: 1;" frameborder="0" allowfullscreen allowtransparency>Loading...</iframe><script async src="https://cdn.strawpoll.com/dist/widgets.js" charset="utf-8"></script></div>
+    </div>
+
+    <!-- 评论区 - 使用独立的宽容器 -->
     <div class="comments-section">
         <h1 class="section-title">💬 玩家讨论区</h1>
         
@@ -191,7 +449,7 @@
      <script>
         // API配置
         const API_BASE = 'https://comments.whmx.top';
-        const SITE_ID = 'site3';
+        const SITE_ID = 'site2';
 
         // 状态管理
         const state = {
