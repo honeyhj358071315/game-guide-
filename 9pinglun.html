@@ -520,6 +520,48 @@
             color: #f87171;
             border: 1px solid #f87171;
         }
+
+        /* 公告栏样式 */
+        .announcement-bar {
+            margin-bottom: 30px;
+        }
+
+        .announcement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .announcement-content {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid #f59e0b;
+            min-height: 60px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            line-height: 1.6;
+        }
+
+        .announcement-editor {
+            margin-top: 15px;
+        }
+
+        .announcement-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .edit-announcement-btn {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .edit-announcement-btn:hover {
+            background: #e6900b;
+        }
     </style>
 </head>
 
@@ -536,6 +578,25 @@
         </div>
 
         <div class="comments-section">
+            <!-- 公告栏 -->
+            <div class="comment-card announcement-bar">
+                <div class="announcement-header">
+                    <h2 class="card-title">📢 公告栏</h2>
+                    <button class="admin-btn edit-announcement-btn" onclick="toggleAnnouncementEdit()" style="display: none;">编辑公告</button>
+                </div>
+                <div class="announcement-content" id="announcementContent">
+                    <!-- 公告内容将通过JavaScript显示 -->
+                    <p>暂无公告</p>
+                </div>
+                <div class="announcement-editor" style="display: none;">
+                    <textarea class="form-textarea" id="announcementTextarea" placeholder="输入公告内容，支持多行文本..." rows="4"></textarea>
+                    <div class="announcement-actions">
+                        <button class="admin-btn login-btn" onclick="saveAnnouncement()">保存公告</button>
+                        <button class="admin-btn logout-btn" onclick="cancelAnnouncementEdit()">取消</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="layout-2col">
                 <!-- 评论提交表单 -->
                 <div class="comment-card">
@@ -597,6 +658,87 @@
     </div>
 
     <script>
+        // 公告栏功能
+        function loadAnnouncement() {
+            // 从localStorage加载公告
+            const announcement = localStorage.getItem('announcement');
+            const announcementContent = document.getElementById('announcementContent');
+            if (announcement) {
+                announcementContent.innerHTML = announcement.replace(/\n/g, '<br>');
+            } else {
+                announcementContent.innerHTML = '<p>暂无公告</p>';
+            }
+        }
+
+        function toggleAnnouncementEdit() {
+            const announcementContent = document.getElementById('announcementContent');
+            const announcementEditor = document.querySelector('.announcement-editor');
+            const announcementTextarea = document.getElementById('announcementTextarea');
+            
+            // 如果是管理员已登录
+            if (isAdminLoggedIn()) {
+                // 从localStorage获取当前公告内容
+                const announcement = localStorage.getItem('announcement') || '';
+                announcementTextarea.value = announcement;
+                
+                // 切换显示状态
+                announcementContent.style.display = 'none';
+                announcementEditor.style.display = 'block';
+            } else {
+                alert('请先以管理员身份登录');
+            }
+        }
+
+        function saveAnnouncement() {
+            const announcementTextarea = document.getElementById('announcementTextarea');
+            const announcement = announcementTextarea.value.trim();
+            
+            // 保存到localStorage
+            localStorage.setItem('announcement', announcement);
+            
+            // 更新显示
+            const announcementContent = document.getElementById('announcementContent');
+            const announcementEditor = document.querySelector('.announcement-editor');
+            
+            if (announcement) {
+                announcementContent.innerHTML = announcement.replace(/\n/g, '<br>');
+            } else {
+                announcementContent.innerHTML = '<p>暂无公告</p>';
+            }
+            
+            // 隐藏编辑界面
+            announcementContent.style.display = 'block';
+            announcementEditor.style.display = 'none';
+            
+            alert('公告保存成功');
+        }
+
+        function cancelAnnouncementEdit() {
+            const announcementContent = document.getElementById('announcementContent');
+            const announcementEditor = document.querySelector('.announcement-editor');
+            
+            // 取消编辑，恢复显示
+            announcementContent.style.display = 'block';
+            announcementEditor.style.display = 'none';
+        }
+
+        // 检查管理员登录状态的函数
+        function isAdminLoggedIn() {
+            return state.isAdmin && localStorage.getItem('isAdminLoggedIn') === 'true';
+        }
+
+        // 更新编辑按钮显示状态
+        function updateAnnouncementEditButton() {
+            const editButton = document.querySelector('.edit-announcement-btn');
+            editButton.style.display = isAdminLoggedIn() ? 'inline-block' : 'none';
+        }
+
+        // 在页面加载时初始化公告栏
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAnnouncement();
+            updateAnnouncementEditButton();
+        });
+
         // API配置
         const API_BASE = 'https://comments.whmx.top';
         const SITE_ID = 'site1';
@@ -907,8 +1049,12 @@
                         // 验证成功，设置登录状态
                         state.adminToken = key;
                         state.isAdmin = true;
+                        // 更新localStorage用于公告栏编辑权限控制
+                        localStorage.setItem('isAdminLoggedIn', 'true');
                         document.getElementById('adminControls').style.display = 'block';
                         document.getElementById('adminKey').value = '';
+                        // 更新公告编辑按钮显示状态
+                        updateAnnouncementEditButton();
                         utils.showAlert('管理员登录成功！');
                     } else {
                         // 验证失败
@@ -929,9 +1075,13 @@
                 state.adminToken = '';
                 state.deleteMode = false;
                 this.selectedComments = [];
+                // 清除localStorage中的管理员登录状态
+                localStorage.removeItem('isAdminLoggedIn');
                 document.getElementById('adminControls').style.display = 'none';
                 document.getElementById('commentsList').classList.remove('delete-mode');
                 document.getElementById('batchControls').classList.remove('active');
+                // 更新公告编辑按钮显示状态
+                updateAnnouncementEditButton();
                 commentManager.loadComments();
                 utils.showAlert('已退出管理模式');
             },
