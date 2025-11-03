@@ -585,7 +585,7 @@
                     <button class="admin-btn edit-announcement-btn" onclick="toggleAnnouncementEdit()" style="display: none;">编辑公告</button>
                 </div>
                 <div class="announcement-content" id="announcementContent">
-                    <!-- 公告内容将通过JavaScript显示 -->
+                    <!-- 公告内容直接存储在HTML中 -->
                     <p>暂无公告</p>
                 </div>
                 <div class="announcement-editor" style="display: none;">
@@ -660,12 +660,10 @@
     <script>
         // 公告栏功能
         function loadAnnouncement() {
-            // 从localStorage加载公告
-            const announcement = localStorage.getItem('announcement');
+            // 直接从HTML元素加载公告（已经在页面中渲染）
             const announcementContent = document.getElementById('announcementContent');
-            if (announcement) {
-                announcementContent.innerHTML = announcement.replace(/\n/g, '<br>');
-            } else {
+            // 如果内容为空，显示默认提示
+            if (!announcementContent.textContent.trim() || announcementContent.textContent.trim() === '暂无公告') {
                 announcementContent.innerHTML = '<p>暂无公告</p>';
             }
         }
@@ -677,9 +675,9 @@
             
             // 如果是管理员已登录
             if (isAdminLoggedIn()) {
-                // 从localStorage获取当前公告内容
-                const announcement = localStorage.getItem('announcement') || '';
-                announcementTextarea.value = announcement;
+                // 从HTML元素中获取当前公告内容（移除HTML标签）
+                const currentContent = announcementContent.textContent === '暂无公告' ? '' : announcementContent.textContent;
+                announcementTextarea.value = currentContent;
                 
                 // 切换显示状态
                 announcementContent.style.display = 'none';
@@ -693,10 +691,7 @@
             const announcementTextarea = document.getElementById('announcementTextarea');
             const announcement = announcementTextarea.value.trim();
             
-            // 保存到localStorage
-            localStorage.setItem('announcement', announcement);
-            
-            // 更新显示
+            // 直接更新HTML元素内容（不再使用localStorage）
             const announcementContent = document.getElementById('announcementContent');
             const announcementEditor = document.querySelector('.announcement-editor');
             
@@ -724,7 +719,7 @@
 
         // 检查管理员登录状态的函数
         function isAdminLoggedIn() {
-            return state.isAdmin && localStorage.getItem('isAdminLoggedIn') === 'true';
+            return state.isAdmin;
         }
 
         // 更新编辑按钮显示状态
@@ -1049,8 +1044,6 @@
                         // 验证成功，设置登录状态
                         state.adminToken = key;
                         state.isAdmin = true;
-                        // 更新localStorage用于公告栏编辑权限控制
-                        localStorage.setItem('isAdminLoggedIn', 'true');
                         document.getElementById('adminControls').style.display = 'block';
                         document.getElementById('adminKey').value = '';
                         // 更新公告编辑按钮显示状态
@@ -1075,8 +1068,6 @@
                 state.adminToken = '';
                 state.deleteMode = false;
                 this.selectedComments = [];
-                // 清除localStorage中的管理员登录状态
-                localStorage.removeItem('isAdminLoggedIn');
                 document.getElementById('adminControls').style.display = 'none';
                 document.getElementById('commentsList').classList.remove('delete-mode');
                 document.getElementById('batchControls').classList.remove('active');
