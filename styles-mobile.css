@@ -152,9 +152,12 @@ h1 {
 
 .quick-buttons {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex-direction: row;
+    gap: 10px;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .quick-btn {
@@ -162,14 +165,18 @@ h1 {
     border: 2px solid #4a9de3;
     border-radius: 8px;
     color: #fff;
-    padding: 12px 20px;
-    font-size: 1rem;
+    padding: 10px 15px;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s;
     text-decoration: none;
-    width: 100%;
-    max-width: 300px;
+    flex: 1;
+    min-width: 80px;
+    max-width: 30%;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .quick-btn:active {
