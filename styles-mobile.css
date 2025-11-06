@@ -129,8 +129,14 @@ h1 {
     opacity: 0.9;
     text-align: center;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    /* autoprefixer: off */
     -webkit-box-orient: vertical;
+    /* autoprefixer: on */
+    -webkit-line-clamp: 2;
+    /* 标准属性作为后备 */
+    display: box;
+    box-orient: vertical;
+    line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
     max-height: 36px;
