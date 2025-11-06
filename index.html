@@ -5,204 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>懒人躺平攻略 - 导航页</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 100%);
-            color: #e0e0e0;
-            line-height: 1.6;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-            padding: 40px;
-            background: rgba(16, 36, 54, 0.8);
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            border-left: 6px solid #4a9de3;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: #4a9de3;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            color: #a0c8f0;
-            margin-bottom: 30px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
-            width: 100%;
-        }
-
-        .nav-card {
-            background: rgba(30, 60, 90, 0.9);
-            border-radius: 15px;
-            padding: 40px 30px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 200px;
-        }
-
-        .nav-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-            border-color: #4a9de3;
-            background: rgba(40, 80, 120, 0.9);
-        }
-
-        .nav-card.strategy {
-            border-left: 6px solid #4a9de3;
-        }
-
-        .nav-card.ranged {
-            border-left: 6px solid #ff9e64;
-        }
-
-        .nav-card.magic {
-            border-left: 6px solid #ba68c8;
-        }
-
-        .nav-card.light {
-            border-left: 6px solid #4cd964;
-        }
-
-        .nav-card.guard {
-            border-left: 6px solid #ff6b6b;
-        }
-
-        .nav-card.tips {
-            border-left: 6px solid #ffc107;
-        }
-
-        .nav-card.navigation {
-            border-left: 6px solid #ba68c8;
-        }
-
-        .nav-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-        }
-
-        .nav-title {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .nav-desc {
-            font-size: 1.1rem;
-            color: #a0c8f0;
-            opacity: 0.9;
-        }
-
-        .quick-access {
-            margin-top: 50px;
-            padding: 30px;
-            background: rgba(16, 36, 54, 0.6);
-            border-radius: 12px;
-            width: 100%;
-        }
-
-        .quick-access h2 {
-            color: #4a9de3;
-            margin-bottom: 25px;
-            font-size: 1.8rem;
-        }
-
-        .quick-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .quick-btn {
-            background: rgba(74, 157, 227, 0.3);
-            border: 2px solid #4a9de3;
-            border-radius: 8px;
-            color: #fff;
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-
-        .quick-btn:hover {
-            background: rgba(74, 157, 227, 0.5);
-            transform: translateY(-2px);
-        }
-
-        footer {
-            margin-top: 60px;
-            padding: 30px;
-            color: #a0c8f0;
-            font-size: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            .nav-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .nav-card {
-                padding: 30px 20px;
-                min-height: 150px;
-            }
-            
-            .nav-icon {
-                font-size: 2.8rem;
-            }
-            
-            .nav-title {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    <!-- PC端样式 -->
+    <link rel="stylesheet" href="styles-pc.css" media="screen and (min-width: 769px)">
+    
+    <!-- 手机端样式 -->
+    <link rel="stylesheet" href="styles-mobile.css" media="screen and (max-width: 768px)">
 </head>
 
 <body>
@@ -211,7 +18,7 @@
             <h1>🚀 懒人躺平攻略大全</h1>
             <div class="subtitle">
                 测试阶段，此网页旨在提供一些新手帮助，如有错误地方请联系本人 B站UP：【海之白葉】我会进行修正。
-                以及有任何意见冲突，请勿上升攻击，合理保留各自意见。网站更新会龟速进行。
+                以及有任何意见冲突，请勿上升攻击，合理保留各自意见。
             </div>
         </header>
 
@@ -249,13 +56,13 @@
             <a href="6xinshou.html#tips-section" class="nav-card tips">
                 <div class="nav-icon">💡</div>
                 <div class="nav-title">新手导航</div>
-                <div class="nav-desc">入门攻略导航，入坑注意事项，其他攻略作者</div>
+                <div class="nav-desc">入门攻略导航，入坑注意事项</div>
             </a>
 
             <a href="7daohang.html#navigation-section" class="nav-card navigation">
                 <div class="nav-icon">🧭</div>
-                <div class="nav-title">未完工</div>
-                <div class="nav-desc"></div>
+                <div class="nav-title">攻略作者导航</div>
+                <div class="nav-desc">其他硬核UP主</div>
             </a>
 
             <a href="8dangqidaohang.html#navigation-section" class="nav-card navigation">
@@ -266,8 +73,8 @@
             
             <a href="9pinglun.html#navigation-section" class="nav-card navigation">
                 <div class="nav-icon">💻</div>
-                <div class="nav-title">公告/建议</div>
-                <div class="nav-desc">可以提供建议/网站更新公告，群号766097667</div>
+                <div class="nav-title">评论区</div>
+                <div class="nav-desc">可以提供意见与建议</div>
             </a>
         </div>
 
