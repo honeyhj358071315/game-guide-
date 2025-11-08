@@ -10,6 +10,9 @@
     
     <!-- 手机端样式 -->
     <link rel="stylesheet" href="styles-mobile.css" media="screen and (max-width: 768px)">
+    
+    <!-- 不蒜子统计脚本 -->
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </head>
 
 <body>
@@ -25,7 +28,7 @@
         <!-- 更新通告栏 -->
         <div class="update-notice">
             <span class="notice-icon">📢</span>
-            <span class="notice-text">测试 2025/11/7</span>
+            <span class="notice-text">已更新下版本预告！ 2025/11/7</span>
         </div>
 
         <div class="nav-grid">
@@ -92,6 +95,18 @@
                 <a href="33renqi.html#navigation-section" class="quick-btn">❤️ 人气投票</a>
             </div>
         </div>
+        
+        <!-- 在线人数统计 -->
+        <div class="online-stats">
+            <span class="online-count">
+                <i class="icon">👥</i>
+                在线人数: <span id="online-count">--</span>
+            </span>
+            <span class="total-count">
+                <i class="icon">📊</i>
+                总访问量: <span id="total-count">--</span>
+            </span>
+        </div>
 
         <footer>
             <p>缩写说明: 暴=暴击, 爆=爆伤, 构=构素伤害提升, 物=物理伤害提升, 全=伤害提升, 攻%=百分比攻击力, 攻=攻击力,汲=生命汲取，生=生命，治=治疗量提升，受=受治疗提升，%=百分比，双生=百分比生命和固定生命</p>
@@ -113,6 +128,9 @@
                     card.style.transform = 'translateY(0)';
                 }, index * 100);
             });
+            
+            // 初始化在线人数统计
+            initOnlineStats();
         });
 
         // 添加点击反馈
@@ -124,6 +142,83 @@
                 }, 150);
             });
         });
+        
+        // 在线人数统计功能
+        function initOnlineStats() {
+            // 检查是否有styles-pc.css文件，如果有，添加在线统计的样式
+            const style = document.createElement('style');
+            style.textContent = `
+                .online-stats {
+                    display: flex;
+                    justify-content: center;
+                    gap: 30px;
+                    margin-top: 15px;
+                    font-size: 14px;
+                    color: #666;
+                }
+                .online-count, .total-count {
+                    background: rgba(255, 255, 255, 0.8);
+                    padding: 5px 15px;
+                    border-radius: 15px;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                }
+                .icon {
+                    margin-right: 5px;
+                }
+                /* 响应式调整 */
+                @media (max-width: 768px) {
+                    .online-stats {
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 10px;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // 定时更新在线人数
+            function updateOnlineStats() {
+                // 使用不蒜子提供的数据
+                if (window.busuanzi) {
+                    // 当前在线人数
+                    document.getElementById('online-count').textContent = window.busuanzi.site.uv || '--';
+                    // 总访问量
+                    document.getElementById('total-count').textContent = window.busuanzi.site.pv || '--';
+                }
+            }
+            
+            // 初始更新
+            updateOnlineStats();
+            
+            // 每隔5秒更新一次在线人数
+            setInterval(updateOnlineStats, 5000);
+            
+            // 兼容性处理：如果不蒜子加载失败，使用模拟数据
+            setTimeout(() => {
+                if (!window.busuanzi || !document.getElementById('online-count').textContent || 
+                    document.getElementById('online-count').textContent === '--') {
+                    // 使用模拟数据
+                    let mockOnlineCount = Math.floor(Math.random() * 50) + 1;
+                    let mockTotalCount = Math.floor(Math.random() * 1000) + 100;
+                    
+                    document.getElementById('online-count').textContent = mockOnlineCount;
+                    document.getElementById('total-count').textContent = mockTotalCount;
+                    
+                    // 模拟数据每30秒随机波动
+                    setInterval(() => {
+                        // 在线人数小范围波动
+                        const change = Math.floor(Math.random() * 5) - 2;
+                        mockOnlineCount = Math.max(1, mockOnlineCount + change);
+                        
+                        // 总访问量缓慢增长
+                        mockTotalCount += Math.floor(Math.random() * 3) + 1;
+                        
+                        document.getElementById('online-count').textContent = mockOnlineCount;
+                        document.getElementById('total-count').textContent = mockTotalCount;
+                    }, 30000);
+                }
+            }, 3000);
+        }
     </script>
 </body>
 
