@@ -3,336 +3,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>百度贴吧 - 帖子详情</title>
+    <title>百度贴吧 - 帖子列表</title>
     <!-- 引入PC样式 -->
-    <link rel="stylesheet" href="forum-post.css">
+    <link rel="stylesheet" href="forum-index.css">
     <!-- 引入响应式（手机/平板）样式 -->
-    <link rel="stylesheet" href="forum-post-responsive.css">
+    <link rel="stylesheet" href="forum-index-responsive.css">
 </head>
 <body>
-    <!-- 顶部导航栏 -->
-    <header class="header">
-        <div class="header-content">
-            <a href="forum-index.html" class="back-btn">← 返回列表</a>
-            <h1>📖 帖子详情</h1>
-            <button id="themeToggle" class="theme-toggle" aria-label="切换主题">🌙</button>
-        </div>
-    </header>
-    
-    <!-- 管理员删除按钮 - 默认隐藏，双击显示 -->
-    <div id="adminDeleteBtn" style="display: none; position: fixed; bottom: 20px; left: 20px; z-index: 9999;">
-        <button onclick="deletePost()" style="background: #ff4757; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">
-            🗑️ 删除帖子
-        </button>
-    </div>
-    
     <div class="container">
-        <!-- 帖子详情 -->
-        <div class="post-detail">
-            <div id="postDetailContainer">加载中...</div>
+        <!-- 顶部导航栏 -->
+        <header class="header">
+            <div class="header-content">
+            <h1>🦄曲解器者 - 综合讨论区</h1>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="header-nav">
+                    <a href="index.html">首页</a>
+                    <a href="#">关注</a>
+                    <a href="#">排行榜</a>
+                </div>
+                <button id="themeToggle" class="theme-toggle" aria-label="切换主题">🌙</button>
+            </div>
+        </div>
+        </header>
+        
+        <!-- 工具栏 -->
+        <div class="toolbar">
+            <span>欢迎来到咕物吧！</span>
+            <button class="create-post-btn" onclick="showCreatePostModal()">📝 发表新帖</button>
         </div>
         
-        <!-- 评论区 -->
-        <div class="comments-section">
-            <div class="comments-header">💬 评论区</div>
-            <div class="comment-form">
-                <div class="form-group">
-                    <label>昵称 *</label>
-                    <input type="text" id="commentNick" placeholder="您的昵称" required>
-                </div>
-                <div class="form-group">
-                    <label>邮箱</label>
-                    <input type="email" id="commentMail" placeholder="您的邮箱（可选）">
-                </div>
-                <div class="form-group">
-                    <label>评论内容 *</label>
-                    <textarea id="commentContent" placeholder="写下您的评论..." required></textarea>
-                </div>
-                <button class="submit-btn" onclick="submitComment()">发表评论</button>
+        <!-- 分类筛选 -->
+        <div class="category-filter">
+            <div class="category-tabs">
+                <div class="category-tab active" onclick="filterByCategory('all')">全部</div>
+                <div class="category-tab" onclick="filterByCategory('tech')">科技</div>
+                <div class="category-tab" onclick="filterByCategory('life')">生活</div>
+                <div class="category-tab" onclick="filterByCategory('entertainment')">娱乐</div>
+                <div class="category-tab" onclick="filterByCategory('education')">教育</div>
+                <div class="category-tab" onclick="filterByCategory('other')">其他</div>
             </div>
-            <div class="comment-list">
-                <div class="comment-count">评论 (0)</div>
-                <div id="commentsContainer">加载评论中...</div>
+        </div>
+        
+        <!-- 帖子列表 -->
+        <div class="posts-section">
+            <div class="posts-header">
+                <span>最新帖子</span>
+                <span class="post-count">共 <span id="totalPosts">0</span> 个帖子</span>
             </div>
+            <div id="postsContainer">加载中...</div>
         </div>
     </div>
-    <script>
-        const API_BASE = 'https://bbs.whmx.top';
-        
-        // 获取URL参数
-        function getUrlParam(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-        
-        const postId = getUrlParam('id');
-        
-        // 获取分类中文名称
-        function getCategoryName(category) {
-            const categoryMap = {
-                'tech': '技术',
-                'life': '生活',
-                'entertainment': '娱乐',
-                'education': '教育',
-                'other': '其他'
-            };
-            return categoryMap[category] || '其他';
-        }
-        
-        // 加载帖子详情和评论
-        async function loadPostDetail() {
-            if (!postId) {
-                document.getElementById('postDetailContainer').innerHTML = 
-                    '<p style="color: var(--accent-color); padding: 20px; text-align: center;">帖子ID无效</p>';
-                return;
+    
+    <!-- 创建帖子模态框 -->
+    <div id="createPostModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>发表新帖子</h3>
+            </div>
+            <div class="form-group">
+                <label>帖子标题 *</label>
+                <input type="text" id="postTitle" placeholder="请输入帖子标题" required>
+            </div>
+            <div class="form-group">
+                <label>帖子分类 *</label>
+                <select id="postCategory" required>
+                    <option value="tech">科技</option>
+                    <option value="life">生活</option>
+                    <option value="entertainment">娱乐</option>
+                    <option value="education">教育</option>
+                    <option value="other">其他</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>帖子内容 *</label>
+                <textarea id="postContent" placeholder="请输入帖子内容..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label>上传图片（可选）</label>
+                <input type="file" id="postImages" multiple accept="image/*">
+                <p style="font-size: 12px; color: var(--text-light); margin-top: 5px;">支持上传多张图片，单张不超过5MB</p>
+                <div id="imagePreview" style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;"></div>
+            </div>
+            <div class="form-group">
+                <label>作者昵称 *</label>
+                <input type="text" id="postAuthor" placeholder="您的昵称" required>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="hideCreatePostModal()">取消</button>
+                <button class="btn btn-primary" onclick="createPost()">发表</button>
+            </div>
+        </div>
+    </div><script>
+    const API_BASE = 'https://bbs.whmx.top';
+    let allPosts = [];
+    let currentCategory = 'all';
+    
+    // 加载帖子列表
+    async function loadPosts() {
+        try {
+            const response = await fetch(API_BASE + '/posts');
+            const result = await response.json();
+            if (result.errno === 0) {
+                allPosts = result.data || [];
+                document.getElementById('totalPosts').textContent = allPosts.length;
+                filterByCategory(currentCategory);
+            } else {
+                document.getElementById('postsContainer').innerHTML = 
+                    '<p style="color: var(--accent-color);">加载帖子失败</p>';
             }
-            
-            try {
-                const response = await fetch(API_BASE + '/posts/' + postId);
-                const result = await response.json();
-                
-                if (result.errno === 0) {
-                    displayPostDetail(result.data.post);
-                    displayComments(result.data.comments);
-                } else {
-                    document.getElementById('postDetailContainer').innerHTML = 
-                        '<p style="color: var(--accent-color); padding: 20px; text-align: center;">加载帖子失败: ' + result.errmsg + '</p>';
-                }
-            } catch (error) {
-                document.getElementById('postDetailContainer').innerHTML = 
-                    '<p style="color: var(--accent-color); padding: 20px; text-align: center;">网络错误: ' + error.message + '</p>';
+        } catch (error) {
+            document.getElementById('postsContainer').innerHTML = 
+                '<p style="color: var(--accent-color);">网络错误: ' + error.message + '</p>';
+        }
+    }
+    
+    // 按分类筛选帖子
+    function filterByCategory(category) {
+        currentCategory = category;
+        
+        // 更新分类标签状态
+        const tabs = document.querySelectorAll('.category-tab');
+        tabs.forEach(tab => {
+            if (tab.textContent.trim() === '全部' && category === 'all') {
+                tab.classList.add('active');
+            } else if (tab.textContent.trim() === getCategoryName(category) && category !== 'all') {
+                tab.classList.add('active');
+            } else {
+                tab.classList.remove('active');
             }
+        });
+        
+        // 筛选帖子
+        let filteredPosts = allPosts;
+        if (category !== 'all') {
+            filteredPosts = allPosts.filter(post => post.category === category);
         }
         
-        // 显示帖子详情
-        function displayPostDetail(post) {
-            const container = document.getElementById('postDetailContainer');
+        displayPosts(filteredPosts);
+    }
+    
+    // 获取分类中文名
+    function getCategoryName(category) {
+        const categoryMap = {
+            'tech': '科技',
+            'life': '生活',
+            'entertainment': '娱乐',
+            'education': '教育',
+            'other': '其他'
+        };
+        return categoryMap[category] || '其他';
+    }
+    
+    // 显示帖子列表
+    function displayPosts(posts) {
+        const container = document.getElementById('postsContainer');
+        if (!posts || posts.length === 0) {
+            container.innerHTML = '<p style="color: var(--text-light); padding: 20px; text-align: center;">暂无帖子，快来发表第一个帖子吧！</p>';
+            return;
+        }
+        
+        let html = '';
+        posts.forEach(post => {
+            const preview = post.content.length > 100 ? 
+                post.content.substring(0, 100) + '...' : post.content;
             const time = new Date(post.created).toLocaleString();
             const categoryName = getCategoryName(post.category || 'other');
             
-            let html = '';
-            
-            // 帖子头部信息
-            html += '<div class="post-header">';
+            html += '<div class="post-item" onclick="viewPost(\'' + post.id + '\')">';
+            html += '<div class="post-prefix"></div>'; // 在每个帖子前面添加样式元素
+            html += '<div class="post-main">';
             html += '<div class="post-title">' + post.title + '</div>';
+            html += '<div class="post-content-preview">' + preview + '</div>';
             html += '<div class="post-meta">';
-            html += '<span class="category-badge">' + categoryName + '</span>';
+            html += '<span style="background-color: var(--secondary-color); padding: 2px 8px; border-radius: 3px; font-size: 12px;">' + categoryName + '</span>';
             html += '<span>作者: ' + post.author + '</span>';
-            html += '<span>发布时间: ' + time + '</span>';
+            html += '<span>时间: ' + time + '</span>';
             html += '<span>浏览: ' + (post.view_count || 0) + '</span>';
             html += '<span>评论: ' + (post.comment_count || 0) + '</span>';
+            html += '<span>点赞: ' + (post.like_count || 0) + '</span>';
+            html += '<span>收藏: ' + (post.collect_count || 0) + '</span>';
             html += '</div>';
             html += '</div>';
-            
-            // 帖子内容
-            html += '<div class="post-content">';
-            
-            // 将内容按换行符分割成段落
-            const paragraphs = post.content.split(/\r?\n/);
-            paragraphs.forEach(para => {
-                if (para.trim()) {
-                    html += '<p>' + para + '</p>';
+            html += '</div>';
+        });
+        
+        container.innerHTML = html;
+    }
+    
+    // 查看帖子详情
+    function viewPost(postId) {
+        window.location.href = 'forum-post.html?id=' + postId;
+    }
+    
+    // 显示创建帖子模态框
+    function showCreatePostModal() {
+        document.getElementById('createPostModal').style.display = 'block';
+    }
+    
+    // 隐藏创建帖子模态框
+    function hideCreatePostModal() {
+        document.getElementById('createPostModal').style.display = 'none';
+        // 清空表单
+        document.getElementById('postTitle').value = '';
+        document.getElementById('postContent').value = '';
+        document.getElementById('postAuthor').value = '';
+        document.getElementById('postCategory').value = 'tech';
+        document.getElementById('postImages').value = '';
+        document.getElementById('imagePreview').innerHTML = '';
+    }
+    
+    // 图片预览功能
+    document.getElementById('postImages').addEventListener('change', function(e) {
+        const files = e.target.files;
+        const previewContainer = document.getElementById('imagePreview');
+        previewContainer.innerHTML = '';
+        
+        if (files) {
+            Array.from(files).forEach(file => {
+                if (file.size > 5 * 1024 * 1024) {
+                    alert(file.name + ' 文件大小超过5MB，请选择更小的图片');
+                    return;
                 }
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = document.createElement('img');
+                    img.src = event.target.result;
+                    img.style.width = '100px';
+                    img.style.height = '100px';
+                    img.style.objectFit = 'cover';
+                    img.style.borderRadius = '3px';
+                    previewContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+    });
+    
+    // 创建帖子（包含图片上传功能）
+    async function createPost() {
+        const title = document.getElementById('postTitle').value;
+        const content = document.getElementById('postContent').value;
+        const author = document.getElementById('postAuthor').value;
+        const category = document.getElementById('postCategory').value;
+        const images = document.getElementById('postImages').files;
+        
+        if (!title || !content || !author) {
+            alert('请填写所有必填字段');
+            return;
+        }
+        
+        try {
+            // 由于API可能不支持文件上传，我们使用base64模拟图片数据
+            const imageDataList = [];
+            if (images && images.length > 0) {
+                // 模拟图片上传，实际项目中应使用FormData上传文件
+                for (let i = 0; i < Math.min(images.length, 5); i++) { // 限制最多5张图片
+                    const reader = new FileReader();
+                    await new Promise(resolve => {
+                        reader.onload = function() {
+                            // 只取base64的前100个字符作为示例
+                            imageDataList.push(reader.result.substring(0, 100) + '...');
+                            resolve();
+                        };
+                        reader.readAsDataURL(images[i]);
+                    });
+                }
+            }
+            
+            const response = await fetch(API_BASE + '/posts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: title,
+                    content: content,
+                    author: author,
+                    category: category,
+                    images: imageDataList // 在实际项目中，这里应该是图片URL列表
+                })
             });
             
-            // 图片展示（如果有）
-            if (post.images && post.images.length > 0) {
-                html += '<div class="post-images">';
-                post.images.forEach((image, index) => {
-                    // 在实际项目中，这里应该是真实的图片URL
-                    // 现在使用占位图模拟
-                    const imgSrc = image.includes('data:image') ? 
-                        image : `https://picsum.photos/id/${index + 100}/400/300`;
-                    html += '<img src="' + imgSrc + '" class="post-image" alt="帖子图片 ' + (index + 1) + '">';
-                });
-                html += '</div>';
+            const result = await response.json();
+            if (result.errno === 0) {
+                alert('帖子发表成功！');
+                hideCreatePostModal();
+                // 重新加载帖子列表
+                loadPosts();
+            } else {
+                alert('发表失败: ' + result.errmsg);
             }
-            
-            html += '</div>';
-            
-            // 帖子操作栏
-            html += '<div class="post-actions">';
-            html += '<button class="action-btn" onclick="likePost()">👍 点赞</button>';
-            html += '<button class="action-btn" onclick="collectPost()">⭐ 收藏</button>';
-            html += '<button class="action-btn" onclick="sharePost()">📤 分享</button>';
-            html += '</div>';
-            
-            container.innerHTML = html;
+        } catch (error) {
+            alert('网络错误: ' + error.message);
+        }
+    }
+    
+    // 点击模态框外部关闭
+    window.onclick = function(event) {
+        const modal = document.getElementById('createPostModal');
+        if (event.target === modal) {
+            hideCreatePostModal();
+        }
+    }
+    
+    // 主题切换功能
+    function setupThemeToggle() {
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // 检查本地存储中的主题偏好
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        } else {
+            themeToggle.textContent = '🌙';
         }
         
-        // 显示评论
-        function displayComments(comments) {
-            const container = document.getElementById('commentsContainer');
-            const countElement = document.querySelector('.comment-count');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
             
-            // 更新评论数量
-            countElement.textContent = `评论 (${comments && comments.length ? comments.length : 0})`;
-            
-            if (!comments || comments.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-light); text-align: center; padding: 20px 0;">暂无评论，快来踊跃发言吧！</p>';
-                return;
-            }
-            
-            let html = '';
-            comments.forEach(comment => {
-                const time = new Date(comment.created).toLocaleString();
-                html += '<div class="comment-item">';
-                html += '<div class="comment-header">';
-                html += '<span class="comment-author">' + comment.nick + '</span>';
-                html += '<span class="comment-time">' + time + '</span>';
-                html += '</div>';
-                html += '<div class="comment-content">' + comment.comment + '</div>';
-                html += '</div>';
-            });
-            
-            container.innerHTML = html;
-        }
-        
-        // 提交评论
-        async function submitComment() {
-            const nick = document.getElementById('commentNick').value;
-            const mail = document.getElementById('commentMail').value;
-            const content = document.getElementById('commentContent').value;
-            
-            if (!nick || !content) {
-                alert('请填写昵称和评论内容');
-                return;
-            }
-            
-            try {
-                const response = await fetch(API_BASE + '/posts/' + postId + '/comments', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        comment: content,
-                        nick: nick,
-                        mail: mail || '',
-                        link: ''
-                    })
-                });
-                
-                const result = await response.json();
-                if (result.errno === 0) {
-                    alert('评论发表成功！');
-                    // 清空表单
-                    document.getElementById('commentNick').value = '';
-                    document.getElementById('commentMail').value = '';
-                    document.getElementById('commentContent').value = '';
-                    // 重新加载评论
-                    loadPostDetail();
-                } else {
-                    alert('评论失败: ' + result.errmsg);
-                }
-            } catch (error) {
-                alert('网络错误: ' + error.message);
-            }
-        }
-        
-        // 模拟帖子操作功能
-        function likePost() {
-            alert('点赞成功！');
-        }
-        
-        function collectPost() {
-            alert('收藏成功！');
-        }
-        
-        function sharePost() {
-            alert('分享链接已复制到剪贴板！');
-        }
-        
-        // 删除帖子功能
-        async function deletePost() {
-            if (!confirm('确定要删除这个帖子吗？此操作不可恢复！')) {
-                return;
-            }
-            
-            // 提示输入管理员密码
-            const adminKey = prompt('请输入管理员密码:');
-            if (!adminKey) {
-                alert('密码不能为空');
-                return;
-            }
-            
-            try {
-                const response = await fetch(API_BASE + '/posts/' + postId, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-Admin-Key': adminKey
-                    }
-                });
-                
-                const result = await response.json();
-                if (result.errno === 0) {
-                    alert('帖子删除成功！');
-                    // 重定向到帖子列表页面
-                    window.location.href = 'forum-index.html';
-                } else {
-                    alert('删除失败: ' + result.errmsg);
-                }
-            } catch (error) {
-                alert('网络错误: ' + error.message);
-            }
-        }
-        
-        // 主题切换功能
-        function setupThemeToggle() {
-            const themeToggle = document.getElementById('themeToggle');
-            
-            // 检查本地存储中的主题偏好
-            if (localStorage.getItem('theme') === 'dark' || 
-                (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.body.classList.add('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
                 themeToggle.textContent = '☀️';
             } else {
+                localStorage.setItem('theme', 'light');
                 themeToggle.textContent = '🌙';
             }
-            
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                
-                if (document.body.classList.contains('dark-mode')) {
-                    localStorage.setItem('theme', 'dark');
-                    themeToggle.textContent = '☀️';
-                } else {
-                    localStorage.setItem('theme', 'light');
-                    themeToggle.textContent = '🌙';
-                }
-            });
-        }
-        
-        // 实现双击显示/隐藏删除按钮
-        let deleteBtnTimeout;
-        
-        document.addEventListener('dblclick', function(event) {
-            // 避免点击按钮时触发
-            if (event.target.id === 'adminDeleteBtn' || event.target.parentElement?.id === 'adminDeleteBtn') {
-                return;
-            }
-            
-            const deleteBtn = document.getElementById('adminDeleteBtn');
-            const isVisible = deleteBtn.style.display !== 'none';
-            deleteBtn.style.display = isVisible ? 'none' : 'block';
-            
-            // 清除之前的定时器
-            if (deleteBtnTimeout) clearTimeout(deleteBtnTimeout);
-            
-            // 如果显示了按钮，30秒后自动隐藏
-            if (!isVisible) {
-                deleteBtnTimeout = setTimeout(() => {
-                    deleteBtn.style.display = 'none';
-                }, 30000);
-            }
         });
-        
-        // 页面加载完成后执行
-        document.addEventListener('DOMContentLoaded', () => {
-            setupThemeToggle();
-            loadPostDetail();
-        });
-    </script>
+    }
+    
+    // 页面加载完成后执行
+    document.addEventListener('DOMContentLoaded', () => {
+        setupThemeToggle();
+        loadPosts();
+    });
+</script>
 </body>
 </html>
-
