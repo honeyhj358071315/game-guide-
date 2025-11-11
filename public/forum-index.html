@@ -17,7 +17,7 @@
             <h1>🦄曲解器者 - 综合讨论区</h1>
             <div style="display: flex; align-items: center; gap: 15px;">
                 <div class="header-nav">
-                    <a href="/index.html">首页</a>
+                    <a href="index.html">首页</a>
                     <a href="#">关注</a>
                     <a href="#">排行榜</a>
                 </div>
@@ -169,10 +169,10 @@
             const time = new Date(post.created).toLocaleString();
             const categoryName = getCategoryName(post.category || 'other');
             
-            html += '<div class="post-item" onclick="viewPost(\'' + post.id + '\')">';
+            html += '<div class="post-item">';
             html += '<div class="post-prefix"></div>'; // 在每个帖子前面添加样式元素
             html += '<div class="post-main">';
-            html += '<div class="post-title">' + post.title + '</div>';
+            html += '<a href="forum-post.html?id=' + post.id + '" class="post-title">' + post.title + '</a>';
             html += '<div class="post-content-preview">' + preview + '</div>';
             html += '<div class="post-meta">';
             html += '<span style="background-color: var(--secondary-color); padding: 2px 8px; border-radius: 3px; font-size: 12px;">' + categoryName + '</span>';
@@ -181,7 +181,6 @@
             html += '<span>浏览: ' + (post.view_count || 0) + '</span>';
             html += '<span>评论: ' + (post.comment_count || 0) + '</span>';
             html += '<span>点赞: ' + (post.like_count || 0) + '</span>';
-            html += '<span>收藏: ' + (post.collect_count || 0) + '</span>';
             html += '</div>';
             html += '</div>';
             html += '</div>';
@@ -190,10 +189,30 @@
         container.innerHTML = html;
     }
     
-    // 查看帖子详情
-    function viewPost(postId) {
-        window.location.href = 'forum-post.html?id=' + postId;
-    }
+    // 可以移除viewPost函数，因为我们现在使用直接链接
+    
+    // 用于从帖子详情页同步更新评论和点赞数量
+    window.updatePostCounts = function(postId, commentCount, likeCount) {
+        // 更新内存中的数据
+        const postIndex = allPosts.findIndex(post => post.id === postId);
+        if (postIndex !== -1) {
+            allPosts[postIndex].comment_count = commentCount;
+            allPosts[postIndex].like_count = likeCount;
+        }
+        
+        // 更新UI显示
+        const postItems = document.querySelectorAll('.post-item');
+        postItems.forEach(item => {
+            const titleLink = item.querySelector('.post-title');
+            if (titleLink && titleLink.href.includes('id=' + postId)) {
+                const metaSpans = item.querySelectorAll('.post-meta span');
+                if (metaSpans.length >= 5) { // 浏览、评论、点赞在位置上是第3、4、5个span
+                    metaSpans[3].textContent = '评论: ' + commentCount;
+                    metaSpans[4].textContent = '点赞: ' + likeCount;
+                }
+            }
+        });
+    };
     
     // 显示创建帖子模态框
     function showCreatePostModal() {
@@ -311,13 +330,12 @@
     function setupThemeToggle() {
         const themeToggle = document.getElementById('themeToggle');
         
-        // 检查本地存储中的主题偏好
-        if (localStorage.getItem('theme') === 'dark' || 
-            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        // 检查本地存储中的主题偏好 - 默认使用浅色模式
+        if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
-            themeToggle.textContent = '☀️';
-        } else {
             themeToggle.textContent = '🌙';
+        } else {
+            themeToggle.textContent = '☀️';
         }
         
         themeToggle.addEventListener('click', () => {
@@ -325,10 +343,10 @@
             
             if (document.body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
-                themeToggle.textContent = '☀️';
+                themeToggle.textContent = '🌙';
             } else {
                 localStorage.setItem('theme', 'light');
-                themeToggle.textContent = '🌙';
+                themeToggle.textContent = '☀️';
             }
         });
     }
