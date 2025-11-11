@@ -280,11 +280,15 @@
                 
                 const result = await response.json();
                 if (result.errno === 0) {
+                    // 注意：POST接口返回的是liked字段
+                    const { liked } = result.data;
+                    
                     // 获取最新的点赞状态和数量
                     const statusResponse = await fetch(API_BASE + '/posts/' + postId + '/like');
                     const statusResult = await statusResponse.json();
                     
                     if (statusResult.errno === 0) {
+                        // 注意：GET接口返回的是user_liked字段
                         const { like_count, user_liked } = statusResult.data;
                         
                         // 更新当前帖子的点赞数
@@ -312,7 +316,7 @@
                             window.opener.updatePostCounts(postId, commentCount, like_count);
                         }
                         
-                        alert(user_liked ? '点赞成功！' : '已取消点赞！');
+                        alert(liked ? '点赞成功！' : '已取消点赞！');
                     }
                 } else {
                     alert('操作失败: ' + result.errmsg);
