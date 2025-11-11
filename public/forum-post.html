@@ -178,7 +178,9 @@
                     // 更新点赞按钮显示
                     const likeBtn = document.querySelector('.action-btn:first-child');
                     if (likeBtn) {
-                        likeBtn.textContent = `${user_liked ? '👍 已点赞' : '👍 点赞'} (${like_count})`;
+                        // 确保点赞数是数字格式
+                        const displayCount = parseInt(like_count) || 0;
+                        likeBtn.textContent = `${user_liked ? '👍 已点赞' : '👍 点赞'} (${displayCount})`;
                         // 添加点赞状态样式
                         if (user_liked) {
                             likeBtn.classList.add('liked');
@@ -293,7 +295,9 @@
                         // 更新界面显示
                         const likeBtn = document.querySelector('.action-btn:first-child');
                         if (likeBtn) {
-                            likeBtn.textContent = `${user_liked ? '👍 已点赞' : '👍 点赞'} (${like_count})`;
+                            // 确保点赞数是数字格式
+                            const displayCount = parseInt(like_count) || 0;
+                            likeBtn.textContent = `${user_liked ? '👍 已点赞' : '👍 点赞'} (${displayCount})`;
                             // 添加点赞状态样式
                             if (user_liked) {
                                 likeBtn.classList.add('liked');
