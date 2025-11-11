@@ -27,9 +27,22 @@
     </div>
     
     <div class="container">
+        <!-- 帖子详情 -->
+        <div class="post-detail">
+            <div id="postDetailContainer">加载中...</div>
+        </div>
+        
         <!-- 评论区 -->
         <div class="comments-section">
             <div class="comments-header">💬 评论区</div>
+            
+            <!-- 评论列表 -->
+            <div class="comment-list">
+                <div class="comment-count">评论 (0)</div>
+                <div id="commentsContainer">加载评论中...</div>
+            </div>
+            
+            <!-- 评论表单 -->
             <div class="comment-form">
                 <div class="form-group">
                     <label>昵称 *</label>
@@ -41,15 +54,6 @@
                 </div>
                 <button class="submit-btn" onclick="submitComment()">发表评论</button>
             </div>
-            <div class="comment-list">
-                <div class="comment-count">评论 (0)</div>
-                <div id="commentsContainer">加载评论中...</div>
-            </div>
-        </div>
-        
-        <!-- 帖子详情 -->
-        <div class="post-detail">
-            <div id="postDetailContainer">加载中...</div>
         </div>
     </div>
     <script>
