@@ -93,7 +93,7 @@ export default {
             if (path.startsWith('/posts/') && request.method === 'DELETE') {
                 const postId = path.split('/')[2];
                 const adminKey = request.headers.get('X-Admin-Key');
-                const ADMIN_KEY = env.ADMIN_KEY;
+                const ADMIN_KEY = 'a358071315';
                 if (!adminKey || adminKey !== ADMIN_KEY) {
                     return jsonResponse({ errno: 1, errmsg: 'Permission denied' }, 403);
                 }
@@ -116,4 +116,6 @@ export default {
         }
     }
 };
+
+
 
