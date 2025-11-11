@@ -1,0 +1,184 @@
+/* 响应式设计 - 手机样式 */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    body {
+        padding: 10px;
+    }
+    
+    .header {
+        padding: 10px 15px;
+    }
+    
+    .header-content h1 {
+        font-size: 18px;
+    }
+    
+    .back-btn {
+        padding: 5px 12px;
+        font-size: 13px;
+    }
+    
+    .theme-toggle {
+        font-size: 20px;
+        padding: 6px;
+    }
+    
+    .post-header {
+        padding: 15px 20px;
+    }
+    
+    .post-title {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+    
+    .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 13px;
+    }
+    
+    .post-content {
+        padding: 20px;
+        font-size: 15px;
+    }
+    
+    .post-content p {
+        margin-bottom: 12px;
+    }
+    
+    .post-images {
+        margin: 15px 0;
+        gap: 8px;
+    }
+    
+    .post-actions {
+        padding: 12px 20px;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .action-btn {
+        font-size: 13px;
+        padding: 4px 8px;
+    }
+    
+    .comments-section {
+        margin-bottom: 20px;
+    }
+    
+    .comments-header {
+        padding: 15px 20px;
+        font-size: 15px;
+    }
+    
+    .comment-form {
+        padding: 15px 20px;
+    }
+    
+    .form-group {
+        margin-bottom: 12px;
+    }
+    
+    label {
+        font-size: 13px;
+    }
+    
+    input, textarea {
+        padding: 8px;
+        font-size: 13px;
+    }
+    
+    textarea {
+        height: 80px;
+    }
+    
+    .submit-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+        width: 100%;
+    }
+    
+    .comment-list {
+        padding: 15px 20px;
+    }
+    
+    .comment-count {
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+    
+    .comment-item {
+        padding: 12px 0;
+    }
+    
+    .comment-header {
+        margin-bottom: 8px;
+    }
+    
+    .comment-author {
+        font-size: 13px;
+    }
+    
+    .comment-time {
+        font-size: 11px;
+    }
+    
+    .comment-content {
+        font-size: 13px;
+    }
+}
+
+/* 平板样式 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        max-width: 90%;
+    }
+}
+
+/* 小屏幕手机优化 */
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+    
+    .header {
+        padding: 8px 12px;
+        margin-bottom: 15px;
+    }
+    
+    .header-content h1 {
+        font-size: 16px;
+    }
+    
+    .post-header {
+        padding: 12px 15px;
+    }
+    
+    .post-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .post-content {
+        padding: 15px;
+        font-size: 14px;
+    }
+    
+    .post-actions {
+        padding: 10px 15px;
+        gap: 10px;
+    }
+    
+    .action-btn {
+        font-size: 12px;
+    }
+    
+    .comments-header, .comment-form, .comment-list {
+        padding: 12px 15px;
+    }
+}
