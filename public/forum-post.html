@@ -296,18 +296,27 @@
                             currentPost.like_count = like_count;
                         }
                         
-                        // 更新界面显示
+                        // 更新界面显示 - 确保点赞数实时更新
                         const likeBtn = document.querySelector('.action-btn:first-child');
                         if (likeBtn) {
                             // 确保点赞数是数字格式
                             const displayCount = parseInt(like_count) || 0;
+                            // 立即更新按钮文本，显示最新点赞数
                             likeBtn.textContent = `${user_liked ? '👍 已点赞' : '👍 点赞'} (${displayCount})`;
-                            // 添加点赞状态样式
+                            // 添加/移除点赞状态样式
                             if (user_liked) {
                                 likeBtn.classList.add('liked');
                             } else {
                                 likeBtn.classList.remove('liked');
                             }
+                            
+                            // 同时更新帖子元数据中的点赞数显示
+                            const likeCountElements = document.querySelectorAll('.post-meta span:nth-child(6)');
+                            likeCountElements.forEach(el => {
+                                if (el.textContent.includes('点赞:')) {
+                                    el.textContent = `点赞: ${displayCount}`;
+                                }
+                            });
                         }
                         
                         // 同步更新列表页的点赞数量
