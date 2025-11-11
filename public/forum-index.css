@@ -1,5 +1,20 @@
-/* 默认主题（使用7daohang样式） */
+/* 默认主题（改为浅色的白天模式） */
 :root {
+    --primary-color: #e0a800;
+    --accent-color: #376b32;
+    --text-color: #333333;
+    --text-light: #5078a0;
+    --border-color: #e0a800;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --bg-color: #f5f5f5;
+    /* 主背景色 */
+    --hover-bg: rgba(240, 240, 240, 0.9);
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* 夜间模式（改为深色的夜间模式） */
+body.dark-mode {
     --primary-color: #ffc107;
     /* 主色调-黄色 */
     --accent-color: #376b32;
@@ -9,23 +24,8 @@
     --border-color: #ffc107;
     --card-bg: rgba(16, 36, 54, 0.8);
     --bg-color: #1a2a3a;
-    /* 主背景色 */
     --hover-bg: rgba(44, 62, 80, 0.9);
     --shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    --transition: all 0.3s ease;
-}
-
-/* 夜间模式（保持深色但调整亮度） */
-body.dark-mode {
-    --primary-color: #e0a800;
-    --accent-color: #376b32;
-    --text-color: #cccccc;
-    --text-light: #80a8d0;
-    --border-color: #e0a800;
-    --card-bg: rgba(10, 24, 38, 0.9);
-    --bg-color: #0d1b2a;
-    --hover-bg: rgba(34, 48, 60, 0.9);
-    --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* PC样式 - 基础样式 */
@@ -36,7 +36,7 @@ body.dark-mode {
 }
 
 body {
-    background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 100%);
+    background: var(--bg-color);
     font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
     color: var(--text-color);
     line-height: 1.6;
@@ -52,7 +52,7 @@ body {
 
 /* 顶部导航栏 */
 .header {
-    background: rgba(16, 36, 54, 0.8);
+    background: rgba(87, 129, 167, 0.8);
     border-left: 6px solid var(--primary-color);
     color: var(--text-color);
     padding: 10px 20px;
@@ -189,7 +189,7 @@ body {
 }
 
 .post-title {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 8px;
     color: var(--text-color);
@@ -306,10 +306,8 @@ select {
     border-radius: 3px;
     font-size: 14px;
     font-family: inherit;
-    background-color: #4a5568;
-    /* 更深的灰色背景，匹配深色主题 */
-    color: #e2e8f0;
-    /* 浅色文本以适应深色背景 */
+    background-color: var(--card-bg);
+    color: var(--text-color);
 }
 
 input:focus,
@@ -317,7 +315,7 @@ textarea:focus,
 select:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(39, 116, 174, 0.1);
+    box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.1);
 }
 
 textarea {
