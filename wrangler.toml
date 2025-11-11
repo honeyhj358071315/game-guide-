@@ -1,0 +1,7 @@
+name = 'twikoo-comments'
+main = 'src/index.js'
+compatibility_date = '2024-11-11'
+[[d1_databases]]
+binding = 'DB'
+database_name = 'twikoo-db'
+database_id = 'e0b4f965-7be1-48ac-b800-9d05a9ab391a'
