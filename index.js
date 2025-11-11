@@ -77,16 +77,64 @@ export default {
                 const post = await db.prepare(
                     'SELECT * FROM posts WHERE id = ?'
                 ).bind(postId).first();
+                // 获取帖子的评论
+                const postComments = await db.prepare(
+                    'SELECT * FROM comments WHERE url = ? AND status = \"approved\" ORDER BY created ASC'
+                ).bind('/post/' + postId).all();
                 if (post) {
                     return jsonResponse({ 
                         errno: 0, 
                         data: {
                             post: post,
-                            comments: []
+                            comments: postComments.results || []
                         } 
                     });
                 } else {
                     return jsonResponse({ errno: 1, errmsg: 'Post not found' }, 404);
+                }
+            }
+            // 为帖子添加评论
+            if (path.startsWith('/posts/') && path.endsWith('/comments') && request.method === 'POST') {
+                const postId = path.split('/')[2];
+                const body = await request.json();
+                const { comment, nick, mail, link, pid = '', rid = '' } = body;
+                if (!comment || !nick) {
+                    return jsonResponse({ errno: 1, errmsg: 'Missing required fields' }, 400);
+                }
+                // 检查帖子是否存在
+                const post = await db.prepare('SELECT * FROM posts WHERE id = ?').bind(postId).first();
+                if (!post) {
+                    return jsonResponse({ errno: 1, errmsg: 'Post not found' }, 404);
+                }
+                const commentId = generateId();
+                const now = Date.now();
+                const userAgent = request.headers.get('user-agent') || '';
+                const ip = request.headers.get('cf-connecting-ip') || '127.0.0.1';
+                const commentUrl = '/post/' + postId;
+                // 插入评论
+                const result = await db.prepare(
+                    'INSERT INTO comments (_id, comment, created, updated, nick, mail, link, url, pid, rid, status, userAgent, ip, objectId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+                ).bind(commentId, comment, now, now, nick, mail || '', link || '', commentUrl, pid, rid, 'approved', userAgent, ip, commentId).run();
+                if (result.success) {
+                    // 更新帖子评论数
+                    await db.prepare(
+                        'UPDATE posts SET comment_count = comment_count + 1, updated = ? WHERE id = ?'
+                    ).bind(now, postId).run();
+                    return jsonResponse({ 
+                        errno: 0, 
+                        data: { 
+                            _id: commentId,
+                            objectId: commentId,
+                            comment: comment,
+                            created: now,
+                            nick: nick,
+                            mail: mail,
+                            link: link,
+                            url: commentUrl
+                        } 
+                    });
+                } else {
+                    return jsonResponse({ errno: 1, errmsg: 'Database insert failed' }, 500);
                 }
             }
             // 删除帖子
@@ -116,6 +164,3 @@ export default {
         }
     }
 };
-
-
-
