@@ -89,6 +89,30 @@ export default {
                     return jsonResponse({ errno: 1, errmsg: 'Post not found' }, 404);
                 }
             }
+            // 删除帖子
+            if (path.startsWith('/posts/') && request.method === 'DELETE') {
+                const postId = path.split('/')[2];
+                // 获取请求头中的管理员密码（简单的权限验证）
+                const adminKey = request.headers.get('X-Admin-Key');
+                
+                // 设置管理员密钥（实际项目中应该从环境变量或配置中读取）
+                const ADMIN_KEY = 'a3580'; // 请在部署时修改为更安全的密钥
+                
+                if (!adminKey || adminKey !== ADMIN_KEY) {
+                    return jsonResponse({ errno: 1, errmsg: 'Permission denied' }, 403);
+                }
+                
+                const result = await db.prepare(
+                    'DELETE FROM posts WHERE id = ?'
+                ).bind(postId).run();
+                
+                if (result.success) {
+                    return jsonResponse({ errno: 0, data: { msg: 'Post deleted successfully' } });
+                } else {
+                    return jsonResponse({ errno: 1, errmsg: 'Delete failed' }, 500);
+                }
+            }
+            
             // 健康检查
             if (path === '/') {
                 return jsonResponse({ errno: 0, data: { msg: 'Forum Service Ready' } });
