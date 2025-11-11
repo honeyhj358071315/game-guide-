@@ -20,9 +20,11 @@
     </header>
     
     <!-- 管理员删除按钮 - 默认隐藏，双击显示 -->
-    <button id="adminDeleteBtn" class="admin-delete-btn" onclick="deletePost()" style="display: none; position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #ff4757; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">
-        🗑️ 删除帖子
-    </button>
+    <div id="adminDeleteBtn" style="display: none; position: fixed; bottom: 20px; left: 20px; z-index: 9999;">
+        <button onclick="deletePost()" style="background: #ff4757; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+            🗑️ 删除帖子
+        </button>
+    </div>
     
     <div class="container">
         <!-- 帖子详情 -->
@@ -65,10 +67,10 @@
         
         const postId = getUrlParam('id');
         
-        // 获取分类中文名
+        // 获取分类中文名称
         function getCategoryName(category) {
             const categoryMap = {
-                'tech': '科技',
+                'tech': '技术',
                 'life': '生活',
                 'entertainment': '娱乐',
                 'education': '教育',
@@ -111,49 +113,49 @@
             let html = '';
             
             // 帖子头部信息
-            html += '\u003cdiv class="post-header"\u003e';
-            html += '\u003cdiv class="post-title"\u003e' + post.title + '\u003c/div\u003e';
-            html += '\u003cdiv class="post-meta"\u003e';
-            html += '\u003cspan class="category-badge"\u003e' + categoryName + '\u003c/span\u003e';
-            html += '\u003cspan\u003e作者: ' + post.author + '\u003c/span\u003e';
-            html += '\u003cspan\u003e发表时间: ' + time + '\u003c/span\u003e';
-            html += '\u003cspan\u003e浏览: ' + (post.view_count || 0) + '\u003c/span\u003e';
-            html += '\u003cspan\u003e评论: ' + (post.comment_count || 0) + '\u003c/span\u003e';
-            html += '\u003c/div\u003e';
-            html += '\u003c/div\u003e';
+            html += '<div class="post-header">';
+            html += '<div class="post-title">' + post.title + '</div>';
+            html += '<div class="post-meta">';
+            html += '<span class="category-badge">' + categoryName + '</span>';
+            html += '<span>作者: ' + post.author + '</span>';
+            html += '<span>发布时间: ' + time + '</span>';
+            html += '<span>浏览: ' + (post.view_count || 0) + '</span>';
+            html += '<span>评论: ' + (post.comment_count || 0) + '</span>';
+            html += '</div>';
+            html += '</div>';
             
             // 帖子内容
-            html += '\u003cdiv class="post-content"\u003e';
+            html += '<div class="post-content">';
             
             // 将内容按换行符分割成段落
             const paragraphs = post.content.split(/\r?\n/);
             paragraphs.forEach(para => {
                 if (para.trim()) {
-                    html += '\u003cp\u003e' + para + '\u003c/p\u003e';
+                    html += '<p>' + para + '</p>';
                 }
             });
             
             // 图片展示（如果有）
             if (post.images && post.images.length > 0) {
-                html += '\u003cdiv class="post-images"\u003e';
+                html += '<div class="post-images">';
                 post.images.forEach((image, index) => {
                     // 在实际项目中，这里应该是真实的图片URL
                     // 现在使用占位图模拟
                     const imgSrc = image.includes('data:image') ? 
                         image : `https://picsum.photos/id/${index + 100}/400/300`;
-                    html += '\u003cimg src="' + imgSrc + '" class="post-image" alt="帖子图片 ' + (index + 1) + '"\u003e';
+                    html += '<img src="' + imgSrc + '" class="post-image" alt="帖子图片 ' + (index + 1) + '">';
                 });
-                html += '\u003c/div\u003e';
+                html += '</div>';
             }
             
-            html += '\u003c/div\u003e';
+            html += '</div>';
             
             // 帖子操作栏
-            html += '\u003cdiv class="post-actions"\u003e';
-            html += '\u003cbutton class="action-btn" onclick="likePost()"\u003e👍 点赞\u003c/button\u003e';
-            html += '\u003cbutton class="action-btn" onclick="collectPost()"\u003e⭐ 收藏\u003c/button\u003e';
-            html += '\u003cbutton class="action-btn" onclick="sharePost()"\u003e🔗 分享\u003c/button\u003e';
-            html += '\u003c/div\u003e';
+            html += '<div class="post-actions">';
+            html += '<button class="action-btn" onclick="likePost()">👍 点赞</button>';
+            html += '<button class="action-btn" onclick="collectPost()">⭐ 收藏</button>';
+            html += '<button class="action-btn" onclick="sharePost()">📤 分享</button>';
+            html += '</div>';
             
             container.innerHTML = html;
         }
@@ -167,20 +169,20 @@
             countElement.textContent = `评论 (${comments && comments.length ? comments.length : 0})`;
             
             if (!comments || comments.length === 0) {
-                container.innerHTML = '\u003cp style="color: var(--text-light); text-align: center; padding: 20px 0;"\u003e暂无评论，快来抢沙发吧！\u003c/p\u003e';
+                container.innerHTML = '<p style="color: var(--text-light); text-align: center; padding: 20px 0;">暂无评论，快来踊跃发言吧！</p>';
                 return;
             }
             
             let html = '';
             comments.forEach(comment => {
                 const time = new Date(comment.created).toLocaleString();
-                html += '\u003cdiv class="comment-item"\u003e';
-                html += '\u003cdiv class="comment-header"\u003e';
-                html += '\u003cspan class="comment-author"\u003e' + comment.nick + '\u003c/span\u003e';
-                html += '\u003cspan class="comment-time"\u003e' + time + '\u003c/span\u003e';
-                html += '\u003c/div\u003e';
-                html += '\u003cdiv class="comment-content"\u003e' + comment.comment + '\u003c/div\u003e';
-                html += '\u003c/div\u003e';
+                html += '<div class="comment-item">';
+                html += '<div class="comment-header">';
+                html += '<span class="comment-author">' + comment.nick + '</span>';
+                html += '<span class="comment-time">' + time + '</span>';
+                html += '</div>';
+                html += '<div class="comment-content">' + comment.comment + '</div>';
+                html += '</div>';
             });
             
             container.innerHTML = html;
@@ -243,7 +245,7 @@
         
         // 删除帖子功能
         async function deletePost() {
-            if (!confirm('确定要删除这个帖子吗？此操作不可撤销！')) {
+            if (!confirm('确定要删除这个帖子吗？此操作不可恢复！')) {
                 return;
             }
             
@@ -265,7 +267,7 @@
                 const result = await response.json();
                 if (result.errno === 0) {
                     alert('帖子删除成功！');
-                    // 重定向到帖子列表页
+                    // 重定向到帖子列表页面
                     window.location.href = 'forum-index.html';
                 } else {
                     alert('删除失败: ' + result.errmsg);
@@ -302,21 +304,24 @@
         }
         
         // 实现双击显示/隐藏删除按钮
-        let doubleClickTimer = null;
-        let clickCount = 0;
+        let deleteBtnTimeout;
         
         document.addEventListener('dblclick', function(event) {
             // 避免点击按钮时触发
-            if (event.target.id === 'adminDeleteBtn') {
+            if (event.target.id === 'adminDeleteBtn' || event.target.parentElement?.id === 'adminDeleteBtn') {
                 return;
             }
             
             const deleteBtn = document.getElementById('adminDeleteBtn');
-            deleteBtn.style.display = deleteBtn.style.display === 'none' ? 'block' : 'none';
+            const isVisible = deleteBtn.style.display !== 'none';
+            deleteBtn.style.display = isVisible ? 'none' : 'block';
+            
+            // 清除之前的定时器
+            if (deleteBtnTimeout) clearTimeout(deleteBtnTimeout);
             
             // 如果显示了按钮，30秒后自动隐藏
-            if (deleteBtn.style.display === 'block') {
-                setTimeout(() => {
+            if (!isVisible) {
+                deleteBtnTimeout = setTimeout(() => {
                     deleteBtn.style.display = 'none';
                 }, 30000);
             }
@@ -327,6 +332,7 @@
             setupThemeToggle();
             loadPostDetail();
         });
-</script>
+    </script>
 </body>
 </html>
+
