@@ -124,7 +124,6 @@
             html += '<span>发布时间: ' + time + '</span>';
             html += '<span>浏览: ' + (post.view_count || 0) + '</span>';
             html += '<span>评论: ' + (post.comment_count || 0) + '</span>';
-            html += '<span>点赞: ' + (post.like_count || 0) + '</span>';
             html += '</div>';
             html += '</div>';
             
@@ -156,40 +155,10 @@
             
             // 帖子操作栏
             html += '<div class="post-actions">';
-            html += '<button class="action-btn" onclick="likePost()">👍 点赞 (' + (post.like_count || 0) + ')</button>';
             html += '<button class="action-btn" onclick="sharePost()">📤 分享</button>';
             html += '</div>';
             
             container.innerHTML = html;
-            
-            // 获取并更新点赞状态
-            try {
-                const statusResponse = await fetch(API_BASE + '/posts/' + postId + '/like');
-                const statusResult = await statusResponse.json();
-                
-                if (statusResult.errno === 0) {
-                    const { like_count, user_liked } = statusResult.data;
-                    
-                    // 更新当前帖子的点赞数
-                    if (currentPost) {
-                        currentPost.like_count = like_count;
-                    }
-                    
-                    // 更新点赞按钮显示
-                    const likeBtn = document.querySelector('.action-btn:first-child');
-                    if (likeBtn) {
-                        // 确保点赞数是数字格式
-                        const displayCount = parseInt(like_count) || 0;
-                        likeBtn.textContent = `${user_liked ? '👍 已点赞' : '👍 点赞'} (${displayCount})`;
-                        // 添加点赞状态样式
-                        if (user_liked) {
-                            likeBtn.classList.add('liked');
-                        }
-                    }
-                }
-            } catch (error) {
-                console.error('获取点赞状态失败:', error);
-            }
         }
         
         // 显示评论
@@ -200,9 +169,9 @@
             // 更新评论数量
             countElement.textContent = `评论 (${comments && comments.length ? comments.length : 0})`;
             
-            // 同步更新列表页的评论和点赞数量
+            // 同步更新列表页的评论数量
             if (window.opener && window.opener.updatePostCounts) {
-                window.opener.updatePostCounts(postId, comments.length, currentPost?.like_count || 0);
+                window.opener.updatePostCounts(postId, comments.length);
             }
             
             if (!comments || comments.length === 0) {
@@ -268,73 +237,7 @@
             }
         }
         
-        // 帖子点赞功能
-        async function likePost() {
-            try {
-                const response = await fetch(API_BASE + '/posts/' + postId + '/like', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                
-                const result = await response.json();
-                if (result.errno === 0) {
-                    // 注意：POST接口返回的是liked字段
-                    const { liked } = result.data;
-                    
-                    // 获取最新的点赞状态和数量
-                    const statusResponse = await fetch(API_BASE + '/posts/' + postId + '/like');
-                    const statusResult = await statusResponse.json();
-                    
-                    if (statusResult.errno === 0) {
-                        // 注意：GET接口返回的是user_liked字段
-                        const { like_count, user_liked } = statusResult.data;
-                        
-                        // 更新当前帖子的点赞数
-                        if (currentPost) {
-                            currentPost.like_count = like_count;
-                        }
-                        
-                        // 更新界面显示 - 确保点赞数实时更新
-                        const likeBtn = document.querySelector('.action-btn:first-child');
-                        if (likeBtn) {
-                            // 确保点赞数是数字格式
-                            const displayCount = parseInt(like_count) || 0;
-                            // 立即更新按钮文本，显示最新点赞数
-                            likeBtn.textContent = `${user_liked ? '👍 已点赞' : '👍 点赞'} (${displayCount})`;
-                            // 添加/移除点赞状态样式
-                            if (user_liked) {
-                                likeBtn.classList.add('liked');
-                            } else {
-                                likeBtn.classList.remove('liked');
-                            }
-                            
-                            // 同时更新帖子元数据中的点赞数显示
-                            const likeCountElements = document.querySelectorAll('.post-meta span:nth-child(6)');
-                            likeCountElements.forEach(el => {
-                                if (el.textContent.includes('点赞:')) {
-                                    el.textContent = `点赞: ${displayCount}`;
-                                }
-                            });
-                        }
-                        
-                        // 同步更新列表页的点赞数量
-                        if (window.opener && window.opener.updatePostCounts) {
-                            const commentCount = document.querySelectorAll('.comment-item').length;
-                            window.opener.updatePostCounts(postId, commentCount, like_count);
-                        }
-                        
-                        alert(liked ? '点赞成功！' : '已取消点赞！');
-                    }
-                } else {
-                    alert('操作失败: ' + result.errmsg);
-                }
-            } catch (error) {
-                alert('网络错误: ' + error.message);
-                console.error('点赞操作失败:', error);
-            }
-        }
+        // 点赞功能将重新实现
         
         function sharePost() {
             const currentUrl = window.location.href;
