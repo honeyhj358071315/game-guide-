@@ -168,8 +168,9 @@ export default {
                         'DELETE FROM post_likes WHERE post_id = ? AND user_ip = ?'
                     ).bind(postId, userIp).run();
                     // 更新帖子点赞数
+                    // 使用SQLite支持的方式确保点赞数不会小于0
                     await db.prepare(
-                        'UPDATE posts SET like_count = GREATEST(0, like_count - 1) WHERE id = ?'
+                        'UPDATE posts SET like_count = CASE WHEN like_count > 0 THEN like_count - 1 ELSE 0 END WHERE id = ?'
                     ).bind(postId).run();
                     return jsonResponse({ errno: 0, data: { liked: false } });
                 } else {
