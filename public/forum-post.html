@@ -41,10 +41,6 @@
                     <input type="text" id="commentNick" placeholder="您的昵称" required>
                 </div>
                 <div class="form-group">
-                    <label>邮箱</label>
-                    <input type="email" id="commentMail" placeholder="您的邮箱（可选）">
-                </div>
-                <div class="form-group">
                     <label>评论内容 *</label>
                     <textarea id="commentContent" placeholder="写下您的评论..." required></textarea>
                 </div>
@@ -104,8 +100,11 @@
             }
         }
         
+        let currentPost = null;
+        
         // 显示帖子详情
         function displayPostDetail(post) {
+            currentPost = post;
             const container = document.getElementById('postDetailContainer');
             const time = new Date(post.created).toLocaleString();
             const categoryName = getCategoryName(post.category || 'other');
@@ -121,6 +120,7 @@
             html += '<span>发布时间: ' + time + '</span>';
             html += '<span>浏览: ' + (post.view_count || 0) + '</span>';
             html += '<span>评论: ' + (post.comment_count || 0) + '</span>';
+            html += '<span>点赞: ' + (post.like_count || 0) + '</span>';
             html += '</div>';
             html += '</div>';
             
@@ -152,8 +152,7 @@
             
             // 帖子操作栏
             html += '<div class="post-actions">';
-            html += '<button class="action-btn" onclick="likePost()">👍 点赞</button>';
-            html += '<button class="action-btn" onclick="collectPost()">⭐ 收藏</button>';
+            html += '<button class="action-btn" onclick="likePost()">👍 点赞 (' + (post.like_count || 0) + ')</button>';
             html += '<button class="action-btn" onclick="sharePost()">📤 分享</button>';
             html += '</div>';
             
@@ -167,6 +166,11 @@
             
             // 更新评论数量
             countElement.textContent = `评论 (${comments && comments.length ? comments.length : 0})`;
+            
+            // 同步更新列表页的评论和点赞数量
+            if (window.opener && window.opener.updatePostCounts) {
+                window.opener.updatePostCounts(postId, comments.length, currentPost?.like_count || 0);
+            }
             
             if (!comments || comments.length === 0) {
                 container.innerHTML = '<p style="color: var(--text-light); text-align: center; padding: 20px 0;">暂无评论，快来踊跃发言吧！</p>';
@@ -191,7 +195,6 @@
         // 提交评论
         async function submitComment() {
             const nick = document.getElementById('commentNick').value;
-            const mail = document.getElementById('commentMail').value;
             const content = document.getElementById('commentContent').value;
             
             if (!nick || !content) {
@@ -208,7 +211,7 @@
                     body: JSON.stringify({
                         comment: content,
                         nick: nick,
-                        mail: mail || '',
+                        mail: '',
                         link: ''
                     })
                 });
@@ -218,7 +221,6 @@
                     alert('评论发表成功！');
                     // 清空表单
                     document.getElementById('commentNick').value = '';
-                    document.getElementById('commentMail').value = '';
                     document.getElementById('commentContent').value = '';
                     // 重新加载评论
                     loadPostDetail();
@@ -233,14 +235,31 @@
         // 模拟帖子操作功能
         function likePost() {
             alert('点赞成功！');
-        }
-        
-        function collectPost() {
-            alert('收藏成功！');
+            // 更新当前帖子的点赞数
+            if (currentPost) {
+                currentPost.like_count = (currentPost.like_count || 0) + 1;
+                // 更新界面显示
+                const likeBtn = document.querySelector('.action-btn:first-child');
+                if (likeBtn) {
+                    likeBtn.textContent = `👍 点赞 (${currentPost.like_count})`;
+                }
+                
+                // 同步更新列表页的点赞数量
+                if (window.opener && window.opener.updatePostCounts) {
+                    const commentCount = document.querySelectorAll('.comment-item').length;
+                    window.opener.updatePostCounts(postId, commentCount, currentPost.like_count);
+                }
+            }
         }
         
         function sharePost() {
-            alert('分享链接已复制到剪贴板！');
+            const currentUrl = window.location.href;
+            navigator.clipboard.writeText(currentUrl).then(() => {
+                alert('链接已成功复制到剪贴板！');
+            }).catch(err => {
+                alert('复制失败，请手动复制：' + currentUrl);
+                console.error('复制失败:', err);
+            });
         }
         
         // 删除帖子功能
@@ -278,30 +297,29 @@
         }
         
         // 主题切换功能
-        function setupThemeToggle() {
-            const themeToggle = document.getElementById('themeToggle');
-            
-            // 检查本地存储中的主题偏好
-            if (localStorage.getItem('theme') === 'dark' || 
-                (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.body.classList.add('dark-mode');
-                themeToggle.textContent = '☀️';
-            } else {
-                themeToggle.textContent = '🌙';
-            }
-            
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                
-                if (document.body.classList.contains('dark-mode')) {
-                    localStorage.setItem('theme', 'dark');
-                    themeToggle.textContent = '☀️';
-                } else {
-                    localStorage.setItem('theme', 'light');
-                    themeToggle.textContent = '🌙';
-                }
-            });
+    function setupThemeToggle() {
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // 检查本地存储中的主题偏好 - 默认使用浅色模式
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '🌙';
+        } else {
+            themeToggle.textContent = '☀️';
         }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '🌙';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '☀️';
+            }
+        });
+    }
         
         // 实现双击显示/隐藏删除按钮
         let deleteBtnTimeout;
