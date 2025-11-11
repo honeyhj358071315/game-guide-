@@ -154,7 +154,57 @@ export default {
                     return jsonResponse({ errno: 1, errmsg: 'Delete failed' }, 500);
                 }
             }
-            // 健康检查
+                        // 帖子点赞
+            if (path.startsWith('/posts/') && path.endsWith('/like') && request.method === 'POST') {
+                const postId = path.split('/')[2];
+                const userIp = request.headers.get('cf-connecting-ip') || '127.0.0.1';
+                // 检查是否已经点赞
+                const existingLike = await db.prepare(
+                    'SELECT * FROM post_likes WHERE post_id = ? AND user_ip = ?'
+                ).bind(postId, userIp).first();
+                if (existingLike) {
+                    // 取消点赞
+                    await db.prepare(
+                        'DELETE FROM post_likes WHERE post_id = ? AND user_ip = ?'
+                    ).bind(postId, userIp).run();
+                    // 更新帖子点赞数
+                    await db.prepare(
+                        'UPDATE posts SET like_count = GREATEST(0, like_count - 1) WHERE id = ?'
+                    ).bind(postId).run();
+                    return jsonResponse({ errno: 0, data: { liked: false } });
+                } else {
+                    // 添加点赞
+                    const likeId = generateId();
+                    const now = Date.now();
+                    await db.prepare(
+                        'INSERT INTO post_likes (id, post_id, user_ip, created) VALUES (?, ?, ?, ?)'
+                    ).bind(likeId, postId, userIp, now).run();
+                    // 更新帖子点赞数
+                    await db.prepare(
+                        'UPDATE posts SET like_count = COALESCE(like_count, 0) + 1 WHERE id = ?'
+                    ).bind(postId).run();
+                    return jsonResponse({ errno: 0, data: { liked: true } });
+                }
+            }
+            // 获取帖子点赞状态
+            if (path.startsWith('/posts/') && path.endsWith('/like') && request.method === 'GET') {
+                const postId = path.split('/')[2];
+                const userIp = request.headers.get('cf-connecting-ip') || '127.0.0.1';
+                const likeCount = await db.prepare(
+                    'SELECT COUNT(*) as count FROM post_likes WHERE post_id = ?'
+                ).bind(postId).first();
+                const userLiked = await db.prepare(
+                    'SELECT * FROM post_likes WHERE post_id = ? AND user_ip = ?'
+                ).bind(postId, userIp).first();
+                return jsonResponse({ 
+                    errno: 0, 
+                    data: { 
+                        like_count: likeCount?.count || 0,
+                        user_liked: !!userLiked
+                    } 
+                });
+            }
+    // 健康检查
             if (path === '/') {
                 return jsonResponse({ errno: 0, data: { msg: 'Forum Service Ready' } });
             }
@@ -164,3 +214,4 @@ export default {
         }
     }
 };
+
