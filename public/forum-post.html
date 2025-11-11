@@ -169,10 +169,10 @@
             const time = new Date(post.created).toLocaleString();
             const categoryName = getCategoryName(post.category || 'other');
             
-            html += '<div class="post-item" onclick="viewPost(\'' + post.id + '\')">';
+            html += '<div class="post-item">';
             html += '<div class="post-prefix"></div>'; // 在每个帖子前面添加样式元素
             html += '<div class="post-main">';
-            html += '<div class="post-title">' + post.title + '</div>';
+            html += '<a href="forum-post.html?id=' + post.id + '" class="post-title">' + post.title + '</a>';
             html += '<div class="post-content-preview">' + preview + '</div>';
             html += '<div class="post-meta">';
             html += '<span style="background-color: var(--secondary-color); padding: 2px 8px; border-radius: 3px; font-size: 12px;">' + categoryName + '</span>';
@@ -190,10 +190,7 @@
         container.innerHTML = html;
     }
     
-    // 查看帖子详情
-    function viewPost(postId) {
-        window.location.href = 'forum-post.html?id=' + postId;
-    }
+    // 可以移除viewPost函数，因为我们现在使用直接链接
     
     // 显示创建帖子模态框
     function showCreatePostModal() {
