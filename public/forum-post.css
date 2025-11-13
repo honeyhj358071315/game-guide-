@@ -206,7 +206,7 @@ body {
     padding: 20px 25px;
     border-bottom: 1px solid var(--border-color);
     font-weight: bold;
-    font-size: 16px;
+    font-size: 25px;
 }
 
 .comment-form {
@@ -275,7 +275,7 @@ textarea {
 
 .comment-item {
     padding: 15px 0;
-    border-bottom: 1px solid var(--secondary-color);
+    border-bottom: 1px solid var(--border-color); /* 改为黄色系的边框颜色 */
 }
 
 .comment-item:last-child {
@@ -291,7 +291,7 @@ textarea {
 .comment-author {
     font-weight: bold;
     color: var(--text-color);
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .comment-time {

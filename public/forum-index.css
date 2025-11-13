@@ -84,7 +84,7 @@ body {
 }
 
 .header h1 {
-    font-size: 24px;
+    font-size: 32px; /* 修改为更大的字体大小 */
     font-weight: bold;
     margin: 0;
 }
@@ -115,7 +115,7 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--border-color);
-    font-size: 18px; /* 控制欢迎文字的字体大小 */
+    font-size: 25px; /* 控制欢迎文字的字体大小 */
 }
 
 .create-post-btn {

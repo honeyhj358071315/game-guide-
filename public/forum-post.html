@@ -187,10 +187,10 @@
                 const time = new Date(comment.created).toLocaleString();
                 html += '<div class="comment-item">';
                 html += '<div class="comment-header">';
-                html += '<span class="comment-author">' + comment.nick + '</span>';
+                html += '<span class="comment-author">昵称：' + comment.nick + '</span>';
                 html += '<span class="comment-time">' + time + '</span>';
                 html += '</div>';
-                html += '<div class="comment-content">' + comment.comment + '</div>';
+                html += '<div class="comment-content">评注内容：' + comment.comment + '</div>';
                 html += '</div>';
             });
             
