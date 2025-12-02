@@ -7,11 +7,11 @@
     <title>懒人躺平攻略 - 导航页</title>
     <!-- PC端样式 -->
     <link rel="stylesheet" href="styles-pc.css" media="screen and (min-width: 769px)">
-    
+
     <!-- 手机端样式 -->
     <link rel="stylesheet" href="styles-mobile.css" media="screen and (max-width: 768px)">
-    
-   
+
+
 </head>
 
 <body>
@@ -27,7 +27,7 @@
         <!-- 更新通告栏 -->
         <div class="update-notice">
             <span class="notice-icon">📢</span>
-            <span class="notice-text">测试！ 2025/11/7</span>
+            <span class="notice-text">2.5下版本,新器者【小宋香炉】焕彰【雪景寒林图】【莲塘乳鸭图】！ 2025/12/4 上线！</span>
         </div>
 
         <div class="nav-grid">
@@ -70,15 +70,15 @@
             <a href="/public/forum-index.html" class="nav-card navigation">
                 <div class="nav-icon">🧭</div>
                 <div class="nav-title">咕物吧</div>
-                <div class="nav-desc">类似贴吧交流区</div>
+                <div class="nav-desc">（未完工）类似贴吧交流区</div>
             </a>
 
             <a href="pages/8dangqidaohang.html#navigation-section" class="nav-card navigation">
                 <div class="nav-icon">🌟</div>
                 <div class="nav-title">当期攻略/下期预告</div>
-                <div class="nav-desc">当期活动攻略/下期注意事项等</div>
+                <div class="nav-desc">（未完工）当期活动攻略/下期注意事项等</div>
             </a>
-            
+
             <a href="pages/9pinglun.html#navigation-section" class="nav-card navigation">
                 <div class="nav-icon">💻</div>
                 <div class="nav-title">网站公告/建议反馈</div>
@@ -94,42 +94,43 @@
                 <a href="pages/33renqi.html#navigation-section" class="quick-btn">❤️ 人气投票</a>
             </div>
         </div>
-        
+
         <footer>
-            <p>缩写说明: 暴=暴击, 爆=爆伤, 构=构素伤害提升, 物=物理伤害提升, 全=伤害提升, 攻%=百分比攻击力, 攻=攻击力,汲=生命汲取，生=生命，治=治疗量提升，受=受治疗提升，%=百分比，双生=百分比生命和固定生命</p>
+            <p>缩写说明: 暴=暴击, 爆=爆伤, 构=构素伤害提升, 物=物理伤害提升, 全=伤害提升, 攻%=百分比攻击力,
+                攻=攻击力,汲=生命汲取，生=生命，治=治疗量提升，受=受治疗提升，%=百分比，双生=百分比生命和固定生命</p>
             <p>可练=练了不亏，选练=根据自身情况。可焕彰/选焕彰一样。</p>
         </footer>
     </div>
 
     <script>
         // 添加页面加载动画
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const cards = document.querySelectorAll('.nav-card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(30px)';
-                
+
                 setTimeout(() => {
                     card.style.transition = 'all 0.6s ease';
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
                 }, index * 100);
             });
-            
+
             // 初始化在线人数统计
             initOnlineStats();
         });
 
         // 添加点击反馈
         document.querySelectorAll('.nav-card').forEach(card => {
-            card.addEventListener('click', function() {
+            card.addEventListener('click', function () {
                 this.style.transform = 'scale(0.95)';
                 setTimeout(() => {
                     this.style.transform = '';
                 }, 150);
             });
         });
-        
+
         // 在线人数统计功能
         function initOnlineStats() {
             // 检查是否有styles-pc.css文件，如果有，添加在线统计的样式
@@ -162,7 +163,7 @@
                 }
             `;
             document.head.appendChild(style);
-            
+
             // 定时更新在线人数
             function updateOnlineStats() {
                 // 使用不蒜子提供的数据
@@ -173,33 +174,33 @@
                     document.getElementById('total-count').textContent = window.busuanzi.site.pv || '--';
                 }
             }
-            
+
             // 初始更新
             updateOnlineStats();
-            
+
             // 每隔5秒更新一次在线人数
             setInterval(updateOnlineStats, 5000);
-            
+
             // 兼容性处理：如果不蒜子加载失败，使用模拟数据
             setTimeout(() => {
-                if (!window.busuanzi || !document.getElementById('online-count').textContent || 
+                if (!window.busuanzi || !document.getElementById('online-count').textContent ||
                     document.getElementById('online-count').textContent === '--') {
                     // 使用模拟数据
                     let mockOnlineCount = Math.floor(Math.random() * 50) + 1;
                     let mockTotalCount = Math.floor(Math.random() * 1000) + 100;
-                    
+
                     document.getElementById('online-count').textContent = mockOnlineCount;
                     document.getElementById('total-count').textContent = mockTotalCount;
-                    
+
                     // 模拟数据每30秒随机波动
                     setInterval(() => {
                         // 在线人数小范围波动
                         const change = Math.floor(Math.random() * 5) - 2;
                         mockOnlineCount = Math.max(1, mockOnlineCount + change);
-                        
+
                         // 总访问量缓慢增长
                         mockTotalCount += Math.floor(Math.random() * 3) + 1;
-                        
+
                         document.getElementById('online-count').textContent = mockOnlineCount;
                         document.getElementById('total-count').textContent = mockTotalCount;
                     }, 30000);
