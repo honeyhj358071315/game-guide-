@@ -536,6 +536,7 @@
             <div class="class-header">
                 <span>远击类角色</span>
                 <button class="add-character" id="addStrategyBtn">+ 添加角色</button>
+        <button class="add-character" id="sortByNumberBtn">按序号排序</button>
             </div>
             <table>
                 <thead>
@@ -672,6 +673,62 @@
                     </td>
                     <td>
                         <div class="editable">
+                            <span class="name-text" style="display: inline;"><span style="color: #ff6b6b">小宋香炉</span></span>
+                            <input type="text" class="edit-input name-edit" value="re小宋香炉" style="display: none;">
+                        </div>
+                        <button class="delete-row">×</button>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="weapon-text weapon" style="display: inline;">流云鸣沙弩<br>铜杆弩</span>
+                            <input type="text" class="edit-input weapon-edit" value="流云鸣沙弩&lt;br&gt;铜杆弩" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="strength-text strength" style="display: inline;">必练</span>
+                            <input type="text" class="edit-input strength-edit" value="必练" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="training-text training" style="display: inline;">破碎7300</span>
+                            <input type="text" class="edit-input training-edit" value="破碎7300" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="knowledge-text knowledge" style="display: inline;">0致/3致</span>
+                            <input type="text" class="edit-input knowledge-edit" value="0致/3致" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="glory-text glory" style="display: inline;">回能/伤拐<br>3致输出</span>
+                            <input type="text" class="edit-input glory-edit" value="回能/伤拐&lt;br&gt;3致输出" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <div class="attributes-text attributes" style="display: inline;"><span class="attr-item"><span style="color: #ff6b6b">暴/爆/物/全</span></span></div>
+                            <input type="text" class="edit-input attributes-edit" value="re暴/爆/物/全" style="display: none;">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
+                            <span class="notes-text notes" style="display: inline;">搭配：召唤队/多段队，找伤队友</span>
+                            <input type="text" class="edit-input notes-edit" value="搭配：召唤队/多段队，找伤队友" style="display: none;">
+                        </div>
+                    </td>
+                    <td></td>
+                </tr><tr data-type="strategy" data-index="3" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                    <td>
+                        <div class="editable">
+                            <span class="row-number" style="color: #a0c8f0;">4.</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="editable">
                             <span class="name-text" style="display: inline;"><span style="color: #ff6b6b">星月夜</span></span>
                             <input type="text" class="edit-input name-edit" value="re星月夜" style="display: none;">
                         </div>
@@ -720,10 +777,10 @@
                         </div>
                     </td>
                     <td></td>
-                </tr><tr data-type="strategy" data-index="3" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                </tr><tr data-type="strategy" data-index="4" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
                     <td>
                         <div class="editable">
-                            <span class="row-number" style="color: #a0c8f0;">4.</span>
+                            <span class="row-number" style="color: #a0c8f0;">5.</span>
                         </div>
                     </td>
                     <td>
@@ -776,10 +833,10 @@
                         </div>
                     </td>
                     <td></td>
-                </tr><tr data-type="strategy" data-index="4" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                </tr><tr data-type="strategy" data-index="5" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
                     <td>
                         <div class="editable">
-                            <span class="row-number" style="color: #a0c8f0;">5.</span>
+                            <span class="row-number" style="color: #a0c8f0;">6.</span>
                         </div>
                     </td>
                     <td>
@@ -832,10 +889,10 @@
                         </div>
                     </td>
                     <td></td>
-                </tr><tr data-type="strategy" data-index="5" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                </tr><tr data-type="strategy" data-index="6" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
                     <td>
                         <div class="editable">
-                            <span class="row-number" style="color: #a0c8f0;">6.</span>
+                            <span class="row-number" style="color: #a0c8f0;">7.</span>
                         </div>
                     </td>
                     <td>
@@ -888,10 +945,10 @@
                         </div>
                     </td>
                     <td></td>
-                </tr><tr data-type="strategy" data-index="6" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                </tr><tr data-type="strategy" data-index="7" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
                     <td>
                         <div class="editable">
-                            <span class="row-number" style="color: #a0c8f0;">7.</span>
+                            <span class="row-number" style="color: #a0c8f0;">8.</span>
                         </div>
                     </td>
                     <td>
@@ -944,10 +1001,10 @@
                         </div>
                     </td>
                     <td></td>
-                </tr><tr data-type="strategy" data-index="7" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                </tr><tr data-type="strategy" data-index="8" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
                     <td>
                         <div class="editable">
-                            <span class="row-number" style="color: #a0c8f0;">8.</span>
+                            <span class="row-number" style="color: #a0c8f0;">9.</span>
                         </div>
                     </td>
                     <td>
@@ -1000,10 +1057,10 @@
                         </div>
                     </td>
                     <td></td>
-                </tr><tr data-type="strategy" data-index="8" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
+                </tr><tr data-type="strategy" data-index="9" style="opacity: 1; transform: translateX(0px); transition: 0.5s; display: none;">
                     <td>
                         <div class="editable">
-                            <span class="row-number" style="color: #a0c8f0;">9.</span>
+                            <span class="row-number" style="color: #a0c8f0;">10.</span>
                         </div>
                     </td>
                     <td>
@@ -2335,6 +2392,18 @@
                 input.classList.contains('knowledge-edit')) {
                 // 强度和致知字段也支持颜色
                 textElement.innerHTML = processColorCodes(newValue.replace(/\|/g, '<br>'))
+            } else if (input.classList.contains('number-edit')) {
+                // 如果是序号编辑，验证数字
+                const newNumber = parseInt(newValue);
+                if (!isNaN(newNumber) && newNumber > 0) {
+                    textElement.textContent = newValue + '.';
+                    // 延迟一点时间后排序，让用户看到修改效果
+                    setTimeout(sortByNumber, 100);
+                } else {
+                    // 数字无效，恢复原值
+                    textElement.textContent = input.defaultValue + '.';
+                    showNotification('序号必须是大于0的数字');
+                }
             } else {
                 // 其他字段（如名称）
                 textElement.innerHTML = processColorCodes(newValue);
@@ -2343,7 +2412,9 @@
             input.style.display = 'none';
             textElement.style.display = 'inline';
 
-            showNotification('内容已更新');
+            if (!input.classList.contains('number-edit')) {
+                showNotification('内容已更新');
+            }
         }
 
         // 取消编辑
@@ -2358,11 +2429,33 @@
             const rows = document.querySelectorAll('#strategy-tbody tr');
             rows.forEach((row, index) => {
                 const numberElement = row.querySelector('.row-number');
-                if (numberElement) {
-                    numberElement.textContent = `${index + 1}.`;
+                const numberInput = row.querySelector('.number-edit');
+                if (numberElement && numberInput) {
+                    numberElement.textContent = numberInput.value + '.';
                     row.dataset.index = index;
                 }
             });
+        }
+
+        // 按序号排序
+        function sortByNumber() {
+            const tbody = document.getElementById('strategy-tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+
+            // 按序号数字排序
+            rows.sort((a, b) => {
+                const numA = parseInt(a.querySelector('.number-edit').value) || 0;
+                const numB = parseInt(b.querySelector('.number-edit').value) || 0;
+                return numA - numB;
+            });
+
+            // 重新插入排序
+            rows.forEach(row => tbody.appendChild(row));
+
+            // 更新显示序号
+            updateRowNumbers();
+            initDropdowns();
+            showNotification('已按序号重新排序');
         }
 
         // 绑定所有编辑事件
@@ -2554,10 +2647,11 @@
 
                 newRow.innerHTML = `
                     <td>
-                        <div class="editable">
-                            <span class="row-number" style="color: #a0c8f0;">${index + 1}.</span>
-                        </div>
-                    </td>
+                    <div class="editable">
+                        <span class="row-number" style="color: #a0c8f0;">${index + 1}.</span>
+                        <input type="text" class="edit-input number-edit" value="${index + 1}">
+                    </div>
+                </td>
                     <td>
                         <div class="editable">
                             <span class="name-text">${character.name || '未命名'}</span>
@@ -2658,6 +2752,31 @@
             setupToggleButtons();
             bindAllEditEvents();
             initDropdowns();
+            
+            // 设置排序按钮点击事件
+            const sortBtn = document.getElementById('sortByNumberBtn');
+            if (sortBtn) {
+                sortBtn.addEventListener('click', sortByNumber);
+            }
+            
+            // 为所有现有行添加序号输入框
+            const existingRows = document.querySelectorAll('#strategy-tbody tr');
+            existingRows.forEach((row, index) => {
+                const rowNumber = index + 1;
+                const numberElement = row.querySelector('.row-number');
+                if (numberElement && !row.querySelector('.number-edit')) {
+                    const inputElement = document.createElement('input');
+                    inputElement.type = 'text';
+                    inputElement.className = 'edit-input number-edit';
+                    inputElement.value = rowNumber;
+                    
+                    const editableDiv = numberElement.parentElement;
+                    editableDiv.appendChild(inputElement);
+                    
+                    // 更新行号显示
+                    numberElement.textContent = rowNumber + '.';
+                }
+            });
 
             // 新增：页面加载时处理换行符
             function processExistingDataLineBreaks() {
