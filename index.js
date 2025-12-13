@@ -208,9 +208,219 @@ export default {
     // 健康检查
             if (path === '/') {
                 return jsonResponse({ errno: 0, data: { msg: 'Forum Service Ready' } });
+        }
+        // 投票相关API
+        // 初始化投票表
+        if (path === '/init-votes' && request.method === 'POST') {
+            await db.prepare(
+                `CREATE TABLE IF NOT EXISTS votes (
+                    id TEXT PRIMARY KEY,
+                    title TEXT NOT NULL,
+                    description TEXT,
+                    options TEXT NOT NULL,
+                    is_multiple INTEGER DEFAULT 0,
+                    daily_limit INTEGER DEFAULT 0,
+                    ip_limit INTEGER DEFAULT 0,
+                    created INTEGER NOT NULL,
+                    updated INTEGER NOT NULL
+                )`
+            ).run();
+            await db.prepare(
+                `CREATE TABLE IF NOT EXISTS vote_records (
+                    id TEXT PRIMARY KEY,
+                    vote_id TEXT NOT NULL,
+                    option_id INTEGER NOT NULL,
+                    ip TEXT NOT NULL,
+                    user_agent TEXT,
+                    created INTEGER NOT NULL,
+                    FOREIGN KEY (vote_id) REFERENCES votes(id)
+                )`
+            ).run();
+            return jsonResponse({ errno: 0, data: { msg: 'Tables initialized' } });
+        }
+        // 创建新投票
+        if (path === '/votes' && request.method === 'POST') {
+            const body = await request.json();
+            const { title, description, options, is_multiple = 0, daily_limit = 0, ip_limit = 0 } = body;
+            if (!title || !options || !Array.isArray(options) || options.length < 2) {
+                return jsonResponse({ errno: 1, errmsg: 'Invalid parameters' }, 400);
             }
-            return jsonResponse({ errno: 1, errmsg: 'Not found' }, 404);
-        } catch (error) {
+            const voteId = generateId();
+            const now = Date.now();
+            const result = await db.prepare(
+                'INSERT INTO votes (id, title, description, options, is_multiple, daily_limit, ip_limit, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+            ).bind(voteId, title, description, JSON.stringify(options), is_multiple, daily_limit, ip_limit, now, now).run();
+            if (result.success) {
+                return jsonResponse({ errno: 0, data: { vote_id: voteId } });
+            } else {
+                return jsonResponse({ errno: 1, errmsg: 'Failed to create vote' }, 500);
+            }
+        }
+        // 获取投票信息
+        if (path.startsWith('/votes/') && request.method === 'GET') {
+            const voteId = path.split('/')[2];
+            const vote = await db.prepare('SELECT * FROM votes WHERE id = ?').bind(voteId).first();
+            if (!vote) {
+                return jsonResponse({ errno: 1, errmsg: 'Vote not found' }, 404);
+            }
+            // 解析选项
+            vote.options = JSON.parse(vote.options);
+            return jsonResponse({ errno: 0, data: vote });
+        }
+        // 提交投票
+        if (path.startsWith('/votes/') && path.endsWith('/submit') && request.method === 'POST') {
+            const voteId = path.split('/')[2];
+            const body = await request.json();
+            const { option_ids } = body;
+            const ip = request.headers.get('cf-connecting-ip') || '127.0.0.1';
+            const userAgent = request.headers.get('user-agent') || '';
+            
+            // 检查投票是否存在
+            const vote = await db.prepare('SELECT * FROM votes WHERE id = ?').bind(voteId).first();
+            if (!vote) {
+                return jsonResponse({ errno: 1, errmsg: 'Vote not found' }, 404);
+            }
+            
+            // 检查投票类型
+            const isMultiple = vote.is_multiple;
+            if (!Array.isArray(option_ids)) {
+                return jsonResponse({ errno: 1, errmsg: 'Invalid option_ids' }, 400);
+            }
+            if (!isMultiple && option_ids.length > 1) {
+                return jsonResponse({ errno: 1, errmsg: 'Single choice only' }, 400);
+            }
+            
+            // 检查IP限制
+            if (vote.ip_limit) {
+                const existingVote = await db.prepare(
+                    'SELECT * FROM vote_records WHERE vote_id = ? AND ip = ?'
+                ).bind(voteId, ip).first();
+                if (existingVote) {
+                    return jsonResponse({ errno: 1, errmsg: 'IP already voted' }, 403);
+                }
+            }
+            
+            // 检查每日限制
+            if (vote.daily_limit) {
+                const todayStart = new Date();
+                todayStart.setHours(0, 0, 0, 0);
+                const todayVotes = await db.prepare(
+                    'SELECT COUNT(*) as count FROM vote_records WHERE vote_id = ? AND ip = ? AND created >= ?'
+                ).bind(voteId, ip, todayStart.getTime()).first();
+                if (todayVotes?.count >= vote.daily_limit) {
+                    return jsonResponse({ errno: 1, errmsg: 'Daily limit reached' }, 403);
+                }
+            }
+            
+            // 保存投票记录
+            const now = Date.now();
+            for (const optionId of option_ids) {
+                const recordId = generateId();
+                await db.prepare(
+                    'INSERT INTO vote_records (id, vote_id, option_id, ip, user_agent, created) VALUES (?, ?, ?, ?, ?, ?)'
+                ).bind(recordId, voteId, optionId, ip, userAgent, now).run();
+            }
+            
+            return jsonResponse({ errno: 0, data: { msg: 'Vote submitted' } });
+        }
+        // 获取投票结果
+        if (path.startsWith('/votes/') && path.endsWith('/results') && request.method === 'GET') {
+            const voteId = path.split('/')[2];
+            
+            // 检查投票是否存在
+            const vote = await db.prepare('SELECT * FROM votes WHERE id = ?').bind(voteId).first();
+            if (!vote) {
+                return jsonResponse({ errno: 1, errmsg: 'Vote not found' }, 404);
+            }
+            
+            // 获取投票记录
+            const records = await db.prepare(
+                'SELECT option_id, COUNT(*) as count FROM vote_records WHERE vote_id = ? GROUP BY option_id'
+            ).bind(voteId).all();
+            
+            // 解析选项
+            const options = JSON.parse(vote.options);
+            const results = options.map((option, index) => {
+                const record = records.results.find(r => r.option_id === index);
+                return {
+                    id: index,
+                    text: option,
+                    count: record?.count || 0
+                };
+            });
+            
+            return jsonResponse({ errno: 0, data: { results, total: records.results.reduce((sum, r) => sum + r.count, 0) } });
+        }
+        
+        // 获取所有投票列表
+        if (path === '/votes' && request.method === 'GET') {
+            const votes = await db.prepare(
+                'SELECT id, title, description, created FROM votes ORDER BY created DESC'
+            ).all();
+            
+            // 处理每个投票的选项数量
+            const processedVotes = votes.results.map(vote => ({
+                ...vote,
+                options_count: JSON.parse(vote.options).length
+            }));
+            
+            return jsonResponse({ errno: 0, data: processedVotes });
+        }
+        
+        // 删除投票
+        if (path.startsWith('/votes/') && request.method === 'DELETE') {
+            const voteId = path.split('/')[2];
+            
+            // 先检查投票是否存在
+            const vote = await db.prepare('SELECT * FROM votes WHERE id = ?').bind(voteId).first();
+            if (!vote) {
+                return jsonResponse({ errno: 1, errmsg: 'Vote not found' }, 404);
+            }
+            
+            // 开始事务
+            await db.batch([
+                // 删除相关的投票记录
+                db.prepare('DELETE FROM vote_records WHERE vote_id = ?').bind(voteId),
+                // 删除投票
+                db.prepare('DELETE FROM votes WHERE id = ?').bind(voteId)
+            ]);
+            
+            return jsonResponse({ errno: 0, data: { msg: 'Vote deleted successfully' } });
+        }
+        
+        // 更新投票
+        if (path.startsWith('/votes/') && request.method === 'PUT') {
+            const voteId = path.split('/')[2];
+            
+            // 解析请求体
+            const body = await request.json();
+            const { title, description, options, is_multiple, allow_anonymous, ip_limit, daily_limit } = body;
+            
+            // 验证必填字段
+            if (!title || !options || !Array.isArray(options) || options.length < 2) {
+                return jsonResponse({ errno: 1, errmsg: 'Invalid parameters' }, 400);
+            }
+            
+            // 检查投票是否存在
+            const vote = await db.prepare('SELECT * FROM votes WHERE id = ?').bind(voteId).first();
+            if (!vote) {
+                return jsonResponse({ errno: 1, errmsg: 'Vote not found' }, 404);
+            }
+            
+            // 更新投票
+            await db.prepare(
+                `UPDATE votes SET title = ?, description = ?, options = ?, is_multiple = ?, 
+                 allow_anonymous = ?, ip_limit = ?, daily_limit = ? WHERE id = ?`
+            ).bind(
+                title, description || '', JSON.stringify(options), is_multiple ? 1 : 0, 
+                allow_anonymous ? 1 : 0, ip_limit ? 1 : 0, daily_limit ? 1 : 0, voteId
+            ).run();
+            
+            return jsonResponse({ errno: 0, data: { msg: 'Vote updated successfully' } });
+        }
+        
+        return jsonResponse({ errno: 1, errmsg: 'Not found' }, 404);
+    } catch (error) {
             return jsonResponse({ errno: 1, errmsg: 'Server error: ' + error.message }, 500);
         }
     }
