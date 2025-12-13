@@ -335,8 +335,10 @@
     </div>
 
     <script>
-        // API配置
-        const API_BASE_URL = 'https://your-cloudflare-worker-url'; // 替换为你的Cloudflare Worker URL
+        // API配置 - 请根据实际部署情况修改
+        // 本地开发：http://localhost:8787
+        // Cloudflare Worker: https://your-worker-name.your-subdomain.workers.dev
+        const API_BASE_URL = 'http://localhost:8787';
         
         // 显示通知
         function showNotification(message, type = 'success') {
@@ -452,7 +454,19 @@
                 return;
             }
             
+            // 获取创建/更新按钮并设置加载状态
+            const createBtn = document.querySelector('button[onclick="createVote()"]');
+            const originalText = createBtn.textContent;
+            createBtn.textContent = voteId ? '更新中...' : '创建中...';
+            createBtn.disabled = true;
+            
             try {
+                // 检查API_BASE_URL配置
+                if (!API_BASE_URL || API_BASE_URL.includes('your-cloudflare-worker-url')) {
+                    showNotification('API配置错误：请先配置正确的API地址', 'error');
+                    return;
+                }
+                
                 const url = voteId ? `${API_BASE_URL}/votes/${voteId}` : `${API_BASE_URL}/votes`;
                 const method = voteId ? 'PUT' : 'POST';
                 
@@ -475,12 +489,26 @@
                 if (result.errno === 0) {
                     showNotification(voteId ? '投票更新成功！' : '投票创建成功！');
                     resetForm();
+                    loadVotesList(); // 刷新投票列表
                 } else {
                     showNotification(result.errmsg, 'error');
                 }
             } catch (error) {
-                showNotification((voteId ? '更新' : '创建') + '投票时出错，请稍后重试', 'error');
+                let errorMessage = (voteId ? '更新' : '创建') + '投票时出错：';
+                
+                // 根据不同错误类型提供更具体的提示
+                if (error.message.includes('Failed to fetch')) {
+                    errorMessage += `无法连接到API服务器。请检查：\n1. API地址是否正确（当前：${API_BASE_URL}）\n2. 服务器是否正在运行\n3. 网络连接是否正常`;
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                showNotification(errorMessage, 'error');
                 console.error((voteId ? '更新' : '创建') + '投票时出错:', error);
+            } finally {
+                // 恢复按钮状态
+                createBtn.textContent = originalText;
+                createBtn.disabled = false;
             }
         }
         
