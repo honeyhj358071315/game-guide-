@@ -182,6 +182,34 @@
             <button type="button" class="btn btn-add" id="addOptionBtn">+ 添加选项</button>
         </div>
 
+        <!-- 在“投票选项”部分之后，添加这个配置区域 -->
+
+ <div class="form-group">
+
+     <label>投票规则配置</label>
+
+     <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 10px;">
+
+         <label style="display: flex; align-items: center;">
+
+             <input type="checkbox" id="limitByIp" style="margin-right: 10px;">
+
+             🔒 启用IP限制（防止同一IP重复投票）
+
+         </label>
+
+         <label style="display: flex; align-items: center;">
+
+             <input type="checkbox" id="allowMultiple" style="margin-right: 10px;">
+
+             ✅ 允许多选（可同时选择多个选项）
+
+         </label>
+
+     </div>
+
+ </div>
+
         <button class="btn btn-primary" id="createPollBtn">🚀 创建投票</button>
 
         <div class="result-box" id="resultBox">
@@ -249,19 +277,33 @@
                 return;
             }
 
+            // 获取配置
+            const limitByIp = document.getElementById('limitByIp').checked;
+            const allowMultiple = document.getElementById('allowMultiple').checked;
+
             // 禁用按钮，防止重复点击
             const btn = document.getElementById('createPollBtn');
             btn.disabled = true;
             btn.textContent = '创建中...';
 
             try {
-                // 调用你的 Worker API
+                // 修改提交的JSON数据，增加 config 字段
+                const requestBody = {
+                    title: title,
+                    options: options,
+                    config: { // 新增的配置
+                        limit_by_ip: limitByIp,
+                        allow_multiple: allowMultiple
+                    }
+                };
+
+                // 调用API
                 const response = await fetch('https://vote-api-worker.honeyhj.workers.dev/api/poll', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ title, options })
+                    body: JSON.stringify(requestBody) // 使用新的 requestBody
                 });
 
                 const result = await response.json();
