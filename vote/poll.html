@@ -269,7 +269,7 @@
         // 配置
         const urlParams = new URLSearchParams(window.location.search);
         const pollId = urlParams.get('id');
-        const apiBase = 'https://vote-api-worker.honeyhj.workers.dev/api';
+        const apiBase = 'https://vote-api.whmx.top/api';
         let userId = localStorage.getItem(`vote_user_${pollId}`) ||
             'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
         localStorage.setItem(`vote_user_${pollId}`, userId);
