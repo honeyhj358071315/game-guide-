@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>参与投票 - 简易投票系统</title>
+    <title>参与投票</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             min-height: 100vh;
             padding: 20px;
@@ -18,171 +18,169 @@
         }
         .container {
             background: white;
-            border-radius: 24px;
-            padding: 40px;
+            border-radius: 20px;
+            padding: 35px;
             width: 100%;
             max-width: 700px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #ff8a00, #e52e71);
-        }
-        h1 {
-            color: #1a202c;
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 2.4rem;
-            font-weight: 800;
-        }
-        .subtitle {
-            text-align: center;
-            color: #718096;
-            margin-bottom: 40px;
-            font-size: 1.1rem;
-        }
-        .options-container {
-            margin: 30px 0;
-        }
+        h1 { color: #1a202c; text-align: center; margin-bottom: 10px; font-size: 2rem; }
+        .subtitle { text-align: center; color: #718096; margin-bottom: 30px; }
+        
+        /* 选项样式 */
         .option {
-            padding: 22px 24px;
-            margin: 16px 0;
+            padding: 18px 20px;
+            margin: 12px 0;
             border: 2px solid #e2e8f0;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 12px;
+            background: white;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
-            background: white;
+            cursor: pointer;
         }
         .option:hover {
             border-color: #4299e1;
             background: #f8fafc;
-            transform: translateX(10px);
-            box-shadow: 0 10px 25px rgba(66, 153, 225, 0.15);
         }
-        .option:active {
-            transform: translateX(5px);
+        .option.selected {
+            background: #ebf8ff;
+            border-color: #4299e1;
         }
-        .option.voted {
-            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
-            border-color: #38a169;
-            color: #22543d;
-        }
-        .option-index {
-            display: inline-flex;
+        /* 多选模式下的复选框 */
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            margin-right: 15px;
+            border: 2px solid #cbd5e0;
+            border-radius: 6px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 46px;
-            height: 46px;
-            background: #edf2f7;
-            border-radius: 50%;
-            margin-right: 20px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #4a5568;
             flex-shrink: 0;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
         }
-        .option:hover .option-index {
+        .option.selected .checkbox {
             background: #4299e1;
+            border-color: #4299e1;
+        }
+        .checkbox::after {
+            content: "✓";
             color: white;
+            font-size: 14px;
+            font-weight: bold;
+            opacity: 0;
+        }
+        .option.selected .checkbox::after {
+            opacity: 1;
         }
         .option-text {
             flex-grow: 1;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 500;
         }
-        .results-panel {
-            margin-top: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
-            padding: 30px;
+        
+        /* 操作按钮 */
+        .actions {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .btn {
+            padding: 14px 28px;
+            background: #4299e1;
             color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #3182ce;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(66, 153, 225, 0.3);
+        }
+        .btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* 结果面板 */
+        .results {
+            margin-top: 40px;
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
             display: none;
         }
-        .results-panel.show {
+        .results.show {
             display: block;
-            animation: slideUp 0.6s ease;
+            animation: fadeIn 0.5s;
         }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .results-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-        }
-        .results-title::before {
-            content: "📊";
-            margin-right: 12px;
-            font-size: 2rem;
+        .results h3 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
         }
         .chart-item {
-            margin: 20px 0;
+            margin: 15px 0;
         }
         .bar-container {
             display: flex;
             align-items: center;
-            margin: 12px 0;
         }
         .bar-label {
-            width: 150px;
-            font-weight: 600;
-            font-size: 1.1rem;
+            width: 120px;
+            font-weight: 500;
         }
         .bar-wrapper {
             flex-grow: 1;
-            height: 38px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            margin: 0 20px;
+            height: 28px;
+            background: #e2e8f0;
+            border-radius: 8px;
+            margin: 0 15px;
             overflow: hidden;
-            position: relative;
-            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
         }
-        .bar-fill {
+        .bar {
             height: 100%;
-            background: linear-gradient(90deg, #ffd89b, #19547b);
-            border-radius: 10px 0 0 10px;
+            background: linear-gradient(90deg, #4299e1, #38b2ac);
+            border-radius: 8px 0 0 8px;
             width: 0%;
-            transition: width 1.5s ease-out;
+            transition: width 1s ease-out;
         }
         .bar-count {
             width: 80px;
             text-align: right;
             font-weight: bold;
-            font-size: 1.3rem;
         }
-        .footer {
+        
+        /* 提示信息 */
+        .info {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 20px;
             color: #a0aec0;
             font-size: 0.9rem;
         }
-        .loading {
-            text-align: center;
-            padding: 60px;
-            color: #718096;
-            font-size: 1.2rem;
+        .multi-hint {
+            color: #e53e3e;
+            font-weight: 500;
+            margin-top: 10px;
         }
         .alert {
-            padding: 20px;
+            padding: 15px;
             background: #fed7d7;
-            border: 2px solid #fc8181;
-            border-radius: 12px;
+            border: 1px solid #fc8181;
+            border-radius: 10px;
             color: #c53030;
-            margin: 20px 0;
-            text-align: center;
+            margin: 15px 0;
             display: none;
         }
         .alert.show {
@@ -192,154 +190,205 @@
 </head>
 <body>
     <div class="container">
-        <h1 id="pollTitle">加载投票...</h1>
-        <p class="subtitle">点击你支持的选项即可投票，结果将实时更新</p>
+        <h1 id="pollTitle">加载中...</h1>
+        <p class="subtitle" id="pollSubtitle">请选择您支持的选项</p>
         
         <div class="alert" id="alertBox"></div>
         
-        <div class="options-container" id="optionsContainer">
-            <div class="loading">正在加载选项...</div>
+        <div id="optionsContainer">
+            <div class="option">
+                <div class="checkbox"></div>
+                <div class="option-text">正在加载选项...</div>
+            </div>
         </div>
-
-        <div class="results-panel" id="resultsPanel">
-            <div class="results-title">实时投票结果</div>
+        
+        <div class="actions">
+            <button class="btn" id="submitVoteBtn" disabled>提交投票</button>
+        </div>
+        
+        <div class="info">
+            <div id="multiHint" class="multi-hint" style="display:none;">💡 此投票允许多选，可同时选择多个选项</div>
+            <div>系统将根据设备标识确保投票公正</div>
+        </div>
+        
+        <div class="results" id="resultsPanel">
+            <h3>📊 投票结果</h3>
             <div id="resultsChart"></div>
-        </div>
-
-        <div class="footer">
-            <p>⚠️ 提示：系统会自动识别你的设备，确保一人一票。</p>
-            <p>分享此链接可邀请更多人参与投票。</p>
         </div>
     </div>
 
     <script>
-        // 从URL获取投票ID
+        // 配置
         const urlParams = new URLSearchParams(window.location.search);
         const pollId = urlParams.get('id');
         const apiBase = 'https://vote-api-worker.honeyhj.workers.dev/api';
-
-        // 生成用户唯一标识（简化版，实际应用需更严谨）
-        function generateUserId() {
-            let userId = localStorage.getItem(`vote_user_${pollId}`);
-            if (!userId) {
-                userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem(`vote_user_${pollId}`, userId);
-            }
-            return userId;
-        }
-        const userId = generateUserId();
+        let userId = localStorage.getItem(`vote_user_${pollId}`) || 
+                    'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem(`vote_user_${pollId}`, userId);
+        
+        let pollConfig = { allow_multiple: false };
+        let selectedOptions = new Set(); // 用于存储多选选项
 
         // 1. 加载投票信息
         async function loadPoll() {
             try {
-                const response = await fetch(`${apiBase}/poll/${pollId}`);
-                const result = await response.json();
+                const resp = await fetch(`${apiBase}/poll/${pollId}`);
+                const data = await resp.json();
                 
-                if (result.success) {
-                    document.getElementById('pollTitle').textContent = result.data.title;
-                    renderOptions(result.data.options);
+                if (data.success) {
+                    document.getElementById('pollTitle').textContent = data.data.title;
+                    pollConfig = JSON.parse(data.data.config || '{}');
+                    
+                    // 显示多选提示
+                    if (pollConfig.allow_multiple) {
+                        document.getElementById('multiHint').style.display = 'block';
+                        document.getElementById('pollSubtitle').textContent = '可多选，点击选项进行选择';
+                    }
+                    
+                    renderOptions(JSON.parse(data.data.options));
                 } else {
-                    showAlert('投票不存在或已被删除');
+                    showAlert(data.error || '投票不存在');
                 }
             } catch (error) {
-                console.error('加载投票失败:', error);
-                showAlert('加载失败，请检查网络或稍后重试');
+                console.error('加载失败:', error);
+                showAlert('加载失败，请检查网络');
             }
         }
 
-        // 2. 渲染选项
+        // 2. 渲染选项（支持多选/单选）
         function renderOptions(options) {
             const container = document.getElementById('optionsContainer');
             container.innerHTML = '';
             
-            options.forEach((optionText, index) => {
-                const optionIndex = index + 1;
+            options.forEach((text, index) => {
+                const optionNum = index + 1;
                 const div = document.createElement('div');
                 div.className = 'option';
-                div.dataset.option = optionIndex;
+                div.dataset.option = optionNum;
                 div.innerHTML = `
-                    <div class="option-index">${optionIndex}</div>
-                    <div class="option-text">${optionText}</div>
+                    <div class="checkbox"></div>
+                    <div class="option-text">${optionNum}. ${text}</div>
                 `;
-                div.onclick = () => castVote(optionIndex, optionText);
+                
+                // 点击事件
+                div.onclick = () => toggleOption(optionNum, div);
                 container.appendChild(div);
             });
+            
+            // 启用提交按钮
+            document.getElementById('submitVoteBtn').disabled = false;
         }
 
-        // 3. 提交投票
-        async function castVote(optionIndex, optionText) {
-            const alertBox = document.getElementById('alertBox');
-            alertBox.classList.remove('show');
+        // 3. 切换选项选择
+        function toggleOption(optionNum, element) {
+            if (pollConfig.allow_multiple) {
+                // 多选模式：切换选择状态
+                if (selectedOptions.has(optionNum)) {
+                    selectedOptions.delete(optionNum);
+                    element.classList.remove('selected');
+                } else {
+                    selectedOptions.add(optionNum);
+                    element.classList.add('selected');
+                }
+            } else {
+                // 单选模式：只选一个
+                document.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                element.classList.add('selected');
+                selectedOptions.clear();
+                selectedOptions.add(optionNum);
+            }
+            
+            // 更新按钮状态
+            updateSubmitButton();
+        }
+
+        // 4. 更新提交按钮状态
+        function updateSubmitButton() {
+            const btn = document.getElementById('submitVoteBtn');
+            btn.disabled = selectedOptions.size === 0;
+            btn.textContent = selectedOptions.size > 1 ? 
+                `提交投票 (${selectedOptions.size}个选项)` : '提交投票';
+        }
+
+        // 5. 提交投票
+        async function submitVote() {
+            const btn = document.getElementById('submitVoteBtn');
+            btn.disabled = true;
+            btn.textContent = '提交中...';
             
             try {
-                const response = await fetch(`${apiBase}/vote`, {
+                // 准备提交数据（单数或数组）
+                const voteData = {
+                    poll_id: parseInt(pollId),
+                    user_id: userId,
+                    option: pollConfig.allow_multiple ? 
+                        Array.from(selectedOptions) : Array.from(selectedOptions)[0]
+                };
+                
+                const resp = await fetch(`${apiBase}/vote`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        poll_id: pollId,
-                        user_id: userId,
-                        option: optionIndex
-                    })
+                    body: JSON.stringify(voteData)
                 });
                 
-                const result = await response.json();
+                const result = await resp.json();
                 
                 if (result.success) {
-                    // 标记已投票选项
+                    showAlert('✅ ' + result.message, 'success');
+                    // 禁用所有选项
                     document.querySelectorAll('.option').forEach(opt => {
-                        opt.classList.remove('voted');
-                        if (parseInt(opt.dataset.option) === optionIndex) {
-                            opt.classList.add('voted');
-                        }
+                        opt.style.opacity = '0.6';
+                        opt.style.cursor = 'not-allowed';
+                        opt.onclick = null;
                     });
-                    // 显示结果面板并更新
-                    document.getElementById('resultsPanel').classList.add('show');
+                    // 显示结果
                     loadResults();
                 } else {
-                    showAlert(result.message || '投票失败');
+                    showAlert('❌ ' + (result.message || '投票失败'));
+                    btn.disabled = false;
+                    updateSubmitButton();
                 }
             } catch (error) {
-                console.error('投票失败:', error);
+                console.error('提交失败:', error);
                 showAlert('网络错误，请稍后重试');
+                btn.disabled = false;
+                updateSubmitButton();
             }
         }
 
-        // 4. 加载并显示结果
+        // 6. 加载结果
         async function loadResults() {
             try {
-                const response = await fetch(`${apiBase}/results?poll_id=${pollId}`);
-                const result = await response.json();
+                const resp = await fetch(`${apiBase}/results?poll_id=${pollId}`);
+                const data = await resp.json();
                 
-                if (result.success) {
-                    renderResultsChart(result.data);
+                if (data.success && data.data.length > 0) {
+                    renderChart(data.data);
+                    document.getElementById('resultsPanel').classList.add('show');
                 }
             } catch (error) {
                 console.error('加载结果失败:', error);
             }
         }
 
-        // 5. 渲染结果图表
-        function renderResultsChart(data) {
+        // 7. 渲染图表
+        function renderChart(data) {
             const container = document.getElementById('resultsChart');
-            if (!data || data.length === 0) {
-                container.innerHTML = '<p>暂无投票数据</p>';
-                return;
-            }
-            
-            // 计算总票数
             const totalVotes = data.reduce((sum, item) => sum + item.count, 0);
             
             let html = '';
             data.forEach(item => {
-                const percentage = totalVotes > 0 ? Math.round((item.count / totalVotes) * 100) : 0;
+                const percent = totalVotes > 0 ? Math.round((item.count / totalVotes) * 100) : 0;
                 html += `
                 <div class="chart-item">
                     <div class="bar-container">
                         <div class="bar-label">${item.selected_option}号选项</div>
                         <div class="bar-wrapper">
-                            <div class="bar-fill" style="width: ${percentage}%"></div>
+                            <div class="bar" style="width: ${percent}%"></div>
                         </div>
-                        <div class="bar-count">${item.count} 票 (${percentage}%)</div>
+                        <div class="bar-count">${item.count}票 (${percent}%)</div>
                     </div>
                 </div>`;
             });
@@ -348,26 +397,28 @@
             
             // 触发动画
             setTimeout(() => {
-                document.querySelectorAll('.bar-fill').forEach(bar => {
+                document.querySelectorAll('.bar').forEach(bar => {
                     bar.style.width = bar.style.width;
                 });
             }, 100);
         }
 
-        // 工具函数：显示警告
-        function showAlert(message) {
+        // 8. 显示提示
+        function showAlert(message, type = 'error') {
             const alertBox = document.getElementById('alertBox');
             alertBox.textContent = message;
-            alertBox.classList.add('show');
+            alertBox.className = `alert ${type === 'success' ? 'success' : ''} show`;
             setTimeout(() => alertBox.classList.remove('show'), 5000);
         }
 
-        // 初始化
+        // 9. 初始化
         if (!pollId) {
             showAlert('无效的投票链接');
         } else {
             loadPoll();
-            // 首次加载时也尝试显示结果
+            // 绑定提交按钮
+            document.getElementById('submitVoteBtn').onclick = submitVote;
+            // 首次加载结果（如果已投过票）
             setTimeout(loadResults, 1000);
         }
     </script>
