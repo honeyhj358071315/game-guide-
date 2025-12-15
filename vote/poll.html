@@ -316,6 +316,11 @@
             try {
                 const resp = await fetch(`${apiBase}/poll/${pollId}`);
                 const data = await resp.json();
+                
+                // 添加调试信息，查看API返回的完整数据结构
+                console.log('API返回的完整数据:', data);
+                console.log('是否有rules字段:', 'rules' in data.data);
+                console.log('rules字段的值:', data.data.rules);
 
                 if (data.success) {
                     document.getElementById('pollTitle').textContent = data.data.title;
@@ -333,9 +338,18 @@
                     optionsArray = data.data.options;
 
                     // 显示投票规则（如果存在）
-                    if (data.data.rules && data.data.rules.trim()) {
-                        document.getElementById('rulesContent').textContent = data.data.rules;
+                    // 兼容可能的API返回结构变化
+                    const rules = data.data.rules || data.data.description || data.data.note || '';
+                    if (rules && rules.trim()) {
+                        document.getElementById('rulesContent').textContent = rules;
                         document.getElementById('votingRules').style.display = 'block';
+                    }
+                    // 添加默认示例规则（仅用于测试，实际使用时可以删除）
+                    // 这行代码可以帮助我们验证显示效果
+                    else {
+                        // 仅用于测试，实际环境中可以删除
+                        // document.getElementById('rulesContent').textContent = '示例规则：每人只能投一票；投票截止时间为12月31日；禁止刷票。';
+                        // document.getElementById('votingRules').style.display = 'block';
                     }
 
                     // 显示多选提示
