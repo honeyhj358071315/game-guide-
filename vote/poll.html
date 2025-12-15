@@ -296,6 +296,7 @@
 
         let pollConfig = { allow_multiple: false };
         let selectedOptions = new Set(); // 用于存储多选选项
+        let optionsArray = []; // 全局存储选项数组，用于结果显示
 
         // 1. 加载投票信息
         async function loadPoll() {
@@ -316,7 +317,7 @@
                     }
 
                     // options 字段已经是数组了，直接使用
-                    const optionsArray = data.data.options;
+                    optionsArray = data.data.options;
 
                     // 显示多选提示
                     if (pollConfig.allow_multiple) {
@@ -474,7 +475,9 @@
                         const widthPercent = totalVotes > 0 ? (item.count / totalVotes * 100) : 0;
                         // 使用不同颜色区分
                         const hue = (item.option * 60) % 360;
-                        return `<div title="选项${item.option}: ${item.count}票 (${Math.round(widthPercent)}%)"
+                        // 获取选项名称，如果不存在则显示选项编号
+                        const optionName = optionsArray[item.option - 1] || `选项${item.option}`;
+                        return `<div title="${optionName}: ${item.count}票 (${Math.round(widthPercent)}%)"
                                     style="width: ${widthPercent}%; background: hsl(${hue}, 70%, 60%); transition: width 1s ease-out;"></div>`;
                     }).join('')}
                 </div>
@@ -482,9 +485,11 @@
                     ${data.map(item => {
                         const percent = totalVotes > 0 ? Math.round((item.count / totalVotes) * 100) : 0;
                         const hue = (item.option * 60) % 360;
+                        // 获取选项名称，如果不存在则显示选项编号
+                        const optionName = optionsArray[item.option - 1] || `选项${item.option}`;
                         return `<div style="display: flex; align-items: center;">
                                     <span style="display: inline-block; width: 12px; height: 12px; background: hsl(${hue}, 70%, 60%); margin-right: 8px;"></span>
-                                    <span>选项${item.option}: ${item.count}票 (${percent}%)</span>
+                                    <span>${optionName}: ${item.count}票 (${percent}%)</span>
                                 </div>`;
                     }).join('')}
                 </div>
