@@ -88,13 +88,13 @@
             </a>
         </div>
 
-        <div class="quick-access" id="voteSection" style="display: none;">
+        <div class="quick-access" id="voteSection">
             <h2>🗳️ 投给心仪的她/他/它？</h2>
             <div class="quick-buttons">
                 <a href="pages/11chiyou.html" class="quick-btn">👑 持有率投票</a>
                 <a href="pages/22qiangdu.html#tips-section" class="quick-btn">💪 强度投票</a>
                 <a href="pages/33renqi.html#navigation-section" class="quick-btn">❤️ 人气投票</a>
-                <a href="vote/create.html" class="quick-btn">📊 投票系统</a>
+                <a href="vote/create.html" class="quick-btn" id="voteSystemBtn" style="display: none;">📊 投票系统</a>
             </div>
         </div>
 
@@ -124,11 +124,11 @@
             initOnlineStats();
         });
 
-        // 双击显示投票系统
+        // 双击显示投票系统按钮
         document.addEventListener('dblclick', function () {
-            const voteSection = document.getElementById('voteSection');
-            if (voteSection) {
-                voteSection.style.display = 'block';
+            const voteSystemBtn = document.getElementById('voteSystemBtn');
+            if (voteSystemBtn) {
+                voteSystemBtn.style.display = 'inline-block';
             }
         });
 
