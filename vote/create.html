@@ -375,12 +375,6 @@
                     
                     // 生成投票页面的完整链接
                     let votePageUrl = `https://whmx.top/vote/poll.html?id=${pollId}`;
-                    // 重新添加URL参数作为fallback，因为API目前不返回rules字段
-                    // 但只在规则内容适中时添加，避免链接过长
-                    if (votingRules && votingRules.length < 200) {
-                        const encodedRules = encodeURIComponent(votingRules);
-                        votePageUrl += `&rules=${encodedRules}`;
-                    }
 
                     // 显示成功结果
                     document.getElementById('voteLink').value = votePageUrl;
