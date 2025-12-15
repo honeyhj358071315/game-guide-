@@ -269,6 +269,11 @@
         <h1 id="pollTitle">加载中...</h1>
         <p class="subtitle" id="pollSubtitle">请选择您支持的选项</p>
 
+        <div id="votingRules" style="background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 15px; margin: 15px 0; display: none;">
+            <h4 style="color: #a0aec0; margin-bottom: 10px; font-size: 1rem;">📋 投票规则与注意事项</h4>
+            <div id="rulesContent" style="color: #a0aec0; line-height: 1.5;"></div>
+        </div>
+
         <div class="alert" id="alertBox"></div>
 
         <div id="optionsContainer">
@@ -326,6 +331,12 @@
 
                     // options 字段已经是数组了，直接使用
                     optionsArray = data.data.options;
+
+                    // 显示投票规则（如果存在）
+                    if (data.data.rules && data.data.rules.trim()) {
+                        document.getElementById('rulesContent').textContent = data.data.rules;
+                        document.getElementById('votingRules').style.display = 'block';
+                    }
 
                     // 显示多选提示
                     if (pollConfig.allow_multiple) {

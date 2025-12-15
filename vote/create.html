@@ -215,6 +215,12 @@
         </div>
 
         <div class="form-group">
+            <label for="votingRules">投票规则和注意事项（可选）</label>
+            <textarea id="votingRules" placeholder="请输入投票规则和注意事项，例如：每人只能投一票；投票截止时间为XX月XX日；禁止刷票等。" rows="4" style="width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; resize: vertical;"></textarea>
+            <small style="display: block; margin-top: 8px; color: #718096; font-size: 0.85rem;">投票规则将显示在投票页面标题下方，帮助参与者了解投票要求</small>
+        </div>
+
+        <div class="form-group">
             <label>投票选项 *（至少需要2个选项）</label>
             <div class="options-container" id="optionsContainer">
                 <!-- 选项会动态添加到这里 -->
@@ -345,9 +351,12 @@
                 const limitByIp = document.getElementById('limitByIp').checked;
                 const allowMultiple = document.getElementById('allowMultiple').checked;
 
+                const votingRules = document.getElementById('votingRules').value.trim();
+                
                 const requestBody = {
                     title: title,
                     options: options,
+                    rules: votingRules,
                     config: {
                         limit_by_ip: limitByIp,
                         allow_multiple: allowMultiple
