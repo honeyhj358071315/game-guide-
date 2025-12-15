@@ -14,17 +14,17 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            background: #1a202c;
             min-height: 100vh;
             padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #333;
+            color: white;
         }
 
         .container {
-            background: white;
+            background: #2d3748;
             border-radius: 20px;
             padding: 35px;
             width: 100%;
@@ -33,7 +33,7 @@
         }
 
         h1 {
-            color: #1a202c;
+            color: white;
             text-align: center;
             margin-bottom: 10px;
             font-size: 2rem;
@@ -41,7 +41,7 @@
 
         .subtitle {
             text-align: center;
-            color: #718096;
+            color: #a0aec0;
             margin-bottom: 30px;
         }
 
@@ -59,58 +59,58 @@
             min-width: 120px;
             max-width: 200px;
             padding: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
+            border: none;
+            border-radius: 0;
             cursor: pointer;
-            text-align: center;
+            text-align: left;
             transition: all 0.2s;
             box-sizing: border-box;
-            background: white;
+            background: transparent;
             display: flex;
             align-items: center;
         }
 
         .option:hover {
-            border-color: #4299e1;
-            background: #f8fafc;
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .option.selected {
-            background: #ebf8ff;
-            border-color: #4299e1;
+            background: rgba(255, 255, 255, 0.05);
         }
         .option-index {
             font-weight: bold;
-            color: #4a5568;
+            color: #a0aec0;
             margin-bottom: 5px;
         }
         .option-text {
             word-break: break-word;
+            color: white;
         }
 
         /* 多选模式下的复选框 */
         .checkbox {
-            width: 22px;
-            height: 22px;
-            margin-right: 15px;
-            border: 2px solid #cbd5e0;
-            border-radius: 6px;
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            border: 2px solid #a0aec0;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
             transition: all 0.2s;
+            background: transparent;
         }
 
         .option.selected .checkbox {
-            background: #4299e1;
-            border-color: #4299e1;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
         }
 
         .checkbox::after {
             content: "✓";
             color: white;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             opacity: 0;
         }
@@ -121,8 +121,9 @@
 
         .option-text {
             flex-grow: 1;
-            font-size: 1.1rem;
-            font-weight: 500;
+            font-size: 1rem;
+            font-weight: 400;
+            color: white;
         }
 
         /* 操作按钮 */
@@ -150,7 +151,7 @@
         }
 
         .btn:disabled {
-            background: #cbd5e0;
+            background: #4a5568;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
@@ -159,11 +160,12 @@
         /* 结果面板 */
         .results {
             margin-top: 40px;
-            background: #f8fafc;
+            background: #2d3748;
             border-radius: 16px;
             padding: 25px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #4a5568;
             display: none;
+            color: white;
         }
 
         .results.show {
@@ -184,7 +186,7 @@
         }
 
         .results h3 {
-            color: #2d3748;
+            color: white;
             margin-bottom: 20px;
             font-size: 1.5rem;
         }
@@ -235,19 +237,25 @@
         }
 
         .multi-hint {
-            color: #e53e3e;
+            color: #fc8181;
             font-weight: 500;
             margin-top: 10px;
         }
 
         .alert {
             padding: 15px;
-            background: #fed7d7;
-            border: 1px solid #fc8181;
+            background: #2d3748;
+            border: 1px solid #742a2a;
             border-radius: 10px;
-            color: #c53030;
+            color: #feb2b2;
             margin: 15px 0;
             display: none;
+        }
+
+        .alert.success {
+            background: #2d3748;
+            border: 1px solid #2a7435;
+            color: #b2feb2;
         }
 
         .alert.show {
@@ -347,10 +355,7 @@
                 div.dataset.option = optionNum;
                 div.innerHTML = `
                     <div class="checkbox"></div>
-                    <div style="flex-grow: 1;">
-                        <div class="option-index">${optionNum}</div>
-                        <div class="option-text">${text}</div>
-                    </div>
+                    <div class="option-text">${text}</div>
                 `;
 
                 // 点击事件
@@ -460,7 +465,7 @@
         function renderChart(data) {
             const container = document.getElementById('resultsChart');
             if (!data || data.length === 0) {
-                container.innerHTML = '<p>暂无投票数据</p>';
+                container.innerHTML = '<p style="color: #a0aec0;">暂无投票数据</p>';
                 return;
             }
 
@@ -470,7 +475,7 @@
 
             // 生成堆叠条形图
             container.innerHTML = `
-                <div class="stacked-bar" style="height: 40px; background: #e2e8f0; border-radius: 8px; margin: 25px 0; overflow: hidden; display: flex;">
+                <div class="stacked-bar" style="height: 40px; background: #4a5568; border-radius: 8px; margin: 25px 0; overflow: hidden; display: flex;">
                     ${data.map(item => {
                         const widthPercent = totalVotes > 0 ? (item.count / totalVotes * 100) : 0;
                         // 使用不同颜色区分
@@ -488,7 +493,7 @@
                         // 获取选项名称，如果不存在则显示选项编号
                         const optionName = optionsArray[item.option - 1] || `选项${item.option}`;
                         return `<div style="display: flex; align-items: center;">
-                                    <span style="display: inline-block; width: 12px; height: 12px; background: hsl(${hue}, 70%, 60%); margin-right: 8px;"></span>
+                                    <span style="display: inline-block; width: 12px; height: 12px; background: hsl(${hue}, 80%, 65%); margin-right: 8px;"></span>
                                     <span>${optionName}: ${item.count}票 (${percent}%)</span>
                                 </div>`;
                     }).join('')}
