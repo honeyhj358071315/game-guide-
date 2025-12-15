@@ -338,8 +338,9 @@
                     optionsArray = data.data.options;
 
                     // 显示投票规则（如果存在）
-                    // 兼容可能的API返回结构变化
-                    const rules = data.data.rules || data.data.description || data.data.note || '';
+                    // 兼容可能的API返回结构变化 + 从URL参数读取作为备用
+                    const rules = data.data.rules || data.data.description || data.data.note || 
+                                  decodeURIComponent(urlParams.get('rules') || ''); // 从URL参数读取规则
                     if (rules && rules.trim()) {
                         document.getElementById('rulesContent').textContent = rules;
                         document.getElementById('votingRules').style.display = 'block';
