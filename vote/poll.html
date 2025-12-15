@@ -91,6 +91,41 @@
             color: white;
         }
 
+        /* 竖向布局（选项≤10个时） */
+        #optionsContainer.vertical-layout {
+            display: block; /* 改为块状堆叠 */
+            flex-wrap: nowrap;
+            gap: 0; /* 移除横向间距 */
+        }
+        #optionsContainer.vertical-layout .option {
+            flex: none; /* 清除弹性属性 */
+            min-width: auto;
+            max-width: 100%;
+            width: 100%;
+            margin-bottom: 12px; /* 添加纵向间距 */
+            padding: 18px 20px;
+            border-radius: 12px;
+            border: 2px solid #4a5568;
+        }
+        #optionsContainer.vertical-layout .option:hover {
+            border-color: #4299e1;
+        }
+
+        /* 横向堆叠布局（选项>10个时） */
+        #optionsContainer.horizontal-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        #optionsContainer.horizontal-layout .option {
+            flex: 1 0 calc(25% - 12px);
+            min-width: 120px;
+            max-width: 200px;
+            padding: 15px;
+            border-radius: 0;
+            border: none;
+        }
+
         /* 多选模式下的复选框 */
         .checkbox {
             width: 20px;
@@ -302,6 +337,15 @@
         <div class="results" id="resultsPanel">
             <h3>📊 投票结果</h3>
             <div id="resultsChart"></div>
+            <!-- 🔽 新增分享按钮 -->
+            <div style="margin-top: 25px; text-align: center; padding-top: 20px; border-top: 1px solid #4a5568;">
+                <button id="shareBtn" class="btn" style="background: #48bb78;">
+                    📋 复制投票链接
+                </button>
+                <p id="shareHint" style="color: #a0aec0; margin-top: 10px; font-size: 0.9rem; display: none;">
+                    链接已复制，可粘贴分享给好友
+                </p>
+            </div>
         </div>
     </div>
 
@@ -378,6 +422,16 @@
             const container = document.getElementById('optionsContainer');
             container.innerHTML = '';
 
+            // 根据选项数量决定布局样式
+            if (options.length <= 10) {
+                container.classList.add('vertical-layout');   // 竖排
+                container.classList.remove('horizontal-layout');
+            } else {
+                container.classList.add('horizontal-layout');  // 横排堆叠
+                container.classList.remove('vertical-layout');
+            }
+
+            // 渲染选项
             options.forEach((text, index) => {
                 const optionNum = index + 1;
                 const div = document.createElement('div');
@@ -385,7 +439,7 @@
                 div.dataset.option = optionNum;
                 div.innerHTML = `
                     <div class="checkbox"></div>
-                    <div class="option-text">${text}</div>
+                    <div class="option-text">${optionNum}. ${text}</div>
                 `;
 
                 // 点击事件
@@ -539,6 +593,50 @@
             setTimeout(() => alertBox.classList.remove('show'), 5000);
         }
 
+        // 分享功能：复制当前投票链接
+        function setupShareButton() {
+            const shareBtn = document.getElementById('shareBtn');
+            const hint = document.getElementById('shareHint');
+            
+            if (!shareBtn) return;
+            
+            shareBtn.onclick = async () => {
+                const voteLink = window.location.href; // 获取当前页面完整链接
+                
+                try {
+                    // 使用现代剪贴板API
+                    await navigator.clipboard.writeText(voteLink);
+                    // 提示用户
+                    hint.style.display = 'block';
+                    hint.style.color = '#48bb78';
+                    hint.textContent = '✅ 投票链接已复制到剪贴板！';
+                    shareBtn.textContent = '✅ 已复制';
+                    shareBtn.style.background = '#38a169';
+                    
+                    // 3秒后恢复按钮状态
+                    setTimeout(() => {
+                        hint.style.display = 'none';
+                        shareBtn.textContent = '📋 复制投票链接';
+                        shareBtn.style.background = '#48bb78';
+                    }, 3000);
+                } catch (err) {
+                    // 降级方案：使用老式 document.execCommand
+                    const input = document.createElement('input');
+                    input.value = voteLink;
+                    document.body.appendChild(input);
+                    input.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(input);
+                    
+                    // 提示用户
+                    hint.style.display = 'block';
+                    hint.style.color = '#ecc94b';
+                    hint.textContent = '✅ 链接已复制（兼容模式）';
+                    setTimeout(() => hint.style.display = 'none', 3000);
+                }
+            };
+        }
+
         // 9. 初始化
         if (!pollId) {
             showAlert('无效的投票链接');
@@ -546,6 +644,8 @@
             loadPoll();
             // 绑定提交按钮
             document.getElementById('submitVoteBtn').onclick = submitVote;
+            // 设置分享按钮
+            setupShareButton(); // 🔽 新增这一行
             // 首次加载结果（如果已投过票）
             setTimeout(loadResults, 1000);
         }
