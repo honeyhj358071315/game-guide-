@@ -45,17 +45,29 @@
             margin-bottom: 30px;
         }
 
-        /* 选项样式 */
+        /* 选项容器 - 横向换行 */
+        #optionsContainer,
+        .options-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        /* 每个选项块 */
         .option {
-            padding: 18px 20px;
-            margin: 12px 0;
+            flex: 1 0 calc(25% - 12px); /* 每行最多4个，可根据需要调整百分比 */
+            min-width: 120px;
+            max-width: 200px;
+            padding: 15px;
             border: 2px solid #e2e8f0;
             border-radius: 12px;
-            background: white;
+            cursor: pointer;
+            text-align: center;
             transition: all 0.2s;
+            box-sizing: border-box;
+            background: white;
             display: flex;
             align-items: center;
-            cursor: pointer;
         }
 
         .option:hover {
@@ -66,6 +78,14 @@
         .option.selected {
             background: #ebf8ff;
             border-color: #4299e1;
+        }
+        .option-index {
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+        .option-text {
+            word-break: break-word;
         }
 
         /* 多选模式下的复选框 */
@@ -326,7 +346,10 @@
                 div.dataset.option = optionNum;
                 div.innerHTML = `
                     <div class="checkbox"></div>
-                    <div class="option-text">${optionNum}. ${text}</div>
+                    <div style="flex-grow: 1;">
+                        <div class="option-index">${optionNum}</div>
+                        <div class="option-text">${text}</div>
+                    </div>
                 `;
 
                 // 点击事件
@@ -435,31 +458,37 @@
         // 7. 渲染图表
         function renderChart(data) {
             const container = document.getElementById('resultsChart');
+            if (!data || data.length === 0) {
+                container.innerHTML = '<p>暂无投票数据</p>';
+                return;
+            }
+
+            // 按选项序号排序
+            data.sort((a, b) => a.option - b.option);
             const totalVotes = data.reduce((sum, item) => sum + item.count, 0);
 
-            let html = '';
-            data.forEach(item => {
-                const percent = totalVotes > 0 ? Math.round((item.count / totalVotes) * 100) : 0;
-                html += `
-                <div class="chart-item">
-                    <div class="bar-container">
-                        <div class="bar-label">${item.selected_option}号选项</div>
-                        <div class="bar-wrapper">
-                            <div class="bar" style="width: ${percent}%"></div>
-                        </div>
-                        <div class="bar-count">${item.count}票 (${percent}%)</div>
-                    </div>
-                </div>`;
-            });
-
-            container.innerHTML = html;
-
-            // 触发动画
-            setTimeout(() => {
-                document.querySelectorAll('.bar').forEach(bar => {
-                    bar.style.width = bar.style.width;
-                });
-            }, 100);
+            // 生成堆叠条形图
+            container.innerHTML = `
+                <div class="stacked-bar" style="height: 40px; background: #e2e8f0; border-radius: 8px; margin: 25px 0; overflow: hidden; display: flex;">
+                    ${data.map(item => {
+                        const widthPercent = totalVotes > 0 ? (item.count / totalVotes * 100) : 0;
+                        // 使用不同颜色区分
+                        const hue = (item.option * 60) % 360;
+                        return `<div title="选项${item.option}: ${item.count}票 (${Math.round(widthPercent)}%)"
+                                    style="width: ${widthPercent}%; background: hsl(${hue}, 70%, 60%); transition: width 1s ease-out;"></div>`;
+                    }).join('')}
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; font-size: 0.9em;">
+                    ${data.map(item => {
+                        const percent = totalVotes > 0 ? Math.round((item.count / totalVotes) * 100) : 0;
+                        const hue = (item.option * 60) % 360;
+                        return `<div style="display: flex; align-items: center;">
+                                    <span style="display: inline-block; width: 12px; height: 12px; background: hsl(${hue}, 70%, 60%); margin-right: 8px;"></span>
+                                    <span>选项${item.option}: ${item.count}票 (${percent}%)</span>
+                                </div>`;
+                    }).join('')}
+                </div>
+            `;
         }
 
         // 8. 显示提示
