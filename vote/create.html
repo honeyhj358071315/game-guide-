@@ -227,21 +227,6 @@
             </div>
             <button type="button" class="btn btn-add" id="addOptionBtn">+ 添加选项</button>
         </div>
-        <!-- 新增：投票规则配置 -->
-        <div class="form-group">
-            <label>投票规则配置</label>
-            <div style="margin-top:10px; display:flex; flex-direction:column; gap:12px;">
-                <label style="display:flex; align-items:center;">
-                    <input type="checkbox" id="limitByIp" style="margin-right:8px;">
-                    🔒 启用IP限制（防止同一IP重复投票）
-                </label>
-                <label style="display:flex; align-items:center;">
-                    <input type="checkbox" id="allowMultiple" style="margin-right:8px;">
-                    ✅ 允许多选（可同时选择多个选项）
-                </label>
-            </div>
-        </div>
-
         <!-- 在“投票选项”部分之后，添加这个配置区域 -->
 
         <div class="form-group">
@@ -356,10 +341,6 @@
             btn.textContent = '创建中...';
 
             try {
-                // 获取配置
-                const limitByIp = document.getElementById('limitByIp').checked;
-                const allowMultiple = document.getElementById('allowMultiple').checked;
-
                 const votingRules = document.getElementById('votingRules').value.trim();
                 
                 const requestBody = {
