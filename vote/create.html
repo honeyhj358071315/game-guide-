@@ -392,13 +392,8 @@
                     // 获取当前页面的基础URL（用于构造投票页链接）
                     const baseUrl = window.location.href.replace('/create.html', '');
                     
-                    // 将投票规则添加到URL参数中（作为备选方案）
+                    // 仅使用pollId生成链接，规则通过API存储和返回，不再作为URL参数
                     let votePageUrl = `https://whmx.top/vote/poll.html?id=${pollId}`;
-                    if (votingRules) {
-                        // 对规则内容进行URL编码，确保特殊字符能正确传输
-                        const encodedRules = encodeURIComponent(votingRules);
-                        votePageUrl += `&rules=${encodedRules}`;
-                    }
 
                     // 显示成功结果
                     document.getElementById('voteLink').value = votePageUrl;
