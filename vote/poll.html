@@ -761,32 +761,18 @@
                         <!-- 百分比标签 -->
                         ${pieSegments.map(segment => {
                 if (segment.percent < 0.05) return '';
-                const percent = Math.round(segment.percent * 100);
-
-                // ✅ 关键修正：角度计算要去掉之前加的offset偏移
-                const centerAngle = ((segment.startAngle + segment.endAngle) / 2) + 90; // 加回90度
-
-                // ✅ 或者更直接的方式：使用原始百分比计算中心角度
-                // const rawStartAngle = segment.startAngle - (-90); // 去掉offset
-                // const rawEndAngle = segment.endAngle - (-90);
-                // const centerAngle = (rawStartAngle + rawEndAngle) / 2;
-
+                const centerAngle = (segment.startAngle + segment.endAngle) / 2;
                 const radians = centerAngle * Math.PI / 180;
                 const pieRadius = 125;
                 const centerRadius = 62.5;
-                // ✅ 标签位置稍微外移一点，避免重叠
-                const labelRadius = centerRadius + (pieRadius - centerRadius) / 2 + 20;
+                const labelRadius = centerRadius + (pieRadius - centerRadius) / 2;
                 const x = Math.cos(radians) * labelRadius;
                 const y = Math.sin(radians) * labelRadius;
-
-                // ✅ 添加调整：如果y轴位置太靠近中心，稍微外推
-                const adjustedX = x;
-                const adjustedY = y;
-
-                return `<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translate(${adjustedX}px, ${adjustedY}px); 
+                const segmentPercent = Math.round(segment.percent * 100); // 改名！
+                return `<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translate(${x}px, ${y}px); 
                 color: #ffffff; font-weight: bold; text-shadow: ${labelShadow}; 
-                font-size: 0.9rem; text-align: center; z-index: 10;">
-            ${percent}%
+                font-size: 0.9rem; text-align: center;">
+            ${segmentPercent}%  // 这里也改！
         </div>`;
             }).join('')}
                     </div>
