@@ -708,7 +708,10 @@
         function renderChart(data) {
             const container = document.getElementById('resultsChart');
             if (!data || data.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-secondary-color, #a0aec0);">暂无投票数据</p>';
+                // 判断当前主题，设置合适的文字颜色
+                const isLightMode = document.body.classList.contains('light-mode');
+                const textColor = isLightMode ? '#4a5568' : '#ffffff';
+                container.innerHTML = `<p style="color: ${textColor};">暂无投票数据</p>`;
                 return;
             }
 
@@ -741,8 +744,8 @@
             // 判断当前主题
             const isLightMode = document.body.classList.contains('light-mode');
             const centerBgColor = isLightMode ? '#ffffff' : '#2d3748';
-            const textSecondaryColor = isLightMode ? '#4a5568' : '#a0aec0';
-            const labelTextColor = isLightMode ? '#000000' : '#ffffff';
+            const textSecondaryColor = isLightMode ? '#4a5568' : '#ffffff'; // 夜间模式下使用白色文字
+            const textPrimaryColor = isLightMode ? '#000000' : '#ffffff';
             const labelShadow = isLightMode ? '0 0 3px rgba(0,0,0,0.3)' : '0 0 3px rgba(0,0,0,0.8)';
 
             // 生成圆形饼图
@@ -752,10 +755,10 @@
                         <!-- 饼图 -->
                         <div style="width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(${conicGradient}); transition: background 1s ease-out;"></div>
                         <!-- 中心圆圈 -->
-                        <div style="position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; border-radius: 50%; background: ${centerBgColor};"></div>
+                        <div style="position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; border-radius: 50%; background: ${centerBgColor}; border: 2px solid rgba(255,255,255,0.1);"></div>
                         <!-- 总票数 -->
                         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-                            <div style="font-size: 2.5rem; font-weight: bold;">${totalVotes}</div>
+                            <div style="font-size: 2.5rem; font-weight: bold; color: ${textPrimaryColor};">${totalVotes}</div>
                             <div style="color: ${textSecondaryColor}; font-size: 0.9rem;">总票数</div>
                         </div>
                         <!-- 百分比标签 -->
@@ -768,7 +771,7 @@
                 const y = Math.sin(radians) * radius;
                 const percent = Math.round(segment.percent * 100);
                 return `<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translate(${x}px, ${y}px); 
-                            color: ${labelTextColor}; font-weight: bold; text-shadow: ${labelShadow}; 
+                            color: ${textPrimaryColor}; font-weight: bold; text-shadow: ${labelShadow}; 
                             font-size: 0.9rem; text-align: center;">
                         ${percent}%
                     </div>`;
