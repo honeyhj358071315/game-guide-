@@ -718,7 +718,8 @@
             let cumulativePercent = 0;
             const pieSegments = data.map(item => {
                 const percent = totalVotes > 0 ? (item.count / totalVotes) : 0;
-                const hue = (item.option * 60) % 360;
+                // ✅ 改为均匀分布所有色调，确保每个选项有独特颜色
+                const hue = (item.option * (360 / data.length)) % 360;
                 // ✅ 关键修正：添加-90度偏移，让饼图从12点钟方向开始
                 const offset = -90;
                 const startAngle = cumulativePercent * 360 + offset;
