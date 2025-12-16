@@ -425,6 +425,32 @@
             text-shadow: none;
         }
 
+        /* 返回按钮样式 */
+        .back-btn {
+            position: fixed;
+            top: 1px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 193, 7, 0.288);
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            color: #fff;
+            padding: 4px 10px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 5px;
+            max-width: 90%;
+            box-sizing: border-box;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 193, 7, 0.5);
+        }
+
         /* 主题切换按钮 */
         .theme-toggle {
             background: rgba(255, 255, 255, 0.1);
@@ -452,10 +478,18 @@
         body.light-mode .theme-toggle:hover {
             background: rgba(0, 0, 0, 0.08);
         }
+
+        /* 返回按钮在日夜模式下保持一致样式 */
+        body.light-mode .back-btn {
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
+    <a href="../index.html" class="back-btn">
+        <span>🏠</span> 返回导航首页
+    </a>
     <div class="theme-toggle-container">
         <span class="theme-label">日夜模式</span>
         <button class="theme-toggle" id="themeToggle">☀️</button>
