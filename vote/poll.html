@@ -773,12 +773,15 @@
                 if (segment.percent < 0.05) return ''; // 小于5%不显示，避免过于拥挤
                 const centerAngle = (segment.startAngle + segment.endAngle) / 2;
                 const radians = centerAngle * Math.PI / 180;
-                const radius = 80; // 减小标签距离中心的距离，使位置更准确
-                const x = Math.cos(radians) * radius;
-                const y = Math.sin(radians) * radius;
+                const pieRadius = 125; // 饼图半径 (250px / 2)
+                const centerRadius = 62.5; // 中心圆半径 (pieRadius / 2)
+                // 标签半径：中心圆半径 + (饼图半径 - 中心圆半径) / 2
+                const labelRadius = centerRadius + (pieRadius - centerRadius) / 2;
+                const x = Math.cos(radians) * labelRadius;
+                const y = Math.sin(radians) * labelRadius;
                 const percent = Math.round(segment.percent * 100);
                 return `<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translate(${x}px, ${y}px); 
-                            color: ${textPrimaryColor}; font-weight: bold; text-shadow: ${labelShadow}; 
+                            color: #fc8181; font-weight: bold; text-shadow: ${labelShadow}; 
                             font-size: 0.9rem; text-align: center;">
                         ${percent}%
                     </div>`;
@@ -789,9 +792,9 @@
                         ${pieSegments.map(segment => {
                 const percent = Math.round(segment.percent * 100);
                 const optionName = optionsArray[segment.item.option - 1] || `选项${segment.item.option}`;
-                return `<div style="display: flex; align-items: center; color: ${textSecondaryColor};">
+                return `<div style="display: flex; align-items: center;">
                                     <span style="display: inline-block; width: 12px; height: 12px; background: hsl(${segment.hue}, 80%, 65%); margin-right: 8px;"></span>
-                                    <span><span style="color: red;">${optionName}</span>: ${segment.item.count}票 (${percent}%)</span>
+                                    <span style="color: #fc8181;">${optionName}: ${segment.item.count}票 (${percent}%)</span>
                                 </div>`;
             }).join('')}
                     </div>
