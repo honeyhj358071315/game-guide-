@@ -375,12 +375,83 @@
                     
                     // 生成投票页面的完整链接
                     let votePageUrl = `https://whmx.top/vote/poll.html?id=${pollId}`;
+                    const localVoteUrl = `${baseUrl}/poll.html?id=${pollId}`;
 
                     // 显示成功结果
                     document.getElementById('voteLink').value = votePageUrl;
                     document.getElementById('resultBox').classList.add('show');
                     // 滚动到结果区域
                     document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+                    
+                    // 🔽 在这里添加管理面板 🔽
+                    const manageHtml = `
+                    <div style="margin-top: 30px; padding: 20px; background: rgba(66, 153, 225, 0.1); border-radius: 12px; border: 1px solid rgba(66, 153, 225, 0.3);">
+                        <h3 style="color: #4299e1; margin-bottom: 15px;">🎛️ 投票管理面板</h3>
+                        <div style="margin-bottom: 15px;">
+                            <p><strong>投票ID:</strong> <code style="background: rgba(0,0,0,0.1); padding: 3px 8px; border-radius: 4px;">${pollId}</code></p>
+                            <p><a href="${localVoteUrl}" target="_blank" style="color: #4299e1; text-decoration: none; font-weight: bold;">👉 前往投票页面</a></p>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.1); padding: 15px; border-radius: 8px;">
+                            <h4 style="color: #a0aec0; margin-bottom: 10px;">添加新选项</h4>
+                            <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                <input type="text" id="newOptionInput_${pollId}" placeholder="输入新选项内容..." 
+                                       style="flex-grow: 1; padding: 10px; border-radius: 6px; border: 1px solid #4a5568; background: #1a202c; color: white;">
+                                <button onclick="addNewOption(${pollId})" 
+                                        style="padding: 10px 20px; background: #4299e1; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                                    ➕ 添加
+                                </button>
+                            </div>
+                            <div id="addOptionResult_${pollId}" style="color: #a0aec0; font-size: 0.9rem;"></div>
+                        </div>
+                    </div>
+                    `;
+                    
+                    // 将管理面板添加到页面
+                    const resultDiv = document.getElementById('resultBox');
+                    resultDiv.insertAdjacentHTML('beforeend', manageHtml);
+                    
+                    // 添加选项函数
+                    window.addNewOption = async function(pollId) {
+                        const input = document.getElementById(`newOptionInput_${pollId}`);
+                        const resultDiv = document.getElementById(`addOptionResult_${pollId}`);
+                        const btn = input.nextElementSibling;
+                        
+                        const text = input.value.trim();
+                        if (!text) {
+                            resultDiv.textContent = '❌ 请输入选项内容';
+                            resultDiv.style.color = '#fc8181';
+                            return;
+                        }
+                        
+                        // 禁用按钮防止重复点击
+                        btn.disabled = true;
+                        btn.textContent = '添加中...';
+                        resultDiv.textContent = '';
+                        
+                        try {
+                            const resp = await fetch('https://vote-api.whmx.top/api/add-option', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ poll_id: pollId, new_option: text })
+                            });
+                            
+                            const result = await resp.json();
+                            if (result.success) {
+                                resultDiv.textContent = `✅ 选项添加成功！新选项序号：${result.new_option_index}`;
+                                resultDiv.style.color = '#48bb78';
+                                input.value = ''; // 清空输入框
+                            } else {
+                                resultDiv.textContent = `❌ 添加失败：${result.error}`;
+                                resultDiv.style.color = '#fc8181';
+                            }
+                        } catch (error) {
+                            resultDiv.textContent = `❌ 网络错误：${error.message}`;
+                            resultDiv.style.color = '#fc8181';
+                        } finally {
+                            btn.disabled = false;
+                            btn.textContent = '➕ 添加';
+                        }
+                    };
                 } else {
                     alert('创建失败：' + (result.error || '未知错误'));
                 }
