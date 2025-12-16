@@ -439,7 +439,7 @@
 </head>
 
 <body>
-    <button class="theme-toggle" id="themeToggle">🌓</button>
+    <button class="theme-toggle" id="themeToggle">☀️</button>
     <div class="container">
         <h1 id="pollTitle">加载中...</h1>
         <p class="subtitle" id="pollSubtitle">请选择您支持的选项</p>
@@ -823,17 +823,28 @@
             const toggle = document.getElementById('themeToggle');
             if (!toggle) return;
             
+            // 更新图标函数
+            function updateIcon() {
+                const isLightMode = document.body.classList.contains('light-mode');
+                toggle.textContent = isLightMode ? '🌙' : '☀️';
+            }
+            
             // 检查localStorage中的主题偏好
             const isLightMode = localStorage.getItem('lightMode') === 'true';
             if (isLightMode) {
                 document.body.classList.add('light-mode');
             }
             
+            // 初始设置图标
+            updateIcon();
+            
             // 添加点击事件
             toggle.addEventListener('click', () => {
                 document.body.classList.toggle('light-mode');
                 // 保存主题偏好到localStorage
                 localStorage.setItem('lightMode', document.body.classList.contains('light-mode'));
+                // 更新图标
+                updateIcon();
             });
         }
         
