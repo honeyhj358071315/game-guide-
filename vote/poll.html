@@ -212,13 +212,6 @@
             animation: fadeIn 0.5s;
         }
 
-        /* 白天模式下的结果面板样式 */
-        body.light-mode .results {
-            background: white;
-            border-color: #e2e8f0;
-            color: #1a202c;
-        }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -362,16 +355,6 @@
         }
 
         body.light-mode .checkbox::after {
-            color: #1a202c;
-        }
-
-        body.light-mode .results {
-            background: white;
-            border-color: #e2e8f0;
-            color: #1a202c;
-        }
-
-        body.light-mode .results h3 {
             color: #1a202c;
         }
 
@@ -715,10 +698,8 @@
         function renderChart(data) {
             const container = document.getElementById('resultsChart');
             if (!data || data.length === 0) {
-                // 判断当前主题，设置合适的文字颜色
-                const isLightMode = document.body.classList.contains('light-mode');
-                const textColor = isLightMode ? '#4a5568' : '#ffffff';
-                container.innerHTML = `<p style="color: ${textColor};">暂无投票数据</p>`;
+                // 始终使用白色文字
+                container.innerHTML = `<p style="color: #ffffff;">暂无投票数据</p>`;
                 return;
             }
 
@@ -748,12 +729,11 @@
                 return `hsl(${segment.hue}, 70%, 60%) ${segment.startAngle}deg ${segment.endAngle}deg`;
             }).join(', ');
 
-            // 判断当前主题
-            const isLightMode = document.body.classList.contains('light-mode');
-            const centerBgColor = isLightMode ? '#ffffff' : '#2d3748';
-            const textSecondaryColor = isLightMode ? '#4a5568' : '#ffffff'; // 夜间模式下使用白色文字
-            const textPrimaryColor = isLightMode ? '#000000' : '#ffffff';
-            const labelShadow = isLightMode ? '0 0 3px rgba(0,0,0,0.3)' : '0 0 3px rgba(0,0,0,0.8)';
+            // 始终使用夜间模式的颜色设置
+            const centerBgColor = '#2d3748'; // 深色背景
+            const textSecondaryColor = '#ffffff'; // 白色文字
+            const textPrimaryColor = '#ffffff'; // 白色文字
+            const labelShadow = '0 0 3px rgba(0,0,0,0.8)'; // 深色背景下的文字阴影
 
             // 生成圆形饼图
             container.innerHTML = `
@@ -781,7 +761,7 @@
                 const y = Math.sin(radians) * labelRadius;
                 const percent = Math.round(segment.percent * 100);
                 return `<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translate(${x}px, ${y}px); 
-                            color: #fc8181; font-weight: bold; text-shadow: ${labelShadow}; 
+                            color: #ffffff; font-weight: bold; text-shadow: ${labelShadow}; 
                             font-size: 0.9rem; text-align: center;">
                         ${percent}%
                     </div>`;
@@ -794,7 +774,7 @@
                 const optionName = optionsArray[segment.item.option - 1] || `选项${segment.item.option}`;
                 return `<div style="display: flex; align-items: center;">
                                     <span style="display: inline-block; width: 12px; height: 12px; background: hsl(${segment.hue}, 80%, 65%); margin-right: 8px;"></span>
-                                    <span style="color: #fc8181;">${optionName}: ${segment.item.count}票 (${percent}%)</span>
+                                    <span style="color: #ffffff;">${optionName}: ${segment.item.count}票 (${percent}%)</span>
                                 </div>`;
             }).join('')}
                     </div>
