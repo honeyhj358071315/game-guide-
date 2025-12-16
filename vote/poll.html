@@ -404,11 +404,32 @@
             color: #4a5568;
         }
 
-        /* 主题切换按钮 */
-        .theme-toggle {
+        /* 主题切换容器 */
+        .theme-toggle-container {
             position: fixed;
             top: 20px;
             right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        /* 主题文字标签 */
+        .theme-label {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-shadow: 0 0 3px rgba(0,0,0,0.8);
+        }
+        
+        body.light-mode .theme-label {
+            color: #1a202c;
+            text-shadow: none;
+        }
+        
+        /* 主题切换按钮 */
+        .theme-toggle {
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
@@ -419,7 +440,6 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s;
-            z-index: 1000;
         }
 
         body.light-mode .theme-toggle {
@@ -439,7 +459,10 @@
 </head>
 
 <body>
-    <button class="theme-toggle" id="themeToggle">☀️</button>
+    <div class="theme-toggle-container">
+        <span class="theme-label">日夜模式</span>
+        <button class="theme-toggle" id="themeToggle">☀️</button>
+    </div>
     <div class="container">
         <h1 id="pollTitle">加载中...</h1>
         <p class="subtitle" id="pollSubtitle">请选择您支持的选项</p>
