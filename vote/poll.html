@@ -705,90 +705,53 @@
         function renderChart(data) {
             const container = document.getElementById('resultsChart');
             if (!data || data.length === 0) {
-                // 始终使用白色文字
                 container.innerHTML = `<p style="color: #ffffff;">暂无投票数据</p>`;
                 return;
             }
 
-            // 按选项序号排序
-            data.sort((a, b) => a.option - b.option);
+            // 按票数降序排序
+            data.sort((a, b) => b.count - a.count);
             const totalVotes = data.reduce((sum, item) => sum + item.count, 0);
-
-            // 生成饼图数据
-            let cumulativePercent = 0;
-            const pieSegments = data.map(item => {
-                const percent = totalVotes > 0 ? (item.count / totalVotes) : 0;
-                // ✅ 改为均匀分布所有色调，确保每个选项有独特颜色
-                const hue = (item.option * (360 / data.length)) % 360;
-                // ✅ 关键修正：添加-90度偏移，让饼图从12点钟方向开始
-                const offset = -90;
-                const startAngle = cumulativePercent * 360 + offset;
-                const endAngle = (cumulativePercent + percent) * 360 + offset;
-                cumulativePercent += percent;
-                return {
-                    item,
-                    percent,
-                    hue,
-                    startAngle,
-                    endAngle
-                };
-            });
-
-            // 创建圆锥渐变字符串
-            const conicGradient = pieSegments.map(segment => {
-                return `hsl(${segment.hue}, 70%, 60%) ${segment.startAngle}deg ${segment.endAngle}deg`;
-            }).join(', ');
-
-            // 始终使用夜间模式的颜色设置
-            const centerBgColor = '#2d3748'; // 深色背景
-            const textSecondaryColor = '#ffffff'; // 白色文字
-            const textPrimaryColor = '#ffffff'; // 白色文字
-            const labelShadow = '0 0 3px rgba(0,0,0,0.8)'; // 深色背景下的文字阴影
-
-            // 生成圆形饼图
-            container.innerHTML = `
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <div style="position: relative; width: 250px; height: 250px; margin: 25px 0;">
-                        <!-- 饼图 -->
-                        <div style="width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(${conicGradient}); transition: background 1s ease-out;"></div>
-                        <!-- 中心圆圈 -->
-                        <div style="position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; border-radius: 50%; background: ${centerBgColor}; border: 2px solid rgba(255,255,255,0.1);"></div>
-                        <!-- 总票数 -->
-                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-                            <div style="font-size: 2.5rem; font-weight: bold; color: ${textPrimaryColor};">${totalVotes}</div>
-                            <div style="color: ${textSecondaryColor}; font-size: 0.9rem;">总票数</div>
-                        </div>
-                        <!-- 百分比标签 -->
-                        ${pieSegments.map(segment => {
-                if (segment.percent < 0.05) return '';
-                const centerAngle = (segment.startAngle + segment.endAngle) / 2;
-                const radians = centerAngle * Math.PI / 180;
-                const pieRadius = 125;
-                const centerRadius = 62.5;
-                const labelRadius = centerRadius + (pieRadius - centerRadius) / 2;
-                const x = Math.cos(radians) * labelRadius;
-                const y = Math.sin(radians) * labelRadius;
-                const segmentPercent = Math.round(segment.percent * 100); 
-                return `<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translate(${x}px, ${y}px); 
-                color: #ffffff; font-weight: bold; text-shadow: ${labelShadow}; 
-                font-size: 0.9rem; text-align: center;">
-            ${segmentPercent}% 
-        </div>`;
-            }).join('')}
+            
+            // 构建列表式结果
+            let html = `
+                <div style="margin-top: 10px; font-size: 0.9rem;">
+                    <div style="color: #a0aec0; margin-bottom: 15px; text-align: center;">
+                        总票数: <strong style="color: white;">${totalVotes}</strong>
                     </div>
-                    <!-- 图例 -->
-                    <div style="display: flex; flex-wrap: wrap; gap: 15px; font-size: 0.9em; justify-content: center; width: 100%;">
-                        ${pieSegments.map(segment => {
-                const percent = Math.round(segment.percent * 100);
-                const optionName = optionsArray[segment.item.option - 1] || `选项${segment.item.option}`;
-                return `<div style="display: flex; align-items: center;">
-                                    <span style="display: inline-block; width: 12px; height: 12px; background: hsl(${segment.hue}, 80%, 65%); margin-right: 8px;"></span>
-                                    <span style="color: #ffffff;">${optionName}: ${segment.item.count}票 (${percent}%)</span>
-                                </div>`;
-            }).join('')}
-                    </div>
-                </div>
             `;
+            
+            data.forEach((item, index) => {
+                const percent = totalVotes > 0 ? ((item.count / totalVotes) * 100).toFixed(1) : 0;
+                const optionName = optionsArray[item.option - 1] || `选项${item.option}`;
+                const rank = index + 1;
+                
+                // 使用不同颜色区分前三名
+                let rankColor = '#a0aec0';
+                if (rank === 1) rankColor = '#f6e05e'; // 金色
+                if (rank === 2) rankColor = '#cbd5e0'; // 银色
+                if (rank === 3) rankColor = '#d69e2e'; // 铜色
+                
+                html += `
+                    <div style="margin-bottom: 12px; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span style="color: ${rankColor}; font-weight: bold; min-width: 20px;">${rank}.</span>
+                                <span style="color: white; flex-grow: 1; word-break: break-word;">${optionName}</span>
+                            </div>
+                            <div style="color: #a0aec0; font-weight: bold; min-width: 60px; text-align: right;">
+                                ${item.count}票 (${percent}%)
+                            </div>
+                        </div>
+                        <div style="height: 8px; background: #4a5568; border-radius: 4px; overflow: hidden;">
+                            <div style="height: 100%; background: linear-gradient(90deg, #4299e1, #38b2ac); border-radius: 4px; width: ${percent}%;"></div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `</div>`;
+            container.innerHTML = html;
         }
 
         // 8. 显示提示
