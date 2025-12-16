@@ -93,20 +93,26 @@
 
         /* 竖向布局（选项≤10个时） */
         #optionsContainer.vertical-layout {
-            display: block; /* 改为块状堆叠 */
+            display: block;
+            /* 改为块状堆叠 */
             flex-wrap: nowrap;
-            gap: 0; /* 移除横向间距 */
+            gap: 0;
+            /* 移除横向间距 */
         }
+
         #optionsContainer.vertical-layout .option {
-            flex: none; /* 清除弹性属性 */
+            flex: none;
+            /* 清除弹性属性 */
             min-width: auto;
             max-width: 100%;
             width: 100%;
-            margin-bottom: 12px; /* 添加纵向间距 */
+            margin-bottom: 12px;
+            /* 添加纵向间距 */
             padding: 18px 20px;
             border-radius: 12px;
             border: 2px solid #4a5568;
         }
+
         #optionsContainer.vertical-layout .option:hover {
             border-color: #4299e1;
         }
@@ -117,6 +123,7 @@
             flex-wrap: wrap;
             gap: 12px;
         }
+
         #optionsContainer.horizontal-layout .option {
             flex: 1 0 calc(25% - 12px);
             min-width: 120px;
@@ -404,20 +411,20 @@
             gap: 8px;
             z-index: 1000;
         }
-        
+
         /* 主题文字标签 */
         .theme-label {
             color: white;
             font-size: 0.9rem;
             font-weight: 500;
-            text-shadow: 0 0 3px rgba(0,0,0,0.8);
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
         }
-        
+
         body.light-mode .theme-label {
             color: #1a202c;
             text-shadow: none;
         }
-        
+
         /* 主题切换按钮 */
         .theme-toggle {
             background: rgba(255, 255, 255, 0.1);
@@ -712,8 +719,10 @@
             const pieSegments = data.map(item => {
                 const percent = totalVotes > 0 ? (item.count / totalVotes) : 0;
                 const hue = (item.option * 60) % 360;
-                const startAngle = cumulativePercent * 360;
-                const endAngle = (cumulativePercent + percent) * 360;
+                // ✅ 关键修正：添加-90度偏移，让饼图从12点钟方向开始
+                const offset = -90;
+                const startAngle = cumulativePercent * 360 + offset;
+                const endAngle = (cumulativePercent + percent) * 360 + offset;
                 cumulativePercent += percent;
                 return {
                     item,
@@ -794,12 +803,12 @@
         function setupShareButton() {
             const shareBtn = document.getElementById('shareBtn');
             const hint = document.getElementById('shareHint');
-            
+
             if (!shareBtn) return;
-            
+
             shareBtn.onclick = async () => {
                 const voteLink = window.location.href; // 获取当前页面完整链接
-                
+
                 try {
                     // 使用现代剪贴板API
                     await navigator.clipboard.writeText(voteLink);
@@ -809,7 +818,7 @@
                     hint.textContent = '✅ 投票链接已复制到剪贴板！';
                     shareBtn.textContent = '✅ 已复制';
                     shareBtn.style.background = '#38a169';
-                    
+
                     // 3秒后恢复按钮状态
                     setTimeout(() => {
                         hint.style.display = 'none';
@@ -824,7 +833,7 @@
                     input.select();
                     document.execCommand('copy');
                     document.body.removeChild(input);
-                    
+
                     // 提示用户
                     hint.style.display = 'block';
                     hint.style.color = '#ecc94b';
@@ -838,22 +847,22 @@
         function setupThemeToggle() {
             const toggle = document.getElementById('themeToggle');
             if (!toggle) return;
-            
+
             // 更新图标函数
             function updateIcon() {
                 const isLightMode = document.body.classList.contains('light-mode');
                 toggle.textContent = isLightMode ? '🌙' : '☀️';
             }
-            
+
             // 检查localStorage中的主题偏好
             const isLightMode = localStorage.getItem('lightMode') === 'true';
             if (isLightMode) {
                 document.body.classList.add('light-mode');
             }
-            
+
             // 初始设置图标
             updateIcon();
-            
+
             // 添加点击事件
             toggle.addEventListener('click', () => {
                 document.body.classList.toggle('light-mode');
@@ -863,7 +872,7 @@
                 updateIcon();
             });
         }
-        
+
         // 9. 初始化
         if (!pollId) {
             showAlert('无效的投票链接');
