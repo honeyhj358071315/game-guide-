@@ -206,6 +206,18 @@
 
 <body>
     <div class="container">
+        <!-- 🔽 新增：管理现有投票 -->
+        <div style="text-align: center; margin-bottom: 30px; padding: 15px; background: rgba(66,153,225,0.1); border-radius: 10px;">
+            <h3>管理已有投票</h3>
+            <div style="display: inline-flex; gap: 10px; align-items: center;">
+                <input type="number" id="managePollId" placeholder="输入投票ID" style="padding: 8px; width: 120px; border-radius: 6px; border: 1px solid #4a5568;">
+                <button onclick="manageExistingPoll()" style="padding: 8px 15px; background: #4299e1; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                    管理这个投票
+                </button>
+            </div>
+        </div>
+        
+        <!-- 原来的创建投票表单 -->
         <h1>创建新投票</h1>
         <p class="subtitle">填写下方表单，一键生成属于你自己的投票链接</p>
 
@@ -501,6 +513,88 @@
                 btn.textContent = '🚨 一键清空所有投票数据';
             }
         });
+
+        // 管理现有投票
+        function manageExistingPoll() {
+            const pollId = document.getElementById('managePollId').value.trim();
+            if (!pollId) return alert('请输入投票ID');
+            
+            // 验证投票是否存在
+            fetch(`https://vote-api.whmx.top/api/poll/${pollId}`)
+                .then(res => res.json())
+                .then(result => {
+                    if (result.success) {
+                        // 显示管理面板
+                        showManagementPanel(pollId, result.data);
+                    } else {
+                        alert('投票不存在');
+                    }
+                })
+                .catch(err => alert('查询失败'));
+        }
+        
+        // 显示管理面板（和创建成功时一样）
+        function showManagementPanel(pollId, pollData) {
+            const voteUrl = `${window.location.origin}/vote/poll.html?id=${pollId}`;
+            
+            const manageHtml = `
+            <div id="managementPanel" style="margin-top: 30px; padding: 20px; background: rgba(66,153,225,0.1); border-radius: 12px; border: 1px solid rgba(66,153,225,0.3);">
+                <h3 style="color: #4299e1;">🎛️ 管理投票: ${pollData.title}</h3>
+                <p>ID: <code>${pollId}</code> | <a href="${voteUrl}" target="_blank">前往投票页面</a></p>
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <input type="text" id="newOptInput" placeholder="新选项内容" style="flex-grow:1; padding: 8px; border-radius:6px; border:1px solid #4a5568; background:#1a202c; color:white;">
+                    <button onclick="addOptionToPoll(${pollId})" style="padding:8px 15px; background:#4299e1; color:white; border:none; border-radius:6px; cursor:pointer;">
+                        添加
+                    </button>
+                </div>
+                <div id="addResult" style="margin-top: 10px; font-size:0.9rem;"></div>
+            </div>`;
+            
+            // 移除旧的面板（如果有）
+            const oldPanel = document.getElementById('managementPanel');
+            if (oldPanel) oldPanel.remove();
+            
+            // 添加到页面
+            document.querySelector('.container').insertAdjacentHTML('beforeend', manageHtml);
+        }
+        
+        // 添加选项函数
+        function addOptionToPoll(pollId) {
+            const input = document.getElementById('newOptInput');
+            const resultDiv = document.getElementById('addResult');
+            const btn = input.nextElementSibling;
+            
+            const text = input.value.trim();
+            if (!text) {
+                resultDiv.innerHTML = '<span style="color:#fc8181">❌ 请输入内容</span>';
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.textContent = '添加中...';
+            
+            fetch('https://vote-api.whmx.top/api/add-option', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ poll_id: pollId, new_option: text })
+            })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    resultDiv.innerHTML = `<span style="color:#48bb78">✅ 添加成功！新选项序号: ${result.new_option_index}</span>`;
+                    input.value = '';
+                } else {
+                    resultDiv.innerHTML = `<span style="color:#fc8181">❌ ${result.error}</span>`;
+                }
+            })
+            .catch(err => {
+                resultDiv.innerHTML = '<span style="color:#fc8181">❌ 网络错误</span>';
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.textContent = '添加';
+            });
+        }
     </script>
 </body>
 
