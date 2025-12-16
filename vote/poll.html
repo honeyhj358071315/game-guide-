@@ -300,10 +300,146 @@
         .alert.show {
             display: block;
         }
+
+        /* 白天模式 */
+        body.light-mode {
+            background: #f7fafc;
+            color: #1a202c;
+        }
+
+        body.light-mode .container {
+            background: white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-mode h1 {
+            color: #1a202c;
+        }
+
+        body.light-mode .subtitle {
+            color: #4a5568;
+        }
+
+        body.light-mode .option {
+            color: #1a202c;
+        }
+
+        body.light-mode .option-text {
+            color: #1a202c;
+        }
+
+        body.light-mode #optionsContainer.vertical-layout .option {
+            border-color: #e2e8f0;
+        }
+
+        body.light-mode #optionsContainer.vertical-layout .option:hover {
+            border-color: #4299e1;
+            background: rgba(66, 153, 225, 0.05);
+        }
+
+        body.light-mode .option:hover {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        body.light-mode .option.selected {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        body.light-mode .checkbox {
+            border-color: #4a5568;
+        }
+
+        body.light-mode .option.selected .checkbox {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: #1a202c;
+        }
+
+        body.light-mode .checkbox::after {
+            color: #1a202c;
+        }
+
+        body.light-mode .results {
+            background: white;
+            border-color: #e2e8f0;
+            color: #1a202c;
+        }
+
+        body.light-mode .results h3 {
+            color: #1a202c;
+        }
+
+        body.light-mode .bar-wrapper {
+            background: #e2e8f0;
+        }
+
+        body.light-mode .info {
+            color: #4a5568;
+        }
+
+        body.light-mode .multi-hint {
+            color: #c53030;
+        }
+
+        body.light-mode .alert {
+            background: white;
+            border-color: #feb2b2;
+            color: #c53030;
+        }
+
+        body.light-mode .alert.success {
+            background: white;
+            border-color: #b2feb2;
+            color: #22543d;
+        }
+
+        body.light-mode #votingRules {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        body.light-mode #votingRules h4 {
+            color: #4a5568;
+        }
+
+        body.light-mode #votingRules #rulesContent {
+            color: #4a5568;
+        }
+
+        /* 主题切换按钮 */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        body.light-mode .theme-toggle {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.1);
+        }
+
+        body.light-mode .theme-toggle:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
     </style>
 </head>
 
 <body>
+    <button class="theme-toggle" id="themeToggle">🌓</button>
     <div class="container">
         <h1 id="pollTitle">加载中...</h1>
         <p class="subtitle" id="pollSubtitle">请选择您支持的选项</p>
@@ -549,7 +685,7 @@
         function renderChart(data) {
             const container = document.getElementById('resultsChart');
             if (!data || data.length === 0) {
-                container.innerHTML = '<p style="color: #a0aec0;">暂无投票数据</p>';
+                container.innerHTML = '<p style="color: var(--text-secondary-color, #a0aec0);">暂无投票数据</p>';
                 return;
             }
 
@@ -576,9 +712,15 @@
 
             // 创建圆锥渐变字符串
             const conicGradient = pieSegments.map(segment => {
-                const optionName = optionsArray[segment.item.option - 1] || `选项${segment.item.option}`;
                 return `hsl(${segment.hue}, 70%, 60%) ${segment.startAngle}deg ${segment.endAngle}deg`;
             }).join(', ');
+
+            // 判断当前主题
+            const isLightMode = document.body.classList.contains('light-mode');
+            const centerBgColor = isLightMode ? '#ffffff' : '#2d3748';
+            const textSecondaryColor = isLightMode ? '#4a5568' : '#a0aec0';
+            const labelTextColor = isLightMode ? '#000000' : '#ffffff';
+            const labelShadow = isLightMode ? '0 0 3px rgba(0,0,0,0.3)' : '0 0 3px rgba(0,0,0,0.8)';
 
             // 生成圆形饼图
             container.innerHTML = `
@@ -586,20 +728,35 @@
                     <div style="position: relative; width: 250px; height: 250px; margin: 25px 0;">
                         <!-- 饼图 -->
                         <div style="width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(${conicGradient}); transition: background 1s ease-out;"></div>
-                        <!-- 中心白色圆圈 -->
-                        <div style="position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; border-radius: 50%; background: #2d3748;"></div>
+                        <!-- 中心圆圈 -->
+                        <div style="position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; border-radius: 50%; background: ${centerBgColor};"></div>
                         <!-- 总票数 -->
                         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
                             <div style="font-size: 2.5rem; font-weight: bold;">${totalVotes}</div>
-                            <div style="color: #a0aec0; font-size: 0.9rem;">总票数</div>
+                            <div style="color: ${textSecondaryColor}; font-size: 0.9rem;">总票数</div>
                         </div>
+                        <!-- 百分比标签 -->
+                        ${pieSegments.map(segment => {
+                if (segment.percent < 0.05) return ''; // 小于5%不显示，避免过于拥挤
+                const centerAngle = (segment.startAngle + segment.endAngle) / 2;
+                const radians = centerAngle * Math.PI / 180;
+                const radius = 90; // 标签距离中心的距离
+                const x = Math.cos(radians) * radius;
+                const y = Math.sin(radians) * radius;
+                const percent = Math.round(segment.percent * 100);
+                return `<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) translate(${x}px, ${y}px); 
+                            color: ${labelTextColor}; font-weight: bold; text-shadow: ${labelShadow}; 
+                            font-size: 0.9rem; text-align: center;">
+                        ${percent}%
+                    </div>`;
+            }).join('')}
                     </div>
                     <!-- 图例 -->
                     <div style="display: flex; flex-wrap: wrap; gap: 15px; font-size: 0.9em; justify-content: center; width: 100%;">
                         ${pieSegments.map(segment => {
                 const percent = Math.round(segment.percent * 100);
                 const optionName = optionsArray[segment.item.option - 1] || `选项${segment.item.option}`;
-                return `<div style="display: flex; align-items: center;">
+                return `<div style="display: flex; align-items: center; color: ${textSecondaryColor};">
                                     <span style="display: inline-block; width: 12px; height: 12px; background: hsl(${segment.hue}, 80%, 65%); margin-right: 8px;"></span>
                                     <span>${optionName}: ${segment.item.count}票 (${percent}%)</span>
                                 </div>`;
@@ -661,6 +818,25 @@
             };
         }
 
+        // 主题切换功能
+        function setupThemeToggle() {
+            const toggle = document.getElementById('themeToggle');
+            if (!toggle) return;
+            
+            // 检查localStorage中的主题偏好
+            const isLightMode = localStorage.getItem('lightMode') === 'true';
+            if (isLightMode) {
+                document.body.classList.add('light-mode');
+            }
+            
+            // 添加点击事件
+            toggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                // 保存主题偏好到localStorage
+                localStorage.setItem('lightMode', document.body.classList.contains('light-mode'));
+            });
+        }
+        
         // 9. 初始化
         if (!pollId) {
             showAlert('无效的投票链接');
@@ -670,6 +846,8 @@
             document.getElementById('submitVoteBtn').onclick = submitVote;
             // 设置分享按钮
             setupShareButton(); // 🔽 新增这一行
+            // 设置主题切换
+            setupThemeToggle(); // 🔽 新增这一行
             // 首次加载结果（如果已投过票）
             setTimeout(loadResults, 1000);
         }
