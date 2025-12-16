@@ -777,7 +777,7 @@
         function renderChart(data) {
             const container = document.getElementById('resultsChart');
             if (!data || data.length === 0) {
-                container.innerHTML = `<p style="color: #ffffff;">暂无投票数据</p>`;
+                container.innerHTML = `<p>暂无投票数据</p>`;
                 return;
             }
 
@@ -788,8 +788,8 @@
             // 构建列表式结果
             let html = `
                 <div style="margin-top: 10px; font-size: 0.9rem;">
-                    <div style="color: #a0aec0; margin-bottom: 15px; text-align: center;">
-                        总票数: <strong style="color: white;">${totalVotes}</strong>
+                    <div style="margin-bottom: 15px; text-align: center;">
+                        总票数: <strong>${totalVotes}</strong>
                     </div>
             `;
             
@@ -805,18 +805,20 @@
                 if (rank === 3) rankColor = '#d69e2e'; // 铜色
                 
                 html += `
-                    <div style="margin-bottom: 12px; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <div class="chart-item">
+                        <div style="margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
                             <div style="display: flex; align-items: center; gap: 8px;">
                                 <span style="color: ${rankColor}; font-weight: bold; min-width: 20px;">${rank}.</span>
-                                <span style="color: white; flex-grow: 1; word-break: break-word;">${optionName}</span>
+                                <span style="flex-grow: 1; word-break: break-word;">${optionName}</span>
                             </div>
-                            <div style="color: #a0aec0; font-weight: bold; min-width: 60px; text-align: right;">
+                            <div style="font-weight: bold; min-width: 60px; text-align: right;">
                                 ${item.count}票 (${percent}%)
                             </div>
                         </div>
-                        <div style="height: 8px; background: #4a5568; border-radius: 4px; overflow: hidden;">
-                            <div style="height: 100%; background: linear-gradient(90deg, #4299e1, #38b2ac); border-radius: 4px; width: ${percent}%;"></div>
+                        <div class="bar-container">
+                            <div class="bar-wrapper">
+                                <div class="bar" style="width: ${percent}%;"></div>
+                            </div>
                         </div>
                     </div>
                 `;
