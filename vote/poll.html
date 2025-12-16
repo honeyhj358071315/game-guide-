@@ -557,30 +557,54 @@
             data.sort((a, b) => a.option - b.option);
             const totalVotes = data.reduce((sum, item) => sum + item.count, 0);
 
-            // 生成堆叠条形图
+            // 生成饼图数据
+            let cumulativePercent = 0;
+            const pieSegments = data.map(item => {
+                const percent = totalVotes > 0 ? (item.count / totalVotes) : 0;
+                const hue = (item.option * 60) % 360;
+                const startAngle = cumulativePercent * 360;
+                const endAngle = (cumulativePercent + percent) * 360;
+                cumulativePercent += percent;
+                return {
+                    item,
+                    percent,
+                    hue,
+                    startAngle,
+                    endAngle
+                };
+            });
+
+            // 创建圆锥渐变字符串
+            const conicGradient = pieSegments.map(segment => {
+                const optionName = optionsArray[segment.item.option - 1] || `选项${segment.item.option}`;
+                return `hsl(${segment.hue}, 70%, 60%) ${segment.startAngle}deg ${segment.endAngle}deg`;
+            }).join(', ');
+
+            // 生成圆形饼图
             container.innerHTML = `
-                <div class="stacked-bar" style="height: 40px; background: #4a5568; border-radius: 8px; margin: 25px 0; overflow: hidden; display: flex;">
-                    ${data.map(item => {
-                const widthPercent = totalVotes > 0 ? (item.count / totalVotes * 100) : 0;
-                // 使用不同颜色区分
-                const hue = (item.option * 60) % 360;
-                // 获取选项名称，如果不存在则显示选项编号
-                const optionName = optionsArray[item.option - 1] || `选项${item.option}`;
-                return `<div title="${optionName}: ${item.count}票 (${Math.round(widthPercent)}%)"
-                                    style="width: ${widthPercent}%; background: hsl(${hue}, 70%, 60%); transition: width 1s ease-out;"></div>`;
-            }).join('')}
-                </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 15px; font-size: 0.9em;">
-                    ${data.map(item => {
-                const percent = totalVotes > 0 ? Math.round((item.count / totalVotes) * 100) : 0;
-                const hue = (item.option * 60) % 360;
-                // 获取选项名称，如果不存在则显示选项编号
-                const optionName = optionsArray[item.option - 1] || `选项${item.option}`;
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <div style="position: relative; width: 250px; height: 250px; margin: 25px 0;">
+                        <!-- 饼图 -->
+                        <div style="width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(${conicGradient}); transition: background 1s ease-out;"></div>
+                        <!-- 中心白色圆圈 -->
+                        <div style="position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; border-radius: 50%; background: #2d3748;"></div>
+                        <!-- 总票数 -->
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                            <div style="font-size: 2.5rem; font-weight: bold;">${totalVotes}</div>
+                            <div style="color: #a0aec0; font-size: 0.9rem;">总票数</div>
+                        </div>
+                    </div>
+                    <!-- 图例 -->
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; font-size: 0.9em; justify-content: center; width: 100%;">
+                        ${pieSegments.map(segment => {
+                const percent = Math.round(segment.percent * 100);
+                const optionName = optionsArray[segment.item.option - 1] || `选项${segment.item.option}`;
                 return `<div style="display: flex; align-items: center;">
-                                    <span style="display: inline-block; width: 12px; height: 12px; background: hsl(${hue}, 80%, 65%); margin-right: 8px;"></span>
-                                    <span>${optionName}: ${item.count}票 (${percent}%)</span>
+                                    <span style="display: inline-block; width: 12px; height: 12px; background: hsl(${segment.hue}, 80%, 65%); margin-right: 8px;"></span>
+                                    <span>${optionName}: ${segment.item.count}票 (${percent}%)</span>
                                 </div>`;
             }).join('')}
+                    </div>
                 </div>
             `;
         }
