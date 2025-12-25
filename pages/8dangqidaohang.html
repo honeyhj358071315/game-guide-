@@ -524,7 +524,30 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody id="tips-section-1-tbody"></tbody>
+                <tbody id="tips-section-1-tbody">
+                    <tr data-type="tips" data-index="0">
+                        <td>
+                            <div class="editable">
+                                <span class="row-number">1.</span>
+                                <input type="text" class="edit-input number-edit" value="1">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editable">
+                                <span class="tip-title">抽取建议+焕章+武器换取</span>
+                                <input type="text" class="edit-input title-edit" value="抽取建议+焕章+武器换取">
+                            </div>
+                            <button class="delete-row">×</button>
+                        </td>
+                        <td>
+                            <div class="editable">
+                                <span class="tip-content">B站地址: <a href="https://www.bilibili.com/video/BV1XLBDBZEyk/#reply115779148188408" target="_blank" rel="noopener noreferrer" style="color: #6bcf7f; text-decoration: none; border-bottom: 1px dotted #6bcf7f;">https://www.bilibili.com/video/BV1XLBDBZEyk/#reply115779148188408</a></span>
+                                <textarea class="edit-input content-edit">B站地址: https://www.bilibili.com/video/BV1XLBDBZEyk/#reply115779148188408</textarea>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
             </table>
             <div class="dropdown-control">
                 <div class="dropdown-info">
@@ -611,9 +634,24 @@
         function autoLink(text) {
             if (!text) return '';
 
-            // 匹配URL正则表达式
-            const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+|[^\s]+\.[^\s]{2,})/gi;
+            // 首先处理包含"B站地址:"的特殊情况，确保文本不包含在超链接内
+            if (text.includes('B站地址:')) {
+                const parts = text.split('B站地址:');
+                if (parts.length === 2) {
+                    // 匹配URL正则表达式
+                    const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+|[^\s]+\.[^\s]{2,})/gi;
+                    return parts[0] + 'B站地址: ' + parts[1].replace(urlRegex, function (url) {
+                        let href = url;
+                        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                            href = 'https://' + url;
+                        }
+                        return '<a href="' + href + '" target="_blank" rel="noopener noreferrer" style="color: #6bcf7f; text-decoration: none; border-bottom: 1px dotted #6bcf7f;">' + url + '</a>';
+                    });
+                }
+            }
 
+            // 普通情况下的链接识别
+            const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+|[^\s]+\.[^\s]{2,})/gi;
             return text.replace(urlRegex, function (url) {
                 let href = url;
                 if (!url.startsWith('http://') && !url.startsWith('https://')) {
