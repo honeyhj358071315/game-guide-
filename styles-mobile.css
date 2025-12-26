@@ -203,3 +203,41 @@ footer {
 footer p {
     margin-bottom: 10px;
 }
+
+/* 更新通告栏样式 */
+.update-notice {
+    background: rgba(30, 60, 90, 0.9);
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 15px 0;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    border-left: 3px solid #4a9de3;
+}
+
+.notice-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    padding: 4px 0;
+    flex-wrap: wrap;
+}
+
+.notice-item:last-child {
+    margin-bottom: 0;
+}
+
+.notice-icon {
+    font-size: 1.1rem;
+    margin-right: 8px;
+    color: #ff9e64;
+}
+
+.notice-text {
+    font-size: 1rem;
+    color: #e0e0e0;
+    line-height: 1.4;
+    word-break: break-word;
+}
